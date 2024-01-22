@@ -3,6 +3,7 @@
 
 
     Sa'ad
+    Pritha
 
 ## Getting started
 
