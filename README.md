@@ -1,7 +1,9 @@
 # CodeLinguists-ao1-15
+Duc Nghia
 
 Fengfan Bian
 
+    Sa'ad
 
 ## Getting started
 
