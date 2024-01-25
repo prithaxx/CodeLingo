@@ -1,4 +1,4 @@
-# Group 1: Rob Kebabs
+# Group 1: Code Linguists
 
 <details open>
 <summary>About us</summary>
