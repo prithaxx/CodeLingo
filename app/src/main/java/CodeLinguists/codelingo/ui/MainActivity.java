@@ -1,8 +1,10 @@
-package CodeLinguists.codelingo;
+package CodeLinguists.codelingo.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import CodeLinguists.codelingo.R;
 
 public class MainActivity extends AppCompatActivity {
 
