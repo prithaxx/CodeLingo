@@ -13,6 +13,11 @@
 
 </details>
 
+# Iteration 0 Notes
+- All features are issues with the label "Feature", all user stories are issues with the label "UserStory"
+- The 5 User stories for iteration 1 are all marked as "high" with a label. We included future user stories to ensure the time estimates were consistent for grading.
+- Developer tasks omitted from this iteration
+
 # Docs
  - [ARCHITECTURE.md](Docs/ARCHITECTURE.md)
 - - -
