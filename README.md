@@ -1,4 +1,4 @@
-# Group 1: Code Linguists
+# Group 15: Code Linguists
 
 <details open>
 <summary>About us</summary>
@@ -40,5 +40,3 @@ We will also be running a comparative survey done by users who have finished a c
 Second, a controlled study will be run to evaluate the performance of two groups of participants completing a CodeLingo course versus reading documentation. We will measure their performance using a quiz and testing for retention of knowledge after a two-week period. We are aiming for an improvement of at least 20%.  
 To test for the comprehensiveness of CodeLingo, we will be running a journal study with participants who will be starting a new job in an unfamiliar language and compare their experiences to those who did not complete a CodeLingo course for the new language.  
 We will also be gathering the assessments from professionals and language specific experts, to evaluate the coverage of our courses and provide an assessment of comprehensiveness. We will consider this successful if the assessments indicate complete coverage.
-
-
