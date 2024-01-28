@@ -6,11 +6,19 @@ import android.os.Bundle;
 
 import CodeLinguists.codelingo.R;
 
-public class cont_Signup extends AppCompatActivity {
+public class GuestLogin extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_guest_login);
+    }
+
+    public void btnLoginOnClick(){
+        //TODO
+    }
+
+    private void login(String name) {
+        //TODO
     }
 }

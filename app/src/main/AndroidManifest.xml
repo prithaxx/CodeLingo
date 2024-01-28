@@ -22,10 +22,7 @@
             android:name=".ui.cont_ChapterSummary"
             android:exported="false" />
         <activity
-            android:name=".ui.cont_Signup"
-            android:exported="false" />
-        <activity
-            android:name=".ui.view_Login"
+            android:name=".ui.GuestLogin"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
