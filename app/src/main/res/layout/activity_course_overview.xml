@@ -4,6 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ChapterView">
+    tools:context=".ui.view_CourseOverview">
 
+    <TextView
+        android:id="@+id/placeholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="course_overview"
+        tools:layout_editor_absoluteX="14dp"
+        tools:layout_editor_absoluteY="18dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
