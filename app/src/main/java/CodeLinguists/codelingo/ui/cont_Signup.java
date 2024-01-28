@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import CodeLinguists.codelingo.R;
 
-public class login extends AppCompatActivity {
+public class cont_Signup extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_signup);
     }
 }
