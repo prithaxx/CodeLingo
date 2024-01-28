@@ -6,6 +6,6 @@ import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 
 public interface IChapterData {
-    public List<ChapterObj> getChaptersByCourse(CourseObj course);
+    List<ChapterObj> getChaptersByCourse(CourseObj course);
 
 }

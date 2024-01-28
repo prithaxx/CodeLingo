@@ -6,5 +6,5 @@ import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.QuizObj;
 
 public interface ISlideShowHandler {
-    public List<QuizObj> getQuizByChapter(ChapterObj chapter);
+    List<QuizObj> getQuizByChapter(ChapterObj chapter);
 }

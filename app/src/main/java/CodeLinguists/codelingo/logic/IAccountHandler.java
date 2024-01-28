@@ -7,14 +7,14 @@ import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
 
 public interface IAccountHandler {
-    public List<AccountObj> getGuestAccounts();
-    public void createGuestAccount(String name);
-    public AccountObj getAccountById(int id);
+    List<AccountObj> getGuestAccounts();
+    void createGuestAccount(String name);
+    AccountObj getAccountById(int id);
 
     /**
      * @return - Course from previous session
      */
-    public CourseObj getActiveCourse();
+    CourseObj getActiveCourse();
 
     //Logins must update ISessionData
     /**
@@ -22,7 +22,7 @@ public interface IAccountHandler {
      * @param account - account to log into
      * @throws AccountNotFoundException
      */
-    public void login(AccountObj account);
+    void login(AccountObj account);
 
     /**
      * Log into an account
@@ -31,7 +31,7 @@ public interface IAccountHandler {
      * @param password - set to null for guest account
      * @throws AccountNotFoundException
      */
-    public void login(String username, String password);
+    void login(String username, String password);
 
-    public void logout();
+    void logout();
 }

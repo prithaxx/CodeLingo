@@ -5,5 +5,5 @@ import java.util.List;
 import CodeLinguists.codelingo.dso.CourseObj;
 
 public interface ICourseData {
-    public List<CourseObj> getCourses();
+    List<CourseObj> getCourses();
 }

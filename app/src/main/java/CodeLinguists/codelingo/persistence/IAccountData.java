@@ -15,7 +15,7 @@ public interface IAccountData {
      * @return matching account
      * @throws AccountNotFoundException
      */
-    public AccountObj getGuestAccountByName(String name);
+    AccountObj getGuestAccountByName(String name);
 
     //return all guest accounts
 
@@ -24,7 +24,7 @@ public interface IAccountData {
      *
      * @return list of accountObj
      */
-    public List<AccountObj> getGuestAccounts();
+    List<AccountObj> getGuestAccounts();
 
     /**
      * creates and returns a new guest account if name is unique, else throw an exception
@@ -32,11 +32,11 @@ public interface IAccountData {
      * @param name - name of new guest account
      * @return the new guest account
      */
-    public AccountObj createGuestAccount(String name);
+    AccountObj createGuestAccount(String name);
 
     /**
      * @param course - course to open on next login
      */
-    public void setActiveCourse(CourseObj course);
+    void setActiveCourse(CourseObj course);
 
 }

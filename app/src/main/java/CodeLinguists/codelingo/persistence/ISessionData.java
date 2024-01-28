@@ -7,6 +7,6 @@ public interface ISessionData {
     /**
      * @return - "remember me" account
      */
-    public AccountObj getActiveAccount();
-    public void setActiveAccount(AccountObj account);
+    AccountObj getActiveAccount();
+    void setActiveAccount(AccountObj account);
 }
