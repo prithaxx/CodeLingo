@@ -4,13 +4,17 @@ public class AccountObj {
     private final int id;
     private final String name;
     private final boolean isGuest;
-    private CourseObj activeCourse;
+    private CourseObj activeCourse;  
+    private String username;
+    private String password;
 
-    public AccountObj(int id, String name, boolean isGuest, CourseObj activeCourse) {
+    public AccountObj(int id, String name, boolean isGuest, CourseObj activeCourse, String username, String password) {
         this.id = id;
         this.name = name;
         this.isGuest = isGuest;
         this.activeCourse = activeCourse;
+        this.username = username;
+        this.password = password;
     }
 
     public int getId() {
@@ -31,5 +35,13 @@ public class AccountObj {
 
     public void setActiveCourse(CourseObj activeCourse) {
         this.activeCourse = activeCourse;
+    }
+
+    public String getUsername(){
+        return username;
+    }
+
+    public String getPassword(){
+        return password;
     }
 }

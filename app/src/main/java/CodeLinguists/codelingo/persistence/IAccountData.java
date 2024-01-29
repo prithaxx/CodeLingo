@@ -17,8 +17,13 @@ public interface IAccountData {
      */
     AccountObj getGuestAccountByName(String name);
 
-    //return all guest accounts
-
+    /**
+     * return all accounts on local device
+     *
+     * @return list of accountObj
+     */
+    List<AccountObj> getAllAccounts();
+    
     /**
      * return all guest accounts on local device
      *

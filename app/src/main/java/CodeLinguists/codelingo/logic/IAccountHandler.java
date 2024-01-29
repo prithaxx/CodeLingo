@@ -9,7 +9,6 @@ import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
 public interface IAccountHandler {
     List<AccountObj> getGuestAccounts();
     void createGuestAccount(String name);
-    AccountObj getAccountById(int id);
 
     /**
      * @return - Course from previous session
@@ -22,7 +21,7 @@ public interface IAccountHandler {
      * @param account - account to log into
      * @throws AccountNotFoundException
      */
-    void login(AccountObj account);
+    //void login(AccountObj account);
 
     /**
      * Log into an account

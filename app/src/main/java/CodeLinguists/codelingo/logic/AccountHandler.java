@@ -27,17 +27,8 @@ public class AccountHandler implements IAccountHandler {
     public void createGuestAccount(String name) {
         accountData.createGuestAccount(name);
     }
-
-
-    //should there be a getAccountByID in IAccountData?
-    // Is there a list of accounts in the data?
-    @Override
-    public AccountObj getAccountById(int id) {
-        if(accountData.getId() == id){
-
-        }
-        return null;
-    }
+    
+    //remove getaccount byID
 
     @Override
     public CourseObj getActiveCourse() {
@@ -49,23 +40,37 @@ public class AccountHandler implements IAccountHandler {
         }
     }
 
-    @Override
+    /*@Override
     public void login(AccountObj account) {
         updateSessionData(account);
-    }
+    }*/  
+    //Prob dont need this anymore 
 
 
-    //should there be username and password variable in AccountObj.java?
     @Override
     public void login(String username, String password) throws AccountNotFoundException {
-        AccountObj account;
-        if (password == null) {
-
-        } else {
-
-            account = null; 
+        if (username == null || username.isEmpty()) {
+            throw new AccountNotFoundException("Username cannot be null or empty.");
         }
-        updateSessionData(account);
+
+        // Logic for guest login
+        if (password == null) {
+            AccountObj account = accountData.getGuestAccountByName(username); // do we get guest account using name or username here
+            updateSessionData(account);
+            return;
+        }
+
+        // Logic for regular user login
+        List<AccountObj> allAccounts = accountData.getAllAccounts(); 
+        for (AccountObj account : allAccounts) {
+            if (username.equals(account.getUsername()) && password.equals(account.getPassword())) {
+                updateSessionData(account);
+                return;
+            }
+        }
+
+        // If no matching account found
+        throw new AccountNotFoundException("Invalid username or password.");
     }
 
     @Override
