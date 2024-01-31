@@ -19,10 +19,10 @@ public interface IAccountHandler {
     /**
      * Login to guest account
      *
-     * @param account - account to log into
+     * @param name - name of account to log into
      * @throws AccountNotFoundException
      */
-    //void login(AccountObj account);
+    void guestLogin(String name);
 
     void setActiveCourse(CourseObj course);
 

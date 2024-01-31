@@ -30,11 +30,12 @@ public class AccountHandler implements IAccountHandler {
 
     @Override
     public void createGuestAccount(String name) {
+        if (name == null || name.isEmpty()) {
+            throw new InputValidationException("Name cannot be null or empty.");
+        }
         accountData.createGuestAccount(name);
     }
     
-    //remove getaccount byID
-
     @Override
     public CourseObj getActiveCourse() {
         AccountObj activeAccount = sessionData.getActiveAccount();
@@ -53,24 +54,10 @@ public class AccountHandler implements IAccountHandler {
         }
     }
 
-    /*@Override
-    public void login(AccountObj account) {
-        updateSessionData(account);
-    }*/  
-    //Prob dont need this anymore 
-
-
     @Override
     public void login(String username, String password) throws AccountNotFoundException {
-        if (username == null || username.isEmpty()) {
-            throw new AccountNotFoundException("Username cannot be null or empty.");
-        }
-
-        // Logic for guest login
-        if (password == null) {
-            AccountObj account = accountData.getGuestAccountByName(username); // do we get guest account using name or username here
-            updateSessionData(account);
-            return;
+        if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
+            throw new InputValidationException("Username or password cannot be null or empty.");
         }
 
         // Logic for regular user login
@@ -84,6 +71,15 @@ public class AccountHandler implements IAccountHandler {
 
         // If no matching account found
         throw new AccountNotFoundException("Invalid username or password.");
+    }
+
+    @Override
+    public void guestLogin(String name) throws AccountNotFoundException{
+        if(name == null || name.isEmpty()){
+            throw new InputValidationException("Name cannot be null or empty.");
+        }
+        AccountObj account = accountData.getGuestAccountByName(name); 
+        updateSessionData(account);
     }
 
     @Override

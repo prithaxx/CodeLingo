@@ -104,15 +104,23 @@ public class AccountHandlerTest {
     public void loginEmptyUsername() {
         accountHandler.login("", "test");
     }
+    @Test(expected = RuntimeException.class)
+    public void loginNullPassword() {
+        accountHandler.login("test", null);
+    }
+    @Test(expected = RuntimeException.class)
+    public void loginEmptyPassword() {
+        accountHandler.login("test", "");
+    }
     @Test(expected = AccountNotFoundException.class)
     public void loginNoGuestAccountFound() {
-        accountHandler.login("test", null);
+        accountHandler.guestLogin("test");
     }
     @Test
     public void loginGuest() {
         String name = "test";
         accountHandler.createGuestAccount(name);
-        accountHandler.login(name, null);
+        accountHandler.guestLogin(name);
         AccountObj account = accountHandler.getAccountDetails();
         assertEquals(account.getName(), name);
     }
