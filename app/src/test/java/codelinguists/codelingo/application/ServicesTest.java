@@ -1,9 +1,10 @@
-package CodeLinguists.codelingo.application;
+package codelinguists.codelingo.application;
 
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.persistence.IAccountData;
 import CodeLinguists.codelingo.persistence.IChapterData;
 import CodeLinguists.codelingo.persistence.ICourseData;

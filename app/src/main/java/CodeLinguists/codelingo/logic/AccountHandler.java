@@ -18,6 +18,11 @@ public class AccountHandler implements IAccountHandler {
         this.sessionData = Services.getSessionData();
     }
 
+    public AccountHandler(IAccountData accountData, ISessionData sessionData) {
+        this.accountData = accountData;
+        this.sessionData = sessionData;
+    }
+
     @Override
     public List<AccountObj> getGuestAccounts() {
         return accountData.getGuestAccounts();
@@ -37,6 +42,14 @@ public class AccountHandler implements IAccountHandler {
             return activeAccount.getActiveCourse();
         }else{
             return null;
+        }
+    }
+
+    @Override
+    public void setActiveCourse(CourseObj course) {
+        AccountObj activeAccount = sessionData.getActiveAccount();
+        if(activeAccount !=null){
+            activeAccount.setActiveCourse(course);
         }
     }
 
@@ -71,6 +84,11 @@ public class AccountHandler implements IAccountHandler {
 
         // If no matching account found
         throw new AccountNotFoundException("Invalid username or password.");
+    }
+
+    @Override
+    public AccountObj getAccountDetails() {
+        return sessionData.getActiveAccount();
     }
 
     @Override

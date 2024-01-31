@@ -1,4 +1,4 @@
-package CodeLinguists.codelingo;
+package codelinguists.codelingo;
 
 import android.content.Context;
 
