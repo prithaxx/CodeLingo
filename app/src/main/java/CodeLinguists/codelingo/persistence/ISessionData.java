@@ -6,7 +6,7 @@ import CodeLinguists.codelingo.dso.CourseObj;
 public interface ISessionData {
 
     /**
-     * @return - "remember me" account
+     * @return - active account
      */
     AccountObj getActiveAccount();
     void setActiveAccount(AccountObj account);
