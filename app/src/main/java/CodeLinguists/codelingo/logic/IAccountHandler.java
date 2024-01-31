@@ -18,10 +18,13 @@ public interface IAccountHandler {
     //Logins must update ISessionData
     /**
      * Login to guest account
+     *
      * @param account - account to log into
      * @throws AccountNotFoundException
      */
     //void login(AccountObj account);
+
+    void setActiveCourse(CourseObj course);
 
     /**
      * Log into an account
@@ -31,6 +34,8 @@ public interface IAccountHandler {
      * @throws AccountNotFoundException
      */
     void login(String username, String password);
+
+    AccountObj getAccountDetails();
 
     void logout();
 }
