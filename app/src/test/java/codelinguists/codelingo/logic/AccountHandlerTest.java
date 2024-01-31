@@ -59,34 +59,24 @@ public class AccountHandlerTest {
     @Test
     public void ActiveCourseDefaultValue() {
         //initial state defaults to null
+        helperLoginGuest();
+
         CourseObj courseObj = accountHandler.getActiveCourse();
-        assertNull(courseObj);
-
-        //test course assignment
-        CourseObj newCourseObj = new CourseObj(1, "test", "test", true, false);
-        accountHandler.setActiveCourse(newCourseObj);
-        courseObj = accountHandler.getActiveCourse();
-        assertSame(newCourseObj, courseObj);
-
-        //test course un-assignment
-        accountHandler.setActiveCourse(null);
-        courseObj = accountHandler.getActiveCourse();
         assertNull(courseObj);
     }
     @Test
     public void ActiveCourseAssignment() {
+        helperLoginGuest();
+
         CourseObj newCourseObj = new CourseObj(1, "test", "test", true, false);
         accountHandler.setActiveCourse(newCourseObj);
         CourseObj courseObj = accountHandler.getActiveCourse();
         assertSame(newCourseObj, courseObj);
-
-        //test course un-assignment
-        accountHandler.setActiveCourse(null);
-        courseObj = accountHandler.getActiveCourse();
-        assertNull(courseObj);
     }
     @Test
     public void ActiveCourseUnAssignment() {
+        helperLoginGuest();
+
         CourseObj newCourseObj = new CourseObj(1, "test", "test", true, false);
         accountHandler.setActiveCourse(newCourseObj);
         accountHandler.setActiveCourse(null);
@@ -124,5 +114,11 @@ public class AccountHandlerTest {
         accountHandler.guestLogin(name);
         AccountObj account = accountHandler.getAccountDetails();
         assertEquals(account.getName(), name);
+    }
+
+    private void helperLoginGuest() {
+        String name = "test";
+        accountHandler.createGuestAccount(name);
+        accountHandler.guestLogin(name);
     }
 }
