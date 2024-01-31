@@ -11,6 +11,7 @@ import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
+import CodeLinguists.codelingo.exceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.AccountHandler;
 import CodeLinguists.codelingo.persistence.IAccountData;
 import CodeLinguists.codelingo.persistence.ISessionData;
@@ -47,11 +48,11 @@ public class AccountHandlerTest {
     }
 
     //TODO make expected exception more specific
-    @Test(expected = RuntimeException.class)
+    @Test(expected = InputValidationException.class)
     public void createGuestAccountNullInvalid() {
         accountHandler.createGuestAccount(null);
     }
-    @Test(expected = RuntimeException.class)
+    @Test(expected = InputValidationException.class)
     public void createGuestAccountEmptyInvalid() {
         accountHandler.createGuestAccount("");
     }
@@ -96,19 +97,19 @@ public class AccountHandlerTest {
     public void loginNoAccountFound() {
         accountHandler.login("test", "test");
     }
-    @Test(expected = RuntimeException.class)
+    @Test(expected = InputValidationException.class)
     public void loginNullUsername() {
         accountHandler.login(null, "test");
     }
-    @Test(expected = RuntimeException.class)
+    @Test(expected = InputValidationException.class)
     public void loginEmptyUsername() {
         accountHandler.login("", "test");
     }
-    @Test(expected = RuntimeException.class)
+    @Test(expected = InputValidationException.class)
     public void loginNullPassword() {
         accountHandler.login("test", null);
     }
-    @Test(expected = RuntimeException.class)
+    @Test(expected = InputValidationException.class)
     public void loginEmptyPassword() {
         accountHandler.login("test", "");
     }

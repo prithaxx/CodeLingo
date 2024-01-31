@@ -5,6 +5,7 @@ import java.util.List;
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
+import CodeLinguists.codelingo.exceptions.InputValidationException;
 
 public interface IAccountHandler {
     List<AccountObj> getGuestAccounts();
@@ -30,7 +31,7 @@ public interface IAccountHandler {
      * Log into an account
      *
      * @param username
-     * @param password - set to null for guest account
+     * @param password 
      * @throws AccountNotFoundException
      */
     void login(String username, String password);

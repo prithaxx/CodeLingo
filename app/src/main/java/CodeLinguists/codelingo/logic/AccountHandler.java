@@ -3,6 +3,7 @@ package CodeLinguists.codelingo.logic;
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
+import CodeLinguists.codelingo.exceptions.InputValidationException;
 import CodeLinguists.codelingo.persistence.IAccountData;
 import CodeLinguists.codelingo.persistence.ISessionData;
 import CodeLinguists.codelingo.application.Services;
@@ -31,7 +32,7 @@ public class AccountHandler implements IAccountHandler {
     @Override
     public void createGuestAccount(String name) {
         if (name == null || name.isEmpty()) {
-            throw new InputValidationException("Name cannot be null or empty.");
+            throw new InputValidationException("Name cannot be empty.");
         }
         accountData.createGuestAccount(name);
     }
@@ -57,7 +58,7 @@ public class AccountHandler implements IAccountHandler {
     @Override
     public void login(String username, String password) throws AccountNotFoundException {
         if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
-            throw new InputValidationException("Username or password cannot be null or empty.");
+            throw new InputValidationException("Username or password cannot be empty.");
         }
 
         // Logic for regular user login
@@ -76,7 +77,7 @@ public class AccountHandler implements IAccountHandler {
     @Override
     public void guestLogin(String name) throws AccountNotFoundException{
         if(name == null || name.isEmpty()){
-            throw new InputValidationException("Name cannot be null or empty.");
+            throw new InputValidationException("Name cannot be empty.");
         }
         AccountObj account = accountData.getGuestAccountByName(name); 
         updateSessionData(account);
