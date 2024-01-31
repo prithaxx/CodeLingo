@@ -14,6 +14,13 @@ public class Services {
     private static ICourseData courseData = null;
     private static IChapterData chapterData = null;
 
+    public static synchronized void resetObjects() {
+        accountData=null;
+        sessionData=null;
+        courseData=null;
+        chapterData=null;
+    }
+
     public static synchronized IAccountData getAccountData() {
         if (accountData==null) {
             //TODO add default persistance class

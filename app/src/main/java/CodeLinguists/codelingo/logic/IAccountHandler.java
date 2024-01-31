@@ -5,11 +5,11 @@ import java.util.List;
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
+import CodeLinguists.codelingo.exceptions.InputValidationException;
 
 public interface IAccountHandler {
     List<AccountObj> getGuestAccounts();
     void createGuestAccount(String name);
-    AccountObj getAccountById(int id);
 
     /**
      * @return - Course from previous session
@@ -19,19 +19,24 @@ public interface IAccountHandler {
     //Logins must update ISessionData
     /**
      * Login to guest account
-     * @param account - account to log into
+     *
+     * @param name - name of account to log into
      * @throws AccountNotFoundException
      */
-    void login(AccountObj account);
+    void guestLogin(String name);
+
+    void setActiveCourse(CourseObj course);
 
     /**
      * Log into an account
      *
      * @param username
-     * @param password - set to null for guest account
+     * @param password 
      * @throws AccountNotFoundException
      */
     void login(String username, String password);
+
+    AccountObj getAccountDetails();
 
     void logout();
 }
