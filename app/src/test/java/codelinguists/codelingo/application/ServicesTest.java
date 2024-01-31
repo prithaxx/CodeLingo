@@ -32,16 +32,16 @@ public class ServicesTest {
     }
     @Test
     public void testGetCourseData() {
-//        ICourseData newCourse = Services.getCourseData();
-//        assertNotNull(newCourse);
-//        ICourseData repeatCourse = Services.getCourseData();
-//        assertSame(newCourse, repeatCourse); //ensure singleton is single
+        ICourseData newCourse = Services.getCourseData();
+        assertNotNull(newCourse);
+        ICourseData repeatCourse = Services.getCourseData();
+        assertSame(newCourse, repeatCourse); //ensure singleton is single
     }
     @Test
     public void testGetChapterData() {
-//        IChapterData newChapter = Services.getChapterData();
-//        assertNotNull(newChapter);
-//        IChapterData repeatChapter = Services.getChapterData();
-//        assertSame(newChapter, repeatChapter); //ensure singleton is single
+        IChapterData newChapter = Services.getChapterData();
+        assertNotNull(newChapter);
+        IChapterData repeatChapter = Services.getChapterData();
+        assertSame(newChapter, repeatChapter); //ensure singleton is single
     }
 }

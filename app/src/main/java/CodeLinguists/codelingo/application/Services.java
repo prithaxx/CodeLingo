@@ -5,6 +5,8 @@ import CodeLinguists.codelingo.persistence.IChapterData;
 import CodeLinguists.codelingo.persistence.ICourseData;
 import CodeLinguists.codelingo.persistence.ISessionData;
 import CodeLinguists.codelingo.persistence.stubs.AccountDataStub;
+import CodeLinguists.codelingo.persistence.stubs.ChapterDataStub;
+import CodeLinguists.codelingo.persistence.stubs.CourseDataStub;
 import CodeLinguists.codelingo.persistence.stubs.SessionDataStub;
 
 /**
@@ -39,16 +41,14 @@ public class Services {
 
     public static synchronized ICourseData getCourseData() {
         if (courseData==null) {
-            //TODO add default persistance class
-            //courseData = new CourseDataStub();
+            courseData = new CourseDataStub();
         }
         return courseData;
     }
 
     public static synchronized IChapterData getChapterData() {
         if (chapterData==null) {
-            //TODO add default persistance class
-            //chapterData = new ChapterDataStub();
+            chapterData = new ChapterDataStub();
         }
         return chapterData;
     }
