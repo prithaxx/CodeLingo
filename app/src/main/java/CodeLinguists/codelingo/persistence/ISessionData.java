@@ -9,4 +9,5 @@ public interface ISessionData {
      */
     AccountObj getActiveAccount();
     void setActiveAccount(AccountObj account);
+    CourseObj getActiveCourse();
 }
