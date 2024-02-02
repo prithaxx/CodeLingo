@@ -34,12 +34,6 @@ public class ChapterHandler implements IChapterHandler {
 
     @Override
     public ChapterObj getChapterById(int chapterId) {
-        List<ChapterObj> allChapters = getChapters(); 
-        for (ChapterObj chapter : allChapters) {
-            if (chapter.getId() == chapterId) {
-                return chapter;
-            }
-        }
-        return null;
+        return chapterData.getChapterById(chapterId);
     }
 }

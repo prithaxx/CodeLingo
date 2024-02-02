@@ -14,6 +14,12 @@ public class CourseHandler implements ICourseHandler {
 
     public CourseHandler(){
         this.courseData = Services.getCourseData();
+        this.sessionData = Services.getSessionData();
+    }
+
+    public CourseHandler(ICourseData courseData, ISessionData sessionData){
+        this.courseData = courseData;
+        this.sessionData = sessionData;
     }
 
     @Override
@@ -23,18 +29,12 @@ public class CourseHandler implements ICourseHandler {
 
     @Override
     public CourseObj getCourseById(int id) {
-        List<CourseObj> courses = getCourses();
-        for (CourseObj course : courses) {
-            if (course.getId() == id) {
-                return course;
-            }
-        }
-        return null; 
+        return courseData.getCourseById(id);
     }
 
     @Override
     public CourseObj getActiveCourse() {
-        sessionData = Services.getSessionData();
+        sessionData = this.getSessionData();
         return sessionData.getActiveCourse();
     }
 }

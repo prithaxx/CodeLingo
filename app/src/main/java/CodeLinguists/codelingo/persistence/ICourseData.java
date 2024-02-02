@@ -6,4 +6,5 @@ import CodeLinguists.codelingo.dso.CourseObj;
 
 public interface ICourseData {
     List<CourseObj> getCourses();
+    CourseObj getCourseById(int id);
 }
