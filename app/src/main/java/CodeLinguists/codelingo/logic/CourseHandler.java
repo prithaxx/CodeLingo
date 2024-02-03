@@ -34,7 +34,6 @@ public class CourseHandler implements ICourseHandler {
 
     @Override
     public CourseObj getActiveCourse() {
-        sessionData = this.getSessionData();
         return sessionData.getActiveCourse();
     }
 }
