@@ -47,7 +47,8 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:background="#37963FB5"
-            android:textSize="30sp"/>
+            android:textSize="30sp"
+            android:singleLine="true"/>
 
         <Button
             android:layout_width="200dp"
