@@ -2,9 +2,11 @@ package CodeLinguists.codelingo.persistence.stubs;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
+import CodeLinguists.codelingo.exceptions.ChapterNotFoundException;
 import CodeLinguists.codelingo.persistence.IChapterData;
 
 public class ChapterDataStub implements IChapterData {
@@ -34,5 +36,22 @@ public class ChapterDataStub implements IChapterData {
     @Override
     public List<ChapterObj> getChaptersByCourse(CourseObj course) {
         return placeholders;
+    }
+
+    @Override
+    public List<ChapterObj> getChaptersByCourseId(int id) {
+        return placeholders.stream().filter(chapter->chapter.getCourseId()==id).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ChapterObj> getChapters() {
+        return placeholders;
+    }
+    @Override
+    public ChapterObj getChapterById(int courseId, int chapterId) {
+        return placeholders.stream()
+                .filter(chapter -> chapter.getCourseId()==courseId&&chapter.getId()==chapterId)
+                .findFirst()
+                .orElseThrow(() -> new ChapterNotFoundException("No chapter for course #"+courseId+" and chapter #"+chapterId));
     }
 }
