@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.view_CourseOverview">
 
-    <TextView
-        android:id="@+id/placeholder"
-        android:layout_width="wrap_content"
+    <Toolbar
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="course_overview"
-        tools:layout_editor_absoluteX="14dp"
-        tools:layout_editor_absoluteY="18dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:background="@drawable/login_background">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/menu"
+            android:padding="5dp"/>
+    </Toolbar>
+
+</LinearLayout>

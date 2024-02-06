@@ -9,6 +9,6 @@ public interface IChapterHandler {
     List<ChapterObj> getChapters();
     List<ChapterObj> getChaptersByCourse(CourseObj course);
     List<ChapterObj> getChaptersByCourseId(int courseId);
-    ChapterObj getChapterById(int chapterId);
+    ChapterObj getChapterById(int courseId, int chapterId);
 
 }

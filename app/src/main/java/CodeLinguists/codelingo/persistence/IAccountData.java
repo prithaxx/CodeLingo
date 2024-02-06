@@ -40,9 +40,5 @@ public interface IAccountData {
      */
     AccountObj createGuestAccount(String name);
 
-    /**
-     * @param course - course to open on next login
-     */
-    void setActiveCourse(CourseObj course);
-
+    void setActiveCourse(AccountObj account, CourseObj course);
 }
