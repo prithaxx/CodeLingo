@@ -5,6 +5,8 @@ import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.persistence.ICourseData;
 import CodeLinguists.codelingo.persistence.ISessionData;
 import CodeLinguists.codelingo.application.Services;
+import CodeLinguists.codelingo.persistence.stubs.CourseDataStub;
+
 import java.util.List;
 
 public class CourseHandler implements ICourseHandler {
@@ -20,6 +22,10 @@ public class CourseHandler implements ICourseHandler {
     public CourseHandler(ICourseData courseData, ISessionData sessionData){
         this.courseData = courseData;
         this.sessionData = sessionData;
+    }
+
+    public CourseHandler(ICourseData courseData){
+        this.courseData = courseData;
     }
 
     @Override

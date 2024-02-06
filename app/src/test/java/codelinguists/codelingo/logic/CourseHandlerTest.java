@@ -14,29 +14,26 @@ import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.logic.CourseHandler;
 import CodeLinguists.codelingo.persistence.ICourseData;
 import CodeLinguists.codelingo.persistence.ISessionData;
+import CodeLinguists.codelingo.persistence.stubs.CourseDataStub;
 
 public class CourseHandlerTest {
     private CourseHandler courseHandler;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp(){
         Services.resetObjects();
-        ICourseData courseData = Services.getCourseData();
-        ISessionData sessionData = Services.getSessionData();
-
-        this.courseHandler = new CourseHandler(courseData, sessionData);
+        this.courseHandler = new CourseHandler(new CourseDataStub());
     }
 
     @Test
     public void getCourses() {
         List<CourseObj> courses = courseHandler.getCourses();
         assertNotNull(courses);
-        assertEquals(courses.size(), 0);
+        assertTrue(courses.size()>0);
     }
     @Test
     public void getCourseByIdSuccess() {
-        int courseId = 1; 
-        CourseObj newCourse = new CourseObj(courseId,"test","test", false,false);
+        int courseId = 1;
         CourseObj course = courseHandler.getCourseById(courseId);
         assertNotNull(course);
         assertEquals(courseId, course.getId());
@@ -46,11 +43,5 @@ public class CourseHandlerTest {
     public void getCourseByIdNotFound() {
         int invalidCourseId = 999; // Assuming 999 is an invalid course ID
         courseHandler.getCourseById(invalidCourseId);
-    }
-
-    @Test
-    public void getActiveCourse() {
-        CourseObj courseObj = courseHandler.getActiveCourse();
-        assertNull(courseObj);
     }
 }

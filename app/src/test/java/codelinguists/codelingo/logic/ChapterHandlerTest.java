@@ -11,25 +11,24 @@ import java.util.List;
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
+import CodeLinguists.codelingo.exceptions.ChapterNotFoundException;
 import CodeLinguists.codelingo.logic.ChapterHandler;
-import CodeLinguists.codelingo.persistence.IChapterData;
+import CodeLinguists.codelingo.persistence.stubs.ChapterDataStub;
 
 public class ChapterHandlerTest {
     private ChapterHandler chapterHandler;
 
     @Before
-    public void setUp() {
+    public void setUp(){
         Services.resetObjects();
-        IChapterData chapterData = Services.getChapterData();
-
-        this.chapterHandler = new ChapterHandler(chapterData);
+        chapterHandler = new ChapterHandler(new ChapterDataStub());
     }
 
     @Test
     public void getChapters() {
         List<ChapterObj> chapters = chapterHandler.getChapters();
         assertNotNull(chapters);
-        assertEquals(chapters.size() , 0);
+        assertTrue(chapters.size() > 0);
     }
 
     @Test
@@ -42,20 +41,34 @@ public class ChapterHandlerTest {
 
     @Test
     public void getChaptersByCourseId() {
-        int courseId = 1; 
-        CourseObj newCourse = new CourseObj(courseId, "Test Course", "Description", true, true);
+        int courseId = 1;
         List<ChapterObj> chapters = chapterHandler.getChaptersByCourseId(courseId);
         assertNotNull(chapters);
         assertFalse(chapters.isEmpty());
+        chapters.forEach(chapter -> assertEquals( courseId, chapter.getCourseId()));
     }
 
     @Test
-    public void testGetChapterById() {
-        CourseObj newCourse = new CourseObj(1, "Test Course", "Description", true, true);
-        int chapterId = 1; 
-        ChapterObj newChapter = new ChapterObj(chapterId, "test", newCourse,"test", true, true);
-        ChapterObj chapter = chapterHandler.getChapterById(chapterId);
+    public void getChaptersByCourseIdFail() {
+        int courseId = 999;
+        List<ChapterObj> chapters = chapterHandler.getChaptersByCourseId(courseId);
+        assertNotNull(chapters);
+        assertTrue(chapters.isEmpty());
+    }
+
+    @Test
+    public void getChapterById() {
+        int courseId = 1;
+        int chapterId = 1;
+        ChapterObj chapter = chapterHandler.getChapterById(courseId, chapterId);
         assertNotNull(chapter);
         assertEquals(chapterId, chapter.getId());
+    }
+
+    @Test(expected = ChapterNotFoundException.class)
+    public void getChapterByIdFail() {
+        int courseId = 1;
+        int chapterId = 999;
+        ChapterObj chapter = chapterHandler.getChapterById(courseId, chapterId);
     }
 }
