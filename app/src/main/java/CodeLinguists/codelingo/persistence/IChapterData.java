@@ -9,6 +9,5 @@ public interface IChapterData {
     List<ChapterObj> getChaptersByCourse(CourseObj course);
     List<ChapterObj> getChaptersByCourseId(int id);
     List<ChapterObj> getChapters();
-    ChapterObj getChapterById(int chapterId);
-
+    ChapterObj getChapterById(int courseId, int chapterId);
 }

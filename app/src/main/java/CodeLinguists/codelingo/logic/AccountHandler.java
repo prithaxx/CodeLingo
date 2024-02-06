@@ -4,6 +4,7 @@ import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.exceptions.InputValidationException;
+import CodeLinguists.codelingo.exceptions.NotSignedInException;
 import CodeLinguists.codelingo.persistence.IAccountData;
 import CodeLinguists.codelingo.persistence.ISessionData;
 import CodeLinguists.codelingo.application.Services;
@@ -40,19 +41,19 @@ public class AccountHandler implements IAccountHandler {
     @Override
     public CourseObj getActiveCourse() {
         AccountObj activeAccount = sessionData.getActiveAccount();
-        if(activeAccount !=null){
-            return activeAccount.getActiveCourse();
-        }else{
-            return null;
+        if(activeAccount == null){
+            throw new NotSignedInException();
         }
+        return activeAccount.getActiveCourse();
     }
 
     @Override
     public void setActiveCourse(CourseObj course) {
         AccountObj activeAccount = sessionData.getActiveAccount();
-        if(activeAccount !=null){
-            activeAccount.setActiveCourse(course);
+        if(activeAccount == null){
+            throw new NotSignedInException();
         }
+        accountData.setActiveCourse(activeAccount, course);
     }
 
     @Override

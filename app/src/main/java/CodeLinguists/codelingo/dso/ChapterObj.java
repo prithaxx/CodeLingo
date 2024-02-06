@@ -4,15 +4,15 @@ public class ChapterObj {
 
     private final int id;
     private final String name;
-    private final CourseObj course;
+    private final int courseId;
     private final String description;
     private final boolean isUnlocked;
     private final boolean isCompleted;
 
-    public ChapterObj(int id, String name, CourseObj course, String description, boolean isUnlocked, boolean isCompleted) {
+    public ChapterObj(int id, String name, int courseId, String description, boolean isUnlocked, boolean isCompleted) {
         this.id = id;
         this.name = name;
-        this.course = course;
+        this.courseId = courseId;
         this.description = description;
         this.isUnlocked = isUnlocked;
         this.isCompleted = isCompleted;
@@ -33,8 +33,8 @@ public class ChapterObj {
     public String getName() {
         return name;
     }
-    public CourseObj getCourse() {
-        return course;
+    public int getCourseId() {
+        return courseId;
     }
 
     public String getDescription() {

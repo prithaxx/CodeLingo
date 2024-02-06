@@ -33,7 +33,7 @@ public class ChapterHandler implements IChapterHandler {
     }
 
     @Override
-    public ChapterObj getChapterById(int chapterId) {
-        return chapterData.getChapterById(chapterId);
+    public ChapterObj getChapterById(int courseId, int chapterId) {
+        return chapterData.getChapterById(courseId, chapterId);
     }
 }

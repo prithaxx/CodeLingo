@@ -4,6 +4,10 @@ import CodeLinguists.codelingo.persistence.IAccountData;
 import CodeLinguists.codelingo.persistence.IChapterData;
 import CodeLinguists.codelingo.persistence.ICourseData;
 import CodeLinguists.codelingo.persistence.ISessionData;
+import CodeLinguists.codelingo.persistence.stubs.AccountDataStub;
+import CodeLinguists.codelingo.persistence.stubs.ChapterDataStub;
+import CodeLinguists.codelingo.persistence.stubs.CourseDataStub;
+import CodeLinguists.codelingo.persistence.stubs.SessionDataStub;
 
 /**
  * Provides creation and distribution of persistance layer classes
@@ -23,32 +27,28 @@ public class Services {
 
     public static synchronized IAccountData getAccountData() {
         if (accountData==null) {
-            //TODO add default persistance class
-            //accountData = new accountDataStub();
+            accountData = new AccountDataStub();
         }
         return accountData;
     }
 
     public static synchronized ISessionData getSessionData() {
         if (sessionData ==null) {
-            //TODO add default persistance class
-            //sessionData = new sessionDataStub();
+            sessionData = new SessionDataStub();
         }
         return sessionData;
     }
 
     public static synchronized ICourseData getCourseData() {
         if (courseData==null) {
-            //TODO add default persistance class
-            //courseData = new courseDataStub();
+            courseData = new CourseDataStub();
         }
         return courseData;
     }
 
     public static synchronized IChapterData getChapterData() {
         if (chapterData==null) {
-            //TODO add default persistance class
-            //chapterData = new chapterDataStub();
+            chapterData = new ChapterDataStub();
         }
         return chapterData;
     }
