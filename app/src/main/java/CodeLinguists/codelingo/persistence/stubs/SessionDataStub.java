@@ -26,4 +26,9 @@ public class SessionDataStub implements ISessionData {
     public void setActiveAccount(AccountObj account) {
         this.activeAccount = account;
     }
+
+    @Override
+    public CourseObj getActiveCourse() {
+        return activeAccount.getActiveCourse();
+    }
 }

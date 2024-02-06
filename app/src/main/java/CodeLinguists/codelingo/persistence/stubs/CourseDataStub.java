@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import CodeLinguists.codelingo.dso.CourseObj;
+import CodeLinguists.codelingo.exceptions.ChapterNotFoundException;
+import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.persistence.ICourseData;
 
 public class CourseDataStub implements ICourseData {
@@ -25,5 +27,13 @@ public class CourseDataStub implements ICourseData {
     @Override
     public List<CourseObj> getCourses() {
         return this.placeholders;
+    }
+
+    @Override
+    public CourseObj getCourseById(int id) {
+        return placeholders.stream()
+                .filter(course -> course.getId()==id)
+                .findFirst()
+                .orElseThrow(() -> new CourseNotFoundException("Course #"+id+" was not found"));
     }
 }
