@@ -17,6 +17,10 @@ public class ChapterHandler implements IChapterHandler {
         this.chapterData = Services.getChapterData();
     }
 
+    public ChapterHandler(IChapterData chapterData){
+        this.chapterData = chapterData;
+    }
+
     @Override
     public List<ChapterObj> getChapters() {
         return chapterData.getChapters();
