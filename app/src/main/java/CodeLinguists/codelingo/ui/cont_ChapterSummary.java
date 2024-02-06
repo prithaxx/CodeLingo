@@ -66,7 +66,6 @@ public class cont_ChapterSummary extends AppCompatActivity {
                 holder.imageChapterStatus.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        // 更新右侧章节描述
                         chapterSummaryTextView.setText(chapter.getDescription());
                     }
                 });
@@ -74,7 +73,6 @@ public class cont_ChapterSummary extends AppCompatActivity {
                 holder.buttonChapter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        // 更新右侧章节描述
                         chapterSummaryTextView.setText(chapter.getDescription());
                     }
                 });
