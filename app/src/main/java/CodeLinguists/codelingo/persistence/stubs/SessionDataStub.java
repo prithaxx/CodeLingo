@@ -2,7 +2,6 @@ package CodeLinguists.codelingo.persistence.stubs;
 
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.CourseObj;
-import CodeLinguists.codelingo.exceptions.NotSignedInException;
 import CodeLinguists.codelingo.persistence.ISessionData;
 
 public class SessionDataStub implements ISessionData {
