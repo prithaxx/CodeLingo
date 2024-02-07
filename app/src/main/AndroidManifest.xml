@@ -25,6 +25,10 @@
             android:exported="false"
             android:screenOrientation="landscape"/>
         <activity
+            android:name=".ui.surface_pro_8___1_activity"
+            android:exported="true"
+            android:screenOrientation="landscape"/>
+        <activity
             android:name=".ui.GuestLogin"
             android:exported="true"
             android:screenOrientation="landscape">
