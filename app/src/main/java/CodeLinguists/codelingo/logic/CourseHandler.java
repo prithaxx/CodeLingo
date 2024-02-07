@@ -4,8 +4,6 @@ import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.persistence.ICourseData;
 import CodeLinguists.codelingo.persistence.ISessionData;
-import CodeLinguists.codelingo.application.Services;
-import CodeLinguists.codelingo.persistence.stubs.CourseDataStub;
 
 import java.util.List;
 

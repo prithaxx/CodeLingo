@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.util.List;
 
@@ -12,8 +11,6 @@ import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.logic.CourseHandler;
-import CodeLinguists.codelingo.persistence.ICourseData;
-import CodeLinguists.codelingo.persistence.ISessionData;
 import CodeLinguists.codelingo.persistence.stubs.CourseDataStub;
 
 public class CourseHandlerTest {
