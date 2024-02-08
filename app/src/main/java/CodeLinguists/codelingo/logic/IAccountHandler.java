@@ -1,8 +1,10 @@
 package CodeLinguists.codelingo.logic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import CodeLinguists.codelingo.dso.AccountObj;
+import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.exceptions.InputValidationException;
@@ -39,4 +41,6 @@ public interface IAccountHandler {
     AccountObj getAccountDetails();
 
     void logout();
+
+    List<ChapterObj> getActiveCourseChapters();
 }

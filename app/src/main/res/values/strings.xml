@@ -3,6 +3,7 @@
 	<!-- activity_course_overview strings -->
 
 	<string name="app_name">Page 1</string>
+	<string name="chapter_status">Chapter Status</string>
 	<string name="ek_img_content">ExportKit Image</string>
 	<string name="codelingo_string">CodeLingo</string>
 	<string name="placeholder_course_string">Placeholder Course</string>

@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Base application theme. -->
+
+    <style name="ChapterButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
 	<!-- activity_course_overview styles -->
 
 	<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -7,5 +14,4 @@
 		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 		<item name="colorAccent">@color/colorAccent</item>
 	</style>
-
 </resources>
