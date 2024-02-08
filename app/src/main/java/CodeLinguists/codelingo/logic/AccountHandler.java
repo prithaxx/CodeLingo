@@ -79,7 +79,7 @@ public class AccountHandler implements IAccountHandler {
     }
 
     @Override
-    public void guestLogin(String name) throws AccountNotFoundException{
+    public AccountObj guestLogin(String name) throws AccountNotFoundException{
         if(name == null || name.isEmpty()){
             throw new InputValidationException("Name cannot be empty.");
         }
@@ -89,7 +89,7 @@ public class AccountHandler implements IAccountHandler {
         if (account==null) {
             account = accountData.createGuestAccount(name);
         }
-        updateSessionData(account);
+        return account;
     }
 
     @Override

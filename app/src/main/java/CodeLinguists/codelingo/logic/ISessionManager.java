@@ -9,18 +9,7 @@ import CodeLinguists.codelingo.dso.QuizObj;
 public interface ISessionManager {
 
     public void guestLogin(String user);
-    public List<QuizObj> getQuiz();
-
-    void startQuiz();
-
-    QuizObj nextQuestion();
-
-    boolean hasNextQuestion();
-
-    QuizObj prevQuestion();
-
-    boolean hasPrevQuestion();
-
+    IQuizHandler startQuiz();
     CourseObj getActiveCourse();
 
     void setActiveChapter(int index);

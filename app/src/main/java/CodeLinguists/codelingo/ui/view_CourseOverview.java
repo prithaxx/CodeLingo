@@ -33,14 +33,14 @@ import CodeLinguists.codelingo.logic.ISessionManager;
 import CodeLinguists.codelingo.logic.SessionManager;
 import CodeLinguists.codelingo.persistence.ISessionData;
 
-	public class view_CourseOverview extends AppCompatActivity {
-	private ISessionManager sessionManager;
+public class view_CourseOverview extends AppCompatActivity {
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_course_overview);
 
-		this.sessionManager = SessionManager.newInstance();
+		ISessionManager sessionManager = SessionManager.newInstance();
 
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.replace(R.id.fragmentContainerView3, cont_CourseOverview.newInstance()).commit();

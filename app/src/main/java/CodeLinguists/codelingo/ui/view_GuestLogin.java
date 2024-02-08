@@ -13,10 +13,12 @@ import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.exceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.AccountHandler;
 import CodeLinguists.codelingo.logic.IAccountHandler;
+import CodeLinguists.codelingo.logic.ISessionManager;
+import CodeLinguists.codelingo.logic.SessionManager;
 import CodeLinguists.codelingo.persistence.IAccountData;
 
 public class view_GuestLogin extends AppCompatActivity {
-    private IAccountHandler accountHandler;
+    private ISessionManager sessionManager;
     private EditText usernameField;
 
     @Override
@@ -24,7 +26,7 @@ public class view_GuestLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_login);
 
-        this.accountHandler = new AccountHandler();
+        this.sessionManager = SessionManager.newInstance();
         this.usernameField = (EditText) findViewById(R.id.un_field);
     }
 
@@ -34,7 +36,7 @@ public class view_GuestLogin extends AppCompatActivity {
 
     private void login(String name) {
         try {
-            accountHandler.guestLogin(name);
+            sessionManager.guestLogin(name);
             navigateToCourseOverview();
         } catch (InputValidationException e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
