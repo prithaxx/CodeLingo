@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.persistence.IAccountData;
 import CodeLinguists.codelingo.persistence.ISessionData;
+import CodeLinguists.codelingo.persistence.IQuizData;
 
 public class ServicesTest {
     @Before
@@ -27,5 +28,13 @@ public class ServicesTest {
         assertNotNull(newSession);
         ISessionData repeatSession = Services.getSessionData();
         assertSame(newSession, repeatSession); //ensure singleton is single
+    }
+
+    @Test
+    public void testGetQuizData() {
+        IQuizData newQuiz = Services.getQuizData();
+        assertNotNull(newQuiz);
+        IQuizData repeatQuiz = Services.getQuizData();
+        assertSame(newQuiz, repeatQuiz);
     }
 }
