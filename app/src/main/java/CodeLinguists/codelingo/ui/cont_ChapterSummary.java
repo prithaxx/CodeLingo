@@ -13,14 +13,19 @@ import java.util.List;
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
+import CodeLinguists.codelingo.logic.AccountHandler;
 import CodeLinguists.codelingo.persistence.stubs.ChapterDataStub;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import org.jetbrains.annotations.NotNull;
 
 
 public class cont_ChapterSummary extends AppCompatActivity {
 
     private RecyclerView chapterListRecyclerView;
     private TextView chapterSummaryTextView;
+    private AccountHandler accountHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +34,20 @@ public class cont_ChapterSummary extends AppCompatActivity {
 
         chapterListRecyclerView = findViewById(R.id.chapterList);
         chapterSummaryTextView = findViewById(R.id.chapterSummary);
+        accountHandler = new AccountHandler();
 
         ChapterDataStub chapterDataStub = new ChapterDataStub();
-        List<ChapterObj> chapters = chapterDataStub.getChaptersByCourse(new CourseObj(1, "ex1", "This is a placeholder 1", false, false));
+        List<ChapterObj> chapters = accountHandler.getActiveCourseChapter();
 
-        ChapterListAdapter adapter = new ChapterListAdapter(chapters);
-        chapterListRecyclerView.setAdapter(adapter);
-        chapterListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        if (chapters == null || chapters.isEmpty()) {
+            // show the toast
+            Toast.makeText(this, "No chapters available", Toast.LENGTH_LONG).show();
+        } else {
+            // otherwise if contains data we will connect RecyclerView display the data
+            ChapterListAdapter adapter = new ChapterListAdapter(chapters);
+            chapterListRecyclerView.setAdapter(adapter);
+            chapterListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        }
     }
 
     private class ChapterListAdapter extends RecyclerView.Adapter<ChapterListAdapter.ChapterViewHolder> {
@@ -45,6 +57,7 @@ public class cont_ChapterSummary extends AppCompatActivity {
             this.chapterList = chapterList;
         }
 
+        @NotNull
         @Override
         public ChapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_chapter, parent, false);
