@@ -7,9 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.dso.QuizObj;
@@ -53,7 +50,7 @@ public class view_SlideShowWrapper extends AppCompatActivity {
         QuizObj quiz = to_next ? quizHandler.nextQuestion() : quizHandler.prevQuestion();
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragmentContainerView, cont_SlideText.newInstance("Quiz #"+quiz.getId(), quiz.getPrompt())).commit();
+        ft.replace(R.id.fragmentContainerView, cont_SlideText.newInstance("Quiz #"+quiz.id(), quiz.prompt())).commit();
         toggleNavButtons();
     }
 

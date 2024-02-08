@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import CodeLinguists.codelingo.R;
@@ -48,7 +47,7 @@ public class cont_CourseOverview extends Fragment {
         View v = inflater.inflate(R.layout.fragment_course_overview, container, false);
 
         TextView tv = v.findViewById(R.id.placeholder_course);
-        tv.setText(course!=null ? course.getName() : "Select a course");
+        tv.setText(course!=null ? course.name() : "Select a course");
 
         View b = v.findViewById(R.id.rectangle_1);
         b.setOnClickListener(this::tileOnclick0);

@@ -66,7 +66,7 @@ public class cont_ChapterSummary extends AppCompatActivity {
         @Override
         public void onBindViewHolder(ChapterViewHolder holder, int position) {
             final ChapterObj chapter = chapterList.get(position);
-            holder.buttonChapter.setText(chapter.getName());
+            holder.buttonChapter.setText(chapter.name());
 
             // set icon
             if (chapter.isCompleted()) {
@@ -76,14 +76,14 @@ public class cont_ChapterSummary extends AppCompatActivity {
                 holder.imageChapterStatus.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        chapterSummaryTextView.setText(chapter.getDescription());
+                        chapterSummaryTextView.setText(chapter.description());
                     }
                 });
 
                 holder.buttonChapter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        chapterSummaryTextView.setText(chapter.getDescription());
+                        chapterSummaryTextView.setText(chapter.description());
                     }
                 });
 

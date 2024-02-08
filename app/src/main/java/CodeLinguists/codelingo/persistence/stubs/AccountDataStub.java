@@ -4,15 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import CodeLinguists.codelingo.dso.AccountObj;
-import CodeLinguists.codelingo.dso.CourseObj;
-import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.persistence.IAccountData;
 
 public class AccountDataStub implements IAccountData {
-    private List<AccountObj> guestAccounts;
+    private final List<AccountObj> guestAccounts;
 
     public AccountDataStub() {
-        guestAccounts = new ArrayList<AccountObj>();
+        guestAccounts = new ArrayList<>();
     }
 
     @Override

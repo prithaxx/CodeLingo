@@ -12,8 +12,8 @@ import java.util.List;
 
 public class AccountHandler implements IAccountHandler {
 
-    private IAccountData accountData; 
-    private ISessionData sessionData; 
+    private final IAccountData accountData;
+    private final ISessionData sessionData;
 
     public AccountHandler() {
         this.accountData = Services.getAccountData();

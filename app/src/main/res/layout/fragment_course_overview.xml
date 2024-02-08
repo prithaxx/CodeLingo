@@ -10,7 +10,6 @@
         android:layout_height="match_parent">
 
         <View
-            android:id="@+id/window"
             android:layout_width="1280dp"
             android:layout_height="800dp"
             android:layout_alignParentEnd="true"
@@ -20,7 +19,6 @@
             android:background="@drawable/login_background" />
 
         <ImageView
-            android:id="@+id/untitled_design__8__1"
             android:layout_width="398dp"
             android:layout_height="353dp"
             android:layout_marginStart="130dp"
@@ -29,7 +27,6 @@
             android:src="@drawable/course_overview_intro" />
 
         <ImageView
-            android:id="@+id/outer_box"
             android:layout_width="1145dp"
             android:layout_height="557dp"
             android:layout_marginStart="62dp"
@@ -47,7 +44,6 @@
             android:background="@drawable/rectangle_1_shape" />
 
         <View
-            android:id="@+id/innerrect1"
             android:layout_width="240dp"
             android:layout_height="152dp"
             android:layout_marginStart="625dp"
@@ -55,7 +51,6 @@
             android:background="@drawable/innerrect1_shape" />
 
         <View
-            android:id="@+id/innerrect1_ek1"
             android:layout_width="240dp"
             android:layout_height="152dp"
             android:layout_marginStart="926dp"
@@ -63,7 +58,6 @@
             android:background="@drawable/innerrect1_ek1_shape" />
 
         <View
-            android:id="@+id/innerrect1_ek2"
             android:layout_width="240dp"
             android:layout_height="152dp"
             android:layout_marginStart="625dp"
@@ -71,7 +65,6 @@
             android:background="@drawable/innerrect1_ek2_shape" />
 
         <View
-            android:id="@+id/innerrect1_ek3"
             android:layout_width="240dp"
             android:layout_height="152dp"
             android:layout_marginStart="925dp"
@@ -88,7 +81,6 @@
             android:background="@drawable/rectangle_2_shape" />
 
         <ImageView
-            android:id="@+id/design2"
             android:layout_width="254dp"
             android:layout_height="152dp"
             android:layout_marginStart="911dp"
@@ -106,7 +98,6 @@
             android:background="@drawable/rectangle_3_shape" />
 
         <ImageView
-            android:id="@+id/design3"
             android:layout_width="226dp"
             android:layout_height="146dp"
             android:layout_marginStart="625dp"
@@ -124,7 +115,6 @@
             android:background="@drawable/rectangle_4_shape" />
 
         <ImageView
-            android:id="@+id/design4"
             android:layout_width="227dp"
             android:layout_height="145dp"
             android:layout_marginStart="925dp"
@@ -143,7 +133,6 @@
             android:textSize="40sp" />
 
         <ImageView
-            android:id="@+id/line_1"
             android:layout_width="477dp"
             android:layout_height="477dp"
             android:layout_marginStart="326dp"
@@ -152,7 +141,6 @@
             android:src="@drawable/line" />
 
         <ImageView
-            android:id="@+id/untitled_design__7__1"
             android:layout_width="211dp"
             android:layout_height="152dp"
             android:layout_marginStart="640dp"
@@ -161,7 +149,6 @@
             android:src="@drawable/course_tile_1" />
 
         <TextView
-            android:id="@+id/ex_1"
             android:layout_width="68.5dp"
             android:layout_height="31.5dp"
             android:layout_marginLeft="640dp"
@@ -171,7 +158,6 @@
             android:textSize="25sp" />
 
         <TextView
-            android:id="@+id/ex_4"
             android:layout_width="74.5dp"
             android:layout_height="31.5dp"
             android:layout_marginLeft="939dp"
@@ -181,7 +167,6 @@
             android:textSize="25sp" />
 
         <TextView
-            android:id="@+id/ex_3"
             android:layout_width="75.5dp"
             android:layout_height="31.5dp"
             android:layout_marginLeft="640dp"
@@ -191,7 +176,6 @@
             android:textSize="25sp" />
 
         <TextView
-            android:id="@+id/ex_2"
             android:layout_width="76.5dp"
             android:layout_height="31.5dp"
             android:layout_marginLeft="939dp"
@@ -201,7 +185,6 @@
             android:textSize="25sp" />
 
         <ImageView
-            android:id="@+id/star_1"
             android:layout_width="25.68dp"
             android:layout_height="24.42dp"
             android:layout_marginStart="702dp"
@@ -210,7 +193,6 @@
             android:src="@drawable/star" />
 
         <ImageView
-            android:id="@+id/star_2"
             android:layout_width="25.68dp"
             android:layout_height="24.42dp"
             android:layout_marginStart="729dp"
@@ -219,7 +201,6 @@
             android:src="@drawable/star" />
 
         <ImageView
-            android:id="@+id/star_5"
             android:layout_width="25.68dp"
             android:layout_height="24.42dp"
             android:layout_marginStart="810dp"
@@ -228,7 +209,6 @@
             android:src="@drawable/star" />
 
         <ImageView
-            android:id="@+id/star_4"
             android:layout_width="25.68dp"
             android:layout_height="24.42dp"
             android:layout_marginStart="783dp"
@@ -237,7 +217,6 @@
             android:src="@drawable/star" />
 
         <ImageView
-            android:id="@+id/star_3"
             android:layout_width="25.68dp"
             android:layout_height="24.42dp"
             android:layout_marginStart="756dp"
@@ -246,7 +225,6 @@
             android:src="@drawable/star" />
 
         <ImageView
-            android:id="@+id/star_16"
             android:layout_width="25.68dp"
             android:layout_height="24.42dp"
             android:layout_marginStart="1037dp"
@@ -255,7 +233,6 @@
             android:src="@drawable/star" />
 
         <ImageView
-            android:id="@+id/star_17"
             android:layout_width="25.68dp"
             android:layout_height="24.42dp"
             android:layout_marginStart="1064dp"
@@ -264,7 +241,6 @@
             android:src="@drawable/star" />
 
         <ImageView
-            android:id="@+id/star_11"
             android:layout_width="25.68dp"
             android:layout_height="24.42dp"
             android:layout_marginStart="716dp"
@@ -273,7 +249,6 @@
             android:src="@drawable/star" />
 
         <ImageView
-            android:id="@+id/star_12"
             android:layout_width="25.68dp"
             android:layout_height="24.42dp"
             android:layout_marginStart="743dp"
@@ -282,7 +257,6 @@
             android:src="@drawable/star" />
 
         <ImageView
-            android:id="@+id/star_14"
             android:layout_width="25.68dp"
             android:layout_height="24.42dp"
             android:layout_marginStart="797dp"
@@ -291,7 +265,6 @@
             android:src="@drawable/star" />
 
         <ImageView
-            android:id="@+id/star_15"
             android:layout_width="25.68dp"
             android:layout_height="24.42dp"
             android:layout_marginStart="770dp"
@@ -300,7 +273,6 @@
             android:src="@drawable/star" />
 
         <ImageView
-            android:id="@+id/star_6"
             android:layout_width="25.68dp"
             android:layout_height="24.42dp"
             android:layout_marginStart="1023dp"
@@ -309,7 +281,6 @@
             android:src="@drawable/star" />
 
         <ImageView
-            android:id="@+id/star_7"
             android:layout_width="25.68dp"
             android:layout_height="24.42dp"
             android:layout_marginStart="1050dp"
@@ -318,7 +289,6 @@
             android:src="@drawable/star" />
 
         <ImageView
-            android:id="@+id/star_10"
             android:layout_width="25.68dp"
             android:layout_height="24.42dp"
             android:layout_marginStart="1077dp"
@@ -327,14 +297,12 @@
             android:src="@drawable/star" />
 
         <RelativeLayout
-            android:id="@+id/align_justify"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="692.75dp"
             android:layout_marginTop="426.89dp" />
 
         <TextView
-            android:id="@+id/loren_ipsum"
             android:layout_width="375dp"
             android:layout_height="66dp"
             android:layout_gravity="center_horizontal|center"
