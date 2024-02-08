@@ -2,13 +2,10 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="GuestLogin">
-        <State />
-      </entry>
       <entry key="app">
         <State />
       </entry>
-      <entry key="view_CourseOverview">
+      <entry key="cont_ChapterSummary">
         <State />
       </entry>
     </value>
