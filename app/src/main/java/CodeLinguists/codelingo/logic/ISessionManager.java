@@ -7,6 +7,5 @@ public interface ISessionManager {
     void guestLogin(String user);
     IQuizHandler startQuiz();
     CourseObj getActiveCourse();
-
     void setActiveChapter(int index);
 }

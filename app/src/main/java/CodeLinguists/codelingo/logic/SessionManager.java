@@ -9,7 +9,7 @@ import CodeLinguists.codelingo.dso.QuizObj;
 import CodeLinguists.codelingo.persistence.IQuizData;
 
 public class SessionManager implements ISessionManager{
-    //Singleton setup
+    //Singleton
     private static ISessionManager sessionManager;
 
     public static ISessionManager newInstance() {
@@ -22,6 +22,7 @@ public class SessionManager implements ISessionManager{
     public static void clearSessionData() {
         sessionManager = null;
     }
+
 
     //instance fields
     IQuizData quizData;

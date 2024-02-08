@@ -38,10 +38,8 @@ public class cont_ChapterSummary extends AppCompatActivity {
         List<ChapterObj> chapters = accountHandler.getActiveCourseChapters();
 
         if (chapters == null || chapters.isEmpty()) {
-            // show the toast
             Toast.makeText(this, "No chapters available", Toast.LENGTH_LONG).show();
         } else {
-            // otherwise if contains data we will connect RecyclerView display the data
             ChapterListAdapter adapter = new ChapterListAdapter(chapters);
             chapterListRecyclerView.setAdapter(adapter);
             chapterListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -68,11 +66,8 @@ public class cont_ChapterSummary extends AppCompatActivity {
             final ChapterObj chapter = chapterList.get(position);
             holder.buttonChapter.setText(chapter.name());
 
-            // set icon
             if (chapter.isCompleted()) {
                 holder.imageChapterStatus.setImageResource(R.drawable.ic_completed);
-
-                // icon listener
                 holder.imageChapterStatus.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
