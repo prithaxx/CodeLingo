@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.cont_ChapterSummary">
+
+    <!-- Chapter list title -->
+    <TextView
+        android:id="@+id/chapterListTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Chapters"
+        android:textColor="@android:color/white"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/chapterList"
+        app:layout_constraintWidth_default="percent"
+        android:background="@color/purple_500"
+        app:layout_constraintWidth_percent="0.3" />
+
+    <!-- Chapter List RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chapterList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/chapterListBackground"
+        app:layout_constraintTop_toBottomOf="@id/chapterListTitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/chapterSummary"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.3" />
+
+    <!-- Chapter Description Title -->
+    <TextView
+        android:id="@+id/chapterDescriptionTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="19dp"
+        android:text="Chapter Description"
+        android:textColor="@android:color/white"
+        android:background="@color/chapterDescriptionBackground"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/chapterSummary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/chapterSummary"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.7" />
+
+    <!-- Chapter Description TextView -->
+    <TextView
+        android:id="@+id/chapterSummary"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/lavender"
+        android:padding="16dp"
+        android:scrollbars="vertical"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/chapterList"
+        app:layout_constraintTop_toBottomOf="@id/chapterDescriptionTitle"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.7" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
