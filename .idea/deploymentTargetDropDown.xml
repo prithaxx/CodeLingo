@@ -5,8 +5,21 @@
       <entry key="app">
         <State />
       </entry>
-      <entry key="cont_ChapterSummary">
-        <State />
+      <entry key="view_CourseOverview">
+        <State>
+          <targetSelectedWithDropDown>
+            <Target>
+              <type value="QUICK_BOOT_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\Admin\.android\avd\Pixel_Tablet_API_34.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-02-08T12:45:58.305032400Z" />
+        </State>
       </entry>
     </value>
   </component>
