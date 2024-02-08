@@ -4,17 +4,19 @@ import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.persistence.IChapterData;
-import CodeLinguists.codelingo.persistence.ISessionData;
-import CodeLinguists.codelingo.application.Services;
 import java.util.List;
 
 
 public class ChapterHandler implements IChapterHandler {
 
-    private IChapterData chapterData;
+    private final IChapterData chapterData;
 
     public ChapterHandler(){
         this.chapterData = Services.getChapterData();
+    }
+
+    public ChapterHandler(IChapterData chapterData){
+        this.chapterData = chapterData;
     }
 
     @Override

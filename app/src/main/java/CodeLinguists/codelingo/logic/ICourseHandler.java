@@ -7,9 +7,4 @@ import CodeLinguists.codelingo.dso.CourseObj;
 public interface ICourseHandler {
     List<CourseObj> getCourses();
     CourseObj getCourseById(int id);
-
-    /**
-     * Pulls course from ISessionData
-     */
-    CourseObj getActiveCourse();
 }
