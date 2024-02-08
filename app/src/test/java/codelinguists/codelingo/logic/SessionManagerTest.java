@@ -14,19 +14,25 @@ public class SessionManagerTest {
     }
 
     @Test
-    public void singletonTest() {
-        assertSame(SessionManager.newInstance(), SessionManager.newInstance());
+    public void guestLoginTest() {
+        SessionManager.newInstance().guestLogin("test");
     }
 
     @Test
-    public void singletonTest() {
-        assertSame(SessionManager.newInstance(), SessionManager.newInstance());
+    public void startQuiz() {
+        assertNotNull(SessionManager.newInstance().startQuiz());
     }
 
     @Test
-    public void singletonTest() {
-        assertSame(SessionManager.newInstance(), SessionManager.newInstance());
+    public void getActiveCourse() {
+        assertNotNull(SessionManager.newInstance().getActiveCourse());
     }
+
+    @Test
+    public void setActiveChapter() {
+        SessionManager.newInstance().setActiveChapter(1);
+    }
+
 
 
 }

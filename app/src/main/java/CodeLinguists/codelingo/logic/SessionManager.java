@@ -29,14 +29,10 @@ public class SessionManager implements ISessionManager{
 
     AccountObj account;
     CourseObj course;
-    ChapterObj chapter;
+    int chapterId;
 
     public SessionManager() {
         quizData = Services.getQuizData();
-    }
-
-    public AccountObj getAccount() {
-        return account;
     }
 
     @Override
@@ -57,7 +53,7 @@ public class SessionManager implements ISessionManager{
 
     @Override
     public void setActiveChapter(int index) {
-
+        chapterId=index;
     }
 
     private List<QuizObj> getQuiz() {
