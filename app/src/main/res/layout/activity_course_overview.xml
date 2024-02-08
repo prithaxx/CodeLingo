@@ -54,13 +54,16 @@
 					 />
 
 
-				<ImageView android:id="@+id/vector"
-					android:src="@drawable/hamburger_menu"
-					android:contentDescription="vector"
-					 android:layout_marginStart="25dp"
-					android:layout_marginTop="36dp"
+				<ImageView
+					android:id="@+id/vector"
 					android:layout_width="19.44dp"
-					android:layout_height="18.23dp" />
+					android:layout_height="18.23dp"
+					android:layout_marginStart="25dp"
+					android:layout_marginTop="36dp"
+					android:contentDescription="vector"
+					android:src="@drawable/hamburger_menu"
+					android:visibility="gone"
+					tools:visibility="gone" />
 
 				<androidx.fragment.app.FragmentContainerView
 					android:id="@+id/fragmentContainerView3"
