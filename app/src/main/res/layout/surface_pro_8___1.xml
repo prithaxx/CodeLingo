@@ -1,29 +1,13 @@
 <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent" android:layout_height="wrap_content" >
-	<!-- 
-	/*
-	 *	This content is generated from the API File Info.
-	 *	(Alt+Shift+Ctrl+I).
-	 *
-	 *	@desc 		
-	 *	@file 		surface_pro_8___1
-	 *	@date 		Wednesday 07th of February 2024 06:38:24 PM
-	 *	@title 		Page 1
-	 *	@author 	
-	 *	@keywords 	
-	 *	@generator 	Export Kit v1.3.figma
-	 *
-	 */
-	-->
-	<ScrollView android:id="@+id/surface_pro_8___1" 
+
+	<ScrollView android:id="@+id/surface_pro_8___1"
 		android:layout_width="wrap_content" 
 		android:layout_height="match_parent" >
 
 		<RelativeLayout android:id="@+id/content_container" 
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content" >
-
-
 
 			<RelativeLayout android:id="@+id/page_surface_pro_8___1_ek1"
 				android:layout_marginTop="0dp"
@@ -40,9 +24,7 @@
 					android:layout_height="800dp" />
 
 				<View   android:id="@+id/window"
-					android:background="@drawable/window_shape"
-					 android:layout_marginStart="-1dp"
-					android:layout_marginTop="-1dp"
+					android:background="@drawable/login_background"
 					android:layout_width="1280dp"
 					android:layout_height="800dp" />
 
@@ -219,15 +201,15 @@
 					android:text="@string/ex_3_string"
 					 />
 
-				<TextView android:id="@+id/ex_2"
-					android:textSize="25sp"
-					android:textColor="@color/_bg__surface_pro_8___1_ek2_color"
-					android:layout_marginLeft="939dp"
-					android:layout_marginTop="424dp"
+				<TextView
+					android:id="@+id/ex_2"
 					android:layout_width="76.5dp"
 					android:layout_height="31.5dp"
+					android:layout_marginLeft="939dp"
+					android:layout_marginTop="424dp"
 					android:text="@string/ex_2_string"
-					 />
+					android:textColor="@color/_bg__surface_pro_8___1_ek2_color"
+					android:textSize="25sp" />
 
 				<ImageView android:id="@+id/star_1"
 					android:src="@drawable/star_1"
@@ -238,7 +220,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_2"
-					android:src="@drawable/star_2"
+					android:src="@drawable/star_1"
 					android:contentDescription="star_2"
 					 android:layout_marginStart="729dp"
 					android:layout_marginTop="418dp"
@@ -246,7 +228,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_5"
-					android:src="@drawable/star_5"
+					android:src="@drawable/star_1"
 					android:contentDescription="star_5"
 					 android:layout_marginStart="810dp"
 					android:layout_marginTop="418dp"
@@ -254,7 +236,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_4"
-					android:src="@drawable/star_4"
+					android:src="@drawable/star_1"
 					android:contentDescription="star_4"
 					 android:layout_marginStart="783dp"
 					android:layout_marginTop="418dp"
@@ -262,7 +244,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_3"
-					android:src="@drawable/star_3"
+					android:src="@drawable/star_1"
 					android:contentDescription="star_3"
 					 android:layout_marginStart="756dp"
 					android:layout_marginTop="418dp"
@@ -270,7 +252,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_16"
-					android:src="@drawable/star_16"
+					android:src="@drawable/star_1"
 					android:contentDescription="star_16"
 					 android:layout_marginStart="1037dp"
 					android:layout_marginTop="672dp"
@@ -278,7 +260,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_17"
-					android:src="@drawable/star_17"
+					android:src="@drawable/star_1"
 					android:contentDescription="star_17"
 					 android:layout_marginStart="1064dp"
 					android:layout_marginTop="672dp"
@@ -286,7 +268,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_11"
-					android:src="@drawable/star_11"
+					android:src="@drawable/star_1"
 					android:contentDescription="star_11"
 					 android:layout_marginStart="716dp"
 					android:layout_marginTop="672dp"
@@ -294,7 +276,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_12"
-					android:src="@drawable/star_12"
+					android:src="@drawable/star_1"
 					android:contentDescription="star_12"
 					 android:layout_marginStart="743dp"
 					android:layout_marginTop="672dp"
@@ -302,7 +284,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_14"
-					android:src="@drawable/star_14"
+					android:src="@drawable/star_1"
 					android:contentDescription="star_14"
 					 android:layout_marginStart="797dp"
 					android:layout_marginTop="672dp"
@@ -310,7 +292,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_15"
-					android:src="@drawable/star_15"
+					android:src="@drawable/star_1"
 					android:contentDescription="star_15"
 					 android:layout_marginStart="770dp"
 					android:layout_marginTop="672dp"
@@ -318,7 +300,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_6"
-					android:src="@drawable/star_6"
+					android:src="@drawable/star_1"
 					android:contentDescription="star_6"
 					 android:layout_marginStart="1023dp"
 					android:layout_marginTop="421dp"
@@ -326,7 +308,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_7"
-					android:src="@drawable/star_7"
+					android:src="@drawable/star_1"
 					android:contentDescription="star_7"
 					 android:layout_marginStart="1050dp"
 					android:layout_marginTop="421dp"
@@ -334,7 +316,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_10"
-					android:src="@drawable/star_10"
+					android:src="@drawable/star_1"
 					android:contentDescription="star_10"
 					 android:layout_marginStart="1077dp"
 					android:layout_marginTop="421dp"
@@ -358,7 +340,7 @@
 					android:layout_marginTop="628dp"
 					android:layout_width="375dp"
 					android:layout_height="66dp"
-					android:text="@string/loren_ipsum_string"
+					android:text="Coding is fun!"
 					 />
 
 
@@ -367,16 +349,7 @@
 					android:layout_marginStart="692.75dp"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					>
-
-					<View   android:id="@+id/_bg__align_justify_ek1"
-						android:background="@drawable/_bg__align_justify_ek1_shape"
-						 android:layout_marginStart="0dp"
-						android:layout_marginTop="0dp"
-						android:layout_width="25dp"
-						android:layout_height="25dp" />
-
-				</RelativeLayout>
+					/>
 
 				<ImageView android:id="@+id/vector"
 					android:src="@drawable/vector"

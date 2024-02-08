@@ -7,17 +7,21 @@
     android:layout_height="match_parent"
     tools:context=".ui.view_CourseOverview">
 
-    <Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/login_background">
+    <include layout="@layout/surface_pro_8___1"></include>
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:src="@drawable/menu"
-            android:padding="5dp"/>
-    </Toolbar>
+    <!--    <Toolbar-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/login_background">-->
+
+<!--        <ImageButton-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:src="@drawable/menu"-->
+<!--            android:padding="5dp"/>-->
+<!--    </Toolbar>-->
+
+
 
 </LinearLayout>
