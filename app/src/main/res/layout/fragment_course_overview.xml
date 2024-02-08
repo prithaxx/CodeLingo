@@ -67,7 +67,7 @@
             android:layout_width="240dp"
             android:layout_height="152dp"
             android:layout_marginStart="625dp"
-            android:layout_marginTop="132dp"
+            android:layout_marginTop="364dp"
             android:background="@drawable/innerrect1_ek2_shape" />
 
         <View

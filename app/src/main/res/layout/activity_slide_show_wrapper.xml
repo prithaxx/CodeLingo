@@ -23,8 +23,10 @@
             android:scaleX="2"
             android:scaleY="2"
             android:src="@drawable/menu"
+            android:visibility="gone"
             tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="15dp" />
+            tools:layout_editor_absoluteY="15dp"
+            tools:visibility="gone" />
     </Toolbar>
 
     <androidx.constraintlayout.widget.ConstraintLayout

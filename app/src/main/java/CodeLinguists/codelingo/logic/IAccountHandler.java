@@ -25,7 +25,7 @@ public interface IAccountHandler {
      * @param name - name of account to log into
      * @throws AccountNotFoundException
      */
-    void guestLogin(String name);
+    AccountObj guestLogin(String name);
 
     void setActiveCourse(CourseObj course);
 
