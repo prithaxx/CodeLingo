@@ -42,5 +42,5 @@ public interface IAccountHandler {
 
     void logout();
 
-    ArrayList<ChapterObj> getActiveCourseChapter();
+    List<ChapterObj> getActiveCourseChapters();
 }

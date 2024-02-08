@@ -98,7 +98,7 @@ public class AccountHandler implements IAccountHandler {
     }
 
     @Override
-    public ArrayList<ChapterObj> getActiveCourseChapter() {
+    public List<ChapterObj> getActiveCourseChapters() {
         return null;
     }
 

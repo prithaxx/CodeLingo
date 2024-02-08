@@ -14,6 +14,7 @@ import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.logic.AccountHandler;
+import CodeLinguists.codelingo.logic.IAccountHandler;
 import CodeLinguists.codelingo.persistence.stubs.ChapterDataStub;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -25,7 +26,7 @@ public class cont_ChapterSummary extends AppCompatActivity {
 
     private RecyclerView chapterListRecyclerView;
     private TextView chapterSummaryTextView;
-    private AccountHandler accountHandler;
+    private IAccountHandler accountHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +37,7 @@ public class cont_ChapterSummary extends AppCompatActivity {
         chapterSummaryTextView = findViewById(R.id.chapterSummary);
         accountHandler = new AccountHandler();
 
-        ChapterDataStub chapterDataStub = new ChapterDataStub();
-        List<ChapterObj> chapters = accountHandler.getActiveCourseChapter();
+        List<ChapterObj> chapters = accountHandler.getActiveCourseChapters();
 
         if (chapters == null || chapters.isEmpty()) {
             // show the toast
@@ -61,7 +61,6 @@ public class cont_ChapterSummary extends AppCompatActivity {
         @Override
         public ChapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_chapter, parent, false);
-            Button button = itemView.findViewById(R.id.buttonChapter);
             return new ChapterViewHolder(itemView);
         }
 
