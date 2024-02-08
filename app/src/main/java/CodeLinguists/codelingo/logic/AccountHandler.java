@@ -2,15 +2,12 @@ package CodeLinguists.codelingo.logic;
 
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.ChapterObj;
-import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.exceptions.InputValidationException;
-import CodeLinguists.codelingo.exceptions.NotSignedInException;
 import CodeLinguists.codelingo.persistence.IAccountData;
 import CodeLinguists.codelingo.persistence.ISessionData;
 import CodeLinguists.codelingo.application.Services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AccountHandler implements IAccountHandler {
