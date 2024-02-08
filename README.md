@@ -20,7 +20,7 @@
 
 # Iteration 1 Notes
 - Time reporting is done on Issues labeled "DevTask"
-- 
+- The focus of this iteration was to create a horizontal prototype, so we implemented a few features to a demonstratable state.
 
 # Docs
  - [ARCHITECTURE.md](Docs/ARCHITECTURE.md)
