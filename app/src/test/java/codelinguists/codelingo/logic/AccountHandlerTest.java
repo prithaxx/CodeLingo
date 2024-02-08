@@ -1,123 +1,105 @@
-//package codelinguists.codelingo.logic;
-//
-//import static org.junit.Assert.*;
-//
-//import org.junit.Before;
-//import org.junit.Test;
-//
-//import java.util.List;
-//
-//import CodeLinguists.codelingo.application.Services;
-//import CodeLinguists.codelingo.dso.AccountObj;
-//import CodeLinguists.codelingo.dso.CourseObj;
-//import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
-//import CodeLinguists.codelingo.exceptions.InputValidationException;
-//import CodeLinguists.codelingo.logic.AccountHandler;
-//import CodeLinguists.codelingo.persistence.IAccountData;
-//import CodeLinguists.codelingo.persistence.ISessionData;
-//
-//public class AccountHandlerTest {
-//    AccountHandler accountHandler;
-//    @Before
-//    public void setUp() throws Exception {
-//        Services.resetObjects();
-//        IAccountData accountData = Services.getAccountData();
-//        ISessionData sessionData = Services.getSessionData();
-//
-//        this.accountHandler = new AccountHandler(accountData, sessionData);
-//    }
-//
-//    @Test
-//    public void getGuestAccounts() {
-//        List<AccountObj> guestAccounts = accountHandler.getGuestAccounts();
-//        assertNotNull(guestAccounts);
-//        assertEquals(guestAccounts.size(), 0);
-//    }
-//
-//    @Test
-//    public void createGuestAccount() {
-//        accountHandler.createGuestAccount("testPerson");
-//        List<AccountObj> guestAccounts = accountHandler.getGuestAccounts();
-//        assertNotNull(guestAccounts);
-//        assertEquals(guestAccounts.size(), 1);
-//
-//        accountHandler.createGuestAccount("1");
-//        guestAccounts = accountHandler.getGuestAccounts();
-//        assertNotNull(guestAccounts);
-//        assertEquals(guestAccounts.size(), 2);
-//    }
-//
-//    @Test(expected = InputValidationException.class)
-//    public void createGuestAccountNullInvalid() {
-//        accountHandler.createGuestAccount(null);
-//    }
-//    @Test(expected = InputValidationException.class)
-//    public void createGuestAccountEmptyInvalid() {
-//        accountHandler.createGuestAccount("");
-//    }
-//    @Test
-//    public void ActiveCourseDefaultValue() {
-//        //initial state defaults to null
-//        helperLoginGuest();
-//
-//        CourseObj courseObj = accountHandler.getActiveCourse();
-//        assertNull(courseObj);
-//    }
-//    @Test
-//    public void ActiveCourseAssignment() {
-//        helperLoginGuest();
-//
-//        CourseObj newCourseObj = new CourseObj(1, "test", "test", true, false);
-//        accountHandler.setActiveCourse(newCourseObj);
-//        CourseObj courseObj = accountHandler.getActiveCourse();
-//        assertSame(newCourseObj, courseObj);
-//    }
-//    @Test
-//    public void ActiveCourseUnAssignment() {
-//        helperLoginGuest();
-//
-//        CourseObj newCourseObj = new CourseObj(1, "test", "test", true, false);
-//        accountHandler.setActiveCourse(newCourseObj);
-//        accountHandler.setActiveCourse(null);
-//        CourseObj courseObj = accountHandler.getActiveCourse();
-//        assertNull(courseObj);
-//    }
-//    @Test(expected = AccountNotFoundException.class)
-//    public void loginNoAccountFound() {
-//        accountHandler.login("test", "test");
-//    }
-//    @Test(expected = InputValidationException.class)
-//    public void loginNullUsername() {
-//        accountHandler.login(null, "test");
-//    }
-//    @Test(expected = InputValidationException.class)
-//    public void loginEmptyUsername() {
-//        accountHandler.login("", "test");
-//    }
-//    @Test(expected = InputValidationException.class)
-//    public void loginNullPassword() {
-//        accountHandler.login("test", null);
-//    }
-//    @Test(expected = InputValidationException.class)
-//    public void loginEmptyPassword() {
-//        accountHandler.login("test", "");
-//    }
-//    @Test(expected = AccountNotFoundException.class)
-//    public void loginNoGuestAccountFound() {
-//        accountHandler.guestLogin("test");
-//    }
-//    @Test
-//    public void loginGuest() {
-//        String name = "test";
-//        accountHandler.createGuestAccount(name);
-//        accountHandler.guestLogin(name);
-//        AccountObj account = accountHandler.getAccountDetails();
-//        assertEquals(account.getName(), name);
-//    }
-//
-//    private void helperLoginGuest() {
-//        String name = "test";
-//        accountHandler.createGuestAccount(name);
-//        accountHandler.guestLogin(name);
-//    }
-//}
+package codelinguists.codelingo.logic;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import CodeLinguists.codelingo.dso.AccountObj;
+import CodeLinguists.codelingo.exceptions.InputValidationException;
+import CodeLinguists.codelingo.logic.AccountHandler;
+import CodeLinguists.codelingo.persistence.IAccountData;
+import CodeLinguists.codelingo.persistence.ISessionData;
+
+public class AccountHandlerTest {
+
+    @Before
+    public void setUp() throws Exception {
+
+    }
+
+    @Test(expected = InputValidationException.class)
+    public void guestLoginNullInput() {
+        AccountDataMock accountData = new AccountDataMock(false, false, false);
+        AccountHandler accountHandler = new AccountHandler(accountData, null);
+        accountHandler.guestLogin(null);
+    }
+
+    @Test(expected = InputValidationException.class)
+    public void guestLoginEmptyInput() {
+        AccountDataMock accountData = new AccountDataMock(false, false, false);
+        AccountHandler accountHandler = new AccountHandler(accountData, null);
+        accountHandler.guestLogin("");
+    }
+
+    @Test
+    public void guestLoginNoAccount() {
+        AccountDataMock accountData = new AccountDataMock(false, false, true);
+        AccountHandler accountHandler = new AccountHandler(accountData, new SessionDataMock());
+        AccountObj acc = accountHandler.guestLogin("test");
+        assertEquals(acc.getName(), "test");
+    }
+
+    @Test
+    public void guestLoginExistingAccount() {
+        AccountDataMock accountData = new AccountDataMock(false, false, false);
+        AccountHandler accountHandler = new AccountHandler(accountData, new SessionDataMock());
+        AccountObj acc = accountHandler.guestLogin("test");
+        assertEquals(acc.getName(), "test");
+    }
+
+    @Test
+    public void guestLoginDefaultConstructor() {
+        AccountHandler accountHandler = new AccountHandler();
+        AccountObj acc = accountHandler.guestLogin("test");
+        assertEquals(acc.getName(), "test");
+    }
+
+    class AccountDataMock implements IAccountData{
+        boolean isGetGuestNull;
+        boolean isCreateGuestNull;
+        boolean enableCreation;
+
+        private AccountObj account;
+
+        public AccountDataMock(boolean isGetGuestNull, boolean isCreateGuestNull, boolean enableCreation) {
+            this.isGetGuestNull = isGetGuestNull;
+            this.isCreateGuestNull = isCreateGuestNull;
+            this.enableCreation = enableCreation;
+        }
+        @Override
+        public AccountObj getGuestAccountByName(String name) {
+            if (enableCreation) {
+                return account;
+            }
+            if (isGetGuestNull){
+                return null;
+            }
+            return new AccountObj(0,name,true,null,null,null);
+        }
+
+        @Override
+        public AccountObj createGuestAccount(String name) {
+            if (isCreateGuestNull){
+                return null;
+            }
+            AccountObj localAccount = new AccountObj(0,name,true,null,null,null);
+            if (enableCreation) {
+                account=localAccount;
+            }
+            return localAccount;
+        }
+    }
+    class SessionDataMock implements ISessionData {
+
+        private AccountObj obj;
+        @Override
+        public void setActiveAccount(AccountObj account) {
+            obj=account;
+        }
+
+        public boolean isActiveAccountSet() {
+            return obj!=null;
+        }
+    }
+}

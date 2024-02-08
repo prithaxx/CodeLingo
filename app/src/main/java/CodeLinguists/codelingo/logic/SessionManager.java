@@ -20,6 +20,10 @@ public class SessionManager implements ISessionManager{
         return sessionManager;
     }
 
+    public static void clearSessionData() {
+        sessionManager = null;
+    }
+
     //instance fields
     IQuizData quizData;
 
@@ -29,6 +33,10 @@ public class SessionManager implements ISessionManager{
 
     public SessionManager() {
         quizData = Services.getQuizData();
+    }
+
+    public AccountObj getAccount() {
+        return account;
     }
 
     @Override
