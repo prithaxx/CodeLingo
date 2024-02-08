@@ -1,3 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Codelingo</string>
+	<!-- activity_course_overview strings -->
+
+	<string name="app_name">Page 1</string>
+	<string name="ek_img_content">ExportKit Image</string>
+	<string name="codelingo_string">CodeLingo</string>
+	<string name="placeholder_course_string">Placeholder Course</string>
+	<string name="ex_1_string">Ex 1</string>
+	<string name="ex_4_string">Ex 4</string>
+	<string name="ex_3_string">Ex 3</string>
+	<string name="ex_2_string">Ex 2</string>
+	<string name="loren_ipsum_string">Loren Ipsum</string>
 </resources>
