@@ -1,41 +1,41 @@
 <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent" android:layout_height="wrap_content" >
 
-	<LinearLayout android:id="@+id/surface_pro_8___1"
+	<LinearLayout
 		android:layout_width="wrap_content" 
 		android:layout_height="match_parent" >
 
-		<RelativeLayout android:id="@+id/content_container" 
+		<RelativeLayout
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content" >
 
-			<RelativeLayout android:id="@+id/page_surface_pro_8___1_ek1"
+			<RelativeLayout
 				android:layout_marginTop="0dp"
 				android:layout_marginStart="0dp"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				>
 
-				<View   android:id="@+id/_bg__surface_pro_8___1_ek2"
+				<View
 					android:background="@drawable/_bg__surface_pro_8___1_ek2_shape"
 					 android:layout_marginStart="0dp"
 					android:layout_marginTop="0dp"
 					android:layout_width="1280dp"
 					android:layout_height="800dp" />
 
-				<View   android:id="@+id/window"
+				<View
 					android:background="@drawable/login_background"
 					android:layout_width="1280dp"
 					android:layout_height="800dp" />
 
-				<View   android:id="@+id/navbar"
+				<View
 					android:background="@drawable/navbar_shape"
 					 android:layout_marginStart="0dp"
 					android:layout_marginTop="0dp"
 					android:layout_width="1280dp"
 					android:layout_height="90dp" />
 
-				<ImageView android:id="@+id/codelingo_logo_1"
+				<ImageView
 					android:src="@drawable/codelingo_logo"
 					android:contentDescription="codelingo_logo_1"
 					 android:layout_marginStart="491dp"
@@ -43,7 +43,7 @@
 					android:layout_width="74dp"
 					android:layout_height="81dp" />
 
-				<TextView android:id="@+id/codelingo"
+				<TextView
 					android:textSize="40sp"
 					android:textColor="@color/_bg__surface_pro_8___1_ek2_color"
 					android:layout_marginLeft="576dp"
@@ -55,7 +55,6 @@
 
 
 				<ImageView
-					android:id="@+id/vector"
 					android:layout_width="19.44dp"
 					android:layout_height="18.23dp"
 					android:layout_marginStart="25dp"

@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import CodeLinguists.codelingo.dso.QuizObj;
-import CodeLinguists.codelingo.exceptions.InputValidationException;
-import CodeLinguists.codelingo.logic.AccountHandler;
 import CodeLinguists.codelingo.logic.QuizHandler;
 
 public class QuizHandlerTest {

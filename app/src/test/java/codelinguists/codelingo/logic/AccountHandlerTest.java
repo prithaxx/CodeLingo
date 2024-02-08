@@ -13,11 +13,6 @@ import CodeLinguists.codelingo.persistence.ISessionData;
 
 public class AccountHandlerTest {
 
-    @Before
-    public void setUp() throws Exception {
-
-    }
-
     @Test(expected = InputValidationException.class)
     public void guestLoginNullInput() {
         AccountDataMock accountData = new AccountDataMock(false, false, false);

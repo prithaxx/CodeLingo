@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.QuizObj;
 import CodeLinguists.codelingo.persistence.IQuizData;
 
 public class QuizDataStub implements IQuizData {
-    private List<QuizObj> quizList;
+    private final List<QuizObj> quizList;
 
     public QuizDataStub() {
         quizList = new ArrayList<>();
@@ -25,14 +24,14 @@ public class QuizDataStub implements IQuizData {
     @Override
     public List<QuizObj> getQuizByChapterId(int chapterId) {
         return quizList.stream()
-                .filter(quizObj -> quizObj.getChapterId()==chapterId)
+                .filter(quizObj -> quizObj.chapterId()==chapterId)
                 .collect(Collectors.toList());
     }
 
     @Override
     public QuizObj getQuizById(int quizId, int chapterId) {
         return quizList.stream()
-                .filter(quizObj -> quizObj.getChapterId()==chapterId && quizObj.getId()==quizId)
+                .filter(quizObj -> quizObj.chapterId()==chapterId && quizObj.id()==quizId)
                 .findFirst()
                 .orElse(null);
     }

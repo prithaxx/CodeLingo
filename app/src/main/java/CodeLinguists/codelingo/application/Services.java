@@ -8,7 +8,7 @@ import CodeLinguists.codelingo.persistence.stubs.QuizDataStub;
 import CodeLinguists.codelingo.persistence.stubs.SessionDataStub;
 
 /**
- * Provides creation and distribution of persistance layer classes
+ * Provides creation and distribution of persistence layer classes
  */
 public class Services {
     private static IAccountData accountData = null;

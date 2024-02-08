@@ -4,13 +4,12 @@ import java.util.List;
 
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.AccountObj;
-import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.dso.QuizObj;
 import CodeLinguists.codelingo.persistence.IQuizData;
 
 public class SessionManager implements ISessionManager{
-    //Singleton setup
+    //Singleton
     private static ISessionManager sessionManager;
 
     public static ISessionManager newInstance() {
@@ -23,6 +22,7 @@ public class SessionManager implements ISessionManager{
     public static void clearSessionData() {
         sessionManager = null;
     }
+
 
     //instance fields
     IQuizData quizData;
