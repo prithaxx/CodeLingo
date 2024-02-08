@@ -9,24 +9,20 @@ import java.util.List;
 import java.util.ArrayList;
 
 import CodeLinguists.codelingo.application.Services;
-import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.logic.CourseHandler;
 import CodeLinguists.codelingo.persistence.ICourseData;
-import CodeLinguists.codelingo.persistence.ISessionData;
 import CodeLinguists.codelingo.persistence.stubs.CourseDataStub;
 
 public class CourseHandlerTest {
     private CourseHandler courseHandler;
     private ICourseData mockedCourseData;
-    private ISessionData mockedSessionData;
 
     @Before
     public void setUp(){
         Services.resetObjects();
         this.mockedCourseData = new MockCourseData();
-        this.mockedSessionData = new MockSessionData();
         this.courseHandler = new CourseHandler(new CourseDataStub());
     }
     //Stub tests
@@ -90,19 +86,4 @@ public class CourseHandlerTest {
             return courses.stream().filter(course -> course.getId() == id).findFirst().orElse(null);
         }
     }
-
-    private class MockSessionData implements ISessionData {
-        @Override
-        public AccountObj getActiveAccount() {
-            return null;
-        }
-
-        public void setActiveAccount(AccountObj account){
-
-        }
-        public CourseObj getActiveCourse(){
-            return null;
-        }
-    }
-    
 }
