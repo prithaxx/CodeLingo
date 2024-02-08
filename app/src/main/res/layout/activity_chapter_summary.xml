@@ -39,7 +39,7 @@
         android:id="@+id/chapterDescriptionTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:padding="19dp"
         android:text="Chapter Description"
         android:background="@color/chapterDescriptionBackground"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
