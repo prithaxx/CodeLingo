@@ -9,17 +9,10 @@ import java.util.List;
 
 public class CourseHandler implements ICourseHandler {
 
-    private ICourseData courseData;
-    private ISessionData sessionData;
+    private final ICourseData courseData;
 
     public CourseHandler(){
         this.courseData = Services.getCourseData();
-        this.sessionData = Services.getSessionData();
-    }
-
-    public CourseHandler(ICourseData courseData, ISessionData sessionData){
-        this.courseData = courseData;
-        this.sessionData = sessionData;
     }
 
     public CourseHandler(ICourseData courseData){
@@ -34,11 +27,6 @@ public class CourseHandler implements ICourseHandler {
     @Override
     public CourseObj getCourseById(int id) {
         return courseData.getCourseById(id);
-    }
-
-    @Override
-    public CourseObj getActiveCourse() {
-        return sessionData.getActiveCourse();
     }
 }
 

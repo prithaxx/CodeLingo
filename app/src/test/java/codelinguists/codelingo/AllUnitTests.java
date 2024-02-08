@@ -12,8 +12,8 @@ import codelinguists.codelingo.logic.CourseHandlerTest;
 @Suite.SuiteClasses({
     ServicesTest.class,
     AccountHandlerTest.class,
-        ChapterHandlerTest.class,
-        CourseHandlerTest.class
+    ChapterHandlerTest.class,
+    CourseHandlerTest.class
 })
 public class AllUnitTests {
 }

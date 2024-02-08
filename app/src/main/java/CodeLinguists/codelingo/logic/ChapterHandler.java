@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ChapterHandler implements IChapterHandler {
 
-    private IChapterData chapterData;
+    private final IChapterData chapterData;
 
     public ChapterHandler(){
         this.chapterData = Services.getChapterData();

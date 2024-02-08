@@ -47,7 +47,6 @@ public class AccountHandlerTest {
         assertEquals(guestAccounts.size(), 2);
     }
 
-    //TODO make expected exception more specific
     @Test(expected = InputValidationException.class)
     public void createGuestAccountNullInvalid() {
         accountHandler.createGuestAccount(null);

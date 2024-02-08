@@ -44,7 +44,7 @@ public class ChapterHandlerTest {
         List<ChapterObj> chapters = chapterHandler.getChaptersByCourseId(courseId);
         assertNotNull(chapters);
         assertFalse(chapters.isEmpty());
-        chapters.forEach(chapter -> assertEquals( courseId, chapter.getCourseId()));
+        chapters.forEach(chapter -> assertEquals(courseId, chapter.getCourseId()));
     }
 
     @Test
