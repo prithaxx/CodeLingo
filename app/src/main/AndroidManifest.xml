@@ -25,10 +25,6 @@
             android:exported="false"
             android:screenOrientation="landscape"/>
         <activity
-            android:name=".ui.cont_CoureOverViewSurfacePro8"
-            android:exported="true"
-            android:screenOrientation="landscape"/>
-        <activity
             android:name=".ui.GuestLogin"
             android:exported="true"
             android:screenOrientation="landscape">
