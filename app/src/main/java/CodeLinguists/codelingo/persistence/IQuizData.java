@@ -6,8 +6,6 @@ import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.QuizObj;
 
 public interface IQuizData {
-    QuizObj getQuizByChapter(ChapterObj chapter);
-    QuizObj getQuizByChapterId(int id);
-    List<ChapterObj> getChapters();
+    List<QuizObj> getQuizByChapterId(int id);
     QuizObj getQuizById(int quizId, int chapterId);
 }

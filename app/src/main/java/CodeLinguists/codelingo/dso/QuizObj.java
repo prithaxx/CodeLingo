@@ -5,15 +5,15 @@ import java.util.List;
 public class QuizObj {
 
     private final int id;
-    private final ChapterObj chapter;
+    private final int chapterId;
     private final String prompt;
     private final String answer;
     private final List<String> wrongAnswers;
     private final List<String> hints;
 
-    public QuizObj(int id, ChapterObj chapter, String prompt, String answer, List<String> hints, List<String> wrongAnswers) {
+    public QuizObj(int id, int chapterId, String prompt, String answer, List<String> hints, List<String> wrongAnswers) {
         this.id = id;
-        this.chapter = chapter;
+        this.chapterId = chapterId;
         this.prompt = prompt;
         this.answer = answer;
         this.hints = hints;
@@ -24,8 +24,8 @@ public class QuizObj {
         return id;
     }
 
-    public ChapterObj getChapter() {
-        return chapter;
+    public int getChapterId() {
+        return this.chapterId;
     }
 
     public String getPrompt() {
