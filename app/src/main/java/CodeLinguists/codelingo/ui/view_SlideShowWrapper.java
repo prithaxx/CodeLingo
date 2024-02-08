@@ -1,6 +1,7 @@
 package CodeLinguists.codelingo.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,9 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.dso.QuizObj;
+import CodeLinguists.codelingo.logic.ISessionManager;
+import CodeLinguists.codelingo.logic.SessionManager;
 
 /**
  * Provides common behaviours for slides like:
@@ -19,53 +23,61 @@ import CodeLinguists.codelingo.dso.QuizObj;
 
 public class view_SlideShowWrapper extends AppCompatActivity {
 
+    ISessionManager sessionManager;
     int lives = 3; //needs to be global
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slide_show_wrapper);
-        TextView prompt = (TextView)findViewById(R.id.txtQuizPrompt);
-        //get quiz prompt and set
-        Button option1 = (Button)findViewById(R.id.btnQuiz1);
-        //Get quiz answer and set
-        //option1.setText();
-        Button option2 = (Button)findViewById(R.id.btnQuiz2);
-        Button option3 = (Button)findViewById(R.id.btnQuiz3);
-        Button option4 = (Button)findViewById(R.id.btnQuiz4);
 
+        sessionManager = SessionManager.newInstance();
+        sessionManager.startQuiz();
+        changeSlide(true);
     }
 
     public void btnSlideShowNextOnClick(View v){
-        startActivity(new Intent(this, view_SlideShowWrapper.class));
+        changeSlide(true);
     }
 
     public void btnSlideShowPrevOnClick(View v){
-        finish();
+        changeSlide(false);
     }
 
-    public void btnQuiz1OnClick(View v){
-        TextView prompt = (TextView)findViewById(R.id.txtQuizPrompt);
-        prompt.setText("Correct!");
+    /**
+     * @param to_next - go to next slide on true, go to previous slide on false.
+     */
+    private void changeSlide(boolean to_next) {
+        QuizObj quiz = to_next ? sessionManager.nextQuestion() : sessionManager.prevQuestion();
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragmentContainerView, cont_SlideText.newInstance("Quiz #"+quiz.getId(), quiz.getPrompt())).commit();
+        toggleNavButtons();
     }
 
-    public void btnQuiz234OnClick(View v){
-        TextView prompt = (TextView)findViewById(R.id.txtQuizPrompt);
-        prompt.setText("Wrong!");
-        lives--;
-        if(lives == 2) {
-            ImageView life = (ImageView) findViewById(R.id.imgHeart3);
-            life.setVisibility(View.GONE);
-        } else if(lives == 1) {
-            ImageView life = (ImageView) findViewById(R.id.imgHeart2);
-            life.setVisibility(View.GONE);
+    private void toggleNavButtons() {
+        Button next = findViewById(R.id.btnSlideShowNext);
+        Button prev = findViewById(R.id.btnSlideShowPrev);
+
+        if (!sessionManager.hasNextQuestion()) {
+            next.setText("Done!");
+            next.setOnClickListener(this::finishQuiz);
         } else {
-            ImageView life = (ImageView) findViewById(R.id.imgHeart1);
-            life.setVisibility(View.GONE);
-            prompt.setText("Too bad, please reattempt");
+            next.setText("Next");
+            next.setOnClickListener(this::btnSlideShowNextOnClick);
+        }
+
+        if (!sessionManager.hasPrevQuestion()) {
+            prev.setVisibility(View.INVISIBLE);
+        } else {
+            prev.setVisibility(View.VISIBLE);
         }
     }
 
-
+    private void finishQuiz(View v) {
+        Intent intent = new Intent(this, view_CourseOverview.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+    }
 
 }
