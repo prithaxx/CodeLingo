@@ -4,13 +4,12 @@ import java.util.List;
 
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.AccountObj;
-import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.dso.QuizObj;
 import CodeLinguists.codelingo.persistence.IQuizData;
 
 public class SessionManager implements ISessionManager{
-    //Singleton setup
+    //Singleton
     private static ISessionManager sessionManager;
 
     public static ISessionManager newInstance() {
@@ -20,12 +19,17 @@ public class SessionManager implements ISessionManager{
         return sessionManager;
     }
 
+    public static void clearSessionData() {
+        sessionManager = null;
+    }
+
+
     //instance fields
     IQuizData quizData;
 
     AccountObj account;
     CourseObj course;
-    ChapterObj chapter;
+    int chapterId;
 
     public SessionManager() {
         quizData = Services.getQuizData();
@@ -49,7 +53,7 @@ public class SessionManager implements ISessionManager{
 
     @Override
     public void setActiveChapter(int index) {
-
+        chapterId=index;
     }
 
     private List<QuizObj> getQuiz() {

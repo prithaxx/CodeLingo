@@ -6,9 +6,8 @@ import static org.junit.Assert.*;
 
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.persistence.IAccountData;
-import CodeLinguists.codelingo.persistence.IChapterData;
-import CodeLinguists.codelingo.persistence.ICourseData;
 import CodeLinguists.codelingo.persistence.ISessionData;
+import CodeLinguists.codelingo.persistence.IQuizData;
 
 public class ServicesTest {
     @Before
@@ -30,18 +29,12 @@ public class ServicesTest {
         ISessionData repeatSession = Services.getSessionData();
         assertSame(newSession, repeatSession); //ensure singleton is single
     }
+
     @Test
-    public void testGetCourseData() {
-        ICourseData newCourse = Services.getCourseData();
-        assertNotNull(newCourse);
-        ICourseData repeatCourse = Services.getCourseData();
-        assertSame(newCourse, repeatCourse); //ensure singleton is single
-    }
-    @Test
-    public void testGetChapterData() {
-        IChapterData newChapter = Services.getChapterData();
-        assertNotNull(newChapter);
-        IChapterData repeatChapter = Services.getChapterData();
-        assertSame(newChapter, repeatChapter); //ensure singleton is single
+    public void testGetQuizData() {
+        IQuizData newQuiz = Services.getQuizData();
+        assertNotNull(newQuiz);
+        IQuizData repeatQuiz = Services.getQuizData();
+        assertSame(newQuiz, repeatQuiz);
     }
 }

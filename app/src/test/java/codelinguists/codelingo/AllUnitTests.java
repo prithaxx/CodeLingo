@@ -4,16 +4,30 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import codelinguists.codelingo.application.ServicesTest;
+import codelinguists.codelingo.dso.AccountObjTest;
+import codelinguists.codelingo.dso.ChapterObjTest;
+import codelinguists.codelingo.dso.CourseObjTest;
+import codelinguists.codelingo.dso.QuizObjTest;
 import codelinguists.codelingo.logic.AccountHandlerTest;
-import codelinguists.codelingo.logic.ChapterHandlerTest;
-import codelinguists.codelingo.logic.CourseHandlerTest;
+import codelinguists.codelingo.logic.ExceptionsTest;
+import codelinguists.codelingo.logic.QuizHandlerTest;
+import codelinguists.codelingo.logic.SessionManagerTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
     ServicesTest.class,
+
+    //logic
     AccountHandlerTest.class,
-    ChapterHandlerTest.class,
-    CourseHandlerTest.class
+    ExceptionsTest.class,
+    QuizHandlerTest.class,
+    SessionManagerTest.class,
+
+    //DSOs
+    AccountObjTest.class,
+    ChapterObjTest.class,
+    CourseObjTest.class,
+    QuizObjTest.class
 })
 public class AllUnitTests {
 }

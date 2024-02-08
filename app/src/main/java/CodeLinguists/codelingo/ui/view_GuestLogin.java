@@ -9,13 +9,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import CodeLinguists.codelingo.R;
-import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.exceptions.InputValidationException;
-import CodeLinguists.codelingo.logic.AccountHandler;
-import CodeLinguists.codelingo.logic.IAccountHandler;
 import CodeLinguists.codelingo.logic.ISessionManager;
 import CodeLinguists.codelingo.logic.SessionManager;
-import CodeLinguists.codelingo.persistence.IAccountData;
 
 public class view_GuestLogin extends AppCompatActivity {
     private ISessionManager sessionManager;

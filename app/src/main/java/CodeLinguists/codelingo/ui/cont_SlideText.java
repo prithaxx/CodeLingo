@@ -17,16 +17,12 @@ import CodeLinguists.codelingo.R;
  * create an instance of this fragment.
  */
 public class cont_SlideText extends Fragment {
-
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "title";
     private static final String ARG_PARAM2 = "prompt";
     private String title;
     private String prompt;
 
-    public cont_SlideText() {
-        // Required empty public constructor
-    }
+    public cont_SlideText() {}
 
     public static cont_SlideText newInstance(String param1, String param2) {
         cont_SlideText fragment = new cont_SlideText();

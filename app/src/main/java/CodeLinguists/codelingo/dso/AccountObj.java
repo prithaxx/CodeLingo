@@ -5,8 +5,8 @@ public class AccountObj {
     private final String name;
     private final boolean isGuest;
     private CourseObj activeCourse;  
-    private String username;
-    private String password;
+    private final String username;
+    private final String password;
 
     public AccountObj(int id, String name, boolean isGuest, CourseObj activeCourse, String username, String password) {
         this.id = id;

@@ -1,8 +1,8 @@
 package CodeLinguists.codelingo.logic;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.dso.QuizObj;
 
 public class QuizHandler implements IQuizHandler{
@@ -11,7 +11,7 @@ public class QuizHandler implements IQuizHandler{
     int currentQuizCursor;
 
     public QuizHandler(List<QuizObj> activeQuiz) {
-        this.activeQuiz=activeQuiz;
+        this.activeQuiz = activeQuiz==null ? new ArrayList<>() : activeQuiz;
         currentQuizCursor=0;
     }
 
@@ -41,5 +41,9 @@ public class QuizHandler implements IQuizHandler{
     @Override
     public boolean hasPrevQuestion() {
         return currentQuizCursor > 1;
+    }
+
+    public int cursorPos() {
+        return currentQuizCursor;
     }
 }

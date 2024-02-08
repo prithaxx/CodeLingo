@@ -17,13 +17,8 @@
 
 package CodeLinguists.codelingo.ui;
 
-import android.app.Activity;
 import android.os.Bundle;
 
-
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
@@ -31,9 +26,8 @@ import androidx.fragment.app.FragmentTransaction;
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.logic.ISessionManager;
 import CodeLinguists.codelingo.logic.SessionManager;
-import CodeLinguists.codelingo.persistence.ISessionData;
 
-public class view_CourseOverview extends AppCompatActivity {
+    public class view_CourseOverview extends AppCompatActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

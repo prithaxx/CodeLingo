@@ -12,10 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.dso.ChapterObj;
-import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.logic.AccountHandler;
 import CodeLinguists.codelingo.logic.IAccountHandler;
-import CodeLinguists.codelingo.persistence.stubs.ChapterDataStub;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -40,10 +38,8 @@ public class cont_ChapterSummary extends AppCompatActivity {
         List<ChapterObj> chapters = accountHandler.getActiveCourseChapters();
 
         if (chapters == null || chapters.isEmpty()) {
-            // show the toast
             Toast.makeText(this, "No chapters available", Toast.LENGTH_LONG).show();
         } else {
-            // otherwise if contains data we will connect RecyclerView display the data
             ChapterListAdapter adapter = new ChapterListAdapter(chapters);
             chapterListRecyclerView.setAdapter(adapter);
             chapterListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -68,24 +64,21 @@ public class cont_ChapterSummary extends AppCompatActivity {
         @Override
         public void onBindViewHolder(ChapterViewHolder holder, int position) {
             final ChapterObj chapter = chapterList.get(position);
-            holder.buttonChapter.setText(chapter.getName());
+            holder.buttonChapter.setText(chapter.name());
 
-            // set icon
             if (chapter.isCompleted()) {
                 holder.imageChapterStatus.setImageResource(R.drawable.ic_completed);
-
-                // icon listener
                 holder.imageChapterStatus.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        chapterSummaryTextView.setText(chapter.getDescription());
+                        chapterSummaryTextView.setText(chapter.description());
                     }
                 });
 
                 holder.buttonChapter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        chapterSummaryTextView.setText(chapter.getDescription());
+                        chapterSummaryTextView.setText(chapter.description());
                     }
                 });
 

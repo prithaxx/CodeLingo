@@ -44,7 +44,8 @@
             android:layout_weight="1"
             android:onClick="btnSlideShowPrevOnClick"
             android:text="Prev"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/btnSlideShowNext"
