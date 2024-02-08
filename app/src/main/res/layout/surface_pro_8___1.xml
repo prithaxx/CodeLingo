@@ -36,7 +36,7 @@
 					android:layout_height="90dp" />
 
 				<ImageView android:id="@+id/codelingo_logo_1"
-					android:src="@drawable/codelingo_logo_1"
+					android:src="@drawable/codelingo_logo"
 					android:contentDescription="codelingo_logo_1"
 					 android:layout_marginStart="491dp"
 					android:layout_marginTop="9dp"
@@ -106,7 +106,7 @@
 					android:layout_height="228dp" />
 
 				<ImageView android:id="@+id/design2"
-					android:src="@drawable/design2"
+					android:src="@drawable/course_tile_2"
 					android:contentDescription="design2"
 					 android:layout_marginStart="911dp"
 					android:layout_marginTop="248dp"
@@ -122,7 +122,7 @@
 					android:layout_height="228dp" />
 
 				<ImageView android:id="@+id/design3"
-					android:src="@drawable/design3"
+					android:src="@drawable/course_tile_3"
 					android:contentDescription="design3"
 					 android:layout_marginStart="625dp"
 					android:layout_marginTop="505dp"
@@ -138,7 +138,7 @@
 					android:layout_height="228dp" />
 
 				<ImageView android:id="@+id/design4"
-					android:src="@drawable/design4"
+					android:src="@drawable/course_tile_4"
 					android:contentDescription="design4"
 					 android:layout_marginStart="925dp"
 					android:layout_marginTop="509dp"
@@ -156,7 +156,7 @@
 					 />
 
 				<ImageView android:id="@+id/line_1"
-					android:src="@drawable/line_1"
+					android:src="@drawable/line"
 					android:contentDescription="line_1"
 					 android:layout_marginStart="326dp"
 					android:layout_marginTop="247dp"
@@ -164,7 +164,7 @@
 					android:layout_height="477dp" />
 
 				<ImageView android:id="@+id/untitled_design__7__1"
-					android:src="@drawable/untitled_design__7__1"
+					android:src="@drawable/course_tile_1"
 					android:contentDescription="untitled_design__7__1"
 					 android:layout_marginStart="640dp"
 					android:layout_marginTop="248dp"
@@ -212,7 +212,7 @@
 					android:textSize="25sp" />
 
 				<ImageView android:id="@+id/star_1"
-					android:src="@drawable/star_1"
+					android:src="@drawable/star"
 					android:contentDescription="star_1"
 					 android:layout_marginStart="702dp"
 					android:layout_marginTop="418dp"
@@ -220,7 +220,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_2"
-					android:src="@drawable/star_1"
+					android:src="@drawable/star"
 					android:contentDescription="star_2"
 					 android:layout_marginStart="729dp"
 					android:layout_marginTop="418dp"
@@ -228,7 +228,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_5"
-					android:src="@drawable/star_1"
+					android:src="@drawable/star"
 					android:contentDescription="star_5"
 					 android:layout_marginStart="810dp"
 					android:layout_marginTop="418dp"
@@ -236,7 +236,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_4"
-					android:src="@drawable/star_1"
+					android:src="@drawable/star"
 					android:contentDescription="star_4"
 					 android:layout_marginStart="783dp"
 					android:layout_marginTop="418dp"
@@ -244,7 +244,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_3"
-					android:src="@drawable/star_1"
+					android:src="@drawable/star"
 					android:contentDescription="star_3"
 					 android:layout_marginStart="756dp"
 					android:layout_marginTop="418dp"
@@ -252,7 +252,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_16"
-					android:src="@drawable/star_1"
+					android:src="@drawable/star"
 					android:contentDescription="star_16"
 					 android:layout_marginStart="1037dp"
 					android:layout_marginTop="672dp"
@@ -260,7 +260,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_17"
-					android:src="@drawable/star_1"
+					android:src="@drawable/star"
 					android:contentDescription="star_17"
 					 android:layout_marginStart="1064dp"
 					android:layout_marginTop="672dp"
@@ -268,7 +268,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_11"
-					android:src="@drawable/star_1"
+					android:src="@drawable/star"
 					android:contentDescription="star_11"
 					 android:layout_marginStart="716dp"
 					android:layout_marginTop="672dp"
@@ -276,7 +276,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_12"
-					android:src="@drawable/star_1"
+					android:src="@drawable/star"
 					android:contentDescription="star_12"
 					 android:layout_marginStart="743dp"
 					android:layout_marginTop="672dp"
@@ -284,7 +284,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_14"
-					android:src="@drawable/star_1"
+					android:src="@drawable/star"
 					android:contentDescription="star_14"
 					 android:layout_marginStart="797dp"
 					android:layout_marginTop="672dp"
@@ -292,7 +292,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_15"
-					android:src="@drawable/star_1"
+					android:src="@drawable/star"
 					android:contentDescription="star_15"
 					 android:layout_marginStart="770dp"
 					android:layout_marginTop="672dp"
@@ -300,7 +300,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_6"
-					android:src="@drawable/star_1"
+					android:src="@drawable/star"
 					android:contentDescription="star_6"
 					 android:layout_marginStart="1023dp"
 					android:layout_marginTop="421dp"
@@ -308,7 +308,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_7"
-					android:src="@drawable/star_1"
+					android:src="@drawable/star"
 					android:contentDescription="star_7"
 					 android:layout_marginStart="1050dp"
 					android:layout_marginTop="421dp"
@@ -316,7 +316,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/star_10"
-					android:src="@drawable/star_1"
+					android:src="@drawable/star"
 					android:contentDescription="star_10"
 					 android:layout_marginStart="1077dp"
 					android:layout_marginTop="421dp"
@@ -324,7 +324,7 @@
 					android:layout_height="24.42dp" />
 
 				<ImageView android:id="@+id/untitled_design__8__1"
-					android:src="@drawable/untitled_design__8__1"
+					android:src="@drawable/course_overview_intro"
 					android:contentDescription="untitled_design__8__1"
 					 android:layout_marginStart="130dp"
 					android:layout_marginTop="259dp"
@@ -352,7 +352,7 @@
 					/>
 
 				<ImageView android:id="@+id/vector"
-					android:src="@drawable/vector"
+					android:src="@drawable/hamburger_menu"
 					android:contentDescription="vector"
 					 android:layout_marginStart="25dp"
 					android:layout_marginTop="36dp"

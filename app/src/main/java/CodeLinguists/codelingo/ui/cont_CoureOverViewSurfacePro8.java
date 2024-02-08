@@ -27,7 +27,7 @@ import android.widget.TextView;
 
 import CodeLinguists.codelingo.R;
 
-	public class surface_pro_8___1_activity extends Activity {
+	public class cont_CoureOverViewSurfacePro8 extends Activity {
 
 	
 	private View _bg__surface_pro_8___1_ek2;
@@ -120,7 +120,7 @@ import CodeLinguists.codelingo.R;
 		star_10 = (ImageView) findViewById(R.id.star_10);
 		untitled_design__8__1 = (ImageView) findViewById(R.id.untitled_design__8__1);
 		loren_ipsum = (TextView) findViewById(R.id.loren_ipsum);
-		_bg__align_justify_ek1 = (View) findViewById(R.id._bg__align_justify_ek1);
+//		_bg__align_justify_ek1 = (View) findViewById(R.id._bg__align_justify_ek1);
 		vector = (ImageView) findViewById(R.id.vector);
 	
 		

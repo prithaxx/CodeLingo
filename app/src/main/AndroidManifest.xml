@@ -25,7 +25,7 @@
             android:exported="false"
             android:screenOrientation="landscape"/>
         <activity
-            android:name=".ui.surface_pro_8___1_activity"
+            android:name=".ui.cont_CoureOverViewSurfacePro8"
             android:exported="true"
             android:screenOrientation="landscape"/>
         <activity
