@@ -11,8 +11,6 @@ import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.exceptions.ChapterNotFoundException;
-import CodeLinguists.codelingo.logic.ChapterHandler;
-import CodeLinguists.codelingo.persistence.stubs.ChapterDataStub;
 
 public class ChapterHandlerTest {
     private ChapterHandler chapterHandler;

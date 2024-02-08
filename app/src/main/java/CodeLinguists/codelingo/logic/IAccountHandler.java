@@ -10,13 +10,6 @@ import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.exceptions.InputValidationException;
 
 public interface IAccountHandler {
-    List<AccountObj> getGuestAccounts();
-    void createGuestAccount(String name);
-
-    /**
-     * @return - Course from previous session
-     */
-    CourseObj getActiveCourse();
 
     //Logins must update ISessionData
     /**
@@ -26,21 +19,6 @@ public interface IAccountHandler {
      * @throws AccountNotFoundException
      */
     AccountObj guestLogin(String name);
-
-    void setActiveCourse(CourseObj course);
-
-    /**
-     * Log into an account
-     *
-     * @param username
-     * @param password 
-     * @throws AccountNotFoundException
-     */
-    void login(String username, String password);
-
-    AccountObj getAccountDetails();
-
-    void logout();
 
     List<ChapterObj> getActiveCourseChapters();
 }

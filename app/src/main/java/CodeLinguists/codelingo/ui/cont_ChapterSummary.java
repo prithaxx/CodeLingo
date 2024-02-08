@@ -12,10 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.dso.ChapterObj;
-import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.logic.AccountHandler;
 import CodeLinguists.codelingo.logic.IAccountHandler;
-import CodeLinguists.codelingo.persistence.stubs.ChapterDataStub;
 import android.widget.ImageView;
 import android.widget.Toast;
 
