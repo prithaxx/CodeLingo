@@ -11,12 +11,12 @@ public class CourseDataStub implements ICourseData {
     List<CourseObj> placeholders;
 
     public CourseDataStub() {
-        this.placeholders =  new ArrayList<>() {{
-            new CourseObj(1,"ex1", "This is a placeholder 1", false, false);
-            new CourseObj(2,"ex2", "This is a placeholder 2", false, false);
-            new CourseObj(3,"ex3", "This is a placeholder 3", false, false);
-            new CourseObj(4,"ex4", "This is a placeholder 4", false, false);
-        }};
+        this.placeholders =  new ArrayList<>();
+        placeholders.add(new CourseObj(1,"ex1", "This is a placeholder 1", false, false));
+        placeholders.add(new CourseObj(2,"ex2", "This is a placeholder 2", false, false));
+        placeholders.add(new CourseObj(3,"ex3", "This is a placeholder 3", false, false));
+        placeholders.add(new CourseObj(4,"ex4", "This is a placeholder 4", false, false));
+
     }
 
     public CourseDataStub(List<CourseObj> placeholders) {
