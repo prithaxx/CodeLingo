@@ -69,4 +69,14 @@ public class SessionManager implements ISessionManager{
     public boolean hasPrevQuestion() {
         return currentQuizCursor > 1;
     }
+
+    @Override
+    public CourseObj getActiveCourse() {
+        return null;
+    }
+
+    @Override
+    public void setActiveChapter(int index) {
+
+    }
 }
