@@ -1,6 +1,7 @@
 package CodeLinguists.codelingo.logic;
 
 import CodeLinguists.codelingo.dso.AccountObj;
+import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.exceptions.InputValidationException;
@@ -8,6 +9,8 @@ import CodeLinguists.codelingo.exceptions.NotSignedInException;
 import CodeLinguists.codelingo.persistence.IAccountData;
 import CodeLinguists.codelingo.persistence.ISessionData;
 import CodeLinguists.codelingo.application.Services;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class AccountHandler implements IAccountHandler {
@@ -80,7 +83,12 @@ public class AccountHandler implements IAccountHandler {
         if(name == null || name.isEmpty()){
             throw new InputValidationException("Name cannot be empty.");
         }
-        AccountObj account = accountData.getGuestAccountByName(name); 
+
+        AccountObj account = accountData.getGuestAccountByName(name);
+
+        if (account==null) {
+            account = accountData.createGuestAccount(name);
+        }
         updateSessionData(account);
     }
 
@@ -92,6 +100,11 @@ public class AccountHandler implements IAccountHandler {
     @Override
     public void logout() {
         sessionData.setActiveAccount(null);
+    }
+
+    @Override
+    public List<ChapterObj> getActiveCourseChapters() {
+        return null;
     }
 
     private void updateSessionData(AccountObj account) {

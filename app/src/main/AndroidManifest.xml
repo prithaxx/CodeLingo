@@ -31,8 +31,8 @@
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".ui.GuestLogin"
-            android:exported="false"
+            android:name=".ui.view_GuestLogin"
+            android:exported="true"
             android:screenOrientation="landscape">
 
         </activity>
