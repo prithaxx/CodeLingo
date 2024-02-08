@@ -25,11 +25,14 @@ public class AccountDataStub implements IAccountData {
 
     @Override
     public AccountObj getGuestAccountByName(String name) {
-        return guestAccounts.stream()
-                .filter(account -> name.equals(account.getName()))
-                .findFirst()
-                .orElseThrow(() -> new AccountNotFoundException("No Account matches the name "+name));
+        for (AccountObj account:this.guestAccounts) {
+            if (name.equals(account.getName())){
+                return account;
+            }
+        }
+        return null;
     }
+
 
     @Override
     public List<AccountObj> getAllAccounts() {

@@ -80,7 +80,12 @@ public class AccountHandler implements IAccountHandler {
         if(name == null || name.isEmpty()){
             throw new InputValidationException("Name cannot be empty.");
         }
-        AccountObj account = accountData.getGuestAccountByName(name); 
+
+        AccountObj account = accountData.getGuestAccountByName(name);
+
+        if (account==null) {
+            account = accountData.createGuestAccount(name);
+        }
         updateSessionData(account);
     }
 
