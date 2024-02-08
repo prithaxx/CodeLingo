@@ -25,6 +25,7 @@
 # Docs
  - [ARCHITECTURE.md](Docs/ARCHITECTURE.md)
  - [VisionStatement.md](Docs/VisionStatement.md)
+ - [CodingStyle.md](Docs/CodingStyle.md)
 - - -
 - - -
 <br>
