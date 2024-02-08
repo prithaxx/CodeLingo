@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background"
+    android:paddingTop="125dp"
+    android:paddingHorizontal="50dp"
+    tools:context=".ui.GuestLogin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="219dp"
+            android:layout_height="206dp"
+            android:src="@drawable/codelingo_logo" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:paddingTop="5dp"
+            android:paddingBottom="35dp"
+            android:textSize="60dp"
+            android:gravity="center"
+            android:ems="10"
+            android:inputType="text"
+            android:textStyle="bold"
+            android:text="CodeLingo" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:paddingStart="20dp"
+            android:hint="Username"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:background="#37963FB5"
+            android:textSize="30sp"
+            android:singleLine="true"/>
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:text="Sign In"
+            android:textSize="30dp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
