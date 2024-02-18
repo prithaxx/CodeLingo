@@ -1,49 +1,27 @@
 package CodeLinguists.codelingo.logic;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.QuizObj;
+import CodeLinguists.codelingo.persistence.IQuizData;
 
 public class QuizHandler implements IQuizHandler{
+    IQuizData quizData;
 
-    List<QuizObj> activeQuiz;
-    int currentQuizCursor;
+    public QuizHandler() {
+        this.quizData = Services.getQuizData();
+    }
 
-    public QuizHandler(List<QuizObj> activeQuiz) {
-        this.activeQuiz = activeQuiz==null ? new ArrayList<>() : activeQuiz;
-        currentQuizCursor=0;
+    public QuizHandler(IQuizData quizData) {
+        this.quizData = quizData;
     }
 
     @Override
-    public QuizObj nextQuestion() {
-        if (currentQuizCursor >= activeQuiz.size()) {
-            return null;
-        }
-        return activeQuiz.get(currentQuizCursor++);
+    public IQuizIterator getQuiz(int courseId, int chapterId) {
+        return new QuizIterator(quizData.getQuizByChapterId(chapterId));
     }
 
     @Override
-    public boolean hasNextQuestion() {
-        return currentQuizCursor < activeQuiz.size();
-    }
-
-    @Override
-    public QuizObj prevQuestion() {
-        //cursor always points to the next quiz
-        //so going backwards requires on offset of 1
-        if (currentQuizCursor <= 1) {
-            return null;
-        }
-        return activeQuiz.get(--currentQuizCursor-1);
-    }
-
-    @Override
-    public boolean hasPrevQuestion() {
-        return currentQuizCursor > 1;
-    }
-
-    public int cursorPos() {
-        return currentQuizCursor;
+    public boolean checkQuizAnswer(QuizObj quiz, String answer) {
+        return !answer.isBlank() && answer.equals(quiz.answer());
     }
 }

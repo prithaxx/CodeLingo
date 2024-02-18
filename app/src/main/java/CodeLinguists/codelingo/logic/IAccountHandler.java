@@ -4,6 +4,7 @@ import java.util.List;
 
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.ChapterObj;
+import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
 
 public interface IAccountHandler {
@@ -15,6 +16,7 @@ public interface IAccountHandler {
      * @param name - name of account to log into
      */
     AccountObj guestLogin(String name);
+    CourseObj getActiveCourse();
 
     List<ChapterObj> getActiveCourseChapters();
 }
