@@ -1,12 +1,9 @@
 package CodeLinguists.codelingo.logic;
 
-import java.util.List;
-
-import CodeLinguists.codelingo.application.Services;
+import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.CourseObj;
-import CodeLinguists.codelingo.dso.QuizObj;
-import CodeLinguists.codelingo.persistence.IQuizData;
+import CodeLinguists.codelingo.exceptions.NoItemSelectedException;
 
 public class SessionManager implements ISessionManager{
     //Singleton
@@ -14,7 +11,7 @@ public class SessionManager implements ISessionManager{
 
     public static ISessionManager newInstance() {
         if (sessionManager==null) {
-            sessionManager = new SessionManager();
+            sessionManager = new SessionManager(new QuizHandler(), new AccountHandler());
         }
         return sessionManager;
     }
@@ -25,25 +22,30 @@ public class SessionManager implements ISessionManager{
 
 
     //instance fields
-    IQuizData quizData;
+    IQuizHandler quizHandler;
+    IAccountHandler accountHandler;
 
     AccountObj account;
     CourseObj course;
     int chapterId;
 
-    public SessionManager() {
-        quizData = Services.getQuizData();
+    private SessionManager(IQuizHandler quizHandler, IAccountHandler accountHandler) {
+        this.quizHandler = quizHandler;
+        this.accountHandler = accountHandler;
+        chapterId=-1; //unselected by default
     }
 
     @Override
     public void guestLogin(String user) {
-        IAccountHandler accountHandler = new AccountHandler();
         this.account = accountHandler.guestLogin(user);
     }
 
     @Override
     public IQuizIterator startQuiz() {
-        return new QuizIterator(this.getQuiz());
+        if (course==null || chapterId<0) {
+            throw new NoItemSelectedException(Strings.NoCourseSelected);
+        }
+        return quizHandler.getQuiz(course.id(), chapterId);
     }
 
     @Override
@@ -54,9 +56,5 @@ public class SessionManager implements ISessionManager{
     @Override
     public void setActiveChapter(int index) {
         chapterId=index;
-    }
-
-    private List<QuizObj> getQuiz() {
-        return quizData.getQuizByChapterId(1);
     }
 }
