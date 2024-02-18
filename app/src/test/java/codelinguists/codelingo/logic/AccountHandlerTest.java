@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import CodeLinguists.codelingo.dso.AccountObj;
+import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.exceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.AccountHandler;
 import CodeLinguists.codelingo.persistence.IAccountData;
@@ -91,6 +92,11 @@ public class AccountHandlerTest {
         @Override
         public void setActiveAccount(AccountObj account) {
             obj=account;
+        }
+
+        @Override
+        public CourseObj getActiveCourse() {
+            return null;
         }
 
         public boolean isActiveAccountSet() {

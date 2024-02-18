@@ -32,7 +32,8 @@ public class SessionManager implements ISessionManager{
     private SessionManager(IQuizHandler quizHandler, IAccountHandler accountHandler) {
         this.quizHandler = quizHandler;
         this.accountHandler = accountHandler;
-        chapterId=-1; //unselected by default
+        course = accountHandler.getActiveCourse();
+        chapterId = -1;
     }
 
     @Override
@@ -50,7 +51,7 @@ public class SessionManager implements ISessionManager{
 
     @Override
     public CourseObj getActiveCourse() {
-        return new CourseObj(0, "Example Course", "Welcome to the example course! This is a placeholder for future courses", true, true);
+        return course;
     }
 
     @Override
