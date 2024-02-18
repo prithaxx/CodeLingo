@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import CodeLinguists.codelingo.dso.QuizObj;
-import CodeLinguists.codelingo.logic.QuizHandler;
+import CodeLinguists.codelingo.logic.QuizIterator;
 
 public class QuizHandlerTest {
     List<QuizObj> quizList;
@@ -20,7 +20,7 @@ public class QuizHandlerTest {
 
     @Test
     public void emptyList() {
-        QuizHandler quizHandler = new QuizHandler(quizList);
+        QuizIterator quizHandler = new QuizIterator(quizList);
 
         assertFalse(quizHandler.hasPrevQuestion());
         assertFalse(quizHandler.hasNextQuestion());
@@ -33,7 +33,7 @@ public class QuizHandlerTest {
 
     @Test
     public void nullList() {
-        QuizHandler quizHandler = new QuizHandler(null);
+        QuizIterator quizHandler = new QuizIterator(null);
 
         assertFalse(quizHandler.hasPrevQuestion());
         assertFalse(quizHandler.hasNextQuestion());
@@ -47,7 +47,7 @@ public class QuizHandlerTest {
     @Test
     public void oneElement() {
         addQuizObj(1);
-        QuizHandler quizHandler = new QuizHandler(quizList);
+        QuizIterator quizHandler = new QuizIterator(quizList);
 
         assertFalse(quizHandler.hasPrevQuestion());
         assertTrue(quizHandler.hasNextQuestion());
@@ -64,7 +64,7 @@ public class QuizHandlerTest {
     @Test
     public void twoElement() {
         addQuizObj(2);
-        QuizHandler quizHandler = new QuizHandler(quizList);
+        QuizIterator quizHandler = new QuizIterator(quizList);
 
         assertFalse(quizHandler.hasPrevQuestion());
         assertTrue(quizHandler.hasNextQuestion());

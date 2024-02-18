@@ -2,7 +2,7 @@ package CodeLinguists.codelingo.logic;
 
 import CodeLinguists.codelingo.dso.QuizObj;
 
-public interface IQuizHandler {
+public interface IQuizIterator {
 
     QuizObj nextQuestion();
 

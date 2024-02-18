@@ -5,7 +5,7 @@ import CodeLinguists.codelingo.dso.CourseObj;
 public interface ISessionManager {
 
     void guestLogin(String user);
-    IQuizHandler startQuiz();
+    IQuizIterator startQuiz();
     CourseObj getActiveCourse();
     void setActiveChapter(int index);
 }

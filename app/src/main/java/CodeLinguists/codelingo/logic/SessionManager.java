@@ -42,8 +42,8 @@ public class SessionManager implements ISessionManager{
     }
 
     @Override
-    public IQuizHandler startQuiz() {
-        return new QuizHandler(this.getQuiz());
+    public IQuizIterator startQuiz() {
+        return new QuizIterator(this.getQuiz());
     }
 
     @Override

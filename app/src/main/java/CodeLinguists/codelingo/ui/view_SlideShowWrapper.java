@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.dso.QuizObj;
-import CodeLinguists.codelingo.logic.IQuizHandler;
+import CodeLinguists.codelingo.logic.IQuizIterator;
 import CodeLinguists.codelingo.logic.ISessionManager;
 import CodeLinguists.codelingo.logic.SessionManager;
 
@@ -23,7 +23,7 @@ public class view_SlideShowWrapper extends AppCompatActivity {
 
     ISessionManager sessionManager;
     int lives = 3; //needs to be global
-    private IQuizHandler quizHandler;
+    private IQuizIterator quizHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

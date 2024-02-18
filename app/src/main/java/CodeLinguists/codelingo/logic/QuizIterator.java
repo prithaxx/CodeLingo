@@ -5,12 +5,12 @@ import java.util.List;
 
 import CodeLinguists.codelingo.dso.QuizObj;
 
-public class QuizHandler implements IQuizHandler{
+public class QuizIterator implements IQuizIterator {
 
     List<QuizObj> activeQuiz;
     int currentQuizCursor;
 
-    public QuizHandler(List<QuizObj> activeQuiz) {
+    public QuizIterator(List<QuizObj> activeQuiz) {
         this.activeQuiz = activeQuiz==null ? new ArrayList<>() : activeQuiz;
         currentQuizCursor=0;
     }
