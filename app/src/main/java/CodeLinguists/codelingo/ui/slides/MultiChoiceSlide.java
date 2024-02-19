@@ -45,10 +45,6 @@ public class MultiChoiceSlide extends QuizSlide {
         optionDButton.setOnClickListener(view -> setUserSelection(v.getResources().getString(R.string.optionD)));
     }
 
-    public void onClickOption(View view){
-        
-    }
-
     private void setUserSelection(String selection) {
         this.userSelection = selection;
     }
