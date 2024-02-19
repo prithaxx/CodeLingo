@@ -9,4 +9,8 @@
     <string name="ex_4_string">Ex 4</string>
     <string name="ex_3_string">Ex 3</string>
     <string name="ex_2_string">Ex 2</string>
+    <string name="optionA">Option A</string>
+    <string name="optionB">Option B</string>
+    <string name="optionC">Option C</string>
+    <string name="optionD">Option D</string>
 </resources>
