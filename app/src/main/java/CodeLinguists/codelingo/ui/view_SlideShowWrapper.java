@@ -13,6 +13,7 @@ import CodeLinguists.codelingo.dso.QuizObj;
 import CodeLinguists.codelingo.logic.IQuizIterator;
 import CodeLinguists.codelingo.logic.ISessionManager;
 import CodeLinguists.codelingo.logic.SessionManager;
+import CodeLinguists.codelingo.ui.slides.QuestionFragmentFactory;
 
 /**
  * Provides common behaviours for slides like:
@@ -21,36 +22,33 @@ import CodeLinguists.codelingo.logic.SessionManager;
 
 public class view_SlideShowWrapper extends AppCompatActivity {
 
-    ISessionManager sessionManager;
-    int lives = 3; //needs to be global
+    private ISessionManager sessionManager;
     private IQuizIterator quizHandler;
+    private QuestionFragmentFactory slideFactory;
+    int lives = 3; //needs to be global
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slide_show_wrapper);
 
-        sessionManager = SessionManager.newInstance();
+        this.sessionManager = SessionManager.newInstance();
         this.quizHandler = sessionManager.startQuiz();
-        changeSlide(true);
+        this.slideFactory = new QuestionFragmentFactory();
+        changeSlide(quizHandler.nextQuestion()); //Load first slide
     }
 
     public void btnSlideShowNextOnClick(View v){
-        changeSlide(true);
+        changeSlide(quizHandler.nextQuestion());
     }
 
     public void btnSlideShowPrevOnClick(View v){
-        changeSlide(false);
+        changeSlide(quizHandler.prevQuestion());
     }
 
-    /**
-     * @param to_next - go to next slide on true, go to previous slide on false.
-     */
-    private void changeSlide(boolean to_next) {
-        QuizObj quiz = to_next ? quizHandler.nextQuestion() : quizHandler.prevQuestion();
-
+    private void changeSlide(QuizObj quiz) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragmentContainerView, cont_SlideText.newInstance("Quiz #"+quiz.id(), quiz.prompt())).commit();
+        ft.replace(R.id.fragmentContainerView, slideFactory.getInstance(quiz)).commit();
         toggleNavButtons();
     }
 

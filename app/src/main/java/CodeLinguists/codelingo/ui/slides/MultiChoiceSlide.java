@@ -13,6 +13,7 @@ public class MultiChoiceSlide extends QuizSlide {
     }
 
 
+    //TODO extract user input
     @Override
     public String getInput() {
         return getString(R.string.placeholder);
