@@ -9,4 +9,15 @@
     <string name="ex_4_string">Ex 4</string>
     <string name="ex_3_string">Ex 3</string>
     <string name="ex_2_string">Ex 2</string>
+    <string name="optionA">Option A</string>
+    <string name="optionB">Option B</string>
+    <string name="optionC">Option C</string>
+    <string name="optionD">Option D</string>
+    <string name="SlideTitlePlaceholder">Slide #%1$d</string>
+    <string name="placeholder">placeholder</string>
+    <string name="check_answer">Check Answer</string>
+    <string name="done">Done!</string>
+    <string name="next">Next</string>
+    <string name="wrong_answer_title">Wrong Answer</string>
+    <string name="correct_answer_title">Correct!</string>
 </resources>
