@@ -1,5 +1,5 @@
 package CodeLinguists.codelingo.dso;
 
 public enum QuestionTypes {
-    TEXT, MULTI_CHOICE;
+    TEXT, FEEDBACK_PASSED, FEEDBACK_FAILED, MULTI_CHOICE;
 }

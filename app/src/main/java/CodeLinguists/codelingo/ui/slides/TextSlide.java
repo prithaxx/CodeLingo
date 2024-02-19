@@ -20,8 +20,7 @@ public class TextSlide extends QuizSlide{
     @Override
     public void populateView(View v) {
         if (quiz == null) {
-//            throw new NullPointerException("System Error: no quiz found");
-            this.quiz = new QuizObj(-999, -999, QuestionTypes.TEXT, "ERROR", "ERROR", null, null);
+            throw new NullPointerException("System Error: no quiz found");
         }
         TextView tv = v.findViewById(R.id.title_text);
         tv.setText(getString(R.string.SlideTitlePlaceholder, quiz.id()));

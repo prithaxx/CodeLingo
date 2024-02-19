@@ -47,4 +47,8 @@ public abstract class QuizSlide extends Fragment {
      * @param v the new view created from the fragment reference
      */
     public abstract void populateView(View v);
+
+    public QuizObj getQuiz() {
+        return this.quiz;
+    }
 }
