@@ -4,6 +4,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.dso.QuizObj;
 
@@ -14,7 +18,6 @@ public class MultiChoiceSlide extends QuizSlide {
     }
 
 
-    //TODO extract user input
     @Override
     public String getInput() {
         return userSelection;
@@ -22,27 +25,29 @@ public class MultiChoiceSlide extends QuizSlide {
 
     @Override
     public void populateView(View v) {
-        TextView tv = v.findViewById(R.id.title_text);
-        tv.setText(getString(R.string.SlideTitlePlaceholder, quiz.id()));
+        TextView titleTextView = v.findViewById(R.id.title_text);
+        titleTextView.setText(getString(R.string.SlideTitlePlaceholder, quiz.id()));
 
-        tv = v.findViewById(R.id.prompt_text);
-        tv.setText(quiz.prompt());
+        TextView promptTextView = v.findViewById(R.id.prompt_text);
+        promptTextView.setText(quiz.prompt());
 
-        Button optionAButton = v.findViewById(R.id.optionA_button);
-        optionAButton.setText(R.string.optionA);
-        optionAButton.setOnClickListener(view -> setUserSelection(v.getResources().getString(R.string.optionA)));
+        List<String> allAnswers = new ArrayList<>(quiz.wrongAnswers());
+        allAnswers.add(quiz.answer());
+        Collections.shuffle(allAnswers);
 
-        Button optionBButton = v.findViewById(R.id.optionB_button);
-        optionBButton.setText(R.string.optionB);
-        optionBButton.setOnClickListener(view -> setUserSelection(v.getResources().getString(R.string.optionB)));
+        Button[] buttons = new Button[]{
+                v.findViewById(R.id.optionA_button),
+                v.findViewById(R.id.optionB_button),
+                v.findViewById(R.id.optionC_button),
+                v.findViewById(R.id.optionD_button)
+        };
 
-        Button optionCButton = v.findViewById(R.id.optionC_button);
-        optionCButton.setText(R.string.optionC);
-        optionCButton.setOnClickListener(view -> setUserSelection(v.getResources().getString(R.string.optionC)));
-
-        Button optionDButton = v.findViewById(R.id.optionD_button);
-        optionDButton.setText(R.string.optionD);
-        optionDButton.setOnClickListener(view -> setUserSelection(v.getResources().getString(R.string.optionD)));
+        for (int i = 0; i < buttons.length; i++) {
+            buttons[i].setText(allAnswers.get(i));
+            buttons[i].setOnClickListener(view -> {
+                setUserSelection(((Button)view).getText().toString());
+            });
+        }
     }
 
     private void setUserSelection(String selection) {

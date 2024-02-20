@@ -1,5 +1,6 @@
 package CodeLinguists.codelingo.persistence.stubs;
 
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,8 +16,8 @@ public class QuizDataStub implements IQuizData {
         quizList = new ArrayList<>();
         quizList.add(new QuizObj(1,1, QuestionTypes.TEXT,"TEXT Placeholder 1", false,null, null, null, null, null));
         quizList.add(new QuizObj(2,1, QuestionTypes.TEXT,"TEXT Placeholder 2", false, null, null, null, null, null));
-        quizList.add(new QuizObj(3,1, QuestionTypes.MULTI_CHOICE,"MULTI_CHOICE Placeholder 1", true, "placeholder", null, null , "id 3: Incorrect answer feedback placeholder", "id 3: Correct answer feedback placeholder"));
-        quizList.add(new QuizObj(4,1, QuestionTypes.MULTI_CHOICE,"MULTI_CHOICE Placeholder 2", true, "placeholder", null, null, "id 4: Incorrect answer feedback placeholder", "id 4: Correct answer feedback placeholder"));
+        quizList.add(new QuizObj(3,1, QuestionTypes.MULTI_CHOICE,"MULTI_CHOICE Placeholder 1", true, "Correct answer", null, Arrays.asList("Incorrect Answer 1", "Incorrect Answer 2", "Incorrect Answer 3"), "id 3: Incorrect answer feedback placeholder" , "id 3: Correct answer feedback placeholder"));
+        quizList.add(new QuizObj(4,1, QuestionTypes.MULTI_CHOICE,"MULTI_CHOICE Placeholder 1", true, "Correct answer", null, Arrays.asList("Incorrect Answer 1", "Incorrect Answer 2", "Incorrect Answer 3"), "id 4: Incorrect answer feedback placeholder" , "id 4: Correct answer feedback placeholder"));
     }
 
     public QuizDataStub(List<QuizObj> quizList) {
