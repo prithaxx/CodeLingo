@@ -14,24 +14,14 @@ import CodeLinguists.codelingo.dso.QuizObj;
 public class MultiChoiceSlide extends QuizSlide {
     private String userSelection = null;
     private Button[] buttons;
+
     public MultiChoiceSlide(QuizObj quiz) {
         super(R.layout.fragment_slide_multiple_choice, quiz);
     }
 
-
     @Override
     public String getInput() {
         return userSelection;
-    }
-
-    private void highlightSelection(View v, Button selectedButton) {
-        int defaultColor = v.getResources().getColor(R.color.defaultButtonColor, v.getContext().getTheme());
-        for (Button button : buttons) {
-            button.setBackgroundColor(defaultColor);
-        }
-
-        int highlightColor = v.getResources().getColor(R.color.highlightButtonColor, v.getContext().getTheme());
-        selectedButton.setBackgroundColor(highlightColor);
     }
 
     @Override
@@ -62,6 +52,16 @@ public class MultiChoiceSlide extends QuizSlide {
         }
     }
 
+    private void highlightSelection(View v, Button selectedButton) {
+        int defaultColor = v.getResources().getColor(R.color.defaultButtonColor, v.getContext().getTheme());
+        for (Button button : buttons) {
+            button.setBackgroundColor(defaultColor);
+        }
+
+        int highlightColor = v.getResources().getColor(R.color.highlightButtonColor, v.getContext().getTheme());
+        selectedButton.setBackgroundColor(highlightColor);
+    }
+    
     private void setUserSelection(String selection) {
         this.userSelection = selection;
     }
