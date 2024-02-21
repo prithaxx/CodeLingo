@@ -9,6 +9,7 @@ public class QuestionFragmentFactory {
         return switch (quiz.type()) {
             case TEXT -> new TextSlide(quiz);
             case MULTI_CHOICE -> new MultiChoiceSlide(quiz);
+            case SHORT_ANSWER -> new ShortAnswerSlide(quiz);
             case FEEDBACK_FAILED, FEEDBACK_PASSED -> new FeedbackSlide(quiz);
             default -> throw new SlideTypeNotHandledException(Strings.SlideNotSupported);
         };
