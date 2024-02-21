@@ -23,6 +23,23 @@ public class MultiChoiceSlide extends QuizSlide {
         return userSelection;
     }
 
+    private void highlightSelection(View v, Button selectedButton) {
+        Button[] buttons = new Button[]{
+                v.findViewById(R.id.optionA_button),
+                v.findViewById(R.id.optionB_button),
+                v.findViewById(R.id.optionC_button),
+                v.findViewById(R.id.optionD_button)
+        };
+
+        int defaultColor = v.getResources().getColor(R.color.defaultButtonColor, v.getContext().getTheme());
+        for (Button button : buttons) {
+            button.setBackgroundColor(defaultColor);
+        }
+
+        int highlightColor = v.getResources().getColor(R.color.highlightButtonColor, v.getContext().getTheme());
+        selectedButton.setBackgroundColor(highlightColor);
+    }
+
     @Override
     public void populateView(View v) {
         TextView titleTextView = v.findViewById(R.id.title_text);
@@ -46,6 +63,7 @@ public class MultiChoiceSlide extends QuizSlide {
             buttons[i].setText(allAnswers.get(i));
             buttons[i].setOnClickListener(view -> {
                 setUserSelection(((Button)view).getText().toString());
+                highlightSelection(v,(Button)view);
             });
         }
     }
