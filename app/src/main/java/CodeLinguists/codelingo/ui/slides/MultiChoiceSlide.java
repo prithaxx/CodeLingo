@@ -13,6 +13,7 @@ import CodeLinguists.codelingo.dso.QuizObj;
 
 public class MultiChoiceSlide extends QuizSlide {
     private String userSelection = null;
+    private Button[] buttons;
     public MultiChoiceSlide(QuizObj quiz) {
         super(R.layout.fragment_slide_multiple_choice, quiz);
     }
@@ -24,13 +25,6 @@ public class MultiChoiceSlide extends QuizSlide {
     }
 
     private void highlightSelection(View v, Button selectedButton) {
-        Button[] buttons = new Button[]{
-                v.findViewById(R.id.optionA_button),
-                v.findViewById(R.id.optionB_button),
-                v.findViewById(R.id.optionC_button),
-                v.findViewById(R.id.optionD_button)
-        };
-
         int defaultColor = v.getResources().getColor(R.color.defaultButtonColor, v.getContext().getTheme());
         for (Button button : buttons) {
             button.setBackgroundColor(defaultColor);
@@ -52,7 +46,7 @@ public class MultiChoiceSlide extends QuizSlide {
         allAnswers.add(quiz.answer());
         Collections.shuffle(allAnswers);
 
-        Button[] buttons = new Button[]{
+        buttons = new Button[]{
                 v.findViewById(R.id.optionA_button),
                 v.findViewById(R.id.optionB_button),
                 v.findViewById(R.id.optionC_button),

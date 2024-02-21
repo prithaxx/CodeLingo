@@ -13,7 +13,7 @@
     <color name="navbar_color">#010728</color>
     <color name="rectangle_1_color">#D9D9D9</color>
     <color name="loren_ipsum_color">#FFA013</color>
-    <color name="defaultButtonColor">#FF6200EE</color>
-    <color name="highlightButtonColor">#D9D9D9</color>
+    <color name="defaultButtonColor">#6750a4</color>
+    <color name="highlightButtonColor">#6200ee</color>
 
 </resources>
