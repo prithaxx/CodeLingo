@@ -2,29 +2,67 @@ package CodeLinguists.codelingo.ui.slides;
 
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Button;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
 
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.dso.QuizObj;
 
 public class MultiChoiceSlide extends QuizSlide {
-    //TODO replace "fragment_slide_text" reference with the multiple choice fragment XML
+    private String userSelection = null;
+    private Button[] buttons;
+
     public MultiChoiceSlide(QuizObj quiz) {
-        super(R.layout.fragment_slide_text, quiz);
+        super(R.layout.fragment_slide_multiple_choice, quiz);
     }
 
-
-    //TODO extract user input
     @Override
     public String getInput() {
-        return getString(R.string.placeholder);
+        return userSelection;
     }
 
     @Override
     public void populateView(View v) {
-        TextView tv = v.findViewById(R.id.title_text);
-        tv.setText(getString(R.string.SlideTitlePlaceholder, quiz.id()));
+        TextView titleTextView = v.findViewById(R.id.title_text);
+        titleTextView.setText(getString(R.string.SlideTitlePlaceholder, quiz.id()));
 
-        tv = v.findViewById(R.id.prompt_text);
-        tv.setText(quiz.prompt());
+        TextView promptTextView = v.findViewById(R.id.prompt_text);
+        promptTextView.setText(quiz.prompt());
+
+        List<String> allAnswers = new ArrayList<>(quiz.wrongAnswers());
+        allAnswers.add(quiz.answer());
+        Collections.shuffle(allAnswers);
+
+        buttons = new Button[]{
+                v.findViewById(R.id.optionA_button),
+                v.findViewById(R.id.optionB_button),
+                v.findViewById(R.id.optionC_button),
+                v.findViewById(R.id.optionD_button)
+        };
+
+        for (int i = 0; i < buttons.length; i++) {
+            buttons[i].setText(allAnswers.get(i));
+            buttons[i].setOnClickListener(view -> {
+                setUserSelection(((Button)view).getText().toString());
+                highlightSelection(v,(Button)view);
+            });
+        }
+    }
+
+    private void highlightSelection(View v, Button selectedButton) {
+        int defaultColor = v.getResources().getColor(R.color.defaultButtonColor, v.getContext().getTheme());
+        for (Button button : buttons) {
+            button.setBackgroundColor(defaultColor);
+        }
+
+        int highlightColor = v.getResources().getColor(R.color.highlightButtonColor, v.getContext().getTheme());
+        selectedButton.setBackgroundColor(highlightColor);
+    }
+    
+    private void setUserSelection(String selection) {
+        this.userSelection = selection;
     }
 }
