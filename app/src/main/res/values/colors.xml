@@ -4,6 +4,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="purple_500">#FF6200EE</color>
+    <color name="darkPurple">#5E35B1</color>
     <color name="lavender">#8692f7</color>
     <color name="chapterListBackground">#EEEEEE</color>
     <color name="chapterDescriptionBackground">#333A85</color>
