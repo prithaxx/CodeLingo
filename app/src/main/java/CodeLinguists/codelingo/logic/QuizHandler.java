@@ -1,7 +1,9 @@
 package CodeLinguists.codelingo.logic;
 
 import CodeLinguists.codelingo.application.Services;
+import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.QuizObj;
+import CodeLinguists.codelingo.exceptions.InputValidationException;
 import CodeLinguists.codelingo.persistence.IQuizData;
 
 public class QuizHandler implements IQuizHandler{
@@ -22,6 +24,9 @@ public class QuizHandler implements IQuizHandler{
 
     @Override
     public boolean checkQuizAnswer(QuizObj quiz, String answer) {
-        return !answer.isBlank() && answer.equals(quiz.answer());
+        if (answer==null || answer.isBlank()) {
+            throw new InputValidationException(Strings.QuestionNotAnswered);
+        }
+        return answer.equals(quiz.answer());
     }
 }
