@@ -18,10 +18,13 @@
 package CodeLinguists.codelingo.ui;
 
 import android.os.Bundle;
+import android.view.View;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.material.navigation.NavigationView;
 
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.logic.ISessionManager;
@@ -38,6 +41,11 @@ import CodeLinguists.codelingo.logic.SessionManager;
 
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.replace(R.id.fragmentContainerView3, cont_CourseOverview.newInstance()).commit();
+	}
+
+	public void btnHamburgerMenuOnClick(View v){
+		NavigationView navView = findViewById(R.id.nav_view);
+		navView.setVisibility(View.VISIBLE);
 	}
 }
 	
