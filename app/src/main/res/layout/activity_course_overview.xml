@@ -1,5 +1,11 @@
-<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent" android:layout_height="wrap_content" >
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/drawer_layout"
+	tools:context=".ui.view_CourseOverview">
+
 
 	<LinearLayout
 		android:layout_width="wrap_content" 
@@ -13,8 +19,7 @@
 				android:layout_marginTop="0dp"
 				android:layout_marginStart="0dp"
 				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				>
+				android:layout_height="wrap_content">
 
 				<View
 					android:background="@drawable/_bg__surface_pro_8___1_ek2_shape"
@@ -35,6 +40,14 @@
 					android:layout_width="1280dp"
 					android:layout_height="90dp" />
 
+
+					<ImageButton
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:src="@drawable/menu"
+						android:background="@android:color/transparent"
+						android:padding="25dp"/>
+
 				<ImageView
 					android:src="@drawable/codelingo_logo"
 					android:contentDescription="codelingo_logo_1"
@@ -43,6 +56,14 @@
 					android:layout_width="74dp"
 					android:layout_height="81dp" />
 
+				<com.google.android.material.navigation.NavigationView
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					app:headerLayout="@layout/header"
+					app:menu="@menu/main_menu"
+					android:id="@+id/nav_view"
+					android:layout_gravity="start"/>
+
 				<TextView
 					android:textSize="40sp"
 					android:textColor="@color/_bg__surface_pro_8___1_ek2_color"
@@ -50,8 +71,7 @@
 					android:layout_marginTop="20dp"
 					android:layout_width="205dp"
 					android:layout_height="59dp"
-					android:text="@string/codelingo_string"
-					 />
+					android:text="@string/codelingo_string" />
 
 
 				<ImageView
