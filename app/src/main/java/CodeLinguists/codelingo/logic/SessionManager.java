@@ -1,9 +1,11 @@
 package CodeLinguists.codelingo.logic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.AccountObj;
+import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.dso.QuizObj;
 import CodeLinguists.codelingo.persistence.IQuizData;
@@ -56,7 +58,41 @@ public class SessionManager implements ISessionManager{
         chapterId=index;
     }
 
+    @Override
+    public List<ChapterObj> getActiveCourseChapters() {
+        List<ChapterObj> chapterList;
+
+        chapterList = new ArrayList<>();
+        chapterList.add(new ChapterObj(1, "Introduction to Java", 1, null, true, true));
+        chapterList.add(new ChapterObj(3, "Data Structures", 1, null, false, false));
+        chapterList.add(new ChapterObj(4, "Advanced Java Features", 2, null, false, false));
+        chapterList.add(new ChapterObj(5, "Concurrency in Java", 2, null, false, false));
+        chapterList.add(new ChapterObj(6, "Java Networking", 3, null, false, false));
+
+        return chapterList;
+    }
+
     private List<QuizObj> getQuiz() {
         return quizData.getQuizByChapterId(1);
+    }
+
+    @Override
+    public int calculateProgressPercentage(CourseObj course) {
+        List<ChapterObj> listOfChapter = getActiveCourseChapters();
+
+        int totalChapters = listOfChapter.size();
+        int completedChapters = 0;
+
+        for (ChapterObj chapter : listOfChapter) {
+            if (chapter.isCompleted()) {
+                completedChapters++;
+            }
+        }
+
+        if (totalChapters == 0) return 0;
+
+        double doublePercent = (double) completedChapters / totalChapters;
+
+        return (int) (doublePercent * 100);
     }
 }
