@@ -13,11 +13,11 @@ public class ChapterDataStub implements IChapterData {
 
     public ChapterDataStub() {
         chapterList = new ArrayList<>();
-        chapterList.add(new ChapterObj(1, "Introduction to Java", 1, null, false, false));
+        chapterList.add(new ChapterObj(1, "Introduction to Java", 1, null, true, false));
         chapterList.add(new ChapterObj(3, "Data Structures", 1, null, false, false));
-        chapterList.add(new ChapterObj(4, "Advanced Java Features", 2, null, false, false));
+        chapterList.add(new ChapterObj(4, "Advanced Java Features", 2, null, true, false));
         chapterList.add(new ChapterObj(5, "Concurrency in Java", 2, null, false, false));
-        chapterList.add(new ChapterObj(6, "Java Networking", 3, null, false, false));
+        chapterList.add(new ChapterObj(6, "Java Networking", 3, null, true, false));
     }
     @Override
     public List<ChapterObj> getChapterByCourseId(int courseId) {
