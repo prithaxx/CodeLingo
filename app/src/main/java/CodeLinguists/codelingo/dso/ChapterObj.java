@@ -5,4 +5,9 @@ public record ChapterObj( int id,
                         int courseId,
                         String description,
                         boolean isUnlocked,
-                        boolean isCompleted) {}
+                        boolean isCompleted) {
+    @Override
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+}

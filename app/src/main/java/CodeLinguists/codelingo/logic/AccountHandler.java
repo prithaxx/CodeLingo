@@ -41,11 +41,6 @@ public class AccountHandler implements IAccountHandler {
         return account;
     }
 
-    @Override
-    public List<ChapterObj> getActiveCourseChapters() {
-        return null;
-    }
-
     private void updateSessionData(AccountObj account) {
         if (account != null) {
             sessionData.setActiveAccount(account);
