@@ -8,14 +8,15 @@ import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.dso.QuizObj;
+import CodeLinguists.codelingo.persistence.IChapterData;
 import CodeLinguists.codelingo.persistence.IQuizData;
 
-public class SessionManager implements ISessionManager{
+public class SessionManager implements ISessionManager {
     //Singleton
     private static ISessionManager sessionManager;
 
     public static ISessionManager newInstance() {
-        if (sessionManager==null) {
+        if (sessionManager == null) {
             sessionManager = new SessionManager();
         }
         return sessionManager;
@@ -28,6 +29,8 @@ public class SessionManager implements ISessionManager{
 
     //instance fields
     IQuizData quizData;
+
+    IChapterData chapterData;
 
     AccountObj account;
     CourseObj course;
@@ -55,22 +58,20 @@ public class SessionManager implements ISessionManager{
 
     @Override
     public void setActiveChapter(int index) {
-        chapterId=index;
+        chapterId = index;
     }
 
     @Override
     public List<ChapterObj> getActiveCourseChapters() {
-        List<ChapterObj> chapterList;
-
-        chapterList = new ArrayList<>();
-        chapterList.add(new ChapterObj(1, "Introduction to Java", 1, null, true, true));
-        chapterList.add(new ChapterObj(3, "Data Structures", 1, null, false, false));
-        chapterList.add(new ChapterObj(4, "Advanced Java Features", 2, null, false, false));
-        chapterList.add(new ChapterObj(5, "Concurrency in Java", 2, null, false, false));
-        chapterList.add(new ChapterObj(6, "Java Networking", 3, null, false, false));
-
-        return chapterList;
+        if (chapterData == null) {
+            chapterData = Services.getChapterData();
+        }
+        if (getActiveCourse() == null) {
+            throw new IllegalStateException("Active course is not set.");
+        }
+        return chapterData.getChapterByCourseId(getActiveCourse().id());
     }
+
 
     private List<QuizObj> getQuiz() {
         return quizData.getQuizByChapterId(1);
