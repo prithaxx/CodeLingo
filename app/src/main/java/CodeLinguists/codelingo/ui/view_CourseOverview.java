@@ -47,6 +47,11 @@ import CodeLinguists.codelingo.logic.SessionManager;
 		NavigationView navView = findViewById(R.id.nav_view);
 		navView.setVisibility(View.VISIBLE);
 	}
+
+	public void btnCloseMenuOnClick(View v){
+		NavigationView navView = findViewById(R.id.nav_view);
+		navView.setVisibility(View.INVISIBLE);
+	}
 }
 	
 	

@@ -8,6 +8,13 @@
     android:layout_width="match_parent"
     android:layout_height="240dp">
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/back_btn"
+        android:background="@android:color/transparent"
+        android:onClick="btnCloseMenuOnClick"/>
+
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
