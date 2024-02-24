@@ -4,15 +4,27 @@
         <item
             android:id="@+id/logout"
             android:icon="@drawable/logout"
-            android:title="logout"/>
+            android:title="Logout"/>
     </group>
 
     <item android:title="Courses">
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:id="@+id/courses"
-                    android:title="Ex1"/>
+                    android:id="@+id/course1"
+                    android:title="     Ex1"/>
+
+                <item
+                    android:id="@+id/course2"
+                    android:title="     Ex2"/>
+
+                <item
+                    android:id="@+id/course3"
+                    android:title="     Ex3"/>
+
+                <item
+                    android:id="@+id/course4"
+                    android:title="     Ex4"/>
             </group>
         </menu>
     </item>
