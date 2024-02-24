@@ -4,7 +4,8 @@
         <item
             android:id="@+id/logout"
             android:icon="@drawable/logout"
-            android:title="Logout"/>
+            android:title="Logout"
+            android:onClick="navigateToLogin"/>
     </group>
 
     <item android:title="Courses">
