@@ -1,19 +1,22 @@
 package CodeLinguists.codelingo.logic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.AccountObj;
+import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.dso.QuizObj;
+import CodeLinguists.codelingo.persistence.IChapterData;
 import CodeLinguists.codelingo.persistence.IQuizData;
 
-public class SessionManager implements ISessionManager{
+public class SessionManager implements ISessionManager {
     //Singleton
     private static ISessionManager sessionManager;
 
     public static ISessionManager newInstance() {
-        if (sessionManager==null) {
+        if (sessionManager == null) {
             sessionManager = new SessionManager();
         }
         return sessionManager;
@@ -26,6 +29,8 @@ public class SessionManager implements ISessionManager{
 
     //instance fields
     IQuizData quizData;
+
+    IChapterData chapterData;
 
     AccountObj account;
     CourseObj course;
@@ -53,10 +58,42 @@ public class SessionManager implements ISessionManager{
 
     @Override
     public void setActiveChapter(int index) {
-        chapterId=index;
+        chapterId = index;
     }
+
+    @Override
+    public List<ChapterObj> getActiveCourseChapters() {
+        if (chapterData == null) {
+            chapterData = Services.getChapterData();
+        }
+        if (getActiveCourse() == null) {
+            throw new IllegalStateException("Active course is not set.");
+        }
+        return chapterData.getChapterByCourseId(getActiveCourse().id());
+    }
+
 
     private List<QuizObj> getQuiz() {
         return quizData.getQuizByChapterId(1);
+    }
+
+    @Override
+    public int calculateProgressPercentage(CourseObj course) {
+        List<ChapterObj> listOfChapter = getActiveCourseChapters();
+
+        int totalChapters = listOfChapter.size();
+        int completedChapters = 0;
+
+        for (ChapterObj chapter : listOfChapter) {
+            if (chapter.isCompleted()) {
+                completedChapters++;
+            }
+        }
+
+        if (totalChapters == 0) return 0;
+
+        double doublePercent = (double) completedChapters / totalChapters;
+
+        return (int) (doublePercent * 100);
     }
 }

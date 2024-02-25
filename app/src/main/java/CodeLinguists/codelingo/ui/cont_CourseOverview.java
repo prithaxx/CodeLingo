@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.logic.ISessionManager;
@@ -47,6 +49,10 @@ public class cont_CourseOverview extends Fragment {
 
         TextView tv = v.findViewById(R.id.placeholder_course);
         tv.setText(course!=null ? course.name() : "Select a course");
+
+        TextView tvProgressPercentage = v.findViewById(R.id.progress_percentage);
+        int progressPercentage = sessionManager.calculateProgressPercentage(course);
+        tvProgressPercentage.setText(String.format(Locale.getDefault(), "%d%%", progressPercentage));
 
         View b = v.findViewById(R.id.rectangle_1);
         b.setOnClickListener(this::tileOnclick0);

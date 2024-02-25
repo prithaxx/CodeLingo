@@ -14,6 +14,9 @@ import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.logic.AccountHandler;
 import CodeLinguists.codelingo.logic.IAccountHandler;
+import CodeLinguists.codelingo.logic.ISessionManager;
+import CodeLinguists.codelingo.logic.SessionManager;
+
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -24,7 +27,7 @@ public class cont_ChapterSummary extends AppCompatActivity {
 
     private RecyclerView chapterListRecyclerView;
     private TextView chapterSummaryTextView;
-    private IAccountHandler accountHandler;
+    private ISessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +36,9 @@ public class cont_ChapterSummary extends AppCompatActivity {
 
         chapterListRecyclerView = findViewById(R.id.chapterList);
         chapterSummaryTextView = findViewById(R.id.chapterSummary);
-        accountHandler = new AccountHandler();
+        sessionManager = new SessionManager();
 
-        List<ChapterObj> chapters = accountHandler.getActiveCourseChapters();
+        List<ChapterObj> chapters = sessionManager.getActiveCourseChapters();
 
         if (chapters == null || chapters.isEmpty()) {
             Toast.makeText(this, "No chapters available", Toast.LENGTH_LONG).show();
