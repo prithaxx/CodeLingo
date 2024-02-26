@@ -1,80 +1,73 @@
-<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent" android:layout_height="wrap_content" >
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/relativeLayout"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content">
 
-	<LinearLayout
-		android:layout_width="wrap_content" 
-		android:layout_height="match_parent" >
+	<View
+		android:id="@+id/view3"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:background="@drawable/login_background"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
 
-		<RelativeLayout
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content" >
+	<View
+		android:id="@+id/view5"
+		android:layout_width="0dp"
+		android:layout_height="90dp"
+		android:background="@drawable/navbar_shape"
+		android:translationZ="2dp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
 
-			<RelativeLayout
-				android:layout_marginTop="0dp"
-				android:layout_marginStart="0dp"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				>
+	<ImageView
+		android:id="@+id/imageView3"
+		android:layout_width="74dp"
+		android:layout_height="81dp"
+		android:contentDescription="codelingo_logo_1"
+		android:src="@drawable/codelingo_logo"
+		android:translationZ="3dp"
+		app:layout_constraintBottom_toBottomOf="@+id/view5"
+		app:layout_constraintEnd_toEndOf="@+id/view5"
+		app:layout_constraintHorizontal_bias="0.38"
+		app:layout_constraintStart_toStartOf="@+id/view5"
+		app:layout_constraintTop_toTopOf="parent" />
 
-				<View
-					android:background="@drawable/_bg__surface_pro_8___1_ek2_shape"
-					 android:layout_marginStart="0dp"
-					android:layout_marginTop="0dp"
-					android:layout_width="1280dp"
-					android:layout_height="800dp" />
+	<TextView
+		android:id="@+id/textView"
+		android:layout_width="205dp"
+		android:layout_height="59dp"
+		android:text="@string/codelingo_string"
+		android:textColor="@color/_bg__surface_pro_8___1_ek2_color"
+		android:textSize="40sp"
+		android:translationZ="3dp"
+		app:layout_constraintBottom_toBottomOf="@+id/view5"
+		app:layout_constraintEnd_toEndOf="@+id/view5"
+		app:layout_constraintStart_toStartOf="@+id/view5"
+		app:layout_constraintTop_toTopOf="@+id/view3" />
 
-				<View
-					android:background="@drawable/login_background"
-					android:layout_width="1280dp"
-					android:layout_height="800dp" />
+	<ImageView
+		android:id="@+id/imageView2"
+		android:layout_width="19.44dp"
+		android:layout_height="18.23dp"
+		android:contentDescription="vector"
+		android:src="@drawable/hamburger_menu"
+		android:visibility="gone"
+		tools:visibility="gone" />
 
-				<View
-					android:background="@drawable/navbar_shape"
-					 android:layout_marginStart="0dp"
-					android:layout_marginTop="0dp"
-					android:layout_width="1280dp"
-					android:layout_height="90dp" />
+	<androidx.fragment.app.FragmentContainerView
+		android:id="@+id/fragmentContainerView3"
+		android:name="CodeLinguists.codelingo.ui.cont_CourseOverview"
+		android:layout_width="0dp"
+		android:layout_height="0dp"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/view5" />
 
-				<ImageView
-					android:src="@drawable/codelingo_logo"
-					android:contentDescription="codelingo_logo_1"
-					 android:layout_marginStart="491dp"
-					android:layout_marginTop="9dp"
-					android:layout_width="74dp"
-					android:layout_height="81dp" />
-
-				<TextView
-					android:textSize="40sp"
-					android:textColor="@color/_bg__surface_pro_8___1_ek2_color"
-					android:layout_marginLeft="576dp"
-					android:layout_marginTop="20dp"
-					android:layout_width="205dp"
-					android:layout_height="59dp"
-					android:text="@string/codelingo_string"
-					 />
-
-
-				<ImageView
-					android:layout_width="19.44dp"
-					android:layout_height="18.23dp"
-					android:layout_marginStart="25dp"
-					android:layout_marginTop="36dp"
-					android:contentDescription="vector"
-					android:src="@drawable/hamburger_menu"
-					android:visibility="gone"
-					tools:visibility="gone" />
-
-				<androidx.fragment.app.FragmentContainerView
-					android:id="@+id/fragmentContainerView3"
-					android:name="CodeLinguists.codelingo.ui.cont_CourseOverview"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_alignParentStart="true"
-					android:layout_alignParentTop="true"
-					android:layout_marginTop="110dp" />
-
-			</RelativeLayout>
-		</RelativeLayout>
-
-	</LinearLayout>
-</HorizontalScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

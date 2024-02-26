@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,14 +49,17 @@ public class cont_CourseOverview extends Fragment {
         TextView tv = v.findViewById(R.id.placeholder_course);
         tv.setText(course!=null ? course.name() : "Select a course");
 
-        View b = v.findViewById(R.id.rectangle_1);
-        b.setOnClickListener(this::tileOnclick0);
-        b = v.findViewById(R.id.rectangle_2);
-        b.setOnClickListener(this::tileOnclick1);
-        b = v.findViewById(R.id.rectangle_3);
-        b.setOnClickListener(this::tileOnclick2);
-        b = v.findViewById(R.id.rectangle_4);
-        b.setOnClickListener(this::tileOnclick3);
+        //FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        //ft.replace(R.id.fragmentContainerView3, cont_CourseOverview.newInstance()).commit();
+
+//        View b = v.findViewById(R.id.rectangle_1);
+//        b.setOnClickListener(this::tileOnclick0);
+//        b = v.findViewById(R.id.rectangle_2);
+//        b.setOnClickListener(this::tileOnclick1);
+//        b = v.findViewById(R.id.rectangle_3);
+//        b.setOnClickListener(this::tileOnclick2);
+//        b = v.findViewById(R.id.rectangle_4);
+//        b.setOnClickListener(this::tileOnclick3);
 
         return v;
     }
