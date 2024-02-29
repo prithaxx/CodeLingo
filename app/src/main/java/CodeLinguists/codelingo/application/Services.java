@@ -1,9 +1,11 @@
 package CodeLinguists.codelingo.application;
 
 import CodeLinguists.codelingo.persistence.IAccountData;
+import CodeLinguists.codelingo.persistence.ICourseData;
 import CodeLinguists.codelingo.persistence.IQuizData;
 import CodeLinguists.codelingo.persistence.ISessionData;
 import CodeLinguists.codelingo.persistence.stubs.AccountDataStub;
+import CodeLinguists.codelingo.persistence.stubs.CourseDataStub;
 import CodeLinguists.codelingo.persistence.stubs.QuizDataStub;
 import CodeLinguists.codelingo.persistence.stubs.SessionDataStub;
 
@@ -12,33 +14,51 @@ import CodeLinguists.codelingo.persistence.stubs.SessionDataStub;
  */
 public class Services {
     private static IAccountData accountData = null;
+    private static ICourseData courseData = null;
     private static ISessionData sessionData = null;
     private static IQuizData quizData = null;
 
+    private static IChapterData chapterData = null;
+
     public static synchronized void resetObjects() {
-        accountData=null;
-        sessionData=null;
-        quizData=null;
+        accountData = null;
+        sessionData = null;
+        quizData = null;
+        chapterData = null;
     }
 
     public static synchronized IAccountData getAccountData() {
-        if (accountData==null) {
+        if (accountData == null) {
             accountData = new AccountDataStub();
         }
         return accountData;
     }
 
+    public static synchronized ICourseData getCourseData(){
+        if(courseData == null){
+            courseData = new CourseDataStub();
+        }
+        return courseData;
+    }
+
     public static synchronized ISessionData getSessionData() {
-        if (sessionData ==null) {
+        if (sessionData == null) {
             sessionData = new SessionDataStub();
         }
         return sessionData;
     }
 
     public static synchronized IQuizData getQuizData() {
-        if (quizData==null) {
+        if (quizData == null) {
             quizData = new QuizDataStub();
         }
         return quizData;
+    }
+
+    public static synchronized IChapterData getChapterData() {
+        if (chapterData == null) {
+            chapterData = new ChapterDataStub();
+        }
+        return chapterData;
     }
 }
