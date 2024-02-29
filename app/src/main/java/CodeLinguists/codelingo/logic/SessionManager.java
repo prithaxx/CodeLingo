@@ -10,6 +10,7 @@ import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.exceptions.NoItemSelectedException;
 import CodeLinguists.codelingo.dso.QuizObj;
+import CodeLinguists.codelingo.persistence.IChapterData;
 import CodeLinguists.codelingo.persistence.ICourseData;
 import CodeLinguists.codelingo.persistence.IQuizData;
 
@@ -30,27 +31,29 @@ public class SessionManager implements ISessionManager {
 
 
     //instance fields
-    IQuizHandler quizHandler;
-    IAccountHandler accountHandler;
-    IQuizData quizData;
-    ICourseData courseData;
-    AccountObj account;
-    CourseObj course;
-    int courseId;
-    int chapterId;
+    private final IQuizHandler quizHandler;
+    private final IAccountHandler accountHandler;
+    private final IQuizData quizData;
+    private final ICourseData courseData;
+    private final IChapterData chapterData;
+    private AccountObj account;
+    private CourseObj course;
+    private int courseId;
+    private int chapterId;
 
-<<<<<<< app/src/main/java/CodeLinguists/codelingo/logic/SessionManager.java
+
     private SessionManager(IQuizHandler quizHandler, IAccountHandler accountHandler) {
         this.quizHandler = quizHandler;
         this.accountHandler = accountHandler;
         course = accountHandler.getActiveCourse();
+        quizData = Services.getQuizData();
+        courseData = Services.getCourseData();
+        chapterData = Services.getChapterData();
         courseId = 1; //hardcoded bad i know, set active course can be called in view_GuestLogin maybe, not sure best place
     }
 
     public SessionManager() {
-        quizData = Services.getQuizData();
-        courseData = Services.getCourseData();
-        courseId = 1; //hardcoded bad i know, set active course can be called in view_GuestLogin maybe, not sure best place
+        this(new QuizHandler(), new AccountHandler());
     }
 
     @Override
@@ -94,9 +97,6 @@ public class SessionManager implements ISessionManager {
 
     @Override
     public List<ChapterObj> getActiveCourseChapters() {
-        if (chapterData == null) {
-            chapterData = Services.getChapterData();
-        }
         if (getActiveCourse() == null) {
             throw new IllegalStateException("Active course is not set.");
         }
