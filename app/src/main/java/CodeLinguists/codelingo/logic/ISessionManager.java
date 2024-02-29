@@ -12,4 +12,6 @@ public interface ISessionManager {
     void setActiveCourse(int index);
     List<CourseObj> getStartedCourseList();
     void setActiveChapter(int index);
+    List<ChapterObj> getActiveCourseChapters();
+    int calculateProgressPercentage(CourseObj course);
 }

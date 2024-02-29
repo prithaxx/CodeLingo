@@ -15,6 +15,4 @@ public interface IAccountHandler {
      * @param name - name of account to log into
      */
     AccountObj guestLogin(String name);
-
-    List<ChapterObj> getActiveCourseChapters();
 }

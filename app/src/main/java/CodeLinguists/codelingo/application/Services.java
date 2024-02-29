@@ -18,14 +18,17 @@ public class Services {
     private static ISessionData sessionData = null;
     private static IQuizData quizData = null;
 
+    private static IChapterData chapterData = null;
+
     public static synchronized void resetObjects() {
-        accountData=null;
-        sessionData=null;
-        quizData=null;
+        accountData = null;
+        sessionData = null;
+        quizData = null;
+        chapterData = null;
     }
 
     public static synchronized IAccountData getAccountData() {
-        if (accountData==null) {
+        if (accountData == null) {
             accountData = new AccountDataStub();
         }
         return accountData;
@@ -39,16 +42,23 @@ public class Services {
     }
 
     public static synchronized ISessionData getSessionData() {
-        if (sessionData ==null) {
+        if (sessionData == null) {
             sessionData = new SessionDataStub();
         }
         return sessionData;
     }
 
     public static synchronized IQuizData getQuizData() {
-        if (quizData==null) {
+        if (quizData == null) {
             quizData = new QuizDataStub();
         }
         return quizData;
+    }
+
+    public static synchronized IChapterData getChapterData() {
+        if (chapterData == null) {
+            chapterData = new ChapterDataStub();
+        }
+        return chapterData;
     }
 }
