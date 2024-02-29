@@ -2,6 +2,7 @@ package CodeLinguists.codelingo.logic;
 
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.ChapterObj;
+import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.exceptions.InputValidationException;
 import CodeLinguists.codelingo.persistence.IAccountData;
@@ -39,6 +40,16 @@ public class AccountHandler implements IAccountHandler {
 
         updateSessionData(account);
         return account;
+    }
+
+    @Override
+    public CourseObj getActiveCourse() {
+        return sessionData.getActiveCourse();
+    }
+
+    @Override
+    public List<ChapterObj> getActiveCourseChapters() {
+        return null;
     }
 
     private void updateSessionData(AccountObj account) {

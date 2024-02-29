@@ -67,16 +67,16 @@ public class cont_CourseOverview extends Fragment {
     }
 
     public void tileOnclick0(View v) {
-        startQuiz(0);
+        startQuiz(1);
     }
     public void tileOnclick1(View v) {
         startQuiz(1);
     }
     public void tileOnclick2(View v) {
-        startQuiz(2);
+        startQuiz(1);
     }
     public void tileOnclick3(View v) {
-        startQuiz(3);
+        startQuiz(1);
     }
 
     public void startQuiz(int index) {

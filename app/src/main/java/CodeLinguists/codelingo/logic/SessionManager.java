@@ -3,11 +3,14 @@ package CodeLinguists.codelingo.logic;
 import java.util.ArrayList;
 import java.util.List;
 
+import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
+import CodeLinguists.codelingo.exceptions.NoItemSelectedException;
 import CodeLinguists.codelingo.dso.QuizObj;
+import CodeLinguists.codelingo.persistence.IChapterData;
 import CodeLinguists.codelingo.persistence.ICourseData;
 import CodeLinguists.codelingo.persistence.IQuizData;
 
@@ -16,8 +19,8 @@ public class SessionManager implements ISessionManager {
     private static ISessionManager sessionManager;
 
     public static ISessionManager newInstance() {
-        if (sessionManager == null) {
-            sessionManager = new SessionManager();
+        if (sessionManager==null) {
+            sessionManager = new SessionManager(new QuizHandler(), new AccountHandler());
         }
         return sessionManager;
     }
@@ -28,32 +31,47 @@ public class SessionManager implements ISessionManager {
 
 
     //instance fields
-    IQuizData quizData;
-    ICourseData courseData;
-    AccountObj account;
-    CourseObj course;
-    int courseId;
-    int chapterId;
+    private final IQuizHandler quizHandler;
+    private final IAccountHandler accountHandler;
+    private final IQuizData quizData;
+    private final ICourseData courseData;
+    private final IChapterData chapterData;
+    private AccountObj account;
+    private CourseObj course;
+    private int courseId;
+    private int chapterId;
 
-    public SessionManager() {
+
+    private SessionManager(IQuizHandler quizHandler, IAccountHandler accountHandler) {
+        this.quizHandler = quizHandler;
+        this.accountHandler = accountHandler;
+        course = accountHandler.getActiveCourse();
         quizData = Services.getQuizData();
         courseData = Services.getCourseData();
+        chapterData = Services.getChapterData();
         courseId = 1; //hardcoded bad i know, set active course can be called in view_GuestLogin maybe, not sure best place
+    }
+
+    public SessionManager() {
+        this(new QuizHandler(), new AccountHandler());
     }
 
     @Override
     public void guestLogin(String user) {
-        IAccountHandler accountHandler = new AccountHandler();
         this.account = accountHandler.guestLogin(user);
     }
 
     @Override
-    public IQuizHandler startQuiz() {
-        return new QuizHandler(this.getQuiz());
+    public IQuizIterator startQuiz() {
+        if (course==null || chapterId<0) {
+            throw new NoItemSelectedException(Strings.NoCourseSelected);
+        }
+        return quizHandler.getQuiz(course.id(), chapterId);
     }
 
     @Override
     public CourseObj getActiveCourse() {
+        //return course;
         course = courseData.getCourseById(courseId);
         if(course == null){
             throw new IllegalStateException("Active course not set");
@@ -79,9 +97,6 @@ public class SessionManager implements ISessionManager {
 
     @Override
     public List<ChapterObj> getActiveCourseChapters() {
-        if (chapterData == null) {
-            chapterData = Services.getChapterData();
-        }
         if (getActiveCourse() == null) {
             throw new IllegalStateException("Active course is not set.");
         }
