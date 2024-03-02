@@ -19,11 +19,15 @@ public class CourseDataHSQLDB implements ICourseData {
     }
 
     @Override
-    public CourseObj getCourseById(int courseId) {
+    public CourseObj getCourseById(int courseId, int accountId) {
         CourseObj course = null;
         try (Connection connection = connect();
-             PreparedStatement ps = connection.prepareStatement("SELECT * FROM COURSE WHERE id = ?")) {
+             PreparedStatement ps = connection.prepareStatement("SELECT c.id, c.name, c.description, cc.isStarted, cc.isCompleted " +
+                                                                    "FROM COURSE c " +
+                                                                    "JOIN COURSE_COMPLETION cc ON c.id = cc.courseId " +
+                                                                    "WHERE c.id = ? AND cc.accountId = ?")) {
             ps.setInt(1, courseId);
+            ps.setInt(2, accountId);
             ResultSet rs = ps.executeQuery();
             ps.close();
 
@@ -41,10 +45,14 @@ public class CourseDataHSQLDB implements ICourseData {
     }
 
     @Override
-    public List<CourseObj> getStartedCourseList() {
+    public List<CourseObj> getStartedCourseList(int accountId) {
         List<CourseObj> startedCourses = new ArrayList<>();
         try (Connection connection = connect();
-             PreparedStatement ps = connection.prepareStatement("SELECT * FROM COURSE WHERE isStarted = TRUE")) {
+             PreparedStatement ps = connection.prepareStatement("SELECT c.id, c.name, c.description, cc.isStarted, cc.isCompleted " +
+                                                                    "FROM COURSE c " +
+                                                                    "JOIN COURSE_COMPLETION cc ON c.id = cc.courseId " +
+                                                                    "WHERE cc.isStarted = TRUE AND cc.accountId = ?")) {
+            ps.setInt(1, accountId);
             ResultSet rs = ps.executeQuery();
             ps.close();
 
