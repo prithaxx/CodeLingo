@@ -72,7 +72,11 @@ public class SessionManager implements ISessionManager {
     @Override
     public CourseObj getActiveCourse() {
         //return course;
-        course = courseData.getCourseById(courseId);
+        if (this.account == null) {
+            throw new IllegalStateException("Account is not set.");
+        }
+        int accountId = account.getId();
+        course = courseData.getCourseById(courseId, accountId);
         if(course == null){
             throw new IllegalStateException("Active course not set");
         }
@@ -86,8 +90,8 @@ public class SessionManager implements ISessionManager {
 
     @Override
     public List<CourseObj> getStartedCourseList(){
-
-        return courseData.getStartedCourseList();
+        int accountId = account.getId();
+        return courseData.getStartedCourseList(accountId);
     }
 
     @Override
@@ -100,7 +104,8 @@ public class SessionManager implements ISessionManager {
         if (getActiveCourse() == null) {
             throw new IllegalStateException("Active course is not set.");
         }
-        return chapterData.getChapterByCourseId(getActiveCourse().id());
+        int accountId = account.getId();
+        return chapterData.getChapterByCourseId(getActiveCourse().id(), accountId);
     }
 
 
