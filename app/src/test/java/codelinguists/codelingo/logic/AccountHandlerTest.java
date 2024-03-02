@@ -71,7 +71,7 @@ public class AccountHandlerTest {
             if (isGetGuestNull){
                 return null;
             }
-            return new AccountObj(0,name,true,null,null,null);
+            return new AccountObj(0,name,true,-1,null,null);
         }
 
         @Override
@@ -79,7 +79,7 @@ public class AccountHandlerTest {
             if (isCreateGuestNull){
                 return null;
             }
-            AccountObj localAccount = new AccountObj(0,name,true,null,null,null);
+            AccountObj localAccount = new AccountObj(0,name,true,-1,null,null);
             if (enableCreation) {
                 account=localAccount;
             }
