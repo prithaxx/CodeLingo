@@ -9,11 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.dso.CourseObj;
+import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.logic.ISessionManager;
 import CodeLinguists.codelingo.logic.SessionManager;
 
@@ -43,7 +45,12 @@ public class cont_CourseOverview extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.sessionManager = SessionManager.newInstance();
-        CourseObj course = sessionManager.getActiveCourse();
+        CourseObj course = null;
+        try {
+            course = sessionManager.getActiveCourse();
+        } catch (CourseNotFoundException e) {
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
 
         View v = inflater.inflate(R.layout.fragment_course_overview, container, false);
 
@@ -51,7 +58,12 @@ public class cont_CourseOverview extends Fragment {
         tv.setText(course!=null ? course.name() : "Select a course");
 
         TextView tvProgressPercentage = v.findViewById(R.id.progress_percentage);
-        int progressPercentage = sessionManager.calculateProgressPercentage(course);
+        int progressPercentage = 0;
+        try {
+            progressPercentage = sessionManager.calculateProgressPercentage(course);
+        } catch (CourseNotFoundException e) {
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
         tvProgressPercentage.setText(String.format(Locale.getDefault(), "%d%%", progressPercentage));
 
         View b = v.findViewById(R.id.rectangle_1);

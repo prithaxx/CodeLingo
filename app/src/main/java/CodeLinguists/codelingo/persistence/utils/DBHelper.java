@@ -5,16 +5,25 @@ import android.content.res.AssetManager;
 
 import CodeLinguists.codelingo.application.Main;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 public class DBHelper {
-
+    private static boolean doReset = true;
+    public static void resetDB(Context context){
+        doReset = true;
+        copyDatabaseToDevice(context);
+    }
     public static void copyDatabaseToDevice(Context context) {
         final String DB_PATH = "db";
 
@@ -23,7 +32,6 @@ public class DBHelper {
         AssetManager assetManager = context.getAssets();
 
         try {
-
             assetNames = assetManager.list(DB_PATH);
             for (int i = 0; i < assetNames.length; i++) {
                 assetNames[i] = DB_PATH + "/" + assetNames[i];
@@ -34,7 +42,7 @@ public class DBHelper {
             Main.setDBPathName(dataDirectory.toString() + "/" + Main.getDBPathName());
 
         } catch (final IOException ioe) {
-            System.out.println("Unable to access application data: " + ioe.getMessage());
+            ioe.printStackTrace();
         }
 
     }
@@ -51,6 +59,11 @@ public class DBHelper {
 
             File outFile = new File(copyPath);
 
+            if (outFile.exists() && doReset) {
+                outFile.delete();
+                doReset = false;
+            }
+
             if (!outFile.exists()) {
                 InputStreamReader in = new InputStreamReader(assetManager.open(asset));
                 FileWriter out = new FileWriter(outFile);
@@ -65,6 +78,5 @@ public class DBHelper {
                 in.close();
             }
         }
-
     }
 }

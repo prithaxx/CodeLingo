@@ -12,6 +12,7 @@ import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.exceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.ISessionManager;
 import CodeLinguists.codelingo.logic.SessionManager;
+import CodeLinguists.codelingo.persistence.utils.DBHelper;
 
 public class view_GuestLogin extends AppCompatActivity {
     private ISessionManager sessionManager;
@@ -22,6 +23,7 @@ public class view_GuestLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_login);
 
+        DBHelper.copyDatabaseToDevice(this);
         this.sessionManager = SessionManager.newInstance();
         this.usernameField = (EditText) findViewById(R.id.un_field);
     }
@@ -33,6 +35,7 @@ public class view_GuestLogin extends AppCompatActivity {
     private void login(String name) {
         try {
             sessionManager.guestLogin(name);
+//            DBHelper.copyDatabaseFromDevice(this, "db");
             navigateToCourseOverview();
         } catch (InputValidationException e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();

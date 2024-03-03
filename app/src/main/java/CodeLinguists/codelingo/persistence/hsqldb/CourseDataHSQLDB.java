@@ -1,6 +1,7 @@
 package CodeLinguists.codelingo.persistence.hsqldb;
 
 import CodeLinguists.codelingo.dso.CourseObj;
+import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.persistence.ICourseData;
 
 import java.sql.*;
@@ -19,20 +20,20 @@ public class CourseDataHSQLDB implements ICourseData {
     }
 
     @Override
-    public CourseObj getCourseById(int courseId, int accountId) {
+    public CourseObj getCourseById(int courseId, int accountId) throws CourseNotFoundException {
         CourseObj course = null;
         try (Connection connection = connect();
              PreparedStatement ps = connection.prepareStatement("SELECT c.id, c.name, c.description, cc.isStarted, cc.isCompleted " +
                                                                     "FROM COURSE c " +
-                                                                    "JOIN COURSE_COMPLETION cc ON c.id = cc.courseId " +
-                                                                    "WHERE c.id = ? AND cc.accountId = ?")) {
-            ps.setInt(1, courseId);
-            ps.setInt(2, accountId);
+                                                                    "LEFT JOIN COURSE_COMPLETION cc ON c.id = cc.courseId and cc.accountId = ?" +
+                                                                    "WHERE c.id = ?")) {
+            ps.setInt(2, courseId);
+            ps.setInt(1, accountId);
             ResultSet rs = ps.executeQuery();
             ps.close();
 
             if (rs.next()) {
-                course = new CourseObj( rs.getInt("id"),
+                return new CourseObj( rs.getInt("id"),
                                         rs.getString("name"),
                                         rs.getString("description"),
                                         rs.getBoolean("isStarted"),
@@ -41,7 +42,7 @@ public class CourseDataHSQLDB implements ICourseData {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return course;
+        throw new CourseNotFoundException("Course "+courseId+" is not available. Select a different course");
     }
 
     @Override

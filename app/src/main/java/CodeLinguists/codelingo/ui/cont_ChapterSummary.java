@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.dso.ChapterObj;
+import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.logic.AccountHandler;
 import CodeLinguists.codelingo.logic.IAccountHandler;
 import CodeLinguists.codelingo.logic.ISessionManager;
@@ -38,7 +39,13 @@ public class cont_ChapterSummary extends AppCompatActivity {
         chapterSummaryTextView = findViewById(R.id.chapterSummary);
         sessionManager = new SessionManager(true);
 
-        List<ChapterObj> chapters = sessionManager.getActiveCourseChapters();
+        List<ChapterObj> chapters = null;
+
+        try {
+            chapters = sessionManager.getActiveCourseChapters();
+        } catch (CourseNotFoundException e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
 
         if (chapters == null || chapters.isEmpty()) {
             Toast.makeText(this, "No chapters available", Toast.LENGTH_LONG).show();
