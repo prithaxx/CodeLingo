@@ -14,3 +14,5 @@
 .cxx
 local.properties
 .DS_Store
+.idea/deploymentTargetDropDown.xml
+.idea/misc.xml

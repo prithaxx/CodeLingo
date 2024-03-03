@@ -20,14 +20,14 @@ public class ChapterDataStub implements IChapterData {
         chapterList.add(new ChapterObj(6, "Java Networking", 3, null, true, false));
     }
     @Override
-    public List<ChapterObj> getChapterByCourseId(int courseId) {
+    public List<ChapterObj> getChapterByCourseId(int courseId, int accountId) {
         return chapterList.stream()
                 .filter(chapterObj -> chapterObj.courseId()==courseId)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public ChapterObj getChapterById(int chapterId, int courseId) {
+    public ChapterObj getChapterById(int chapterId, int courseId, int accountId) {
         return chapterList.stream()
                 .filter(chapterObj -> chapterObj.courseId()==courseId && chapterObj.id()==chapterId)
                 .findFirst()

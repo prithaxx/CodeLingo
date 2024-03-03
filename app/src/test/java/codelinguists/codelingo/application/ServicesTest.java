@@ -17,24 +17,24 @@ public class ServicesTest {
 
     @Test
     public void testGetAccountData() {
-        IAccountData newAccount = Services.getAccountData();
+        IAccountData newAccount = Services.getAccountData(true);
         assertNotNull(newAccount);
-        IAccountData repeatAccount = Services.getAccountData();
+        IAccountData repeatAccount = Services.getAccountData(true);
         assertSame(newAccount, repeatAccount);
     }
     @Test
     public void testGetSessionData() {
-        ISessionData newSession = Services.getSessionData();
+        ISessionData newSession = Services.getSessionData(true);
         assertNotNull(newSession);
-        ISessionData repeatSession = Services.getSessionData();
+        ISessionData repeatSession = Services.getSessionData(true);
         assertSame(newSession, repeatSession); //ensure singleton is single
     }
 
     @Test
     public void testGetQuizData() {
-        IQuizData newQuiz = Services.getQuizData();
+        IQuizData newQuiz = Services.getQuizData(true);
         assertNotNull(newQuiz);
-        IQuizData repeatQuiz = Services.getQuizData();
+        IQuizData repeatQuiz = Services.getQuizData(true);
         assertSame(newQuiz, repeatQuiz);
     }
 }

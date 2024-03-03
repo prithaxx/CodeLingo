@@ -26,7 +26,7 @@ public class AccountDataStub implements IAccountData {
 
     @Override
     public AccountObj createGuestAccount(String name) {
-        AccountObj newAccount = new AccountObj(guestAccounts.size() + 1, name, true, null, null, null);
+        AccountObj newAccount = new AccountObj(guestAccounts.size() + 1, name, true, -1, null, null);
         guestAccounts.add(newAccount);
         return newAccount;
     }

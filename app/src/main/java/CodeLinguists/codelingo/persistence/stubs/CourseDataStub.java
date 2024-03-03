@@ -22,7 +22,7 @@ public class CourseDataStub implements ICourseData {
     }
 
     @Override
-    public CourseObj getCourseById(int id){
+    public CourseObj getCourseById(int id, int accountId){
         return courseList.stream()
                 .filter(courseObj -> id == courseObj.id())
                 .findFirst()
@@ -30,7 +30,7 @@ public class CourseDataStub implements ICourseData {
     }
 
     @Override
-    public List<CourseObj> getStartedCourseList(){
+    public List<CourseObj> getStartedCourseList(int accountId){
         return courseList.stream()
                 .filter(CourseObj::isStarted)
                 .collect(Collectors.toList());
