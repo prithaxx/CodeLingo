@@ -63,8 +63,9 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public void setActiveCourse(int index){
+    public void setActiveCourse(int index) throws CourseNotFoundException {
         accountHandler.setActiveCourse(account, index);
+        getActiveCourse();
     }
 
     @Override

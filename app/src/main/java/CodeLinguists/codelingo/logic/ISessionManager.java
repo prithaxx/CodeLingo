@@ -12,7 +12,7 @@ public interface ISessionManager {
     void guestLogin(String user) throws SQLException, CourseNotFoundException;
     IQuizIterator startQuiz();
     CourseObj getActiveCourse() throws CourseNotFoundException;
-    void setActiveCourse(int index);
+    void setActiveCourse(int index) throws CourseNotFoundException;
     List<CourseObj> getCourseList();
     void setActiveChapter(int index);
     List<ChapterObj> getActiveCourseChapters() throws CourseNotFoundException;

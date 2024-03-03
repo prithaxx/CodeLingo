@@ -41,6 +41,7 @@ public class AccountHandler implements IAccountHandler {
     @Override
     public void setActiveCourse(AccountObj account, int courseId) {
         accountData.setActiveCourse(account.getId(), courseId);
+        account.setActiveCourseId(courseId);
     }
 
     @Override
