@@ -1,7 +1,7 @@
 package CodeLinguists.codelingo.application;
 
 public class Main {
-    private static String dbName = "CodelingoDB";
+    private static String dbName = "CodeLingoDB";
 
     public static void setDBPathName(final String name) {
         try {
