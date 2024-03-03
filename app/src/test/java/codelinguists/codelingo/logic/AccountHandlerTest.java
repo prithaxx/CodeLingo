@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.SQLException;
+
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.exceptions.InputValidationException;
@@ -15,21 +17,21 @@ import CodeLinguists.codelingo.persistence.ISessionData;
 public class AccountHandlerTest {
 
     @Test(expected = InputValidationException.class)
-    public void guestLoginNullInput() {
+    public void guestLoginNullInput() throws SQLException {
         AccountDataMock accountData = new AccountDataMock(false, false, false);
         AccountHandler accountHandler = new AccountHandler(accountData, null);
         accountHandler.guestLogin(null);
     }
 
     @Test(expected = InputValidationException.class)
-    public void guestLoginEmptyInput() {
+    public void guestLoginEmptyInput() throws SQLException {
         AccountDataMock accountData = new AccountDataMock(false, false, false);
         AccountHandler accountHandler = new AccountHandler(accountData, null);
         accountHandler.guestLogin("");
     }
 
     @Test
-    public void guestLoginNoAccount() {
+    public void guestLoginNoAccount() throws SQLException {
         AccountDataMock accountData = new AccountDataMock(false, false, true);
         AccountHandler accountHandler = new AccountHandler(accountData, new SessionDataMock());
         AccountObj acc = accountHandler.guestLogin("test");
@@ -37,7 +39,7 @@ public class AccountHandlerTest {
     }
 
     @Test
-    public void guestLoginExistingAccount() {
+    public void guestLoginExistingAccount() throws SQLException {
         AccountDataMock accountData = new AccountDataMock(false, false, false);
         AccountHandler accountHandler = new AccountHandler(accountData, new SessionDataMock());
         AccountObj acc = accountHandler.guestLogin("test");
@@ -45,7 +47,7 @@ public class AccountHandlerTest {
     }
 
     @Test
-    public void guestLoginDefaultConstructor() {
+    public void guestLoginDefaultConstructor() throws SQLException {
         AccountHandler accountHandler = new AccountHandler(true);
         AccountObj acc = accountHandler.guestLogin("test");
         assertEquals(acc.getName(), "test");
