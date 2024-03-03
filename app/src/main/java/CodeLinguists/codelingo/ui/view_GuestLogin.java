@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.sql.SQLException;
+
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.exceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.ISessionManager;
@@ -37,7 +39,7 @@ public class view_GuestLogin extends AppCompatActivity {
             sessionManager.guestLogin(name);
 //            DBHelper.copyDatabaseFromDevice(this, "db");
             navigateToCourseOverview();
-        } catch (InputValidationException e) {
+        } catch (InputValidationException | SQLException e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }

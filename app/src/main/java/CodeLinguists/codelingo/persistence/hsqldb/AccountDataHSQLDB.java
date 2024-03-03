@@ -52,7 +52,7 @@ public class AccountDataHSQLDB implements IAccountData {
     }
 
     @Override
-    public AccountObj createGuestAccount(String name){
+    public AccountObj createGuestAccount(String name) throws SQLException {
         try (Connection connection = connect()){
             PreparedStatement ps = connection.prepareStatement("INSERT INTO PUBLIC.ACCOUNT VALUES (DEFAULT, ?, TRUE, 0, ?, '')");
             ps.setString(1, name);
@@ -60,23 +60,10 @@ public class AccountDataHSQLDB implements IAccountData {
             ps.executeUpdate();
             ps.close();
 
-            ps = connection.prepareStatement("select * from ACCOUNT");
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String name2 = rs.getString("name");
-                boolean isGuest = rs.getBoolean("isGuest");
-                int activeCourse = rs.getInt("ActiveCourseId");
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-            }
-
             ps = connection.prepareStatement("select * from ACCOUNT where USERNAME = ? and NAME = ?");
             ps.setString(1, name);
             ps.setString(2, name);
-            rs = ps.executeQuery();
-
-
+            ResultSet rs = ps.executeQuery();
 
             if(rs.next()) {
                 int id = rs.getInt("id");
@@ -87,18 +74,9 @@ public class AccountDataHSQLDB implements IAccountData {
                 String password = rs.getString("password");
                 return new AccountObj(id, name2, isGuest, activeCourse, username, password);
             }
-
-//            try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
-//                if (generatedKeys.next()) {
-//                    int id = generatedKeys.getInt(1);
-//                    return new AccountObj(id, name, true, 0, "", "");
-//                } else {
-//                    throw new SQLException("Creating account failed, no ID obtained.");
-//                }
-//            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        throw new SQLException("Creating account failed, no ID obtained.");
     }
 }

@@ -1,5 +1,6 @@
 package CodeLinguists.codelingo.logic;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public void guestLogin(String user) {
+    public void guestLogin(String user) throws SQLException {
         this.account = accountHandler.guestLogin(user);
     }
 

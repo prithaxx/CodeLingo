@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 public class DBHelper {
-    private static boolean doReset = true;
+    private static boolean doReset = false;
     public static void resetDB(Context context){
         doReset = true;
         copyDatabaseToDevice(context);
