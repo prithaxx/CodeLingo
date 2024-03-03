@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import CodeLinguists.codelingo.dso.QuestionTypes;
+import CodeLinguists.codelingo.dso.QuestionType;
 import CodeLinguists.codelingo.dso.QuizObj;
 import CodeLinguists.codelingo.logic.QuizIterator;
 
@@ -85,7 +85,7 @@ public class QuizHandlerTest {
 
     private void addQuizObj(int count) {
         for (int i = 0; i < count; i++) {
-            quizList.add(new QuizObj(1, 1, QuestionTypes.FEEDBACK_PASSED, "desc", true, "answer",null,null,"wrong","correct"));
+            quizList.add(new QuizObj(1, 1, QuestionType.FEEDBACK_PASSED, "desc", true, "answer",null,null,"wrong","correct"));
         }
     }
 }

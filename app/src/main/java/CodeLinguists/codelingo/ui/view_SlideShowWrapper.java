@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import CodeLinguists.codelingo.R;
+import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.QuizObj;
 import CodeLinguists.codelingo.exceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.IQuizIterator;
@@ -36,7 +37,7 @@ public class view_SlideShowWrapper extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slide_show_wrapper);
 
-        this.sessionManager = SessionManager.newInstance();
+        this.sessionManager = Services.getSessionManager();
         this.quizIterator = sessionManager.startQuiz();
         this.slideFactory = new QuestionFragmentFactory();
         changeSlide(quizIterator.startQuiz()); //Load first slide

@@ -9,10 +9,6 @@ import CodeLinguists.codelingo.persistence.IQuizData;
 public class QuizHandler implements IQuizHandler{
     IQuizData quizData;
 
-    public QuizHandler(boolean forProduction) {
-        this.quizData = Services.getQuizData(forProduction);
-    }
-
     public QuizHandler(IQuizData quizData) {
         this.quizData = quizData;
     }

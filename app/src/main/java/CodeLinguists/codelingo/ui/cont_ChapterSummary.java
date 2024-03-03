@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import CodeLinguists.codelingo.R;
+import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.logic.AccountHandler;
@@ -37,7 +38,7 @@ public class cont_ChapterSummary extends AppCompatActivity {
 
         chapterListRecyclerView = findViewById(R.id.chapterList);
         chapterSummaryTextView = findViewById(R.id.chapterSummary);
-        sessionManager = new SessionManager(true);
+        sessionManager = Services.getSessionManager();
 
         List<ChapterObj> chapters = null;
 

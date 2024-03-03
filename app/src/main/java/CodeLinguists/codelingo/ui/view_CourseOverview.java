@@ -29,6 +29,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.navigation.NavigationView;
 
 import CodeLinguists.codelingo.R;
+import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.logic.ISessionManager;
 import CodeLinguists.codelingo.logic.SessionManager;
 
@@ -39,7 +40,7 @@ import CodeLinguists.codelingo.logic.SessionManager;
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_course_overview);
 
-		ISessionManager sessionManager = SessionManager.newInstance();
+		ISessionManager sessionManager = Services.getSessionManager();
 
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.replace(R.id.fragmentContainerView3, cont_CourseOverview.newInstance()).commit();

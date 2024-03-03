@@ -17,11 +17,6 @@ public class AccountHandler implements IAccountHandler {
     private final IAccountData accountData;
     private final ISessionData sessionData;
 
-    public AccountHandler(boolean forProduction) {
-        this.accountData = Services.getAccountData(forProduction);
-        this.sessionData = Services.getSessionData(forProduction);
-    }
-
     public AccountHandler(IAccountData accountData, ISessionData sessionData) {
         this.accountData = accountData;
         this.sessionData = sessionData;

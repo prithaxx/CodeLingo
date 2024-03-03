@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import CodeLinguists.codelingo.dso.QuestionTypes;
+import CodeLinguists.codelingo.dso.QuestionType;
 import CodeLinguists.codelingo.dso.QuizObj;
 import CodeLinguists.codelingo.persistence.IQuizData;
 
@@ -39,7 +39,7 @@ public class QuizDataHSQLDB implements IQuizData {
 
                 int id = rs.getInt("id");
                 String typeString = rs.getString("type");
-                QuestionTypes type = QuestionTypes.valueOf(typeString);
+                QuestionType type = QuestionType.valueOf(typeString);
                 String prompt = rs.getString("prompt");
                 boolean hasAnswer = rs.getBoolean("hasAnswer");
                 String answer = rs.getString("answer");
@@ -70,7 +70,7 @@ public class QuizDataHSQLDB implements IQuizData {
 
             if (rs.next()) {
                 int id = rs.getInt("id");
-                QuestionTypes type = QuestionTypes.valueOf(rs.getString("type"));
+                QuestionType type = QuestionType.valueOf(rs.getString("type"));
                 String prompt = rs.getString("prompt");
                 boolean hasAnswer = rs.getBoolean("hasAnswer");
                 String answer = rs.getString("answer");

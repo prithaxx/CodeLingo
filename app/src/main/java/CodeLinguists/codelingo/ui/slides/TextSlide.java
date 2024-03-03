@@ -4,7 +4,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import CodeLinguists.codelingo.R;
-import CodeLinguists.codelingo.dso.QuestionTypes;
 import CodeLinguists.codelingo.dso.QuizObj;
 
 public class TextSlide extends QuizSlide{
