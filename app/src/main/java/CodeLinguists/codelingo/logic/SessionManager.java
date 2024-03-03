@@ -1,5 +1,6 @@
 package CodeLinguists.codelingo.logic;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,8 @@ import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
+import CodeLinguists.codelingo.dso.CourseObjFactory;
+import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.exceptions.NoItemSelectedException;
 import CodeLinguists.codelingo.dso.QuizObj;
 import CodeLinguists.codelingo.persistence.IChapterData;
@@ -57,7 +60,7 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public void guestLogin(String user) {
+    public void guestLogin(String user) throws SQLException {
         this.account = accountHandler.guestLogin(user);
     }
 
@@ -70,13 +73,18 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public CourseObj getActiveCourse() {
+    public CourseObj getActiveCourse() throws CourseNotFoundException {
         //return course;
         if (this.account == null) {
             throw new IllegalStateException("Account is not set.");
         }
         int accountId = account.getId();
-        course = courseData.getCourseById(courseId, accountId);
+        try {
+            course = courseData.getCourseById(courseId, accountId);
+        } catch (CourseNotFoundException e) {
+            course = CourseObjFactory.getNoneCourse();
+            throw e;
+        }
         if(course == null){
             throw new IllegalStateException("Active course not set");
         }
@@ -100,9 +108,9 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public List<ChapterObj> getActiveCourseChapters() {
-        if (getActiveCourse() == null) {
-            throw new IllegalStateException("Active course is not set.");
+    public List<ChapterObj> getActiveCourseChapters() throws CourseNotFoundException {
+        if (course == null) {
+            throw new CourseNotFoundException("No course selected");
         }
         int accountId = account.getId();
         return chapterData.getChapterByCourseId(getActiveCourse().id(), accountId);
@@ -114,7 +122,7 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public int calculateProgressPercentage(CourseObj course) {
+    public int calculateProgressPercentage(CourseObj course) throws CourseNotFoundException {
         List<ChapterObj> listOfChapter = getActiveCourseChapters();
 
         int totalChapters = listOfChapter.size();

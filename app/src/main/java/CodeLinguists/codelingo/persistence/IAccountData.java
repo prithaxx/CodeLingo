@@ -1,5 +1,7 @@
 package CodeLinguists.codelingo.persistence;
 
+import java.sql.SQLException;
+
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
 
@@ -19,5 +21,5 @@ public interface IAccountData {
      * @param name - name of new guest account
      * @return the new guest account
      */
-    AccountObj createGuestAccount(String name);
+    AccountObj createGuestAccount(String name) throws SQLException;
 }

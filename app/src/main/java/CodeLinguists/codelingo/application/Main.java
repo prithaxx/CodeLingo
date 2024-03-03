@@ -1,18 +1,14 @@
 package CodeLinguists.codelingo.application;
 
+import org.hsqldb.jdbcDriver;
+
+import java.lang.reflect.InvocationTargetException;
+
 public class Main {
     private static String dbName = "CodeLingoDB";
 
     public static void setDBPathName(final String name) {
-        try {
-            Class.forName("org.hsqldb.jdbcDriver").newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        new jdbcDriver();
         dbName = name;
     }
 

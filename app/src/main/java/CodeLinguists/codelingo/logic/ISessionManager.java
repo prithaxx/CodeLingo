@@ -1,18 +1,20 @@
 package CodeLinguists.codelingo.logic;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
+import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 
 public interface ISessionManager {
 
-    void guestLogin(String user);
+    void guestLogin(String user) throws SQLException;
     IQuizIterator startQuiz();
-    CourseObj getActiveCourse();
+    CourseObj getActiveCourse() throws CourseNotFoundException;
     void setActiveCourse(int index);
     List<CourseObj> getStartedCourseList();
     void setActiveChapter(int index);
-    List<ChapterObj> getActiveCourseChapters();
-    int calculateProgressPercentage(CourseObj course);
+    List<ChapterObj> getActiveCourseChapters() throws CourseNotFoundException;
+    int calculateProgressPercentage(CourseObj course) throws CourseNotFoundException;
 }
