@@ -32,9 +32,9 @@ public class ServicesTest {
 
     @Test
     public void testGetQuizData() {
-        IQuizData newQuiz = Services.getQuizData();
+        IQuizData newQuiz = Services.getQuizData(true);
         assertNotNull(newQuiz);
-        IQuizData repeatQuiz = Services.getQuizData();
+        IQuizData repeatQuiz = Services.getQuizData(true);
         assertSame(newQuiz, repeatQuiz);
     }
 }

@@ -46,7 +46,7 @@ public class AccountHandlerTest {
 
     @Test
     public void guestLoginDefaultConstructor() {
-        AccountHandler accountHandler = new AccountHandler();
+        AccountHandler accountHandler = new AccountHandler(true);
         AccountObj acc = accountHandler.guestLogin("test");
         assertEquals(acc.getName(), "test");
     }

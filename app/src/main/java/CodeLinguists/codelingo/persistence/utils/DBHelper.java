@@ -67,10 +67,4 @@ public class DBHelper {
         }
 
     }
-
-    public static String getSQLDateString(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        return dateFormat.format(date);
-    }
-
 }
