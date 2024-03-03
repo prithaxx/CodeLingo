@@ -5,6 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.SQLException;
+
+import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.logic.SessionManager;
 
 public class SessionManagerTest {
@@ -14,7 +17,7 @@ public class SessionManagerTest {
     }
 
     @Test
-    public void guestLoginTest() {
+    public void guestLoginTest() throws SQLException {
         SessionManager.newInstance().guestLogin("test");
     }
 
@@ -24,7 +27,7 @@ public class SessionManagerTest {
     }
 
     @Test
-    public void getActiveCourse() {
+    public void getActiveCourse() throws CourseNotFoundException {
         assertNotNull(SessionManager.newInstance().getActiveCourse());
     }
 

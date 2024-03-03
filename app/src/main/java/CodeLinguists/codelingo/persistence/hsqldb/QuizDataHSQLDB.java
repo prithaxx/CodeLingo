@@ -30,7 +30,7 @@ public class QuizDataHSQLDB implements IQuizData {
         List<QuizObj> quizzes = new ArrayList<>();
 
         try (Connection connection = connect()){
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM QUIZ WHERE chapterId = ?");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM QUIZ WHERE chapterId = ? ORDER BY id");
             ps.setInt(1, chapterId);
             ResultSet rs = ps.executeQuery();
             ps.close();
@@ -38,16 +38,17 @@ public class QuizDataHSQLDB implements IQuizData {
             while (rs.next()) {
 
                 int id = rs.getInt("id");
-                QuestionTypes type = QuestionTypes.valueOf(rs.getString("type"));
+                String typeString = rs.getString("type");
+                QuestionTypes type = QuestionTypes.valueOf(typeString);
                 String prompt = rs.getString("prompt");
                 boolean hasAnswer = rs.getBoolean("hasAnswer");
                 String answer = rs.getString("answer");
-                List<String> hints = rs.getString("hints") != null ? Arrays.stream(rs.getString("hints").split(",")).collect(Collectors.toList()) : new ArrayList<>();
+//                List<String> hints = rs.getString("hints") != null ? Arrays.stream(rs.getString("hints").split(",")).collect(Collectors.toList()) : new ArrayList<>();
                 List<String> wrongAnswers = rs.getString("wrongAnswers") != null ? Arrays.stream(rs.getString("wrongAnswers").split(",")).collect(Collectors.toList()) : new ArrayList<>();
                 String wrongFeedback = rs.getString("wrongFeedback");
                 String correctFeedback = rs.getString("correctFeedback");
 
-                QuizObj quiz = new QuizObj(id,chapterId, type, prompt, hasAnswer, answer, hints, wrongAnswers, wrongFeedback, correctFeedback);
+                QuizObj quiz = new QuizObj(id,chapterId, type, prompt, hasAnswer, answer, null, wrongAnswers, wrongFeedback, correctFeedback);
                 quizzes.add(quiz);
             }
         } catch (SQLException e) {

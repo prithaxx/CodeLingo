@@ -9,6 +9,7 @@ import CodeLinguists.codelingo.persistence.IAccountData;
 import CodeLinguists.codelingo.persistence.ISessionData;
 import CodeLinguists.codelingo.application.Services;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class AccountHandler implements IAccountHandler {
@@ -16,9 +17,9 @@ public class AccountHandler implements IAccountHandler {
     private final IAccountData accountData;
     private final ISessionData sessionData;
 
-    public AccountHandler() {
-        this.accountData = Services.getAccountData();
-        this.sessionData = Services.getSessionData();
+    public AccountHandler(boolean forProduction) {
+        this.accountData = Services.getAccountData(forProduction);
+        this.sessionData = Services.getSessionData(forProduction);
     }
 
     public AccountHandler(IAccountData accountData, ISessionData sessionData) {
@@ -27,7 +28,7 @@ public class AccountHandler implements IAccountHandler {
     }
 
     @Override
-    public AccountObj guestLogin(String name) throws AccountNotFoundException{
+    public AccountObj guestLogin(String name) throws AccountNotFoundException, SQLException {
         if(name == null || name.isEmpty()){
             throw new InputValidationException("Name cannot be empty.");
         }

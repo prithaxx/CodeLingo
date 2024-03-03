@@ -5,6 +5,11 @@ import CodeLinguists.codelingo.persistence.IChapterData;
 import CodeLinguists.codelingo.persistence.ICourseData;
 import CodeLinguists.codelingo.persistence.IQuizData;
 import CodeLinguists.codelingo.persistence.ISessionData;
+import CodeLinguists.codelingo.persistence.hsqldb.AccountDataHSQLDB;
+import CodeLinguists.codelingo.persistence.hsqldb.ChapterDataHSQLDB;
+import CodeLinguists.codelingo.persistence.hsqldb.CourseDataHSQLDB;
+import CodeLinguists.codelingo.persistence.hsqldb.QuizDataHSQLDB;
+import CodeLinguists.codelingo.persistence.hsqldb.SessionDataHSQLDB;
 import CodeLinguists.codelingo.persistence.stubs.AccountDataStub;
 import CodeLinguists.codelingo.persistence.stubs.ChapterDataStub;
 import CodeLinguists.codelingo.persistence.stubs.CourseDataStub;
@@ -29,37 +34,59 @@ public class Services {
         chapterData = null;
     }
 
-    public static synchronized IAccountData getAccountData() {
+    public static synchronized IAccountData getAccountData(boolean forProduction) {
         if (accountData == null) {
-            accountData = new AccountDataStub();
+            if (forProduction) {
+                accountData = new AccountDataHSQLDB(Main.getDBPathName());
+            } else {
+                accountData = new AccountDataStub();
+            }
         }
         return accountData;
     }
 
-    public static synchronized ICourseData getCourseData(){
+    public static synchronized ICourseData getCourseData(boolean forProduction){
         if(courseData == null){
-            courseData = new CourseDataStub();
+            if (forProduction) {
+                courseData = new CourseDataHSQLDB(Main.getDBPathName());
+            } else {
+                courseData = new CourseDataStub();
+            }
+
         }
         return courseData;
     }
 
-    public static synchronized ISessionData getSessionData() {
+    public static synchronized ISessionData getSessionData(boolean forProduction) {
         if (sessionData == null) {
-            sessionData = new SessionDataStub();
+            if (forProduction) {
+                sessionData = new SessionDataHSQLDB();
+            } else {
+                sessionData = new SessionDataStub();
+            }
         }
         return sessionData;
     }
 
-    public static synchronized IQuizData getQuizData() {
+    public static synchronized IQuizData getQuizData(boolean forProduction) {
         if (quizData == null) {
-            quizData = new QuizDataStub();
+            if (forProduction) {
+                quizData = new QuizDataHSQLDB(Main.getDBPathName());
+            } else {
+                quizData = new QuizDataStub();
+            }
+
         }
         return quizData;
     }
 
-    public static synchronized IChapterData getChapterData() {
+    public static synchronized IChapterData getChapterData(boolean forProduction) {
         if (chapterData == null) {
-            chapterData = new ChapterDataStub();
+            if (forProduction) {
+                chapterData = new ChapterDataHSQLDB(Main.getDBPathName());
+            } else {
+                chapterData = new ChapterDataStub();
+            }
         }
         return chapterData;
     }

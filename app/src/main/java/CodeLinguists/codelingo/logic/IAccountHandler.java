@@ -1,5 +1,6 @@
 package CodeLinguists.codelingo.logic;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import CodeLinguists.codelingo.dso.AccountObj;
@@ -15,7 +16,7 @@ public interface IAccountHandler {
      *
      * @param name - name of account to log into
      */
-    AccountObj guestLogin(String name);
+    AccountObj guestLogin(String name) throws SQLException;
     CourseObj getActiveCourse();
 
     List<ChapterObj> getActiveCourseChapters();
