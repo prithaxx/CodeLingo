@@ -14,7 +14,7 @@ public class QuizIterator implements IQuizIterator {
     private boolean inFeedback; //if showing quiz slide or feedback slide
 
     public QuizIterator(List<QuizObj> activeQuiz) {
-        this(new QuizHandler(), activeQuiz);
+        this(new QuizHandler(true), activeQuiz);
     }
 
     public QuizIterator(IQuizHandler quizHandler, List<QuizObj> activeQuiz) {

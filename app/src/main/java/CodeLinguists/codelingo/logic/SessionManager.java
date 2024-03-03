@@ -20,7 +20,7 @@ public class SessionManager implements ISessionManager {
 
     public static ISessionManager newInstance() {
         if (sessionManager==null) {
-            sessionManager = new SessionManager(new QuizHandler(), new AccountHandler());
+            sessionManager = new SessionManager(new QuizHandler(true), new AccountHandler(true),true);
         }
         return sessionManager;
     }
@@ -42,18 +42,18 @@ public class SessionManager implements ISessionManager {
     private int chapterId;
 
 
-    private SessionManager(IQuizHandler quizHandler, IAccountHandler accountHandler) {
+    private SessionManager(IQuizHandler quizHandler, IAccountHandler accountHandler, boolean forProduction) {
         this.quizHandler = quizHandler;
         this.accountHandler = accountHandler;
         course = accountHandler.getActiveCourse();
-        quizData = Services.getQuizData();
-        courseData = Services.getCourseData();
-        chapterData = Services.getChapterData();
+        quizData = Services.getQuizData(forProduction);
+        courseData = Services.getCourseData(forProduction);
+        chapterData = Services.getChapterData(forProduction);
         courseId = 1; //hardcoded bad i know, set active course can be called in view_GuestLogin maybe, not sure best place
     }
 
-    public SessionManager() {
-        this(new QuizHandler(), new AccountHandler());
+    public SessionManager(boolean forProduction) {
+        this(new QuizHandler(forProduction), new AccountHandler(forProduction),true);
     }
 
     @Override

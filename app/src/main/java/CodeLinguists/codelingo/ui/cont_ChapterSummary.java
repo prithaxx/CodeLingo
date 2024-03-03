@@ -36,7 +36,7 @@ public class cont_ChapterSummary extends AppCompatActivity {
 
         chapterListRecyclerView = findViewById(R.id.chapterList);
         chapterSummaryTextView = findViewById(R.id.chapterSummary);
-        sessionManager = new SessionManager();
+        sessionManager = new SessionManager(true);
 
         List<ChapterObj> chapters = sessionManager.getActiveCourseChapters();
 
