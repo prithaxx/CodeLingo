@@ -29,37 +29,60 @@ public class Services {
         chapterData = null;
     }
 
-    public static synchronized IAccountData getAccountData() {
+    public static synchronized IAccountData getAccountData(boolean forProduction) {
         if (accountData == null) {
-            accountData = new AccountDataStub();
+            if (forProduction) {
+                // need to fit with the actually method
+                //accountData = new AccountPersistenceHSQLDB(Main.getDBPathName());
+            } else {
+                accountData = new AccountDataStub();
+            }
         }
         return accountData;
     }
 
-    public static synchronized ICourseData getCourseData(){
+    public static synchronized ICourseData getCourseData(boolean forProduction){
         if(courseData == null){
-            courseData = new CourseDataStub();
+            if (forProduction) {
+                //courseData = new CoursePersistenceHSQLDB(getCoursePersistence(true), Main.getDBPathName());
+            } else {
+                courseData = new CourseDataStub();
+            }
+
         }
         return courseData;
     }
 
-    public static synchronized ISessionData getSessionData() {
+    public static synchronized ISessionData getSessionData(boolean forProduction) {
         if (sessionData == null) {
-            sessionData = new SessionDataStub();
+            if (forProduction) {
+                //sessionPersistence = new SessionPersistenceHSQLDB(getSessionPersistence(true), Main.getDBPathName());
+            } else {
+                sessionData = new SessionDataStub();
+            }
         }
         return sessionData;
     }
 
-    public static synchronized IQuizData getQuizData() {
+    public static synchronized IQuizData getQuizData(boolean forProduction) {
         if (quizData == null) {
-            quizData = new QuizDataStub();
+            if (forProduction) {
+                // quizPersistence = new QuizPersistenceHSQLDB(getQuizPersistence(true), Main.getDBPathName());
+            } else {
+                quizData = new QuizDataStub();
+            }
+
         }
         return quizData;
     }
 
-    public static synchronized IChapterData getChapterData() {
+    public static synchronized IChapterData getChapterData(boolean forProduction) {
         if (chapterData == null) {
-            chapterData = new ChapterDataStub();
+            if (forProduction) {
+                // chapterPersistence = new ChapterPersistenceHSQLDB(getChapterPersistence(true), Main.getDBPathName());
+            } else {
+                chapterData = new ChapterDataStub();
+            }
         }
         return chapterData;
     }
