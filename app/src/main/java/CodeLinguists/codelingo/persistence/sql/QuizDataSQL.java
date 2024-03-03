@@ -1,7 +1,6 @@
-package CodeLinguists.codelingo.persistence.hsqldb;
+package CodeLinguists.codelingo.persistence.sql;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,23 +12,20 @@ import java.util.stream.Collectors;
 import CodeLinguists.codelingo.dso.QuestionType;
 import CodeLinguists.codelingo.dso.QuizObj;
 import CodeLinguists.codelingo.persistence.IQuizData;
+import CodeLinguists.codelingo.persistence.utils.ISqlRunner;
 
-public class QuizDataHSQLDB implements IQuizData {
-    private final String dbPath;
+public class QuizDataSQL implements IQuizData {
+    private final ISqlRunner sqlRunner;
 
-    public QuizDataHSQLDB(String dbPath) {
-        this.dbPath = dbPath;
-    }
-
-    private Connection connect() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+    public QuizDataSQL(ISqlRunner sqlRunner) {
+        this.sqlRunner = sqlRunner;
     }
 
     @Override
     public List<QuizObj> getQuizByChapterId(int chapterId){
         List<QuizObj> quizzes = new ArrayList<>();
 
-        try (Connection connection = connect()){
+        try (Connection connection = sqlRunner.connect()){
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM QUIZ WHERE chapterId = ? ORDER BY id");
             ps.setInt(1, chapterId);
             ResultSet rs = ps.executeQuery();
@@ -61,7 +57,7 @@ public class QuizDataHSQLDB implements IQuizData {
     public QuizObj getQuizById(int quizId, int chapterId){
         QuizObj quiz = null;
 
-        try (Connection connection = connect()){
+        try (Connection connection = sqlRunner.connect()){
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM QUIZ WHERE chapterId = ? AND quizId = ?");
             ps.setInt(1, chapterId);
             ps.setInt(2, quizId);

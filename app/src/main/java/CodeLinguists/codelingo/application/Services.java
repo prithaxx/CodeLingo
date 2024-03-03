@@ -11,16 +11,18 @@ import CodeLinguists.codelingo.persistence.IChapterData;
 import CodeLinguists.codelingo.persistence.ICourseData;
 import CodeLinguists.codelingo.persistence.IQuizData;
 import CodeLinguists.codelingo.persistence.ISessionData;
-import CodeLinguists.codelingo.persistence.hsqldb.AccountDataHSQLDB;
-import CodeLinguists.codelingo.persistence.hsqldb.ChapterDataHSQLDB;
-import CodeLinguists.codelingo.persistence.hsqldb.CourseDataHSQLDB;
-import CodeLinguists.codelingo.persistence.hsqldb.QuizDataHSQLDB;
-import CodeLinguists.codelingo.persistence.hsqldb.SessionDataHSQLDB;
+import CodeLinguists.codelingo.persistence.sql.AccountDataSQL;
+import CodeLinguists.codelingo.persistence.sql.ChapterDataSQL;
+import CodeLinguists.codelingo.persistence.sql.CourseDataSQL;
+import CodeLinguists.codelingo.persistence.sql.QuizDataSQL;
+import CodeLinguists.codelingo.persistence.sql.SessionDataSQL;
 import CodeLinguists.codelingo.persistence.stubs.AccountDataStub;
 import CodeLinguists.codelingo.persistence.stubs.ChapterDataStub;
 import CodeLinguists.codelingo.persistence.stubs.CourseDataStub;
 import CodeLinguists.codelingo.persistence.stubs.QuizDataStub;
 import CodeLinguists.codelingo.persistence.stubs.SessionDataStub;
+import CodeLinguists.codelingo.persistence.utils.HSQLDBRunner;
+import CodeLinguists.codelingo.persistence.utils.ISqlRunner;
 
 /**
  * Provides creation and distribution of persistence layer classes
@@ -30,11 +32,16 @@ public class Services {
     private enum DbType {
         STUB, HSQLDB
     }
+
+    //Configure
     private static final DbType DB_IMPLEMENTATION = DbType.HSQLDB;
+
+    //Logic Layer
     private static ISessionManager sessionManager = null;
     private static IAccountHandler accountHandler = null;
     private static IQuizHandler quizHandler = null;
 
+    //Persistence layer
     private static IAccountData accountData = null;
     private static ICourseData courseData = null;
     private static ISessionData sessionData = null;
@@ -76,7 +83,7 @@ public class Services {
         if (accountData == null) {
             switch (DB_IMPLEMENTATION){
                 case STUB -> accountData = new AccountDataStub();
-                case HSQLDB -> accountData = new AccountDataHSQLDB(Main.getDBPathName());
+                case HSQLDB -> accountData = new AccountDataSQL(getSqlRunner());
             }
         }
         return accountData;
@@ -86,7 +93,7 @@ public class Services {
         if(courseData == null){
             switch (DB_IMPLEMENTATION){
                 case STUB -> courseData = new CourseDataStub();
-                case HSQLDB -> courseData = new CourseDataHSQLDB(Main.getDBPathName());
+                case HSQLDB -> courseData = new CourseDataSQL(getSqlRunner());
             }
         }
         return courseData;
@@ -96,7 +103,7 @@ public class Services {
         if (sessionData == null) {
             switch (DB_IMPLEMENTATION){
                 case STUB -> sessionData = new SessionDataStub();
-                case HSQLDB -> sessionData = new SessionDataHSQLDB(Main.getDBPathName());
+                case HSQLDB -> sessionData = new SessionDataSQL(getSqlRunner());
             }
         }
 
@@ -107,7 +114,7 @@ public class Services {
         if (quizData == null) {
             switch (DB_IMPLEMENTATION){
                 case STUB -> quizData = new QuizDataStub();
-                case HSQLDB -> quizData = new QuizDataHSQLDB(Main.getDBPathName());
+                case HSQLDB -> quizData = new QuizDataSQL(getSqlRunner());
             }
         }
         return quizData;
@@ -117,9 +124,16 @@ public class Services {
         if (chapterData == null) {
             switch (DB_IMPLEMENTATION){
                 case STUB -> chapterData = new ChapterDataStub();
-                case HSQLDB -> chapterData = new ChapterDataHSQLDB(Main.getDBPathName());
+                case HSQLDB -> chapterData = new ChapterDataSQL(getSqlRunner());
             }
         }
         return chapterData;
+    }
+
+    private static synchronized ISqlRunner getSqlRunner() {
+        return switch (DB_IMPLEMENTATION){
+            case STUB -> null;
+            case HSQLDB -> new HSQLDBRunner(Main.getDbUrl());
+        };
     }
 }

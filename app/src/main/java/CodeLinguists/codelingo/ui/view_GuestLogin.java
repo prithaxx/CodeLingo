@@ -14,8 +14,7 @@ import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.exceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.ISessionManager;
-import CodeLinguists.codelingo.logic.SessionManager;
-import CodeLinguists.codelingo.persistence.utils.DBHelper;
+import CodeLinguists.codelingo.persistence.utils.DbHelper;
 
 public class view_GuestLogin extends AppCompatActivity {
     private ISessionManager sessionManager;
@@ -26,7 +25,7 @@ public class view_GuestLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_login);
 
-        DBHelper.copyDatabaseToDevice(this);
+        DbHelper.copyDatabaseToDevice(this);
         this.sessionManager = Services.getSessionManager();
         this.usernameField = (EditText) findViewById(R.id.un_field);
     }

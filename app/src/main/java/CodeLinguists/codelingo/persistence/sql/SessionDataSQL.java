@@ -1,17 +1,18 @@
-package CodeLinguists.codelingo.persistence.hsqldb;
+package CodeLinguists.codelingo.persistence.sql;
 
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.persistence.ISessionData;
+import CodeLinguists.codelingo.persistence.utils.ISqlRunner;
 
-public class SessionDataHSQLDB implements ISessionData {
-    private final String dbPath;
+public class SessionDataSQL implements ISessionData {
+    private final ISqlRunner sqlRunner;
     //TODO connect to DB
     private AccountObj activeAccount;
     private CourseObj activeCourse;
 
-    public SessionDataHSQLDB(String dbPathName) {
-        this.dbPath = dbPathName;
+    public SessionDataSQL(ISqlRunner sqlRunner) {
+        this.sqlRunner = sqlRunner;
     }
 
     @Override

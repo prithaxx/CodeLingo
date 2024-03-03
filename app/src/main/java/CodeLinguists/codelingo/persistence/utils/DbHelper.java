@@ -5,20 +5,12 @@ import android.content.res.AssetManager;
 
 import CodeLinguists.codelingo.application.Main;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
 
-public class DBHelper {
+public class DbHelper {
     private static boolean doReset = false;
     public static void resetDB(Context context){
         doReset = true;
@@ -39,7 +31,7 @@ public class DBHelper {
 
             copyAssetsToDirectory(context, assetNames, dataDirectory);
 
-            Main.setDBPathName(dataDirectory.toString() + "/" + Main.getDBPathName());
+            Main.setDBPathName(dataDirectory.toString() + "/" + Main.DB_FILE_NAME);
 
         } catch (final IOException ioe) {
             ioe.printStackTrace();
