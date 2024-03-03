@@ -12,6 +12,7 @@ import java.sql.SQLException;
 
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.application.Services;
+import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.exceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.ISessionManager;
 import CodeLinguists.codelingo.persistence.utils.DbHelper;
@@ -38,7 +39,7 @@ public class view_GuestLogin extends AppCompatActivity {
         try {
             sessionManager.guestLogin(name);
             navigateToCourseOverview();
-        } catch (InputValidationException | SQLException e) {
+        } catch (InputValidationException | SQLException | CourseNotFoundException e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }

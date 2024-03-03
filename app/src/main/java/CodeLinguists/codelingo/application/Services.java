@@ -2,6 +2,7 @@ package CodeLinguists.codelingo.application;
 
 import CodeLinguists.codelingo.logic.AccountHandler;
 import CodeLinguists.codelingo.logic.IAccountHandler;
+import CodeLinguists.codelingo.logic.ICourseHandler;
 import CodeLinguists.codelingo.logic.IQuizHandler;
 import CodeLinguists.codelingo.logic.ISessionManager;
 import CodeLinguists.codelingo.logic.QuizHandler;
@@ -40,6 +41,7 @@ public class Services {
     private static ISessionManager sessionManager = null;
     private static IAccountHandler accountHandler = null;
     private static IQuizHandler quizHandler = null;
+    private static ICourseHandler courseHandler = null;
 
     //Persistence layer
     private static IAccountData accountData = null;
@@ -60,7 +62,7 @@ public class Services {
 
     public static ISessionManager getSessionManager() {
         if (sessionManager == null) {
-            sessionManager = new SessionManager(getQuizHandler(), getAccountHandler());
+            sessionManager = new SessionManager(getQuizHandler(), getAccountHandler(), getCourseHandler());
         }
         return sessionManager;
     }
@@ -77,6 +79,13 @@ public class Services {
             quizHandler = new QuizHandler(getQuizData());
         }
         return quizHandler;
+    }
+
+    public static ICourseHandler getCourseHandler(){
+        if (courseHandler == null){
+            courseHandler = new CourseHandler(getCourseData(), getChapterData());
+        }
+        return courseHandler;
     }
 
     public static synchronized IAccountData getAccountData() {

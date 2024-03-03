@@ -15,6 +15,7 @@ public class QuizHandler implements IQuizHandler{
 
     @Override
     public IQuizIterator getQuiz(int courseId, int chapterId) {
+        //TODO Inverse dependency principle
         return new QuizIterator(quizData.getQuizByChapterId(chapterId));
     }
 

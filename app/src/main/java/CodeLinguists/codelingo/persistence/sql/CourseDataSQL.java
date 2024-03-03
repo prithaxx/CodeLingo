@@ -43,19 +43,18 @@ public class CourseDataSQL implements ICourseData {
     }
 
     @Override
-    public List<CourseObj> getStartedCourseList(int accountId) {
-        List<CourseObj> startedCourses = new ArrayList<>();
+    public List<CourseObj> getCourseList(int accountId) {
+        List<CourseObj> courses = new ArrayList<>();
         try (Connection connection = sqlRunner.connect();
              PreparedStatement ps = connection.prepareStatement("SELECT c.id, c.name, c.description, cc.isStarted, cc.isCompleted " +
                                                                     "FROM COURSE c " +
-                                                                    "JOIN COURSE_COMPLETION cc ON c.id = cc.courseId " +
-                                                                    "WHERE cc.isStarted = TRUE AND cc.accountId = ?")) {
+                                                                    "JOIN COURSE_COMPLETION cc ON c.id = cc.courseId and cc.accountId = ?")) {
             ps.setInt(1, accountId);
             ResultSet rs = ps.executeQuery();
             ps.close();
 
             while (rs.next()) {
-                startedCourses.add(new CourseObj(
+                courses.add(new CourseObj(
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("description"),
@@ -66,6 +65,6 @@ public class CourseDataSQL implements ICourseData {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return startedCourses;
+        return courses;
     }
 }

@@ -46,7 +46,7 @@ public class AccountDataSQL implements IAccountData {
     @Override
     public AccountObj createGuestAccount(String name) throws SQLException {
         try (Connection connection = sqlRunner.connect()){
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO PUBLIC.ACCOUNT VALUES (DEFAULT, ?, TRUE, 0, ?, '')");
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO PUBLIC.ACCOUNT VALUES (DEFAULT, ?, TRUE, 1, ?, '')");
             ps.setString(1, name);
             ps.setString(2, name);
             ps.executeUpdate();
@@ -70,5 +70,18 @@ public class AccountDataSQL implements IAccountData {
             e.printStackTrace();
         }
         throw new SQLException("Creating account failed, no ID obtained.");
+    }
+
+    @Override
+    public void setActiveCourse(int accountId, int courseId) {
+        try (Connection connection = sqlRunner.connect()) {
+            PreparedStatement ps = connection.prepareStatement("UPDATE ACCOUNT set ActiveCourseId = ? where id = ?");
+            ps.setInt(1, courseId);
+            ps.setInt(2, accountId);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

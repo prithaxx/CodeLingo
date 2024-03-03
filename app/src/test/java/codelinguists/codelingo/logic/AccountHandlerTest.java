@@ -88,6 +88,11 @@ public class AccountHandlerTest {
             }
             return localAccount;
         }
+
+        @Override
+        public void setActiveCourse(int accountId, int courseId) {
+
+        }
     }
     class SessionDataMock implements ISessionData {
 

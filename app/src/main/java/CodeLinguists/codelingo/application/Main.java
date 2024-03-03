@@ -14,7 +14,7 @@ public class Main {
     public static String getDbUrl() {
         if (dbName ==null || dbName.isBlank()) {
             //TODO!!! fix this error to something meaningful
-            throw new RuntimeException("This is maybe bad?");
+            throw new RuntimeException("Database is not instantiate yet!");
         }
         return "jdbc:hsqldb:file:"+dbName+";shutdown=true";
     }
