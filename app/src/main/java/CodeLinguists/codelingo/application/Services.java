@@ -5,6 +5,11 @@ import CodeLinguists.codelingo.persistence.IChapterData;
 import CodeLinguists.codelingo.persistence.ICourseData;
 import CodeLinguists.codelingo.persistence.IQuizData;
 import CodeLinguists.codelingo.persistence.ISessionData;
+import CodeLinguists.codelingo.persistence.hsqldb.AccountDataHSQLDB;
+import CodeLinguists.codelingo.persistence.hsqldb.ChapterDataHSQLDB;
+import CodeLinguists.codelingo.persistence.hsqldb.CourseDataHSQLDB;
+import CodeLinguists.codelingo.persistence.hsqldb.QuizDataHSQLDB;
+import CodeLinguists.codelingo.persistence.hsqldb.SessionDataHSQLDB;
 import CodeLinguists.codelingo.persistence.stubs.AccountDataStub;
 import CodeLinguists.codelingo.persistence.stubs.ChapterDataStub;
 import CodeLinguists.codelingo.persistence.stubs.CourseDataStub;
@@ -32,8 +37,7 @@ public class Services {
     public static synchronized IAccountData getAccountData(boolean forProduction) {
         if (accountData == null) {
             if (forProduction) {
-                // need to fit with the actually method
-                //accountData = new AccountPersistenceHSQLDB(Main.getDBPathName());
+                accountData = new AccountDataHSQLDB(Main.getDBPathName());
             } else {
                 accountData = new AccountDataStub();
             }
@@ -44,7 +48,7 @@ public class Services {
     public static synchronized ICourseData getCourseData(boolean forProduction){
         if(courseData == null){
             if (forProduction) {
-                //courseData = new CoursePersistenceHSQLDB(getCoursePersistence(true), Main.getDBPathName());
+                courseData = new CourseDataHSQLDB(Main.getDBPathName());
             } else {
                 courseData = new CourseDataStub();
             }
@@ -56,7 +60,7 @@ public class Services {
     public static synchronized ISessionData getSessionData(boolean forProduction) {
         if (sessionData == null) {
             if (forProduction) {
-                //sessionPersistence = new SessionPersistenceHSQLDB(getSessionPersistence(true), Main.getDBPathName());
+                sessionData = new SessionDataHSQLDB();
             } else {
                 sessionData = new SessionDataStub();
             }
@@ -67,7 +71,7 @@ public class Services {
     public static synchronized IQuizData getQuizData(boolean forProduction) {
         if (quizData == null) {
             if (forProduction) {
-                // quizPersistence = new QuizPersistenceHSQLDB(getQuizPersistence(true), Main.getDBPathName());
+                quizData = new QuizDataHSQLDB(Main.getDBPathName());
             } else {
                 quizData = new QuizDataStub();
             }
@@ -79,7 +83,7 @@ public class Services {
     public static synchronized IChapterData getChapterData(boolean forProduction) {
         if (chapterData == null) {
             if (forProduction) {
-                // chapterPersistence = new ChapterPersistenceHSQLDB(getChapterPersistence(true), Main.getDBPathName());
+                chapterData = new ChapterDataHSQLDB(Main.getDBPathName());
             } else {
                 chapterData = new ChapterDataStub();
             }
