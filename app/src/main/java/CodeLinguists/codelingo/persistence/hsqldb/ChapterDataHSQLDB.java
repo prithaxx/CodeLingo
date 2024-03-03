@@ -58,11 +58,12 @@ public class ChapterDataHSQLDB implements IChapterData {
         try (Connection connection = connect();
              PreparedStatement ps = connection.prepareStatement("SELECT c.id, c.name, c.courseId, c.description, cc.isUnlocked, cc.isCompleted " +
                                                                     "FROM CHAPTER c " +
-                                                                    "JOIN CHAPTER_COMPLETION cc ON c.id = cc.chapterId " +
-                                                                    "WHERE c.courseId = ? AND c.id = ? AND cc.accountId = ?")) {
-            ps.setInt(1, courseId);
-            ps.setInt(2, chapterId);
-            ps.setInt(3, accountId);
+                                                                    "LEFT JOIN CHAPTER_COMPLETION cc ON c.id = cc.chapterId and cc.accountId = ? " +
+                                                                    "WHERE c.courseId = ? AND c.id = ?")) {
+            ps.setInt(1, accountId);
+            ps.setInt(2, courseId);
+            ps.setInt(3, chapterId);
+
             ResultSet rs = ps.executeQuery();
             ps.close();
 
