@@ -1,67 +1,41 @@
 package CodeLinguists.codelingo.logic;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import CodeLinguists.codelingo.application.Strings;
-import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.dso.CourseObjFactory;
 import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.exceptions.NoItemSelectedException;
-import CodeLinguists.codelingo.dso.QuizObj;
-import CodeLinguists.codelingo.persistence.IChapterData;
-import CodeLinguists.codelingo.persistence.ICourseData;
-import CodeLinguists.codelingo.persistence.IQuizData;
 
 public class SessionManager implements ISessionManager {
-    //Singleton
-    private static ISessionManager sessionManager;
-
-    public static ISessionManager newInstance() {
-        if (sessionManager==null) {
-            sessionManager = new SessionManager(new QuizHandler(true), new AccountHandler(true),true);
-        }
-        return sessionManager;
-    }
-
-    public static void clearSessionData() {
-        sessionManager = null;
-    }
-
 
     //instance fields
     private final IQuizHandler quizHandler;
     private final IAccountHandler accountHandler;
-    private final IQuizData quizData;
-    private final ICourseData courseData;
-    private final IChapterData chapterData;
+    private final ICourseHandler courseHandler;
     private AccountObj account;
     private CourseObj course;
-    private int courseId;
     private int chapterId;
 
 
-    private SessionManager(IQuizHandler quizHandler, IAccountHandler accountHandler, boolean forProduction) {
+    public SessionManager(IQuizHandler quizHandler, IAccountHandler accountHandler, ICourseHandler courseHandler) {
         this.quizHandler = quizHandler;
         this.accountHandler = accountHandler;
-        course = accountHandler.getActiveCourse();
-        quizData = Services.getQuizData(forProduction);
-        courseData = Services.getCourseData(forProduction);
-        chapterData = Services.getChapterData(forProduction);
-        courseId = 1; //hardcoded bad i know, set active course can be called in view_GuestLogin maybe, not sure best place
-    }
-
-    public SessionManager(boolean forProduction) {
-        this(new QuizHandler(forProduction), new AccountHandler(forProduction),true);
+        this.courseHandler = courseHandler;
     }
 
     @Override
     public void guestLogin(String user) throws SQLException {
         this.account = accountHandler.guestLogin(user);
+        try {
+            getActiveCourse();
+        } catch (CourseNotFoundException e) {
+            e.printStackTrace(); //Suppress this error, it's irrelevant on login
+        }
     }
 
     @Override
@@ -76,30 +50,27 @@ public class SessionManager implements ISessionManager {
     public CourseObj getActiveCourse() throws CourseNotFoundException {
         //return course;
         if (this.account == null) {
+            //TODO this is a permission exception
             throw new IllegalStateException("Account is not set.");
         }
-        int accountId = account.getId();
         try {
-            course = courseData.getCourseById(courseId, accountId);
+            CourseObj course = courseHandler.getActiveCourse(account);
         } catch (CourseNotFoundException e) {
             course = CourseObjFactory.getNoneCourse();
             throw e;
-        }
-        if(course == null){
-            throw new IllegalStateException("Active course not set");
         }
         return course;
     }
 
     @Override
-    public void setActiveCourse(int index){
-        courseId = index;
+    public void setActiveCourse(int index) throws CourseNotFoundException {
+        accountHandler.setActiveCourse(account, index);
+        getActiveCourse();
     }
 
     @Override
-    public List<CourseObj> getStartedCourseList(){
-        int accountId = account.getId();
-        return courseData.getStartedCourseList(accountId);
+    public List<CourseObj> getCourseList(){
+        return courseHandler.getCourseList(account);
     }
 
     @Override
@@ -109,35 +80,15 @@ public class SessionManager implements ISessionManager {
 
     @Override
     public List<ChapterObj> getActiveCourseChapters() throws CourseNotFoundException {
-        if (course == null) {
-            throw new CourseNotFoundException("No course selected");
+        if (account == null) {
+            //TODO this is a permission exception
+            throw new IllegalStateException("Account is not set.");
         }
-        int accountId = account.getId();
-        return chapterData.getChapterByCourseId(getActiveCourse().id(), accountId);
-    }
-
-
-    private List<QuizObj> getQuiz() {
-        return quizData.getQuizByChapterId(1);
+        return courseHandler.getActiveCourseChapters(account);
     }
 
     @Override
     public int calculateProgressPercentage(CourseObj course) throws CourseNotFoundException {
-        List<ChapterObj> listOfChapter = getActiveCourseChapters();
-
-        int totalChapters = listOfChapter.size();
-        int completedChapters = 0;
-
-        for (ChapterObj chapter : listOfChapter) {
-            if (chapter.isCompleted()) {
-                completedChapters++;
-            }
-        }
-
-        if (totalChapters == 0) return 0;
-
-        double doublePercent = (double) completedChapters / totalChapters;
-
-        return (int) (doublePercent * 100);
+        return courseHandler.calculateProgressPercentage(account, course);
     }
 }

@@ -1,36 +1,28 @@
-package CodeLinguists.codelingo.persistence.hsqldb;
+package CodeLinguists.codelingo.persistence.sql;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import CodeLinguists.codelingo.dso.AccountObj;
-import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.persistence.IAccountData;
-import CodeLinguists.codelingo.persistence.ICourseData;
-import CodeLinguists.codelingo.persistence.utils.DBHelper;
+import CodeLinguists.codelingo.persistence.utils.ISqlRunner;
 
-public class AccountDataHSQLDB implements IAccountData {
-    private final String dbPath;
+public class AccountDataSQL implements IAccountData {
+    private final ISqlRunner sqlRunner;
 
-    public AccountDataHSQLDB(String dbPath) {
-        this.dbPath = dbPath;
-    }
-
-    private Connection connect() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+    public AccountDataSQL(ISqlRunner sqlRunner) {
+        this.sqlRunner = sqlRunner;
     }
 
     @Override
     @NotNull
     public AccountObj getGuestAccountByName(String name){
         AccountObj account = null;
-        try (Connection connection = connect()){
+        try (Connection connection = sqlRunner.connect()){
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM ACCOUNT WHERE name = ?");
             ps.setString(1, name);
             ResultSet rs = ps.executeQuery();
@@ -53,8 +45,8 @@ public class AccountDataHSQLDB implements IAccountData {
 
     @Override
     public AccountObj createGuestAccount(String name) throws SQLException {
-        try (Connection connection = connect()){
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO PUBLIC.ACCOUNT VALUES (DEFAULT, ?, TRUE, 0, ?, '')");
+        try (Connection connection = sqlRunner.connect()){
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO PUBLIC.ACCOUNT VALUES (DEFAULT, ?, TRUE, 1, ?, '')");
             ps.setString(1, name);
             ps.setString(2, name);
             ps.executeUpdate();
@@ -78,5 +70,18 @@ public class AccountDataHSQLDB implements IAccountData {
             e.printStackTrace();
         }
         throw new SQLException("Creating account failed, no ID obtained.");
+    }
+
+    @Override
+    public void setActiveCourse(int accountId, int courseId) {
+        try (Connection connection = sqlRunner.connect()) {
+            PreparedStatement ps = connection.prepareStatement("UPDATE ACCOUNT set ActiveCourseId = ? where id = ?");
+            ps.setInt(1, courseId);
+            ps.setInt(2, accountId);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

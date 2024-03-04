@@ -30,10 +30,8 @@ public class CourseDataStub implements ICourseData {
     }
 
     @Override
-    public List<CourseObj> getStartedCourseList(int accountId){
-        return courseList.stream()
-                .filter(CourseObj::isStarted)
-                .collect(Collectors.toList());
+    public List<CourseObj> getCourseList(int accountId){
+        return courseList;
     }
 
 }

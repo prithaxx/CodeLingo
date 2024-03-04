@@ -7,5 +7,5 @@ import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 
 public interface ICourseData {
     CourseObj getCourseById(int id, int accountId) throws CourseNotFoundException;
-    List<CourseObj> getStartedCourseList(int accountId);
+    List<CourseObj> getCourseList(int accountId);
 }

@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
+import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.exceptions.InputValidationException;
@@ -48,7 +49,7 @@ public class AccountHandlerTest {
 
     @Test
     public void guestLoginDefaultConstructor() throws SQLException {
-        AccountHandler accountHandler = new AccountHandler(true);
+        AccountHandler accountHandler = new AccountHandler(Services.getAccountData(), Services.getSessionData());
         AccountObj acc = accountHandler.guestLogin("test");
         assertEquals(acc.getName(), "test");
     }
@@ -86,6 +87,11 @@ public class AccountHandlerTest {
                 account=localAccount;
             }
             return localAccount;
+        }
+
+        @Override
+        public void setActiveCourse(int accountId, int courseId) {
+
         }
     }
     class SessionDataMock implements ISessionData {

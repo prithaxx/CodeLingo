@@ -14,6 +14,7 @@ import android.widget.Toast;
 import java.util.Locale;
 
 import CodeLinguists.codelingo.R;
+import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.logic.ISessionManager;
@@ -44,7 +45,7 @@ public class cont_CourseOverview extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        this.sessionManager = SessionManager.newInstance();
+        this.sessionManager = Services.getSessionManager();
         CourseObj course = null;
         try {
             course = sessionManager.getActiveCourse();

@@ -30,4 +30,21 @@ public class AccountDataStub implements IAccountData {
         guestAccounts.add(newAccount);
         return newAccount;
     }
+
+    @Override
+    public void setActiveCourse(int accountId, int courseId) {
+        AccountObj account = getAccountById(accountId);
+        if (account != null) {
+            account.setActiveCourseId(courseId);
+        }
+    }
+
+    private AccountObj getAccountById(int accountId) {
+        for (AccountObj account:this.guestAccounts) {
+            if (accountId == account.getId()){
+                return account;
+            }
+        }
+        return null;
+    }
 }

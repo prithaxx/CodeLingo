@@ -9,16 +9,13 @@ import CodeLinguists.codelingo.persistence.IQuizData;
 public class QuizHandler implements IQuizHandler{
     IQuizData quizData;
 
-    public QuizHandler(boolean forProduction) {
-        this.quizData = Services.getQuizData(forProduction);
-    }
-
     public QuizHandler(IQuizData quizData) {
         this.quizData = quizData;
     }
 
     @Override
     public IQuizIterator getQuiz(int courseId, int chapterId) {
+        //TODO Inverse dependency principle
         return new QuizIterator(quizData.getQuizByChapterId(chapterId));
     }
 

@@ -22,4 +22,5 @@ public interface IAccountData {
      * @return the new guest account
      */
     AccountObj createGuestAccount(String name) throws SQLException;
+    void setActiveCourse(int accountId, int courseId);
 }

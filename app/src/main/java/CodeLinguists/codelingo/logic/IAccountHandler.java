@@ -17,7 +17,8 @@ public interface IAccountHandler {
      * @param name - name of account to log into
      */
     AccountObj guestLogin(String name) throws SQLException;
-    CourseObj getActiveCourse();
+
+    void setActiveCourse(AccountObj account, int courseId);
 
     List<ChapterObj> getActiveCourseChapters();
 }

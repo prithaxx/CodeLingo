@@ -1,7 +1,6 @@
-package CodeLinguists.codelingo.persistence.hsqldb;
+package CodeLinguists.codelingo.persistence.sql;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,23 +9,20 @@ import java.util.List;
 
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.persistence.IChapterData;
+import CodeLinguists.codelingo.persistence.utils.ISqlRunner;
 
-public class ChapterDataHSQLDB implements IChapterData {
-    private final String dbPath;
+public class ChapterDataSQL implements IChapterData {
+    private final ISqlRunner sqlRunner;
 
-    public ChapterDataHSQLDB(String dbPath) {
-        this.dbPath = dbPath;
-    }
-
-    private Connection connect() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+    public ChapterDataSQL(ISqlRunner sqlRunner) {
+        this.sqlRunner = sqlRunner;
     }
 
     @Override
     public List<ChapterObj> getChapterByCourseId(int courseId, int accountId) {
         List<ChapterObj> chapters = new ArrayList<>();
 
-        try (Connection connection = connect()){
+        try (Connection connection = sqlRunner.connect()){
             PreparedStatement ps = connection.prepareStatement("SELECT c.id, c.name, c.courseId, c.description, cc.isUnlocked, cc.isCompleted" +
                                                                     "FROM CHAPTER c" +
                                                                     "JOIN CHAPTER_COMPLETION cc ON c.id = cc.chapterId" +
@@ -55,7 +51,7 @@ public class ChapterDataHSQLDB implements IChapterData {
     @Override
     public ChapterObj getChapterById(int chapterId, int courseId, int accountId) {
         ChapterObj chapter = null;
-        try (Connection connection = connect();
+        try (Connection connection = sqlRunner.connect();
              PreparedStatement ps = connection.prepareStatement("SELECT c.id, c.name, c.courseId, c.description, cc.isUnlocked, cc.isCompleted " +
                                                                     "FROM CHAPTER c " +
                                                                     "LEFT JOIN CHAPTER_COMPLETION cc ON c.id = cc.chapterId and cc.accountId = ? " +

@@ -2,18 +2,20 @@ package CodeLinguists.codelingo.application;
 
 import org.hsqldb.jdbcDriver;
 
-import java.lang.reflect.InvocationTargetException;
-
 public class Main {
-    private static String dbName = "CodeLingoDB";
+    public static final String DB_FILE_NAME = "CodeLingoDB";
+    private static String dbName = null;
 
     public static void setDBPathName(final String name) {
         new jdbcDriver();
         dbName = name;
     }
 
-    public static String getDBPathName() {
-        return dbName;
+    public static String getDbUrl() {
+        if (dbName ==null || dbName.isBlank()) {
+            //TODO!!! fix this error to something meaningful
+            throw new RuntimeException("Database is not instantiate yet!");
+        }
+        return "jdbc:hsqldb:file:"+dbName+";shutdown=true";
     }
-
 }

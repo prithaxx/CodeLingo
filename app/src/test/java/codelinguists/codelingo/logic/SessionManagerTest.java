@@ -7,33 +7,34 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
+import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.logic.SessionManager;
 
 public class SessionManagerTest {
     @Before
     public void setup() {
-        SessionManager.clearSessionData();
+        Services.resetObjects();
     }
 
     @Test
     public void guestLoginTest() throws SQLException {
-        SessionManager.newInstance().guestLogin("test");
+        Services.getSessionManager().guestLogin("test");
     }
 
     @Test
     public void startQuiz() {
-        assertNotNull(SessionManager.newInstance().startQuiz());
+        assertNotNull(Services.getSessionManager().startQuiz());
     }
 
     @Test
     public void getActiveCourse() throws CourseNotFoundException {
-        assertNotNull(SessionManager.newInstance().getActiveCourse());
+        assertNotNull(Services.getSessionManager().getActiveCourse());
     }
 
     @Test
     public void setActiveChapter() {
-        SessionManager.newInstance().setActiveChapter(1);
+        Services.getSessionManager().setActiveChapter(1);
     }
 
 

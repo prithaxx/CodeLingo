@@ -3,7 +3,8 @@ package CodeLinguists.codelingo.logic;
 import java.util.ArrayList;
 import java.util.List;
 
-import CodeLinguists.codelingo.dso.QuestionTypes;
+import CodeLinguists.codelingo.application.Services;
+import CodeLinguists.codelingo.dso.QuestionType;
 import CodeLinguists.codelingo.dso.QuizObj;
 
 public class QuizIterator implements IQuizIterator {
@@ -14,7 +15,7 @@ public class QuizIterator implements IQuizIterator {
     private boolean inFeedback; //if showing quiz slide or feedback slide
 
     public QuizIterator(List<QuizObj> activeQuiz) {
-        this(new QuizHandler(true), activeQuiz);
+        this(Services.getQuizHandler(), activeQuiz);
     }
 
     public QuizIterator(IQuizHandler quizHandler, List<QuizObj> activeQuiz) {
@@ -68,7 +69,7 @@ public class QuizIterator implements IQuizIterator {
             return nextQuestion();
         }
 
-        QuestionTypes feedbackType = quizHandler.checkQuizAnswer(current, input) ? QuestionTypes.FEEDBACK_PASSED : QuestionTypes.FEEDBACK_FAILED;
+        QuestionType feedbackType = quizHandler.checkQuizAnswer(current, input) ? QuestionType.FEEDBACK_PASSED : QuestionType.FEEDBACK_FAILED;
         inFeedback = true;
         return QuizObj.asFeedback(current, feedbackType);
     }
