@@ -8,7 +8,9 @@ import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.dso.CourseObjFactory;
+import CodeLinguists.codelingo.exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
+import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.exceptions.NoItemSelectedException;
 
 public class SessionManager implements ISessionManager {
@@ -29,12 +31,12 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public void guestLogin(String user) throws SQLException {
+    public void guestLogin(String user) throws DataInaccessibleException {
         this.account = accountHandler.guestLogin(user);
         try {
             getActiveCourse();
-        } catch (CourseNotFoundException e) {
-            e.printStackTrace(); //Suppress this error, it's irrelevant on login
+        } catch (CourseNotFoundException | AccountPermissionException e) {
+            e.printStackTrace(); //Suppress these error, it's irrelevant on login
         }
     }
 
@@ -47,11 +49,10 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public CourseObj getActiveCourse() throws CourseNotFoundException {
+    public CourseObj getActiveCourse() throws CourseNotFoundException, AccountPermissionException {
         //return course;
         if (this.account == null) {
-            //TODO this is a permission exception
-            throw new IllegalStateException("Account is not set.");
+            throw new AccountPermissionException(Strings.NotSignedIn);
         }
         try {
             CourseObj course = courseHandler.getActiveCourse(account);
@@ -63,7 +64,7 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public void setActiveCourse(int index) throws CourseNotFoundException {
+    public void setActiveCourse(int index) throws CourseNotFoundException, AccountPermissionException {
         accountHandler.setActiveCourse(account, index);
         getActiveCourse();
     }
@@ -79,10 +80,9 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public List<ChapterObj> getActiveCourseChapters() throws CourseNotFoundException {
+    public List<ChapterObj> getActiveCourseChapters() throws CourseNotFoundException, AccountPermissionException {
         if (account == null) {
-            //TODO this is a permission exception
-            throw new IllegalStateException("Account is not set.");
+            throw new AccountPermissionException(Strings.NotSignedIn);
         }
         return courseHandler.getActiveCourseChapters(account);
     }

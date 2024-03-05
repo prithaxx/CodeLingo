@@ -2,6 +2,8 @@ package CodeLinguists.codelingo.application;
 
 import org.hsqldb.jdbcDriver;
 
+import CodeLinguists.codelingo.exceptions.RuntimeExceptions.DBStateException;
+
 public class Main {
     public static final String DB_FILE_NAME = "CodeLingoDB";
     private static String dbName = null;
@@ -13,9 +15,8 @@ public class Main {
 
     public static String getDbUrl() {
         if (dbName ==null || dbName.isBlank()) {
-            //TODO!!! fix this error to something meaningful
-            throw new RuntimeException("Database is not instantiate yet!");
+            throw new DBStateException(Strings.DbNotInitialized);
         }
-        return "jdbc:hsqldb:file:"+dbName+";shutdown=true";
+        return Strings.HSQLDBUrl(dbName);
     }
 }

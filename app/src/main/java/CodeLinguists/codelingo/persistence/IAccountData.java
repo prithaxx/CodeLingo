@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
+import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
 
 public interface IAccountData {
 
@@ -21,6 +22,6 @@ public interface IAccountData {
      * @param name - name of new guest account
      * @return the new guest account
      */
-    AccountObj createGuestAccount(String name) throws SQLException;
+    AccountObj createGuestAccount(String name) throws DataInaccessibleException;
     void setActiveCourse(int accountId, int courseId);
 }

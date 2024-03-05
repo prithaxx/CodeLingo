@@ -9,7 +9,7 @@ import CodeLinguists.codelingo.dso.QuizObj;
 
 public class QuizIterator implements IQuizIterator {
 
-    private IQuizHandler quizHandler;
+    private final IQuizHandler quizHandler;
     List<QuizObj> activeQuiz;
     int currentQuizCursor;
     private boolean inFeedback; //if showing quiz slide or feedback slide
@@ -71,7 +71,7 @@ public class QuizIterator implements IQuizIterator {
 
         QuestionType feedbackType = quizHandler.checkQuizAnswer(current, input) ? QuestionType.FEEDBACK_PASSED : QuestionType.FEEDBACK_FAILED;
         inFeedback = true;
-        return QuizObj.asFeedback(current, feedbackType);
+        return QuizObj.cloneAsFeedback(current, feedbackType);
     }
 
     public int cursorPos() {

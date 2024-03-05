@@ -1,9 +1,11 @@
 package CodeLinguists.codelingo.logic;
 
+import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
+import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.exceptions.InputValidationException;
 import CodeLinguists.codelingo.persistence.IAccountData;
 import CodeLinguists.codelingo.persistence.ISessionData;
@@ -23,9 +25,9 @@ public class AccountHandler implements IAccountHandler {
     }
 
     @Override
-    public AccountObj guestLogin(String name) throws AccountNotFoundException, SQLException {
+    public AccountObj guestLogin(String name) throws AccountNotFoundException, DataInaccessibleException {
         if(name == null || name.isEmpty()){
-            throw new InputValidationException("Name cannot be empty.");
+            throw new InputValidationException(Strings.NoName);
         }
 
         AccountObj account = accountData.getGuestAccountByName(name);

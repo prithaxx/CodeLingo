@@ -12,7 +12,9 @@ import java.sql.SQLException;
 
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.application.Services;
+import CodeLinguists.codelingo.exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
+import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.exceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.ISessionManager;
 import CodeLinguists.codelingo.persistence.utils.DbHelper;
@@ -39,8 +41,10 @@ public class view_GuestLogin extends AppCompatActivity {
         try {
             sessionManager.guestLogin(name);
             navigateToCourseOverview();
-        } catch (InputValidationException | SQLException | CourseNotFoundException e) {
+        } catch (InputValidationException | DataInaccessibleException | CourseNotFoundException e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        } catch (AccountPermissionException e) {
+            e.printStackTrace();
         }
     }
 

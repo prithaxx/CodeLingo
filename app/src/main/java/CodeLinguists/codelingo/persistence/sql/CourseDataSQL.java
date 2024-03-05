@@ -1,5 +1,6 @@
 package CodeLinguists.codelingo.persistence.sql;
 
+import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.persistence.ICourseData;
@@ -39,7 +40,7 @@ public class CourseDataSQL implements ICourseData {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        throw new CourseNotFoundException("Course "+courseId+" is not available. Select a different course");
+        throw new CourseNotFoundException(Strings.CourseNotFound(courseId));
     }
 
     @Override

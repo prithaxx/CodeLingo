@@ -8,7 +8,9 @@ import org.junit.Test;
 import java.sql.SQLException;
 
 import CodeLinguists.codelingo.application.Services;
+import CodeLinguists.codelingo.exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
+import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.logic.SessionManager;
 
 public class SessionManagerTest {
@@ -18,7 +20,7 @@ public class SessionManagerTest {
     }
 
     @Test
-    public void guestLoginTest() throws SQLException {
+    public void guestLoginTest() throws DataInaccessibleException, CourseNotFoundException, AccountPermissionException {
         Services.getSessionManager().guestLogin("test");
     }
 
@@ -28,7 +30,7 @@ public class SessionManagerTest {
     }
 
     @Test
-    public void getActiveCourse() throws CourseNotFoundException {
+    public void getActiveCourse() throws CourseNotFoundException, AccountPermissionException {
         assertNotNull(Services.getSessionManager().getActiveCourse());
     }
 
