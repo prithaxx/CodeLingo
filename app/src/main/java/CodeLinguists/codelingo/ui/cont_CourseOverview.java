@@ -66,7 +66,7 @@ public class cont_CourseOverview extends Fragment {
         } catch (CourseNotFoundException e) {
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
-        tvProgressPercentage.setText(String.format(Locale.getDefault(), "%d%%", progressPercentage));
+        tvProgressPercentage.setText(String.format(Locale.getDefault(), "%d%% complete", progressPercentage));
 
         View b = v.findViewById(R.id.rectangle_1);
         b.setOnClickListener(this::tileOnclick0);
