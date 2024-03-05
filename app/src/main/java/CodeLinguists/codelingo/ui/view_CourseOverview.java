@@ -21,6 +21,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,10 +32,11 @@ import com.google.android.material.navigation.NavigationView;
 
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.application.Services;
+import CodeLinguists.codelingo.dso.AccountObj;
+import CodeLinguists.codelingo.exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.logic.ISessionManager;
-import CodeLinguists.codelingo.logic.SessionManager;
 
-    public class view_CourseOverview extends AppCompatActivity {
+	public class view_CourseOverview extends AppCompatActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,18 @@ import CodeLinguists.codelingo.logic.SessionManager;
 
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.replace(R.id.fragmentContainerView3, cont_CourseOverview.newInstance()).commit();
+
+		try {
+			AccountObj account = sessionManager.getActiveAccount();
+			NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+			View headerView = navigationView.getHeaderView(0);
+			TextView menuName = (TextView) headerView.findViewById(R.id.header_name);
+			TextView menuUsername = (TextView) headerView.findViewById(R.id.header_username);
+			menuName.setText(account.getName());
+			menuUsername.setText(account.getUsername());
+		} catch (AccountPermissionException e) {
+			Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	public void btnHamburgerMenuOnClick(View v){

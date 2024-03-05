@@ -41,6 +41,14 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
+    public AccountObj getActiveAccount() throws AccountPermissionException {
+        if (account == null) {
+            throw new AccountPermissionException(Strings.NotSignedIn);
+        }
+        return account;
+    }
+
+    @Override
     public IQuizIterator startQuiz() {
         if (course==null || chapterId<0) {
             throw new NoItemSelectedException(Strings.NoCourseSelected);
