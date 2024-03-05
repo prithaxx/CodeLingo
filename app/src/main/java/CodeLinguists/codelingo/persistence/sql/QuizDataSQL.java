@@ -25,14 +25,8 @@ public class QuizDataSQL implements IQuizData {
     public List<QuizObj> getQuizByChapterId(int chapterId){
         List<QuizObj> quizzes = new ArrayList<>();
 
-        try (Connection connection = sqlRunner.connect()){
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM QUIZ WHERE chapterId = ? ORDER BY id");
-            ps.setInt(1, chapterId);
-            ResultSet rs = ps.executeQuery();
-            ps.close();
-
+        try (ResultSet rs = sqlRunner.selectQuizByChapterId(chapterId)){
             while (rs.next()) {
-
                 int id = rs.getInt("id");
                 String typeString = rs.getString("type");
                 QuestionType type = QuestionType.valueOf(typeString);
@@ -56,14 +50,7 @@ public class QuizDataSQL implements IQuizData {
     @Override
     public QuizObj getQuizById(int quizId, int chapterId){
         QuizObj quiz = null;
-
-        try (Connection connection = sqlRunner.connect()){
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM QUIZ WHERE chapterId = ? AND quizId = ?");
-            ps.setInt(1, chapterId);
-            ps.setInt(2, quizId);
-            ResultSet rs = ps.executeQuery();
-            ps.close();
-
+        try (ResultSet rs = sqlRunner.selectQuizById(quizId, chapterId)){
             if (rs.next()) {
                 int id = rs.getInt("id");
                 QuestionType type = QuestionType.valueOf(rs.getString("type"));

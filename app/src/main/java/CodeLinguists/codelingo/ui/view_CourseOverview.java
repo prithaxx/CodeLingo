@@ -54,7 +54,7 @@ import CodeLinguists.codelingo.logic.ISessionManager;
 			View headerView = navigationView.getHeaderView(0);
 			TextView menuName = (TextView) headerView.findViewById(R.id.header_name);
 			TextView menuUsername = (TextView) headerView.findViewById(R.id.header_username);
-			menuName.setText(account.getName());
+			menuName.setText(String.format(getString(R.string.welcome_name), account.getName()));
 			menuUsername.setText(account.getUsername());
 		} catch (AccountPermissionException e) {
 			Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
