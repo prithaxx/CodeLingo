@@ -23,7 +23,7 @@ public class AccountDataSQL implements IAccountData {
 
     @Override
     @NotNull
-    public AccountObj getGuestAccountByName(String name){
+    public AccountObj getGuestAccountByName(String name) throws AccountNotFoundException {
         AccountObj account = null;
         try (Connection connection = sqlRunner.connect()){
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM ACCOUNT WHERE name = ?");

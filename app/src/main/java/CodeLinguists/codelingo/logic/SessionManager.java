@@ -55,12 +55,12 @@ public class SessionManager implements ISessionManager {
             throw new AccountPermissionException(Strings.NotSignedIn);
         }
         try {
-            CourseObj course = courseHandler.getActiveCourse(account);
+            course = courseHandler.getActiveCourse(account);
+            return course;
         } catch (CourseNotFoundException e) {
             course = CourseObjFactory.getNoneCourse();
             throw e;
         }
-        return course;
     }
 
     @Override

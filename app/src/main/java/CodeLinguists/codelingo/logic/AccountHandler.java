@@ -25,14 +25,15 @@ public class AccountHandler implements IAccountHandler {
     }
 
     @Override
-    public AccountObj guestLogin(String name) throws AccountNotFoundException, DataInaccessibleException {
+    public AccountObj guestLogin(String name) throws DataInaccessibleException {
         if(name == null || name.isEmpty()){
             throw new InputValidationException(Strings.NoName);
         }
 
-        AccountObj account = accountData.getGuestAccountByName(name);
-
-        if (account==null) {
+        AccountObj account = null;
+        try {
+            account = accountData.getGuestAccountByName(name);
+        } catch (AccountNotFoundException e) {
             account = accountData.createGuestAccount(name);
         }
 
