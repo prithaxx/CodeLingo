@@ -1,6 +1,8 @@
 package CodeLinguists.codelingo.application;
 
+import CodeLinguists.codelingo.exceptions.RuntimeExceptions.ConstantDependencyException;
 import CodeLinguists.codelingo.logic.AccountHandler;
+import CodeLinguists.codelingo.logic.CourseHandler;
 import CodeLinguists.codelingo.logic.IAccountHandler;
 import CodeLinguists.codelingo.logic.ICourseHandler;
 import CodeLinguists.codelingo.logic.IQuizHandler;
@@ -30,58 +32,79 @@ import CodeLinguists.codelingo.persistence.utils.ISqlRunner;
  * Handles dependency injection
  */
 public class Services {
-    private enum DbType {
+    public enum DbType {
         STUB, HSQLDB
     }
 
     //Configure
-    private static final DbType DB_IMPLEMENTATION = DbType.HSQLDB;
+    private static DbType DB_IMPLEMENTATION = DbType.HSQLDB;
 
     //Logic Layer
-    private static ISessionManager sessionManager = null;
-    private static IAccountHandler accountHandler = null;
-    private static IQuizHandler quizHandler = null;
-    private static ICourseHandler courseHandler = null;
+    private static ISessionManager sessionManager;
+    private static IAccountHandler accountHandler;
+    private static IQuizHandler quizHandler;
+    private static ICourseHandler courseHandler;
 
-    //Persistence layer
-    private static IAccountData accountData = null;
-    private static ICourseData courseData = null;
-    private static ISessionData sessionData = null;
-    private static IQuizData quizData = null;
-    private static IChapterData chapterData = null;
+    //Persistence
+    private static IAccountData accountData;
+    private static ICourseData courseData;
+    private static ISessionData sessionData;
+    private static IQuizData quizData;
+    private static IChapterData chapterData;
 
     public static synchronized void resetObjects() {
         sessionManager = null;
         accountHandler = null;
         quizHandler = null;
+        courseHandler = null;
+
         accountData = null;
+        courseData = null;
         sessionData = null;
         quizData = null;
         chapterData = null;
     }
 
-    public static ISessionManager getSessionManager() {
+    public static synchronized void setImplementation(DbType newType) {
+        if (
+            sessionManager != null ||
+            accountHandler != null ||
+            quizHandler != null ||
+            courseHandler != null ||
+
+            accountData != null ||
+            courseData != null ||
+            sessionData != null ||
+            quizData != null ||
+            chapterData != null
+        ) {
+            throw new ConstantDependencyException(Strings.CannotModifyDependencies);
+        }
+        DB_IMPLEMENTATION = newType;
+    }
+
+    public static synchronized ISessionManager getSessionManager() {
         if (sessionManager == null) {
             sessionManager = new SessionManager(getQuizHandler(), getAccountHandler(), getCourseHandler());
         }
         return sessionManager;
     }
 
-    public static IAccountHandler getAccountHandler() {
+    public static synchronized IAccountHandler getAccountHandler() {
         if (accountHandler == null) {
             accountHandler = new AccountHandler(getAccountData(), getSessionData());
         }
         return accountHandler;
     }
 
-    public static IQuizHandler getQuizHandler() {
+    public static synchronized IQuizHandler getQuizHandler() {
         if (quizHandler == null){
             quizHandler = new QuizHandler(getQuizData());
         }
         return quizHandler;
     }
 
-    public static ICourseHandler getCourseHandler(){
+    public static synchronized ICourseHandler getCourseHandler(){
         if (courseHandler == null){
             courseHandler = new CourseHandler(getCourseData(), getChapterData());
         }

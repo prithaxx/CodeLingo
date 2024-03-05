@@ -7,6 +7,7 @@ import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
+import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
 
 public interface IAccountHandler {
 
@@ -16,7 +17,7 @@ public interface IAccountHandler {
      *
      * @param name - name of account to log into
      */
-    AccountObj guestLogin(String name) throws SQLException;
+    AccountObj guestLogin(String name) throws DataInaccessibleException;
 
     void setActiveCourse(AccountObj account, int courseId);
 

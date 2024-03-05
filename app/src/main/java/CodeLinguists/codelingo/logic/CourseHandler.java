@@ -1,4 +1,4 @@
-package CodeLinguists.codelingo.application;
+package CodeLinguists.codelingo.logic;
 
 import java.util.List;
 
@@ -12,8 +12,9 @@ import CodeLinguists.codelingo.persistence.ICourseData;
 import CodeLinguists.codelingo.persistence.IQuizData;
 
 public class CourseHandler implements ICourseHandler {
-    private ICourseData courseData;
-    private IChapterData chapterData;
+    private final ICourseData courseData;
+    private final IChapterData chapterData;
+    
     public CourseHandler(ICourseData courseData, IChapterData chapterData) {
         this.courseData = courseData;
         this.chapterData = chapterData;

@@ -7,7 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.AccountObj;
+import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
+import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.persistence.IAccountData;
 import CodeLinguists.codelingo.persistence.utils.ISqlRunner;
 
@@ -40,11 +43,16 @@ public class AccountDataSQL implements IAccountData {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return account;
+
+        if (account == null) {
+            throw new AccountNotFoundException(Strings.AccountNotFound(name));
+        } else {
+            return account;
+        }
     }
 
     @Override
-    public AccountObj createGuestAccount(String name) throws SQLException {
+    public AccountObj createGuestAccount(String name) throws DataInaccessibleException {
         try (Connection connection = sqlRunner.connect()){
             PreparedStatement ps = connection.prepareStatement("INSERT INTO PUBLIC.ACCOUNT VALUES (DEFAULT, ?, TRUE, 1, ?, '')");
             ps.setString(1, name);
@@ -69,7 +77,7 @@ public class AccountDataSQL implements IAccountData {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        throw new SQLException("Creating account failed, no ID obtained.");
+        throw new DataInaccessibleException(Strings.CannotCreateAccount);
     }
 
     @Override
