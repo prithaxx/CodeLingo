@@ -39,10 +39,11 @@ public class SessionManagerIT {
     @Before
     public void setup() throws IOException {
         this.tempDB = TestUtils.copyDB();
-        quizHandler = Services.getQuizHandler();
-        accountHandler = Services.getAccountHandler();
-        courseHandler = Services.getCourseHandler();
-        sessionManager = new SessionManager(quizHandler, accountHandler, courseHandler);
+//        quizHandler = Services.getQuizHandler();
+//        accountHandler = Services.getAccountHandler();
+//        courseHandler = Services.getCourseHandler();
+//        sessionManager = new SessionManager(quizHandler, accountHandler, courseHandler);
+
     }
 
     @After
