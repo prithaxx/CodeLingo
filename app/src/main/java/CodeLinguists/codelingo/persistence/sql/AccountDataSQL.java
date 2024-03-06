@@ -2,13 +2,12 @@ package CodeLinguists.codelingo.persistence.sql;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.AccountObj;
+import CodeLinguists.codelingo.dso.LocalPreferences;
 import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.persistence.IAccountData;
@@ -24,44 +23,29 @@ public class AccountDataSQL implements IAccountData {
     @Override
     @NotNull
     public AccountObj getGuestAccountByName(String name) throws AccountNotFoundException {
-        AccountObj account = null;
-        try (ResultSet rs = sqlRunner.selectAccountByName(name)){
-            if (rs.next()) {
-                int id = rs.getInt("id");
-                boolean isGuest = rs.getBoolean("isGuest");
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-                int activeCourseId = rs.getInt("activeCourseId");
-
-                account = new AccountObj(id, name, isGuest, activeCourseId, username, password);
-            }
+        try {
+            return rsToAccountObj(sqlRunner.selectAccountByName(name));
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new AccountNotFoundException(Strings.AccountNotFoundWithName(name), e);
         }
+    }
 
-        if (account == null) {
-            throw new AccountNotFoundException(Strings.AccountNotFound(name));
-        } else {
-            return account;
+    @Override
+    public AccountObj getGuestAccountById(int accountId) throws AccountNotFoundException {
+        try {
+            return rsToAccountObj(sqlRunner.selectAccountById(accountId));
+        } catch (SQLException e) {
+            throw new AccountNotFoundException(Strings.AccountNotFound, e);
         }
     }
 
     @Override
     public AccountObj createGuestAccount(String name) throws DataInaccessibleException {
-        try (ResultSet rs = sqlRunner.insertGuestAccount(name)){
-            if(rs.next()) {
-                int id = rs.getInt("id");
-                String name2 = rs.getString("name");
-                boolean isGuest = rs.getBoolean("isGuest");
-                int activeCourse = rs.getInt("ActiveCourseId");
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-                return new AccountObj(id, name2, isGuest, activeCourse, username, password);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        try {
+            return rsToAccountObj(sqlRunner.insertGuestAccount(name));
+        } catch (SQLException | AccountNotFoundException e) {
+            throw new DataInaccessibleException(Strings.CannotCreateAccount, e);
         }
-        throw new DataInaccessibleException(Strings.CannotCreateAccount);
     }
 
     @Override
@@ -71,5 +55,59 @@ public class AccountDataSQL implements IAccountData {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void setStayLoggedIn(int accountId, boolean stayLoggedIn) {
+        try {
+            sqlRunner.updateLocalPreferencesAutoLogin(stayLoggedIn, accountId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public LocalPreferences getLocalPreferences() throws DataInaccessibleException {
+        try (ResultSet rs = sqlRunner.selectLocalPreferences()){
+            if (rs.next()) {
+                boolean autoLogin = rs.getBoolean("autoLogin");
+                int activeAccountId = rs.getInt("activeAccountId");
+                return new LocalPreferences(autoLogin, activeAccountId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        throw new DataInaccessibleException(Strings.CannotFindPreferences);
+    }
+
+    @Override
+    public void initLocalPreferences() {
+        try (ResultSet rs = sqlRunner.selectLocalPreferences()) {
+            if (!rs.next()){
+                sqlRunner.insertLocalPreferences();
+            } else {
+                setStayLoggedIn(1, false);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private AccountObj rsToAccountObj(ResultSet rs) throws AccountNotFoundException {
+        try (rs) {
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                boolean isGuest = rs.getBoolean("isGuest");
+                String name = rs.getString("name");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                int activeCourseId = rs.getInt("activeCourseId");
+
+                return new AccountObj(id, name, isGuest, activeCourseId, username, password);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        throw new AccountNotFoundException(Strings.AccountNotFound);
     }
 }

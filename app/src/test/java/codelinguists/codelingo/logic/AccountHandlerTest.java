@@ -95,6 +95,11 @@ public class AccountHandlerTest {
         public void setActiveCourse(int accountId, int courseId) {
 
         }
+
+        @Override
+        public void setStayLoggedIn(int accountId, boolean stayLoggedIn) {
+            return;
+        }
     }
     class SessionDataMock implements ISessionData {
 

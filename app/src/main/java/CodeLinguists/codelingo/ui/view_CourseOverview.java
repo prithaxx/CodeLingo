@@ -19,6 +19,7 @@ package CodeLinguists.codelingo.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.se.omapi.Session;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -36,14 +37,16 @@ import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.logic.ISessionManager;
 
-	public class view_CourseOverview extends AppCompatActivity {
+public class view_CourseOverview extends AppCompatActivity {
+
+	ISessionManager sessionManager;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_course_overview);
 
-		ISessionManager sessionManager = Services.getSessionManager();
+		sessionManager = Services.getSessionManager();
 
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.replace(R.id.fragmentContainerView3, cont_CourseOverview.newInstance()).commit();
@@ -73,6 +76,7 @@ import CodeLinguists.codelingo.logic.ISessionManager;
 	}
 
 	public void navigateToLogin(MenuItem item) {
+		sessionManager.logout();
 		Intent intent = new Intent(view_CourseOverview.this, view_GuestLogin.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		startActivity(intent);

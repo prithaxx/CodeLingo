@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.application.Services;
+import CodeLinguists.codelingo.dso.LocalPreferences;
 import CodeLinguists.codelingo.exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
@@ -31,15 +33,21 @@ public class view_GuestLogin extends AppCompatActivity {
         DbHelper.copyDatabaseToDevice(this);
         this.sessionManager = Services.getSessionManager();
         this.usernameField = (EditText) findViewById(R.id.un_field);
+
+        if (sessionManager.autoLogin()) {
+            navigateToCourseOverview();
+        }
     }
 
     public void btnLoginOnClick(View v){
-        login(String.valueOf(usernameField.getText()));
+        String name = String.valueOf(usernameField.getText());
+        boolean stayIn = ((CheckBox)findViewById(R.id.stay_logged_in)).isChecked();
+        login(name, stayIn);
     }
 
-    private void login(String name) {
+    private void login(String name, boolean stayLoggedIn) {
         try {
-            sessionManager.guestLogin(name);
+            sessionManager.guestLogin(name, stayLoggedIn);
             navigateToCourseOverview();
         } catch (InputValidationException | DataInaccessibleException | CourseNotFoundException e) {
             e.printStackTrace();

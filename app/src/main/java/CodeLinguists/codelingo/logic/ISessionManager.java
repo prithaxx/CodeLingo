@@ -6,6 +6,7 @@ import java.util.List;
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
+import CodeLinguists.codelingo.dso.LocalPreferences;
 import CodeLinguists.codelingo.exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
@@ -13,6 +14,7 @@ import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
 public interface ISessionManager {
 
     void guestLogin(String user) throws CourseNotFoundException, AccountPermissionException, DataInaccessibleException;
+    void guestLogin(String user, boolean stayLoggedIn) throws CourseNotFoundException, AccountPermissionException, DataInaccessibleException;
     AccountObj getActiveAccount() throws AccountPermissionException;
     IQuizIterator startQuiz();
     CourseObj getActiveCourse() throws CourseNotFoundException, AccountPermissionException;
@@ -21,4 +23,6 @@ public interface ISessionManager {
     void setActiveChapter(int index);
     List<ChapterObj> getActiveCourseChapters() throws CourseNotFoundException, AccountPermissionException;
     int calculateProgressPercentage(CourseObj course) throws CourseNotFoundException;
+    boolean autoLogin();
+    void logout();
 }

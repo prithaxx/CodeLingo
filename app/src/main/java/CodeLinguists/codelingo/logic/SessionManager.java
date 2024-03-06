@@ -1,6 +1,5 @@
 package CodeLinguists.codelingo.logic;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import CodeLinguists.codelingo.application.Strings;
@@ -8,6 +7,7 @@ import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.dso.CourseObjFactory;
+import CodeLinguists.codelingo.dso.LocalPreferences;
 import CodeLinguists.codelingo.exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
@@ -32,12 +32,30 @@ public class SessionManager implements ISessionManager {
 
     @Override
     public void guestLogin(String user) throws DataInaccessibleException {
-        this.account = accountHandler.guestLogin(user);
-        try {
-            getActiveCourse();
-        } catch (CourseNotFoundException | AccountPermissionException e) {
-            e.printStackTrace(); //Suppress these error, it's irrelevant on login
+        storeAccount(accountHandler.guestLogin(user));
+    }
+
+    @Override
+    public void guestLogin(String user, boolean stayLoggedIn) throws DataInaccessibleException {
+        storeAccount(accountHandler.guestLogin(user, stayLoggedIn));
+    }
+
+    @Override
+    public boolean autoLogin() {
+        AccountObj acc = accountHandler.autoLogin();
+        if (acc != null) {
+            storeAccount(acc);
+            return true;
         }
+        return false;
+    }
+
+    @Override
+    public void logout() {
+        account = null;
+        course = null;
+        chapterId = -1;
+        accountHandler.logout();
     }
 
     @Override
@@ -98,5 +116,14 @@ public class SessionManager implements ISessionManager {
     @Override
     public int calculateProgressPercentage(CourseObj course) throws CourseNotFoundException {
         return courseHandler.calculateProgressPercentage(account, course);
+    }
+
+    private void storeAccount(AccountObj acc) {
+        this.account = acc;
+        try {
+            getActiveCourse();
+        } catch (CourseNotFoundException | AccountPermissionException e) {
+            e.printStackTrace(); //Suppress these error, it's irrelevant on login
+        }
     }
 }

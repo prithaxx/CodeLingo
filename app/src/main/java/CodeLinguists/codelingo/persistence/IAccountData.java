@@ -3,6 +3,7 @@ package CodeLinguists.codelingo.persistence;
 import java.sql.SQLException;
 
 import CodeLinguists.codelingo.dso.AccountObj;
+import CodeLinguists.codelingo.dso.LocalPreferences;
 import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
 
@@ -15,6 +16,7 @@ public interface IAccountData {
      * @return matching account
      */
     AccountObj getGuestAccountByName(String name) throws AccountNotFoundException;
+    AccountObj getGuestAccountById(int accountId) throws AccountNotFoundException;
 
     /**
      * creates and returns a new guest account if name is unique, else throw an exception
@@ -24,4 +26,10 @@ public interface IAccountData {
      */
     AccountObj createGuestAccount(String name) throws DataInaccessibleException;
     void setActiveCourse(int accountId, int courseId);
+
+    void setStayLoggedIn(int accountId, boolean stayLoggedIn);
+
+    LocalPreferences getLocalPreferences() throws DataInaccessibleException;
+
+    void initLocalPreferences();
 }
