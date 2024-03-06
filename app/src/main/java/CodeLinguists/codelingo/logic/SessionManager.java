@@ -41,6 +41,14 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
+    public AccountObj getActiveAccount() throws AccountPermissionException {
+        if (account == null) {
+            throw new AccountPermissionException(Strings.NotSignedIn);
+        }
+        return account;
+    }
+
+    @Override
     public IQuizIterator startQuiz() {
         if (course==null || chapterId<0) {
             throw new NoItemSelectedException(Strings.NoCourseSelected);
@@ -55,12 +63,12 @@ public class SessionManager implements ISessionManager {
             throw new AccountPermissionException(Strings.NotSignedIn);
         }
         try {
-            CourseObj course = courseHandler.getActiveCourse(account);
+            course = courseHandler.getActiveCourse(account);
+            return course;
         } catch (CourseNotFoundException e) {
             course = CourseObjFactory.getNoneCourse();
             throw e;
         }
-        return course;
     }
 
     @Override

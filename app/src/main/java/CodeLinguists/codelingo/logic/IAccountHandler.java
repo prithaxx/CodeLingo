@@ -20,6 +20,4 @@ public interface IAccountHandler {
     AccountObj guestLogin(String name) throws DataInaccessibleException;
 
     void setActiveCourse(AccountObj account, int courseId);
-
-    List<ChapterObj> getActiveCourseChapters();
 }

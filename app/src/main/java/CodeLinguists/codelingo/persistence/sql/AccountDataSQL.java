@@ -25,12 +25,7 @@ public class AccountDataSQL implements IAccountData {
     @NotNull
     public AccountObj getGuestAccountByName(String name) throws AccountNotFoundException {
         AccountObj account = null;
-        try (Connection connection = sqlRunner.connect()){
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM ACCOUNT WHERE name = ?");
-            ps.setString(1, name);
-            ResultSet rs = ps.executeQuery();
-            ps.close();
-
+        try (ResultSet rs = sqlRunner.selectAccountByName(name)){
             if (rs.next()) {
                 int id = rs.getInt("id");
                 boolean isGuest = rs.getBoolean("isGuest");
@@ -53,18 +48,7 @@ public class AccountDataSQL implements IAccountData {
 
     @Override
     public AccountObj createGuestAccount(String name) throws DataInaccessibleException {
-        try (Connection connection = sqlRunner.connect()){
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO PUBLIC.ACCOUNT VALUES (DEFAULT, ?, TRUE, 1, ?, '')");
-            ps.setString(1, name);
-            ps.setString(2, name);
-            ps.executeUpdate();
-            ps.close();
-
-            ps = connection.prepareStatement("select * from ACCOUNT where USERNAME = ? and NAME = ?");
-            ps.setString(1, name);
-            ps.setString(2, name);
-            ResultSet rs = ps.executeQuery();
-
+        try (ResultSet rs = sqlRunner.selectAccountByName(name)){
             if(rs.next()) {
                 int id = rs.getInt("id");
                 String name2 = rs.getString("name");
@@ -82,12 +66,8 @@ public class AccountDataSQL implements IAccountData {
 
     @Override
     public void setActiveCourse(int accountId, int courseId) {
-        try (Connection connection = sqlRunner.connect()) {
-            PreparedStatement ps = connection.prepareStatement("UPDATE ACCOUNT set ActiveCourseId = ? where id = ?");
-            ps.setInt(1, courseId);
-            ps.setInt(2, accountId);
-            ps.executeUpdate();
-            ps.close();
+        try {
+            sqlRunner.updateAccountActiveCourse(accountId, courseId);
         } catch (SQLException e) {
             e.printStackTrace();
         }
