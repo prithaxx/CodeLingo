@@ -1,4 +1,4 @@
-package CodeLinguists.codelingo.application;
+package CodeLinguists.codelingo.logic;
 
 import java.util.List;
 

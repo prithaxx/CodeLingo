@@ -1,6 +1,7 @@
 package CodeLinguists.codelingo.application;
 
 import CodeLinguists.codelingo.logic.AccountHandler;
+import CodeLinguists.codelingo.logic.CourseHandler;
 import CodeLinguists.codelingo.logic.IAccountHandler;
 import CodeLinguists.codelingo.logic.ICourseHandler;
 import CodeLinguists.codelingo.logic.IQuizHandler;
