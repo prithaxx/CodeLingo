@@ -14,7 +14,7 @@ public interface IAccountData {
      * @param name - search accounts by string
      * @return matching account
      */
-    AccountObj getGuestAccountByName(String name);
+    AccountObj getGuestAccountByName(String name) throws AccountNotFoundException;
 
     /**
      * creates and returns a new guest account if name is unique, else throw an exception
