@@ -42,6 +42,7 @@ public class view_GuestLogin extends AppCompatActivity {
             sessionManager.guestLogin(name);
             navigateToCourseOverview();
         } catch (InputValidationException | DataInaccessibleException | CourseNotFoundException e) {
+            e.printStackTrace();
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         } catch (AccountPermissionException e) {
             e.printStackTrace();

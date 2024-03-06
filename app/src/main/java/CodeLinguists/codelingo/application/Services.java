@@ -52,6 +52,10 @@ public class Services {
     private static IQuizData quizData;
     private static IChapterData chapterData;
 
+    @Deprecated
+    /**
+     * Used exclusively for testing
+     */
     public static synchronized void resetObjects() {
         sessionManager = null;
         accountHandler = null;

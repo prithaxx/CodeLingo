@@ -51,6 +51,7 @@ public class cont_CourseOverview extends Fragment {
         try {
             course = sessionManager.getActiveCourse();
         } catch (CourseNotFoundException | AccountPermissionException e) {
+            e.printStackTrace();
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
@@ -64,6 +65,7 @@ public class cont_CourseOverview extends Fragment {
         try {
             progressPercentage = sessionManager.calculateProgressPercentage(course);
         } catch (CourseNotFoundException e) {
+            e.printStackTrace();
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
         tvProgressPercentage.setText(String.format(Locale.getDefault(), "%d%% complete", progressPercentage));

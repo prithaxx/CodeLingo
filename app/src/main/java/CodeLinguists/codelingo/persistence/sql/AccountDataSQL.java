@@ -48,7 +48,7 @@ public class AccountDataSQL implements IAccountData {
 
     @Override
     public AccountObj createGuestAccount(String name) throws DataInaccessibleException {
-        try (ResultSet rs = sqlRunner.selectAccountByName(name)){
+        try (ResultSet rs = sqlRunner.insertGuestAccount(name)){
             if(rs.next()) {
                 int id = rs.getInt("id");
                 String name2 = rs.getString("name");

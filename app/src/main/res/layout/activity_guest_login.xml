@@ -31,7 +31,6 @@
             android:textSize="60dp"
             android:gravity="center"
             android:ems="10"
-            android:inputType="text"
             android:textStyle="bold"
             android:text="CodeLingo" />
 

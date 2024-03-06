@@ -57,6 +57,7 @@ import CodeLinguists.codelingo.logic.ISessionManager;
 			menuName.setText(String.format(getString(R.string.welcome_name), account.getName()));
 			menuUsername.setText(account.getUsername());
 		} catch (AccountPermissionException e) {
+			e.printStackTrace();
 			Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 		}
 	}
