@@ -11,9 +11,11 @@ import CodeLinguists.codelingo.persistence.IAccountData;
 
 public class AccountDataStub implements IAccountData {
     private final List<AccountObj> guestAccounts;
+    private LocalPreferences localPreferences;
 
     public AccountDataStub() {
         guestAccounts = new ArrayList<>();
+        localPreferences = new LocalPreferences(false, 0);
     }
 
     @Override
@@ -55,18 +57,18 @@ public class AccountDataStub implements IAccountData {
     //There is no persistence, so staying logged in does nothing
     @Override
     public void setStayLoggedIn(int accountid, boolean stayLoggedIn) {
-        return;
+        localPreferences = new LocalPreferences(stayLoggedIn, accountid);
     }
 
     @Override
     public LocalPreferences getLocalPreferences() throws DataInaccessibleException {
-        return new LocalPreferences(false, 0);
+        return localPreferences;
     }
 
     //No persistence -> no localPreferences
     @Override
     public void initLocalPreferences() {
-        return;
+        localPreferences = new LocalPreferences(false, 0);
     }
 
     private AccountObj getAccountById(int accountId) {
