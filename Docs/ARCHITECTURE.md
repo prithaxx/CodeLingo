@@ -2,13 +2,13 @@
 
 **Directory of Classes and their locations**
 
-## Iteration 1 Diagram
-
-![architecture](<Architecture.svg>)
-
 ## Iteration 2 Diagram
 
 ![alt text](Architecture2.svg)
+
+## Iteration 1 Diagram
+
+![architecture](<Architecture.svg>)
 
 ## UI Layer
 [GuestLogin](../app/src/main/java/CodeLinguists/codelingo/ui/view_GuestLogin.java)
