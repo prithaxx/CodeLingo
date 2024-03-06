@@ -47,6 +47,7 @@ public class view_SlideShowWrapper extends AppCompatActivity {
         try {
             changeSlide(quizIterator.submit(currentSlide.getInput()));
         } catch (InputValidationException e) {
+            e.printStackTrace();
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }

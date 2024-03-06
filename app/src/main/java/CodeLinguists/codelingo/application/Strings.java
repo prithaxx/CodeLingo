@@ -9,9 +9,12 @@ public class Strings {
     public static String NoName = "Name cannot be empty.";
     public static String NotSignedIn = "Account is not set.";
     public static String CannotCreateAccount = "Creating account failed, please try again";
-    public static String AccountNotFound(String name) { return "No account found for the name " + name; }
+    public static String AccountNotFound = "No account found";
+
+    public static String AccountNotFoundWithName(String name) { return "No account found for the name " + name; }
     public static String CourseNotFound(int courseId) { return "Course "+courseId+" is not available. Selecte a different course"; }
     public static String CourseHasNoChapters = "Course under construction, no lessons found for course.";
+    public static String CannotFindPreferences = "LOCAL_PREFERENCES returned no entries.";
 
     //System Exceptions
     public static String DbNotInitialized = "Database is not instantiate yet!";

@@ -51,6 +51,7 @@ public class cont_ChapterSummary extends AppCompatActivity {
             chapterListRecyclerView.setAdapter(adapter);
             chapterListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         } catch (CourseNotFoundException | AccountPermissionException | EmptyListException e) {
+            e.printStackTrace();
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }

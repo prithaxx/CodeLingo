@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.CourseObj;
+import CodeLinguists.codelingo.dso.LocalPreferences;
 import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.exceptions.InputValidationException;
@@ -80,6 +81,11 @@ public class AccountHandlerTest {
         }
 
         @Override
+        public AccountObj getGuestAccountById(int accountId) throws AccountNotFoundException {
+            return null;
+        }
+
+        @Override
         public AccountObj createGuestAccount(String name) {
             if (isCreateGuestNull){
                 return null;
@@ -93,6 +99,21 @@ public class AccountHandlerTest {
 
         @Override
         public void setActiveCourse(int accountId, int courseId) {
+
+        }
+
+        @Override
+        public void setStayLoggedIn(int accountId, boolean stayLoggedIn) {
+            return;
+        }
+
+        @Override
+        public LocalPreferences getLocalPreferences() throws DataInaccessibleException {
+            return null;
+        }
+
+        @Override
+        public void initLocalPreferences() {
 
         }
     }

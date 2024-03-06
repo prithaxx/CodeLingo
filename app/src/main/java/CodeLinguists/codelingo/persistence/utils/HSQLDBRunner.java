@@ -33,6 +33,20 @@ public class HSQLDBRunner implements ISqlRunner {
     }
 
     @Override
+    public ResultSet selectAccountById(int accountId) throws SQLException {
+        //Uses try-with to close connection & prepared statement on exception
+        try (
+                Connection connection = connect();
+                PreparedStatement ps = connection.prepareStatement("SELECT * FROM ACCOUNT WHERE id = ?");
+        ) {
+            ps.setInt(1, accountId);
+            ResultSet rs = ps.executeQuery();
+            ps.close();
+            return rs;
+        }
+    }
+
+    @Override
     public ResultSet insertGuestAccount(String name) throws SQLException {
         //Uses try-with to close connection & prepared statement on exception
         try (
@@ -142,6 +156,32 @@ public class HSQLDBRunner implements ISqlRunner {
             ps.setInt(1, chapterId);
             ps.setInt(2, quizId);
             return ps.executeQuery();
+        }
+    }
+
+    @Override
+    public void updateLocalPreferencesAutoLogin(boolean stayLoggedIn, int accountId) throws SQLException {
+        try (Connection connection = connect();
+             PreparedStatement ps = connection.prepareStatement("UPDATE LOCAL_PREFERENCES SET (autoLogin, activeAccountId) = (?, ?)")) {
+            ps.setBoolean(1, stayLoggedIn);
+            ps.setInt(2, accountId);
+            ps.executeUpdate();
+        }
+    }
+
+    @Override
+    public ResultSet selectLocalPreferences() throws SQLException {
+        try (Connection connection = connect();
+             PreparedStatement ps = connection.prepareStatement("SELECT * FROM LOCAL_PREFERENCES")) {
+            return ps.executeQuery();
+        }
+    }
+
+    @Override
+    public void insertLocalPreferences() throws SQLException {
+        try (Connection connection = connect();
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO LOCAL_PREFERENCES FALSE, 1")) {
+            ps.executeUpdate();
         }
     }
 }
