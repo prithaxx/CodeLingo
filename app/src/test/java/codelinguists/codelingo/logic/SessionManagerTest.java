@@ -18,7 +18,7 @@ public class SessionManagerTest {
     }
 
     @Test
-    public void guestLoginTest() throws SQLException {
+    public void guestLoginTest() throws SQLException, CourseNotFoundException {
         Services.getSessionManager().guestLogin("test");
     }
 
