@@ -8,6 +8,7 @@ import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.dso.CourseObjFactory;
 import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
+import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.logic.logic_exceptions.NoItemSelectedException;
@@ -30,12 +31,12 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public void guestLogin(String user) throws DataInaccessibleException {
+    public void guestLogin(String user) throws DataInaccessibleException, InputValidationException {
         storeAccount(accountHandler.guestLogin(user));
     }
 
     @Override
-    public void guestLogin(String user, boolean stayLoggedIn) throws DataInaccessibleException {
+    public void guestLogin(String user, boolean stayLoggedIn) throws DataInaccessibleException, InputValidationException {
         storeAccount(accountHandler.guestLogin(user, stayLoggedIn));
     }
 
@@ -66,7 +67,7 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public IQuizIterator startQuiz() {
+    public IQuizIterator startQuiz() throws NoItemSelectedException {
         if (course==null || chapterId<0) {
             throw new NoItemSelectedException(Strings.NoCourseSelected);
         }

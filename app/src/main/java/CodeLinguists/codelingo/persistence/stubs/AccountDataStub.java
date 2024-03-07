@@ -5,8 +5,8 @@ import java.util.List;
 
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.LocalPreferences;
-import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
-import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.AccountNotFoundException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.persistence.IAccountData;
 
 public class AccountDataStub implements IAccountData {
@@ -56,8 +56,8 @@ public class AccountDataStub implements IAccountData {
 
     //There is no persistence, so staying logged in does nothing
     @Override
-    public void setStayLoggedIn(int accountid, boolean stayLoggedIn) {
-        localPreferences = new LocalPreferences(stayLoggedIn, accountid);
+    public void setStayLoggedIn(int accountId, boolean stayLoggedIn) {
+        localPreferences = new LocalPreferences(stayLoggedIn, accountId);
     }
 
     @Override

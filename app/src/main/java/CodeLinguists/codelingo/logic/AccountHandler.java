@@ -2,8 +2,6 @@ package CodeLinguists.codelingo.logic;
 
 import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.AccountObj;
-import CodeLinguists.codelingo.dso.ChapterObj;
-import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.dso.LocalPreferences;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
@@ -22,17 +20,17 @@ public class AccountHandler implements IAccountHandler {
     }
 
     @Override
-    public AccountObj guestLogin(String name) throws DataInaccessibleException {
+    public AccountObj guestLogin(String name) throws DataInaccessibleException, InputValidationException {
         return guestLogin(name, false);
     }
 
     @Override
-    public AccountObj guestLogin(String name, boolean stayLoggedIn) throws DataInaccessibleException {
+    public AccountObj guestLogin(String name, boolean stayLoggedIn) throws DataInaccessibleException, InputValidationException {
         if(name == null || name.isEmpty()){
             throw new InputValidationException(Strings.NoName);
         }
 
-        AccountObj account = null;
+        AccountObj account;
         try {
             account = accountData.getGuestAccountByName(name);
         } catch (AccountNotFoundException e) {

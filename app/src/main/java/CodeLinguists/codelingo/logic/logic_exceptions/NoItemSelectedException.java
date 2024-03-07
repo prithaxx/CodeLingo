@@ -1,6 +1,6 @@
 package CodeLinguists.codelingo.logic.logic_exceptions;
 
-public class NoItemSelectedException extends RuntimeException{
+public class NoItemSelectedException extends Exception{
     public NoItemSelectedException(String message) {
         super(message);
     }

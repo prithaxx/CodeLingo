@@ -1,6 +1,7 @@
 package CodeLinguists.codelingo.logic;
 
 import CodeLinguists.codelingo.dso.QuizObj;
+import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 
 public interface IQuizIterator {
     QuizObj startQuiz();
@@ -21,5 +22,5 @@ public interface IQuizIterator {
      * @return nextQuestion() if no feedback required,
      * Else a QuizObj for feedback
      */
-    QuizObj submit(String input);
+    QuizObj submit(String input) throws InputValidationException;
 }
