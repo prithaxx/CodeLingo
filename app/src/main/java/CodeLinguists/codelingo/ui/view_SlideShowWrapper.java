@@ -10,13 +10,15 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import CodeLinguists.codelingo.R;
+import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.QuizObj;
-import CodeLinguists.codelingo.exceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.IQuizIterator;
 import CodeLinguists.codelingo.logic.ISessionManager;
-import CodeLinguists.codelingo.logic.SessionManager;
+import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
+import CodeLinguists.codelingo.logic.logic_exceptions.NoItemSelectedException;
 import CodeLinguists.codelingo.ui.slides.QuestionFragmentFactory;
 import CodeLinguists.codelingo.ui.slides.QuizSlide;
+import CodeLinguists.codelingo.ui.ui_exceptions.SlideTypeNotHandledException;
 
 /**
  * Provides common behaviours for slides like:
@@ -28,7 +30,6 @@ public class view_SlideShowWrapper extends AppCompatActivity {
     private ISessionManager sessionManager;
     private IQuizIterator quizIterator;
     private QuestionFragmentFactory slideFactory;
-    int lives = 3; //needs to be global
     private QuizSlide currentSlide;
 
     @Override
@@ -36,28 +37,32 @@ public class view_SlideShowWrapper extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slide_show_wrapper);
 
-        this.sessionManager = SessionManager.newInstance();
-        this.quizIterator = sessionManager.startQuiz();
-        this.slideFactory = new QuestionFragmentFactory();
-        changeSlide(quizIterator.startQuiz()); //Load first slide
-    }
-
-    public void btnSlideShowNextOnClick(View v){
+        this.sessionManager = Services.getSessionManager();
         try {
-            changeSlide(quizIterator.submit(currentSlide.getInput()));
-        } catch (InputValidationException e) {
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            this.quizIterator = sessionManager.startQuiz();
+        } catch (NoItemSelectedException e) {
+            throw new RuntimeException(e);
+        }
+        this.slideFactory = new QuestionFragmentFactory();
+        try {
+            changeSlide(quizIterator.startQuiz()); //Load first slide
+        } catch (SlideTypeNotHandledException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public void btnSlideShowPrevOnClick(View v){
+    public void btnSlideShowNextOnClick(View v) throws SlideTypeNotHandledException, InputValidationException {
+        changeSlide(quizIterator.submit(currentSlide.getInput()));
+    }
+
+    public void btnSlideShowPrevOnClick(View v) throws SlideTypeNotHandledException {
         changeSlide(quizIterator.prevQuestion());
     }
-    public void btnSlideShowSkipOnClick(View v) {
+    public void btnSlideShowSkipOnClick(View v) throws SlideTypeNotHandledException {
         changeSlide(quizIterator.nextQuestion());
     }
 
-    private void changeSlide(QuizObj quiz) {
+    private void changeSlide(QuizObj quiz) throws SlideTypeNotHandledException {
         this.currentSlide = slideFactory.getInstance(quiz);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -72,14 +77,26 @@ public class view_SlideShowWrapper extends AppCompatActivity {
 
         if (quizData.hasAnswer()) {
             next.setText(R.string.check_answer);
-            next.setOnClickListener(this::btnSlideShowNextOnClick);
+            next.setOnClickListener(v -> {
+                try {
+                    btnSlideShowNextOnClick(v);
+                } catch (SlideTypeNotHandledException | InputValidationException e) {
+                    Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
         } else {
             if (!quizIterator.hasNextQuestion()) {
                 next.setText(R.string.done);
                 next.setOnClickListener(this::finishQuiz);
             } else {
                 next.setText(R.string.next);
-                next.setOnClickListener(this::btnSlideShowNextOnClick);
+                next.setOnClickListener(v -> {
+                    try {
+                        btnSlideShowNextOnClick(v);
+                    } catch (SlideTypeNotHandledException | InputValidationException e) {
+                        Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         }
 

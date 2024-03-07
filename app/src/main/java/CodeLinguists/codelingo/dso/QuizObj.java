@@ -4,7 +4,7 @@ import java.util.List;
 
 public record QuizObj(int id,
                       int chapterId,
-                      QuestionTypes type,
+                      QuestionType type,
                       String prompt,
                       boolean hasAnswer,
                       String answer,
@@ -12,7 +12,7 @@ public record QuizObj(int id,
                       List<String> wrongAnswers,
                       String wrongFeedback,
                       String correctFeedback) {
-    public static QuizObj asFeedback(QuizObj quiz, QuestionTypes type) {
+    public static QuizObj cloneAsFeedback(QuizObj quiz, QuestionType type) {
         return new QuizObj(
                 quiz.id(),
                 quiz.chapterId(),

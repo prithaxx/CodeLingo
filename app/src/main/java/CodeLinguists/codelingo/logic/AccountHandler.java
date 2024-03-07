@@ -1,61 +1,72 @@
 package CodeLinguists.codelingo.logic;
 
+import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.AccountObj;
-import CodeLinguists.codelingo.dso.ChapterObj;
-import CodeLinguists.codelingo.dso.CourseObj;
-import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
-import CodeLinguists.codelingo.exceptions.InputValidationException;
+import CodeLinguists.codelingo.dso.preferencesObj;
+import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.AccountNotFoundException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
+import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.persistence.IAccountData;
-import CodeLinguists.codelingo.persistence.ISessionData;
-import CodeLinguists.codelingo.application.Services;
-
-import java.sql.SQLException;
-import java.util.List;
 
 public class AccountHandler implements IAccountHandler {
 
     private final IAccountData accountData;
-    private final ISessionData sessionData;
 
-    public AccountHandler(boolean forProduction) {
-        this.accountData = Services.getAccountData(forProduction);
-        this.sessionData = Services.getSessionData(forProduction);
-    }
-
-    public AccountHandler(IAccountData accountData, ISessionData sessionData) {
+    public AccountHandler(IAccountData accountData) {
         this.accountData = accountData;
-        this.sessionData = sessionData;
     }
 
     @Override
-    public AccountObj guestLogin(String name) throws AccountNotFoundException, SQLException {
+    public AccountObj guestLogin(String name) throws DataInaccessibleException, InputValidationException {
+        return guestLogin(name, false);
+    }
+
+    @Override
+    public AccountObj guestLogin(String name, boolean stayLoggedIn) throws DataInaccessibleException, InputValidationException {
         if(name == null || name.isEmpty()){
-            throw new InputValidationException("Name cannot be empty.");
+            throw new InputValidationException(Strings.NoName);
         }
 
-        AccountObj account = accountData.getGuestAccountByName(name);
-
-        if (account==null) {
+        AccountObj account;
+        try {
+            account = accountData.getGuestAccountByName(name);
+        } catch (AccountNotFoundException e) {
             account = accountData.createGuestAccount(name);
         }
 
-        updateSessionData(account);
+        accountData.setStayLoggedIn(account.getId(), stayLoggedIn);
         return account;
     }
 
     @Override
-    public CourseObj getActiveCourse() {
-        return sessionData.getActiveCourse();
+    public void logout() {
+        accountData.setStayLoggedIn(-1, false);
     }
 
     @Override
-    public List<ChapterObj> getActiveCourseChapters() {
+     // Returns Null if autologin fails
+    public AccountObj autoLogin() {
+        try {
+            preferencesObj lp = accountData.getLocalPreferences();
+            if (lp.autoLogin() && lp.accountId()>0) {
+                return accountData.getGuestAccountById(lp.accountId());
+            }
+        } catch (DataInaccessibleException | AccountNotFoundException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
-    private void updateSessionData(AccountObj account) {
-        if (account != null) {
-            sessionData.setActiveAccount(account);
+    @Override
+    public void setActiveCourse(AccountObj account, int courseId) throws InputValidationException, AccountPermissionException {
+        if (courseId<0) {
+            throw new InputValidationException(Strings.CourseNotFound(courseId));
         }
+        if (account==null) {
+            throw new AccountPermissionException(Strings.NotSignedIn);
+        }
+        accountData.setActiveCourse(account.getId(), courseId);
+        account.setActiveCourseId(courseId);
     }
 }

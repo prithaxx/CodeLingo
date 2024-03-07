@@ -1,9 +1,11 @@
 package CodeLinguists.codelingo.ui;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,13 +13,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import CodeLinguists.codelingo.R;
+import CodeLinguists.codelingo.application.Services;
+import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
-import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
+import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.logic.ISessionManager;
-import CodeLinguists.codelingo.logic.SessionManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,56 +50,46 @@ public class cont_CourseOverview extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        this.sessionManager = SessionManager.newInstance();
+        this.sessionManager = Services.getSessionManager();
         CourseObj course = null;
         try {
             course = sessionManager.getActiveCourse();
-        } catch (CourseNotFoundException e) {
+        } catch (CourseNotFoundException | AccountPermissionException e) {
+            e.printStackTrace();
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
         View v = inflater.inflate(R.layout.fragment_course_overview, container, false);
 
         TextView tv = v.findViewById(R.id.placeholder_course);
-        tv.setText(course!=null ? course.name() : "Select a course");
+        tv.setText(course!=null ? course.name() : getString(R.string.select_a_course));
 
         TextView tvProgressPercentage = v.findViewById(R.id.progress_percentage);
         int progressPercentage = 0;
         try {
-            progressPercentage = sessionManager.calculateProgressPercentage(course);
-        } catch (CourseNotFoundException e) {
+            progressPercentage = sessionManager.calculateProgressPercentage();
+        } catch (CourseNotFoundException | AccountPermissionException e) {
+            e.printStackTrace();
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
-        tvProgressPercentage.setText(String.format(Locale.getDefault(), "%d%%", progressPercentage));
+        tvProgressPercentage.setText(String.format(Locale.getDefault(), "%d%% complete", progressPercentage));
 
-        View b = v.findViewById(R.id.rectangle_1);
-        b.setOnClickListener(this::tileOnclick0);
-        b = v.findViewById(R.id.rectangle_2);
-        b.setOnClickListener(this::tileOnclick1);
-        b = v.findViewById(R.id.rectangle_3);
-        b.setOnClickListener(this::tileOnclick2);
-        b = v.findViewById(R.id.rectangle_4);
-        b.setOnClickListener(this::tileOnclick3);
+        View chapterListView = v.findViewById(R.id.chapterList);
+        List<ChapterObj> chapters = null;
+        try {
+            chapters = sessionManager.getActiveCourseChapters();
+        } catch (CourseNotFoundException | AccountPermissionException e) {
+            e.printStackTrace();
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            chapters = new ArrayList<>(); //Empty list to avoid null point errors
+        }
 
+        // Set the adapter
+        if (chapterListView instanceof RecyclerView recyclerView) {
+            Context context = chapterListView.getContext();
+            recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
+            recyclerView.setAdapter(new itm_ChapterRecyclerViewAdapter(chapters));
+        }
         return v;
-    }
-
-    public void tileOnclick0(View v) {
-        startQuiz(1);
-    }
-    public void tileOnclick1(View v) {
-        startQuiz(1);
-    }
-    public void tileOnclick2(View v) {
-        startQuiz(1);
-    }
-    public void tileOnclick3(View v) {
-        startQuiz(1);
-    }
-
-    public void startQuiz(int index) {
-        sessionManager.setActiveChapter(index);
-        Intent intent = new Intent(requireContext(), view_SlideShowWrapper.class);
-        startActivity(intent);
     }
 }

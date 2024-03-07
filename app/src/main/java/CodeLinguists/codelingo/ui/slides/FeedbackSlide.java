@@ -4,18 +4,18 @@ import android.view.View;
 import android.widget.TextView;
 
 import CodeLinguists.codelingo.R;
-import CodeLinguists.codelingo.dso.QuestionTypes;
+import CodeLinguists.codelingo.dso.QuestionType;
 import CodeLinguists.codelingo.dso.QuizObj;
 
 public class FeedbackSlide extends QuizSlide{
     private final boolean isCorrect;
     public FeedbackSlide(QuizObj quiz) {
         super(
-                quiz.type().equals(QuestionTypes.FEEDBACK_PASSED)
+                quiz.type().equals(QuestionType.FEEDBACK_PASSED)
                         ? R.layout.fragment_slide_correct_answer
                         : R.layout.fragment_slide_wrong_answer,
                 quiz);
-        this.isCorrect = quiz.type().equals(QuestionTypes.FEEDBACK_PASSED);
+        this.isCorrect = quiz.type().equals(QuestionType.FEEDBACK_PASSED);
     }
     @Override
     public String getInput() {

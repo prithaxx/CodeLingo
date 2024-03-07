@@ -2,18 +2,27 @@ package CodeLinguists.codelingo.application;
 
 import org.hsqldb.jdbcDriver;
 
-import java.lang.reflect.InvocationTargetException;
+import CodeLinguists.codelingo.application.runtime_exceptions.DBStateException;
 
 public class Main {
-    private static String dbName = "CodeLingoDB";
+    public static final String DB_FILE_NAME = "CodeLingoDB";
+    private static String dbName = null;
 
     public static void setDBPathName(final String name) {
-        new jdbcDriver();
+        //new jdbcDriver();
+        try {
+            Class.forName("org.hsqldb.jdbc.JDBCDriver").newInstance();
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         dbName = name;
+
     }
 
-    public static String getDBPathName() {
-        return dbName;
+    public static String getDbUrl() {
+        if (dbName ==null || dbName.isBlank()) {
+            throw new DBStateException(Strings.DbNotInitialized);
+        }
+        return Strings.HSQLDBUrl(dbName);
     }
-
 }

@@ -4,7 +4,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import CodeLinguists.codelingo.R;
-import CodeLinguists.codelingo.dso.QuestionTypes;
 import CodeLinguists.codelingo.dso.QuizObj;
 
 public class TextSlide extends QuizSlide{
@@ -19,9 +18,6 @@ public class TextSlide extends QuizSlide{
 
     @Override
     public void populateView(View v) {
-        if (quiz == null) {
-            throw new NullPointerException("System Error: no quiz found");
-        }
         TextView tv = v.findViewById(R.id.title_text);
         tv.setText(getString(R.string.SlideTitlePlaceholder, quiz.id()));
 

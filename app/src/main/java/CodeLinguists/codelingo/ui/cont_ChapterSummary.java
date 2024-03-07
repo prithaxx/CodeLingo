@@ -11,12 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import CodeLinguists.codelingo.R;
+import CodeLinguists.codelingo.application.Services;
+import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.ChapterObj;
-import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
-import CodeLinguists.codelingo.logic.AccountHandler;
-import CodeLinguists.codelingo.logic.IAccountHandler;
+import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
+import CodeLinguists.codelingo.ui.ui_exceptions.EmptyListException;
 import CodeLinguists.codelingo.logic.ISessionManager;
-import CodeLinguists.codelingo.logic.SessionManager;
 
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -37,29 +38,28 @@ public class cont_ChapterSummary extends AppCompatActivity {
 
         chapterListRecyclerView = findViewById(R.id.chapterList);
         chapterSummaryTextView = findViewById(R.id.chapterSummary);
-        sessionManager = new SessionManager(true);
+        sessionManager = Services.getSessionManager();
 
         List<ChapterObj> chapters = null;
 
         try {
             chapters = sessionManager.getActiveCourseChapters();
-        } catch (CourseNotFoundException e) {
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-
-        if (chapters == null || chapters.isEmpty()) {
-            Toast.makeText(this, "No chapters available", Toast.LENGTH_LONG).show();
-        } else {
             ChapterListAdapter adapter = new ChapterListAdapter(chapters);
             chapterListRecyclerView.setAdapter(adapter);
             chapterListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        } catch (CourseNotFoundException | AccountPermissionException | EmptyListException e) {
+            e.printStackTrace();
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
     private class ChapterListAdapter extends RecyclerView.Adapter<ChapterListAdapter.ChapterViewHolder> {
         private final List<ChapterObj> chapterList;
 
-        ChapterListAdapter(List<ChapterObj> chapterList) {
+        ChapterListAdapter(List<ChapterObj> chapterList) throws EmptyListException {
+            if (chapterList == null || chapterList.isEmpty()) {
+                throw new EmptyListException(Strings.CourseHasNoChapters);
+            }
             this.chapterList = chapterList;
         }
 
@@ -98,7 +98,7 @@ public class cont_ChapterSummary extends AppCompatActivity {
                 holder.buttonChapter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        chapterSummaryTextView.setText("please complete the previous chapters");
+                        chapterSummaryTextView.setText(R.string.please_complete_the_previous_chapters);
                     }
                 });
 
