@@ -1,4 +1,4 @@
-package CodeLinguists.codelingo.exceptions;
+package CodeLinguists.codelingo.persistence.persistenceExceptions;
 
 public class DataInaccessibleException extends Exception{
     public DataInaccessibleException(String message) {

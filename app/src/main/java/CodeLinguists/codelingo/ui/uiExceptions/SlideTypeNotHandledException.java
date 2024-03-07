@@ -1,4 +1,4 @@
-package CodeLinguists.codelingo.exceptions;
+package CodeLinguists.codelingo.ui.uiExceptions;
 
 public class SlideTypeNotHandledException extends RuntimeException {
     public SlideTypeNotHandledException(String message) {

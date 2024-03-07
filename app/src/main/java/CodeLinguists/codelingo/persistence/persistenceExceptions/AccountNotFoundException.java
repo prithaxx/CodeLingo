@@ -1,4 +1,4 @@
-package CodeLinguists.codelingo.exceptions;
+package CodeLinguists.codelingo.persistence.persistenceExceptions;
 
 public class AccountNotFoundException extends Exception{
     public AccountNotFoundException(String message) {

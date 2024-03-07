@@ -5,13 +5,10 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.SQLException;
-
 import CodeLinguists.codelingo.application.Services;
-import CodeLinguists.codelingo.exceptions.AccountPermissionException;
-import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
-import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
-import CodeLinguists.codelingo.logic.SessionManager;
+import CodeLinguists.codelingo.logic.logicExceptions.AccountPermissionException;
+import CodeLinguists.codelingo.persistence.persistenceExceptions.CourseNotFoundException;
+import CodeLinguists.codelingo.persistence.persistenceExceptions.DataInaccessibleException;
 
 public class SessionManagerTest {
     @Before

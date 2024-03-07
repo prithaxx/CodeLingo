@@ -8,14 +8,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.sql.SQLException;
-
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.application.Services;
-import CodeLinguists.codelingo.exceptions.AccountPermissionException;
-import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
-import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
-import CodeLinguists.codelingo.exceptions.InputValidationException;
+import CodeLinguists.codelingo.logic.logicExceptions.AccountPermissionException;
+import CodeLinguists.codelingo.persistence.persistenceExceptions.CourseNotFoundException;
+import CodeLinguists.codelingo.persistence.persistenceExceptions.DataInaccessibleException;
+import CodeLinguists.codelingo.logic.logicExceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.ISessionManager;
 import CodeLinguists.codelingo.persistence.utils.DbHelper;
 

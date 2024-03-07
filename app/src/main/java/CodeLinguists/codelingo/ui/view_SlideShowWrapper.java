@@ -12,10 +12,9 @@ import android.widget.Toast;
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.QuizObj;
-import CodeLinguists.codelingo.exceptions.InputValidationException;
+import CodeLinguists.codelingo.logic.logicExceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.IQuizIterator;
 import CodeLinguists.codelingo.logic.ISessionManager;
-import CodeLinguists.codelingo.logic.SessionManager;
 import CodeLinguists.codelingo.ui.slides.QuestionFragmentFactory;
 import CodeLinguists.codelingo.ui.slides.QuizSlide;
 
@@ -29,7 +28,6 @@ public class view_SlideShowWrapper extends AppCompatActivity {
     private ISessionManager sessionManager;
     private IQuizIterator quizIterator;
     private QuestionFragmentFactory slideFactory;
-    static int globalLives = 3; //needs to be global
     private QuizSlide currentSlide;
 
     @Override

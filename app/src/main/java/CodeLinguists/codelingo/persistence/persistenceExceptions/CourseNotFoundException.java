@@ -1,4 +1,4 @@
-package CodeLinguists.codelingo.exceptions;
+package CodeLinguists.codelingo.persistence.persistenceExceptions;
 
 public class CourseNotFoundException extends Exception{
     public CourseNotFoundException(String message, Throwable cause) {

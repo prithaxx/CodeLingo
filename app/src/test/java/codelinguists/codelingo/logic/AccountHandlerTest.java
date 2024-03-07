@@ -2,17 +2,14 @@ package codelinguists.codelingo.logic;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
-
-import java.sql.SQLException;
 
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.CourseObj;
-import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
-import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
-import CodeLinguists.codelingo.exceptions.InputValidationException;
+import CodeLinguists.codelingo.persistence.persistenceExceptions.AccountNotFoundException;
+import CodeLinguists.codelingo.persistence.persistenceExceptions.DataInaccessibleException;
+import CodeLinguists.codelingo.logic.logicExceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.AccountHandler;
 import CodeLinguists.codelingo.persistence.IAccountData;
 import CodeLinguists.codelingo.persistence.ISessionData;

@@ -1,6 +1,5 @@
 package CodeLinguists.codelingo.logic;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import CodeLinguists.codelingo.application.Strings;
@@ -8,10 +7,10 @@ import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.dso.CourseObjFactory;
-import CodeLinguists.codelingo.exceptions.AccountPermissionException;
-import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
-import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
-import CodeLinguists.codelingo.exceptions.NoItemSelectedException;
+import CodeLinguists.codelingo.logic.logicExceptions.AccountPermissionException;
+import CodeLinguists.codelingo.persistence.persistenceExceptions.CourseNotFoundException;
+import CodeLinguists.codelingo.persistence.persistenceExceptions.DataInaccessibleException;
+import CodeLinguists.codelingo.logic.logicExceptions.NoItemSelectedException;
 
 public class SessionManager implements ISessionManager {
 

@@ -1,4 +1,4 @@
-package CodeLinguists.codelingo.exceptions;
+package CodeLinguists.codelingo.logic.logicExceptions;
 
 public class AccountPermissionException extends Exception{
     public AccountPermissionException(String message) {

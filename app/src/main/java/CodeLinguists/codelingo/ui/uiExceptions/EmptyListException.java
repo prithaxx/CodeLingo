@@ -1,4 +1,4 @@
-package CodeLinguists.codelingo.exceptions;
+package CodeLinguists.codelingo.ui.uiExceptions;
 
 public class EmptyListException extends Exception{
     public EmptyListException(String message) {

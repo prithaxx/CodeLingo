@@ -1,6 +1,6 @@
 package CodeLinguists.codelingo.application;
 
-import CodeLinguists.codelingo.exceptions.RuntimeExceptions.ConstantDependencyException;
+import CodeLinguists.codelingo.application.applicationExceptions.ConstantDependencyException;
 import CodeLinguists.codelingo.logic.AccountHandler;
 import CodeLinguists.codelingo.logic.CourseHandler;
 import CodeLinguists.codelingo.logic.IAccountHandler;

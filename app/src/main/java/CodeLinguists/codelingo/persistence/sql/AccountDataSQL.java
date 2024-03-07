@@ -2,15 +2,13 @@ package CodeLinguists.codelingo.persistence.sql;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.AccountObj;
-import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
-import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
+import CodeLinguists.codelingo.persistence.persistenceExceptions.AccountNotFoundException;
+import CodeLinguists.codelingo.persistence.persistenceExceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.persistence.IAccountData;
 import CodeLinguists.codelingo.persistence.utils.ISqlRunner;
 

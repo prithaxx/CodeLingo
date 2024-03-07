@@ -1,10 +1,8 @@
 package CodeLinguists.codelingo.persistence;
 
-import java.sql.SQLException;
-
 import CodeLinguists.codelingo.dso.AccountObj;
-import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
-import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
+import CodeLinguists.codelingo.persistence.persistenceExceptions.AccountNotFoundException;
+import CodeLinguists.codelingo.persistence.persistenceExceptions.DataInaccessibleException;
 
 public interface IAccountData {
 

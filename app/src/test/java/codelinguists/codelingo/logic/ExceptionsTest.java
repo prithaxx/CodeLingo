@@ -3,8 +3,8 @@ package codelinguists.codelingo.logic;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
-import CodeLinguists.codelingo.exceptions.InputValidationException;
+import CodeLinguists.codelingo.persistence.persistenceExceptions.AccountNotFoundException;
+import CodeLinguists.codelingo.logic.logicExceptions.InputValidationException;
 public class ExceptionsTest {
     @Test
     public void testAccountNotFound() {
