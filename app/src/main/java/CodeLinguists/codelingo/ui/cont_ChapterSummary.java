@@ -14,13 +14,10 @@ import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.ChapterObj;
-import CodeLinguists.codelingo.exceptions.AccountPermissionException;
-import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
-import CodeLinguists.codelingo.exceptions.EmptyListException;
-import CodeLinguists.codelingo.logic.AccountHandler;
-import CodeLinguists.codelingo.logic.IAccountHandler;
+import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
+import CodeLinguists.codelingo.ui.ui_exceptions.EmptyListException;
 import CodeLinguists.codelingo.logic.ISessionManager;
-import CodeLinguists.codelingo.logic.SessionManager;
 
 import android.widget.ImageView;
 import android.widget.Toast;
