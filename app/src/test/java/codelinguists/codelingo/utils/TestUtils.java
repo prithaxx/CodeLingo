@@ -1,4 +1,4 @@
-package codelinguists.codelingo.unit_tests.utils;
+package codelinguists.codelingo.utils;
 
 import java.io.File;
 import java.io.IOException;

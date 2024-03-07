@@ -12,41 +12,67 @@ import java.util.List;
 
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.CourseObj;
+import CodeLinguists.codelingo.exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
+import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.exceptions.NoItemSelectedException;
-import CodeLinguists.codelingo.logic.IAccountHandler;
-import CodeLinguists.codelingo.logic.ICourseHandler;
-import CodeLinguists.codelingo.logic.IQuizHandler;
-import CodeLinguists.codelingo.logic.SessionManager;
-import codelinguists.codelingo.unit_tests.utils.TestUtils;
+import CodeLinguists.codelingo.logic.ISessionManager;
+import codelinguists.codelingo.utils.SqlDbIT;
+import codelinguists.codelingo.utils.TestUtils;
 
-public class SessionManagerIT {
-    private File tempDB;
-    private SessionManager sessionManager;
-    private IQuizHandler quizHandler;
-    private IAccountHandler accountHandler;
-    private ICourseHandler courseHandler;
-    @Before
+public class SessionManagerIT extends SqlDbIT {
+
+    ISessionManager sessionManager;
+
+    @Override
     public void setup() throws IOException {
-        this.tempDB = TestUtils.copyDB();
-        quizHandler = Services.getQuizHandler();
-        accountHandler = Services.getAccountHandler();
-        courseHandler = Services.getCourseHandler();
-        sessionManager = new SessionManager(quizHandler, accountHandler, courseHandler);
-
-    }
-
-    @After
-    public void reset() {
-        this.tempDB.delete();
-        Services.resetObjects();
+        super.setup();
+        sessionManager = Services.getSessionManager();
     }
 
     @Test
-    public void testGuestLogin() throws SQLException, CourseNotFoundException {
+    public void testGuestLogin() throws AccountPermissionException, DataInaccessibleException, CourseNotFoundException {
         String user = "SA";
         sessionManager.guestLogin(user);
-        assertNotNull(sessionManager.getActiveCourse());
+        assertNotNull(sessionManager.getActiveAccount());
+    }
+
+    @Test
+    public void testGuestLoginOverload() throws AccountPermissionException, DataInaccessibleException, CourseNotFoundException {
+        String user = "SA";
+        sessionManager.guestLogin(user, false);
+        assertNotNull(sessionManager.getActiveAccount());
+    }
+
+    @Test
+    public void testNoAutoLogin() throws AccountPermissionException, DataInaccessibleException, CourseNotFoundException {
+        String user = "SA";
+        sessionManager.guestLogin(user);
+        assertNotNull(sessionManager.getActiveAccount());
+    }
+
+    @Test(expected = AccountPermissionException.class)
+    public void testLogoutAccount() throws CourseNotFoundException, AccountPermissionException, DataInaccessibleException {
+        String user = "SA";
+        sessionManager.guestLogin(user);
+        sessionManager.logout();
+        sessionManager.getActiveAccount();
+    }
+
+    @Test(expected = AccountPermissionException.class)
+    public void testLogoutCourse() throws CourseNotFoundException, AccountPermissionException, DataInaccessibleException {
+        String user = "SA";
+        sessionManager.guestLogin(user);
+        sessionManager.logout();
+        sessionManager.getActiveCourse();
+    }
+
+    @Test(expected = AccountPermissionException.class)
+    public void testLogoutChapter() throws CourseNotFoundException, AccountPermissionException, DataInaccessibleException {
+        String user = "SA";
+        sessionManager.guestLogin(user);
+        sessionManager.logout();
+        sessionManager.getActiveCourse();
     }
 
     @Test(expected = NoItemSelectedException.class)
@@ -55,7 +81,7 @@ public class SessionManagerIT {
     }
 
     @Test
-    public void testSetActiveCourse() throws CourseNotFoundException, SQLException {
+    public void testSetActiveCourse() throws DataInaccessibleException, CourseNotFoundException, AccountPermissionException {
         String user = "SA";
         sessionManager.guestLogin(user);
         List<CourseObj> courses = sessionManager.getCourseList();
@@ -66,7 +92,7 @@ public class SessionManagerIT {
     }
 
     @Test(expected = IllegalStateException.class)
-    public void testGetActiveCourseWithoutLogin() throws CourseNotFoundException {
+    public void testGetActiveCourseWithoutLogin() throws CourseNotFoundException, AccountPermissionException {
         sessionManager.getActiveCourse();
     }
 
@@ -78,14 +104,14 @@ public class SessionManagerIT {
     //}
 
     @Test
-    public void testGetActiveCourseChapters() throws CourseNotFoundException, SQLException {
+    public void testGetActiveCourseChapters() throws CourseNotFoundException, SQLException, DataInaccessibleException, AccountPermissionException {
         String user = "SA";
         sessionManager.guestLogin(user);
         assertNotNull(sessionManager.getActiveCourseChapters());
     }
 
     @Test
-    public void testCalculateProgressPercentage() throws CourseNotFoundException, SQLException {
+    public void testCalculateProgressPercentage() throws CourseNotFoundException, SQLException, AccountPermissionException, DataInaccessibleException {
         String user = "SA";
         sessionManager.guestLogin(user);
         assertNotNull(sessionManager.calculateProgressPercentage(sessionManager.getActiveCourse()));

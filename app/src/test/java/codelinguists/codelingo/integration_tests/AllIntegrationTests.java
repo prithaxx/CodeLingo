@@ -1,4 +1,4 @@
-package codelinguists.codelingo;
+package codelinguists.codelingo.integration_tests;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -14,6 +14,6 @@ import codelinguists.codelingo.integration_tests.SessionManagerIT;
 public class AllIntegrationTests {
     @BeforeSuite
     public void setupDb() {
-        System.out.println("SADKJHASKDJGASJFKHGASFJHASGFJHASGDFJKHAG");
+
     }
 }
