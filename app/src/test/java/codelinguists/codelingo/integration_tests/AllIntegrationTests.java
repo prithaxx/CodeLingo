@@ -8,7 +8,9 @@ import codelinguists.codelingo.integration_tests.SessionManagerIT;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        SessionManagerIT.class
+        SessionManagerIT.class,
+        SessionManagerLogoutIT.class,
+        SessionManagerQuizIteratorIT.class
 })
 
 public class AllIntegrationTests {

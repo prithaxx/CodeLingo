@@ -88,7 +88,7 @@ import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFound
 			cont_CourseOverview newCont = new cont_CourseOverview();
 			FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 			ft.replace(R.id.fragmentContainerView3, newCont).commit();
-		} catch (CourseNotFoundException | AccountPermissionException e) {
+		} catch (CourseNotFoundException | AccountPermissionException | InputValidationException e) {
 			e.printStackTrace();
 			Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 		}

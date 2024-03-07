@@ -91,18 +91,30 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public void setActiveCourse(int courseId) throws CourseNotFoundException, AccountPermissionException {
+    public void setActiveCourse(int courseId) throws CourseNotFoundException, AccountPermissionException, InputValidationException {
+        if (this.account == null) {
+            throw new AccountPermissionException(Strings.NotSignedIn);
+        }
         accountHandler.setActiveCourse(account, courseId);
         getActiveCourse(); //update course variable
     }
 
     @Override
-    public List<CourseObj> getCourseList(){
+    public List<CourseObj> getCourseList() throws AccountPermissionException {
+        if (account == null) {
+            throw new AccountPermissionException(Strings.NotSignedIn);
+        }
         return courseHandler.getCourseList(account);
     }
 
     @Override
-    public void setActiveChapter(int chapterId) {
+    public void setActiveChapter(int chapterId) throws InputValidationException, AccountPermissionException {
+        if (account == null) {
+            throw new AccountPermissionException(Strings.NotSignedIn);
+        }
+        if (chapterId < 0) {
+            throw new InputValidationException(Strings.ChapterIdPositive);
+        }
         this.chapterId = chapterId;
     }
 
@@ -115,8 +127,11 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public int calculateProgressPercentage(CourseObj course) throws CourseNotFoundException {
-        return courseHandler.calculateProgressPercentage(account, course);
+    public int calculateProgressPercentage() throws CourseNotFoundException, AccountPermissionException {
+        if (account == null) {
+            throw new AccountPermissionException(Strings.NotSignedIn);
+        }
+        return courseHandler.calculateProgressPercentage(account);
     }
 
     private void storeAccount(AccountObj acc) {

@@ -53,10 +53,11 @@ public class QuizIterator implements IQuizIterator {
         inFeedback = false;
         //cursor always points to the next quiz
         //so going backwards requires on offset of 1
-        if (currentQuizCursor <= 1) {
+        if (hasPrevQuestion()) {
+            return activeQuiz.get(--currentQuizCursor-1);
+        } else {
             return null;
         }
-        return activeQuiz.get(--currentQuizCursor-1);
     }
 
     @Override
@@ -67,7 +68,7 @@ public class QuizIterator implements IQuizIterator {
     @Override
     public QuizObj submit(String input) throws InputValidationException {
         QuizObj current = activeQuiz.get(currentQuizCursor-1);
-        if ( current.answer() == null || !current.hasAnswer() || inFeedback) {
+        if ( current.answer() == null || current.answer().isBlank() || !current.hasAnswer() || inFeedback) {
             return nextQuestion();
         }
 
@@ -76,6 +77,7 @@ public class QuizIterator implements IQuizIterator {
         return QuizObj.cloneAsFeedback(current, feedbackType);
     }
 
+    @Override
     public int cursorPos() {
         return currentQuizCursor;
     }

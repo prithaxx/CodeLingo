@@ -17,6 +17,7 @@ import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
+import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.logic.ISessionManager;
 
@@ -62,8 +63,8 @@ public class cont_CourseOverview extends Fragment {
         TextView tvProgressPercentage = v.findViewById(R.id.progress_percentage);
         int progressPercentage = 0;
         try {
-            progressPercentage = sessionManager.calculateProgressPercentage(course);
-        } catch (CourseNotFoundException e) {
+            progressPercentage = sessionManager.calculateProgressPercentage();
+        } catch (CourseNotFoundException | AccountPermissionException e) {
             e.printStackTrace();
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
@@ -97,8 +98,13 @@ public class cont_CourseOverview extends Fragment {
     }
 
     public void startQuiz(int index) {
-        sessionManager.setActiveChapter(index);
-        Intent intent = new Intent(requireContext(), view_SlideShowWrapper.class);
-        startActivity(intent);
+        try {
+            sessionManager.setActiveChapter(index);
+            Intent intent = new Intent(requireContext(), view_SlideShowWrapper.class);
+            startActivity(intent);
+        } catch (InputValidationException | AccountPermissionException e) {
+            e.printStackTrace();
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }
