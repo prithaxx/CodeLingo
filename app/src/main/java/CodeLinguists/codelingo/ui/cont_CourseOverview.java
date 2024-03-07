@@ -16,10 +16,9 @@ import java.util.Locale;
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.CourseObj;
-import CodeLinguists.codelingo.exceptions.AccountPermissionException;
-import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
+import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.logic.ISessionManager;
-import CodeLinguists.codelingo.logic.SessionManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,6 +50,7 @@ public class cont_CourseOverview extends Fragment {
         try {
             course = sessionManager.getActiveCourse();
         } catch (CourseNotFoundException | AccountPermissionException e) {
+            e.printStackTrace();
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
@@ -64,10 +64,13 @@ public class cont_CourseOverview extends Fragment {
         try {
             progressPercentage = sessionManager.calculateProgressPercentage(course);
         } catch (CourseNotFoundException e) {
+            e.printStackTrace();
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
         tvProgressPercentage.setText(String.format(Locale.getDefault(), "%d%% complete", progressPercentage));
 
+
+        //We know this is hard-coded, will be resolve in iteration 3
         View b = v.findViewById(R.id.rectangle_1);
         b.setOnClickListener(this::tileOnclick0);
         b = v.findViewById(R.id.rectangle_2);

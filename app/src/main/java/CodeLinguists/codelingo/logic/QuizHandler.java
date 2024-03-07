@@ -1,9 +1,8 @@
 package CodeLinguists.codelingo.logic;
 
-import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.QuizObj;
-import CodeLinguists.codelingo.exceptions.InputValidationException;
+import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.persistence.IQuizData;
 
 public class QuizHandler implements IQuizHandler{

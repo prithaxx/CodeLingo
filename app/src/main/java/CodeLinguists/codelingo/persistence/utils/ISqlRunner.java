@@ -5,22 +5,31 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public interface ISqlRunner {
-    public Connection connect() throws SQLException;
+    Connection connect() throws SQLException;
 
     //AccountData
-    public ResultSet selectAccountByName(String name) throws SQLException;
-    public ResultSet insertGuestAccount(String name) throws SQLException;
-    public void updateAccountActiveCourse(int accountId, int courseId) throws SQLException;
+    ResultSet selectAccountByName(String name) throws SQLException;
+    ResultSet insertGuestAccount(String name) throws SQLException;
+    void updateAccountActiveCourse(int accountId, int courseId) throws SQLException;
 
     //CourseData
-    public ResultSet selectCourseById(int courseId, int accountId) throws SQLException;
-    public ResultSet selectCourseList(int accountId) throws SQLException;
+    ResultSet selectCourseById(int courseId, int accountId) throws SQLException;
+    ResultSet selectCourseList(int accountId) throws SQLException;
 
     //ChapterData
-    public ResultSet selectChaptersByCourseId(int courseId, int accountId) throws SQLException;
-    public ResultSet selectChapterById(int chapterId, int courseId, int accountId) throws SQLException;
+    ResultSet selectChaptersByCourseId(int courseId, int accountId) throws SQLException;
+    ResultSet selectChapterById(int chapterId, int courseId, int accountId) throws SQLException;
 
     //QuizData
-    public ResultSet selectQuizByChapterId(int chapterId) throws SQLException;
-    public ResultSet selectQuizById(int quizId, int chapterId) throws SQLException;
+    ResultSet selectQuizByChapterId(int chapterId) throws SQLException;
+    ResultSet selectQuizById(int quizId, int chapterId) throws SQLException;
+
+
+    //Preferences
+    void updateLocalPreferencesAutoLogin(boolean stayLoggedIn, int accountId) throws SQLException;
+    ResultSet selectLocalPreferences() throws SQLException;
+
+    void insertLocalPreferences() throws SQLException;
+
+    ResultSet selectAccountById(int accountId) throws SQLException;
 }

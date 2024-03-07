@@ -2,7 +2,7 @@ package CodeLinguists.codelingo.persistence.sql;
 
 import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.CourseObj;
-import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.persistence.ICourseData;
 import CodeLinguists.codelingo.persistence.utils.ISqlRunner;
 

@@ -19,6 +19,7 @@ package CodeLinguists.codelingo.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.se.omapi.Session;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -33,12 +34,12 @@ import com.google.android.material.navigation.NavigationView;
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.AccountObj;
-import CodeLinguists.codelingo.exceptions.AccountPermissionException;
-import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
+import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.logic.ISessionManager;
 import CodeLinguists.codelingo.logic.SessionManager;
 
 public class view_CourseOverview extends AppCompatActivity {
+
 	ISessionManager sessionManager;
 
 	@Override
@@ -58,6 +59,7 @@ public class view_CourseOverview extends AppCompatActivity {
 			menuName.setText(String.format(getString(R.string.welcome_name), account.getName()));
 			menuUsername.setText(account.getUsername());
 		} catch (AccountPermissionException e) {
+			e.printStackTrace();
 			Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 		}
 	}
@@ -73,6 +75,7 @@ public class view_CourseOverview extends AppCompatActivity {
 	}
 
 	public void navigateToLogin(MenuItem item) {
+		sessionManager.logout();
 		Intent intent = new Intent(view_CourseOverview.this, view_GuestLogin.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		startActivity(intent);
