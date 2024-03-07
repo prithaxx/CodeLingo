@@ -22,12 +22,12 @@
 - Time reporting is done on Issues labeled "DevTask"
 - The focus of this iteration was to create a horizontal prototype, so we implemented a few features to a demonstrable state.
 
-#Iteration 2 Notes
+# Iteration 2 Notes
 - Time reporting is done on Issues labeled "DevTask".
 - The big things we did in this iteration is implementing the database and write integration tests.
 - In this iteration, we started 2 features: Demo Quiz and Course Navigation. These 2 features are mostly finished:
     + Demo Quiz : Still need to implement code block type quiz slide (low priority).
-    + Course navigation: Still need to work on UI/Design of Chapter Summary popup modal (medium priority).
+    + Course navigation: Still need to work on the design of the Chapter Summary popup modal (medium priority).
     + These will be moved into the next iteration.
 
 # Docs
