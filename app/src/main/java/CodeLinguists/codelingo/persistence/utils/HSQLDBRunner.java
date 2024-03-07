@@ -115,7 +115,7 @@ public class HSQLDBRunner implements ISqlRunner {
         try (Connection connection = connect();
              PreparedStatement ps = connection.prepareStatement("SELECT c.id, c.name, c.courseId, c.description, cc.isUnlocked, cc.isCompleted " +
                      "FROM CHAPTER c " +
-                     "JOIN CHAPTER_COMPLETION cc ON c.id = cc.chapterId AND cc.accountId = ? " +
+                     "LEFT JOIN CHAPTER_COMPLETION cc ON c.id = cc.chapterId AND cc.accountId = ? " +
                      "WHERE c.courseId = ?")) {
             ps.setInt(2, courseId);
             ps.setInt(1, accountId);

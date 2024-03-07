@@ -2,7 +2,7 @@ package CodeLinguists.codelingo.logic;
 
 import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.AccountObj;
-import CodeLinguists.codelingo.dso.LocalPreferences;
+import CodeLinguists.codelingo.dso.preferencesObj;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
@@ -51,7 +51,7 @@ public class AccountHandler implements IAccountHandler {
      // Returns Null if autologin fails
     public AccountObj autoLogin() {
         try {
-            LocalPreferences lp = accountData.getLocalPreferences();
+            preferencesObj lp = accountData.getLocalPreferences();
             if (lp.autoLogin() && lp.accountId()>0) {
                 return accountData.getGuestAccountById(lp.accountId());
             }

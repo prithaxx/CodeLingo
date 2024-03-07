@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.AccountObj;
-import CodeLinguists.codelingo.dso.LocalPreferences;
+import CodeLinguists.codelingo.dso.preferencesObj;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.persistence.IAccountData;
@@ -67,12 +67,12 @@ public class AccountDataSQL implements IAccountData {
     }
 
     @Override
-    public LocalPreferences getLocalPreferences() throws DataInaccessibleException {
+    public preferencesObj getLocalPreferences() throws DataInaccessibleException {
         try (ResultSet rs = sqlRunner.selectLocalPreferences()){
             if (rs.next()) {
                 boolean autoLogin = rs.getBoolean("autoLogin");
                 int activeAccountId = rs.getInt("activeAccountId");
-                return new LocalPreferences(autoLogin, activeAccountId);
+                return new preferencesObj(autoLogin, activeAccountId);
             }
         } catch (SQLException e) {
             e.printStackTrace();
