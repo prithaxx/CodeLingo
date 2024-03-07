@@ -70,8 +70,11 @@ public class SessionManager implements ISessionManager {
 
     @Override
     public IQuizIterator startQuiz() throws NoItemSelectedException {
-        if (course==null || chapterId<0) {
+        if (course==null) {
             throw new NoItemSelectedException(Strings.NoCourseSelected);
+        }
+        if (chapterId<0) {
+            throw new NoItemSelectedException(Strings.NoChapterSelected);
         }
         return quizHandler.getQuiz(course.id(), chapterId);
     }

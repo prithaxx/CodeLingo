@@ -7,16 +7,13 @@ import CodeLinguists.codelingo.persistence.persistence_exceptions.AccountNotFoun
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.persistence.IAccountData;
-import CodeLinguists.codelingo.persistence.ISessionData;
 
 public class AccountHandler implements IAccountHandler {
 
     private final IAccountData accountData;
-    private final ISessionData sessionData;
 
-    public AccountHandler(IAccountData accountData, ISessionData sessionData) {
+    public AccountHandler(IAccountData accountData) {
         this.accountData = accountData;
-        this.sessionData = sessionData;
     }
 
     @Override
@@ -38,7 +35,6 @@ public class AccountHandler implements IAccountHandler {
         }
 
         accountData.setStayLoggedIn(account.getId(), stayLoggedIn);
-        updateSessionData(account);
         return account;
     }
 
@@ -68,11 +64,5 @@ public class AccountHandler implements IAccountHandler {
         }
         accountData.setActiveCourse(account.getId(), courseId);
         account.setActiveCourseId(courseId);
-    }
-
-    private void updateSessionData(AccountObj account) {
-        if (account != null) {
-            sessionData.setActiveAccount(account);
-        }
     }
 }

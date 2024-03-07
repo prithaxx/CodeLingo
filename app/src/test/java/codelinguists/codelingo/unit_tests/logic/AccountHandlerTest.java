@@ -13,28 +13,27 @@ import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessib
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.AccountHandler;
 import CodeLinguists.codelingo.persistence.IAccountData;
-import CodeLinguists.codelingo.persistence.ISessionData;
 
 public class AccountHandlerTest {
 
     @Test(expected = InputValidationException.class)
     public void guestLoginNullInput() throws DataInaccessibleException, AccountNotFoundException, InputValidationException {
         AccountDataMock accountData = new AccountDataMock(false, false, false);
-        AccountHandler accountHandler = new AccountHandler(accountData, null);
+        AccountHandler accountHandler = new AccountHandler(accountData);
         accountHandler.guestLogin(null);
     }
 
     @Test(expected = InputValidationException.class)
     public void guestLoginEmptyInput() throws DataInaccessibleException, AccountNotFoundException, InputValidationException {
         AccountDataMock accountData = new AccountDataMock(false, false, false);
-        AccountHandler accountHandler = new AccountHandler(accountData, null);
+        AccountHandler accountHandler = new AccountHandler(accountData);
         accountHandler.guestLogin("");
     }
 
     @Test
     public void guestLoginNoAccount() throws DataInaccessibleException, AccountNotFoundException, InputValidationException {
         AccountDataMock accountData = new AccountDataMock(false, false, true);
-        AccountHandler accountHandler = new AccountHandler(accountData, new SessionDataMock());
+        AccountHandler accountHandler = new AccountHandler(accountData);
         AccountObj acc = accountHandler.guestLogin("test");
         assertEquals(acc.getName(), "test");
     }
@@ -42,14 +41,14 @@ public class AccountHandlerTest {
     @Test
     public void guestLoginExistingAccount() throws DataInaccessibleException, AccountNotFoundException, InputValidationException {
         AccountDataMock accountData = new AccountDataMock(false, false, false);
-        AccountHandler accountHandler = new AccountHandler(accountData, new SessionDataMock());
+        AccountHandler accountHandler = new AccountHandler(accountData);
         AccountObj acc = accountHandler.guestLogin("test");
         assertEquals(acc.getName(), "test");
     }
 
     @Test
     public void guestLoginDefaultConstructor() throws DataInaccessibleException, AccountNotFoundException, InputValidationException {
-        AccountHandler accountHandler = new AccountHandler(Services.getAccountData(), Services.getSessionData());
+        AccountHandler accountHandler = new AccountHandler(Services.getAccountData());
         AccountObj acc = accountHandler.guestLogin("test");
         assertEquals(acc.getName(), "test");
     }
@@ -107,28 +106,6 @@ public class AccountHandlerTest {
         @Override
         public preferencesObj getLocalPreferences() throws DataInaccessibleException {
             return null;
-        }
-
-        @Override
-        public void initLocalPreferences() {
-
-        }
-    }
-    class SessionDataMock implements ISessionData {
-
-        private AccountObj obj;
-        @Override
-        public void setActiveAccount(AccountObj account) {
-            obj=account;
-        }
-
-        @Override
-        public CourseObj getActiveCourse() {
-            return null;
-        }
-
-        public boolean isActiveAccountSet() {
-            return obj!=null;
         }
     }
 }

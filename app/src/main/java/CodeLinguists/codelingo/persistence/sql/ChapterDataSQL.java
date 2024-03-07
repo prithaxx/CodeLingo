@@ -37,23 +37,4 @@ public class ChapterDataSQL implements IChapterData {
         }
         return chapters;
     }
-
-    @Override
-    public ChapterObj getChapterById(int chapterId, int courseId, int accountId) {
-        ChapterObj chapter = null;
-        try (ResultSet rs = sqlRunner.selectChapterById(chapterId, courseId, accountId)) {
-            if (rs.next()) {
-                chapter = new ChapterObj(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getInt("courseId"),
-                        rs.getString("description"),
-                        rs.getBoolean("isUnlocked"),
-                        rs.getBoolean("isCompleted"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return chapter;
-    }
 }
