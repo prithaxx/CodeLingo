@@ -24,7 +24,7 @@ public class AccountDataSQL implements IAccountData {
     @NotNull
     public AccountObj getGuestAccountByName(String name) throws AccountNotFoundException {
         try {
-            return rsToAccountObj(sqlRunner.selectAccountByName(name));
+            return rsToAccountObj(sqlRunner.selectGuestAccountByUsername(name));
         } catch (SQLException e) {
             throw new AccountNotFoundException(Strings.AccountNotFoundWithName(name), e);
         }
@@ -33,7 +33,7 @@ public class AccountDataSQL implements IAccountData {
     @Override
     public AccountObj getGuestAccountById(int accountId) throws AccountNotFoundException {
         try {
-            return rsToAccountObj(sqlRunner.selectAccountById(accountId));
+            return rsToAccountObj(sqlRunner.selectGuestAccountById(accountId));
         } catch (SQLException e) {
             throw new AccountNotFoundException(Strings.AccountNotFound, e);
         }

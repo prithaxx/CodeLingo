@@ -18,11 +18,11 @@ public interface ISessionManager {
     AccountObj getActiveAccount() throws AccountPermissionException;
     IQuizIterator startQuiz() throws NoItemSelectedException;
     CourseObj getActiveCourse() throws CourseNotFoundException, AccountPermissionException;
-    void setActiveCourse(int index) throws CourseNotFoundException, AccountPermissionException;
-    List<CourseObj> getCourseList();
-    void setActiveChapter(int index);
+    void setActiveCourse(int index) throws CourseNotFoundException, AccountPermissionException, InputValidationException;
+    List<CourseObj> getCourseList() throws AccountPermissionException;
+    void setActiveChapter(int index) throws InputValidationException, AccountPermissionException;
     List<ChapterObj> getActiveCourseChapters() throws CourseNotFoundException, AccountPermissionException;
-    int calculateProgressPercentage(CourseObj course) throws CourseNotFoundException;
+    int calculateProgressPercentage() throws CourseNotFoundException, AccountPermissionException;
     boolean autoLogin();
     void logout();
 }

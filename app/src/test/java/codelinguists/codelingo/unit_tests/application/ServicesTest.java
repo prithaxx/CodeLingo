@@ -1,4 +1,4 @@
-package codelinguists.codelingo.application;
+package codelinguists.codelingo.unit_tests.application;
 
 import org.junit.Before;
 import org.junit.Test;
