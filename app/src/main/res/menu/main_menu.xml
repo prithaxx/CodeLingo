@@ -10,23 +10,16 @@
 
     <item android:title="Courses">
         <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/course1"
-                    android:title="     Ex1"/>
+            <item
+                android:id="@+id/course1"
+                android:onClick="changeView"
+                android:title="     Java Basics" />
 
-                <item
-                    android:id="@+id/course2"
-                    android:title="     Ex2"/>
+            <item
+                android:id="@+id/course2"
+                android:onClick="changeView"
+                android:title="     Java Advanced" />
 
-                <item
-                    android:id="@+id/course3"
-                    android:title="     Ex3"/>
-
-                <item
-                    android:id="@+id/course4"
-                    android:title="     Ex4"/>
-            </group>
         </menu>
     </item>
 </menu>

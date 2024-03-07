@@ -34,17 +34,18 @@ import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.exceptions.AccountPermissionException;
+import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.logic.ISessionManager;
+import CodeLinguists.codelingo.logic.SessionManager;
 
 	public class view_CourseOverview extends AppCompatActivity {
+		ISessionManager sessionManager;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_course_overview);
-
-		ISessionManager sessionManager = Services.getSessionManager();
-
+		sessionManager = Services.getSessionManager();
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.replace(R.id.fragmentContainerView3, cont_CourseOverview.newInstance()).commit();
 
@@ -75,6 +76,29 @@ import CodeLinguists.codelingo.logic.ISessionManager;
 		Intent intent = new Intent(view_CourseOverview.this, view_GuestLogin.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		startActivity(intent);
+	}
+
+	private void changeCourse(int newCourseId){
+		try {
+			sessionManager.setActiveCourse(newCourseId);
+			cont_CourseOverview newCont = new cont_CourseOverview();
+			FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+			ft.replace(R.id.fragmentContainerView3, newCont).commit();
+		} catch (CourseNotFoundException | AccountPermissionException e) {
+			e.printStackTrace();
+			Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	public void changeView(MenuItem view){
+		if(R.id.course1 == view.getItemId()) {
+			changeCourse(1);
+		}
+		else if(R.id.course2 == view.getItemId()) {
+			changeCourse(2);
+		}
+		else
+			Toast.makeText(this, "Course not available", Toast.LENGTH_SHORT).show();
 	}
 }
 	
