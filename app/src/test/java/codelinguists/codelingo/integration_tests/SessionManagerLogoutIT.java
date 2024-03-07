@@ -5,12 +5,11 @@ import org.junit.Test;
 import java.io.IOException;
 
 import CodeLinguists.codelingo.application.Services;
-import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.dso.CourseObjFactory;
-import CodeLinguists.codelingo.exceptions.AccountPermissionException;
-import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
-import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.logic.ISessionManager;
+import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
+import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
 import codelinguists.codelingo.utils.SqlDbIT;
 
 public class SessionManagerLogoutIT extends SqlDbIT {
@@ -28,17 +27,17 @@ public class SessionManagerLogoutIT extends SqlDbIT {
     }
 
     @Test(expected = AccountPermissionException.class)
-    public void logoutSetActiveCourse() throws CourseNotFoundException, AccountPermissionException {
+    public void logoutSetActiveCourse() throws CourseNotFoundException, AccountPermissionException, InputValidationException {
         sessionManager.setActiveCourse(1);
     }
 
     @Test(expected = AccountPermissionException.class)
-    public void logoutGetCourseList() throws CourseNotFoundException, AccountPermissionException {
+    public void logoutGetCourseList() throws AccountPermissionException {
         sessionManager.getCourseList();
     }
 
     @Test(expected = AccountPermissionException.class)
-    public void logoutSetActiveChapter() throws CourseNotFoundException, AccountPermissionException {
+    public void logoutSetActiveChapter() throws AccountPermissionException, InputValidationException {
         sessionManager.setActiveChapter(1);
     }
 
@@ -49,6 +48,6 @@ public class SessionManagerLogoutIT extends SqlDbIT {
 
     @Test(expected = AccountPermissionException.class)
     public void logoutCalculateProgressPercentage() throws CourseNotFoundException, AccountPermissionException {
-        sessionManager.calculateProgressPercentage(CourseObjFactory.getNoneCourse());
+        sessionManager.calculateProgressPercentage();
     }
 }

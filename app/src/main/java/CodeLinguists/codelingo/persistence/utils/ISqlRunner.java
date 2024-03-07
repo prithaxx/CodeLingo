@@ -8,7 +8,7 @@ public interface ISqlRunner {
     Connection connect() throws SQLException;
 
     //AccountData
-    ResultSet selectAccountByName(String name) throws SQLException;
+    ResultSet selectGuestAccountByUsername(String name) throws SQLException;
     ResultSet insertGuestAccount(String name) throws SQLException;
     void updateAccountActiveCourse(int accountId, int courseId) throws SQLException;
 
@@ -31,5 +31,5 @@ public interface ISqlRunner {
 
     void insertLocalPreferences() throws SQLException;
 
-    ResultSet selectAccountById(int accountId) throws SQLException;
+    ResultSet selectGuestAccountById(int accountId) throws SQLException;
 }

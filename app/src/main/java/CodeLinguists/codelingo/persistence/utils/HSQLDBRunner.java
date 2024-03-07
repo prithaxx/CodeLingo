@@ -19,11 +19,11 @@ public class HSQLDBRunner implements ISqlRunner {
     }
 
     @Override
-    public ResultSet selectAccountByName(String name) throws SQLException {
+    public ResultSet selectGuestAccountByUsername(String name) throws SQLException {
         //Uses try-with to close connection & prepared statement on exception
         try (
                 Connection connection = connect();
-                PreparedStatement ps = connection.prepareStatement("SELECT * FROM ACCOUNT WHERE name = ?");
+                PreparedStatement ps = connection.prepareStatement("SELECT * FROM ACCOUNT WHERE username = ? AND isGuest = TRUE");
                 ) {
             ps.setString(1, name);
             ResultSet rs = ps.executeQuery();
@@ -33,11 +33,11 @@ public class HSQLDBRunner implements ISqlRunner {
     }
 
     @Override
-    public ResultSet selectAccountById(int accountId) throws SQLException {
+    public ResultSet selectGuestAccountById(int accountId) throws SQLException {
         //Uses try-with to close connection & prepared statement on exception
         try (
                 Connection connection = connect();
-                PreparedStatement ps = connection.prepareStatement("SELECT * FROM ACCOUNT WHERE id = ?");
+                PreparedStatement ps = connection.prepareStatement("SELECT * FROM ACCOUNT WHERE id = ? AND isGuest = TRUE");
         ) {
             ps.setInt(1, accountId);
             ResultSet rs = ps.executeQuery();
@@ -115,10 +115,10 @@ public class HSQLDBRunner implements ISqlRunner {
         try (Connection connection = connect();
              PreparedStatement ps = connection.prepareStatement("SELECT c.id, c.name, c.courseId, c.description, cc.isUnlocked, cc.isCompleted " +
                      "FROM CHAPTER c " +
-                     "JOIN CHAPTER_COMPLETION cc ON c.id = cc.chapterId " +
-                     "WHERE c.courseId = ? AND cc.accountId = ?")) {
-            ps.setInt(1, courseId);
-            ps.setInt(2, accountId);
+                     "JOIN CHAPTER_COMPLETION cc ON c.id = cc.chapterId AND cc.accountId = ? " +
+                     "WHERE c.courseId = ?")) {
+            ps.setInt(2, courseId);
+            ps.setInt(1, accountId);
             return ps.executeQuery();
         }
     }

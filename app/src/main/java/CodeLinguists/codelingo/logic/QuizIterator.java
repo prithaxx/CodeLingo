@@ -53,10 +53,11 @@ public class QuizIterator implements IQuizIterator {
         inFeedback = false;
         //cursor always points to the next quiz
         //so going backwards requires on offset of 1
-        if (currentQuizCursor <= 1) {
+        if (hasPrevQuestion()) {
+            return activeQuiz.get(--currentQuizCursor-1);
+        } else {
             return null;
         }
-        return activeQuiz.get(--currentQuizCursor-1);
     }
 
     @Override

@@ -34,7 +34,7 @@ public class CourseHandler implements ICourseHandler {
     }
 
     @Override
-    public int calculateProgressPercentage(AccountObj account, CourseObj course) throws CourseNotFoundException {
+    public int calculateProgressPercentage(AccountObj account) throws CourseNotFoundException {
         List<ChapterObj> listOfChapter = getActiveCourseChapters(account);
 
         int totalChapters = listOfChapter.size();

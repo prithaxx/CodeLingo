@@ -15,7 +15,7 @@ public interface IAccountHandler {
     AccountObj guestLogin(String name) throws DataInaccessibleException, InputValidationException;
     AccountObj guestLogin(String name, boolean stayLoggedIn) throws DataInaccessibleException, InputValidationException;
 
-    void setActiveCourse(AccountObj account, int courseId);
+    void setActiveCourse(AccountObj account, int courseId) throws InputValidationException;
 
     AccountObj autoLogin();
 

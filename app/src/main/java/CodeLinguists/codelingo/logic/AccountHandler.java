@@ -62,7 +62,10 @@ public class AccountHandler implements IAccountHandler {
     }
 
     @Override
-    public void setActiveCourse(AccountObj account, int courseId) {
+    public void setActiveCourse(AccountObj account, int courseId) throws InputValidationException {
+        if (courseId<0) {
+            throw new InputValidationException(Strings.CourseNotFound(courseId));
+        }
         accountData.setActiveCourse(account.getId(), courseId);
         account.setActiveCourseId(courseId);
     }

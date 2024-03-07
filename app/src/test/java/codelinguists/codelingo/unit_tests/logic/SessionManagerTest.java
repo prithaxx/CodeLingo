@@ -34,7 +34,7 @@ public class SessionManagerTest {
     }
 
     @Test
-    public void setActiveChapter() {
+    public void setActiveChapter() throws AccountPermissionException, InputValidationException {
         Services.getSessionManager().setActiveChapter(1);
     }
 

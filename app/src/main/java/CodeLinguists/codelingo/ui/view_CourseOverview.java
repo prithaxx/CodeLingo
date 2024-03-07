@@ -37,8 +37,10 @@ import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.logic.ISessionManager;
 import CodeLinguists.codelingo.logic.SessionManager;
+import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
 
-public class view_CourseOverview extends AppCompatActivity {
+	public class view_CourseOverview extends AppCompatActivity {
 
 	ISessionManager sessionManager;
 
@@ -87,7 +89,7 @@ public class view_CourseOverview extends AppCompatActivity {
 			cont_CourseOverview newCont = new cont_CourseOverview();
 			FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 			ft.replace(R.id.fragmentContainerView3, newCont).commit();
-		} catch (CourseNotFoundException | AccountPermissionException e) {
+		} catch (CourseNotFoundException | AccountPermissionException | InputValidationException e) {
 			e.printStackTrace();
 			Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 		}
