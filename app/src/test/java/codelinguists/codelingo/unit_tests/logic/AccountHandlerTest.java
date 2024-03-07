@@ -7,7 +7,7 @@ import org.junit.Test;
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.CourseObj;
-import CodeLinguists.codelingo.dso.LocalPreferences;
+import CodeLinguists.codelingo.dso.preferencesObj;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
@@ -104,7 +104,7 @@ public class AccountHandlerTest {
         }
 
         @Override
-        public LocalPreferences getLocalPreferences() throws DataInaccessibleException {
+        public preferencesObj getLocalPreferences() throws DataInaccessibleException {
             return null;
         }
     }
