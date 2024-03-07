@@ -28,6 +28,8 @@ public class SessionManager implements ISessionManager {
         this.quizHandler = quizHandler;
         this.accountHandler = accountHandler;
         this.courseHandler = courseHandler;
+        course = CourseObjFactory.getNoneCourse();;
+        chapterId = -1;
     }
 
     @Override
@@ -76,13 +78,12 @@ public class SessionManager implements ISessionManager {
 
     @Override
     public CourseObj getActiveCourse() throws CourseNotFoundException, AccountPermissionException {
-        //return course;
         if (this.account == null) {
             throw new AccountPermissionException(Strings.NotSignedIn);
         }
         try {
-            course = courseHandler.getActiveCourse(account);
-            return course;
+            this.course = courseHandler.getActiveCourse(account);
+            return this.course;
         } catch (CourseNotFoundException e) {
             course = CourseObjFactory.getNoneCourse();
             throw e;
@@ -90,9 +91,9 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public void setActiveCourse(int index) throws CourseNotFoundException, AccountPermissionException {
-        accountHandler.setActiveCourse(account, index);
-        getActiveCourse();
+    public void setActiveCourse(int courseId) throws CourseNotFoundException, AccountPermissionException {
+        accountHandler.setActiveCourse(account, courseId);
+        getActiveCourse(); //update course variable
     }
 
     @Override
@@ -101,8 +102,8 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public void setActiveChapter(int index) {
-        chapterId = index;
+    public void setActiveChapter(int chapterId) {
+        this.chapterId = chapterId;
     }
 
     @Override
