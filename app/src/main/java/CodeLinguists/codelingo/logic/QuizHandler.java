@@ -19,7 +19,7 @@ public class QuizHandler implements IQuizHandler{
     }
 
     @Override
-    public boolean checkQuizAnswer(QuizObj quiz, String answer) {
+    public boolean checkQuizAnswer(QuizObj quiz, String answer) throws InputValidationException {
         if (answer==null || answer.isBlank()) {
             throw new InputValidationException(Strings.QuestionNotAnswered);
         }

@@ -36,17 +36,17 @@ public class view_GuestLogin extends AppCompatActivity {
         }
     }
 
-    public void btnLoginOnClick(View v){
+    public void btnLoginOnClick(View v) throws InputValidationException {
         String name = String.valueOf(usernameField.getText());
         boolean stayIn = ((CheckBox)findViewById(R.id.stay_logged_in)).isChecked();
         login(name, stayIn);
     }
 
-    private void login(String name, boolean stayLoggedIn) {
+    private void login(String name, boolean stayLoggedIn) throws InputValidationException {
         try {
             sessionManager.guestLogin(name, stayLoggedIn);
             navigateToCourseOverview();
-        } catch (InputValidationException | DataInaccessibleException | CourseNotFoundException e) {
+        } catch (DataInaccessibleException | CourseNotFoundException e) {
             e.printStackTrace();
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         } catch (AccountPermissionException e) {

@@ -1,6 +1,6 @@
 package CodeLinguists.codelingo.logic.logic_exceptions;
 
-public class InputValidationException extends RuntimeException{
+public class InputValidationException extends Exception{
     public InputValidationException(String message) {
         super(message);
     }

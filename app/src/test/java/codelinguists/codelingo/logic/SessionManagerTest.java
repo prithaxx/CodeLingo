@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
+import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
+import CodeLinguists.codelingo.logic.logic_exceptions.NoItemSelectedException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 
@@ -17,12 +19,12 @@ public class SessionManagerTest {
     }
 
     @Test
-    public void guestLoginTest() throws DataInaccessibleException, CourseNotFoundException, AccountPermissionException {
+    public void guestLoginTest() throws DataInaccessibleException, CourseNotFoundException, AccountPermissionException, InputValidationException {
         Services.getSessionManager().guestLogin("test");
     }
 
     @Test
-    public void startQuiz() {
+    public void startQuiz() throws NoItemSelectedException {
         assertNotNull(Services.getSessionManager().startQuiz());
     }
 

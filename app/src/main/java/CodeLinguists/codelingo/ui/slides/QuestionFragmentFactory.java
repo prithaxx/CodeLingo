@@ -5,7 +5,7 @@ import CodeLinguists.codelingo.dso.QuizObj;
 import CodeLinguists.codelingo.ui.ui_exceptions.SlideTypeNotHandledException;
 
 public class QuestionFragmentFactory {
-    public QuizSlide getInstance(QuizObj quiz) {
+    public QuizSlide getInstance(QuizObj quiz) throws SlideTypeNotHandledException {
         return switch (quiz.type()) {
             case TEXT -> new TextSlide(quiz);
             case MULTI_CHOICE -> new MultiChoiceSlide(quiz);

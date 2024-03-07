@@ -7,6 +7,7 @@ import org.junit.Test;
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.CourseObj;
+import CodeLinguists.codelingo.dso.LocalPreferences;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
@@ -17,21 +18,21 @@ import CodeLinguists.codelingo.persistence.ISessionData;
 public class AccountHandlerTest {
 
     @Test(expected = InputValidationException.class)
-    public void guestLoginNullInput() throws DataInaccessibleException, AccountNotFoundException {
+    public void guestLoginNullInput() throws DataInaccessibleException, AccountNotFoundException, InputValidationException {
         AccountDataMock accountData = new AccountDataMock(false, false, false);
         AccountHandler accountHandler = new AccountHandler(accountData, null);
         accountHandler.guestLogin(null);
     }
 
     @Test(expected = InputValidationException.class)
-    public void guestLoginEmptyInput() throws DataInaccessibleException, AccountNotFoundException {
+    public void guestLoginEmptyInput() throws DataInaccessibleException, AccountNotFoundException, InputValidationException {
         AccountDataMock accountData = new AccountDataMock(false, false, false);
         AccountHandler accountHandler = new AccountHandler(accountData, null);
         accountHandler.guestLogin("");
     }
 
     @Test
-    public void guestLoginNoAccount() throws DataInaccessibleException, AccountNotFoundException {
+    public void guestLoginNoAccount() throws DataInaccessibleException, AccountNotFoundException, InputValidationException {
         AccountDataMock accountData = new AccountDataMock(false, false, true);
         AccountHandler accountHandler = new AccountHandler(accountData, new SessionDataMock());
         AccountObj acc = accountHandler.guestLogin("test");
@@ -39,7 +40,7 @@ public class AccountHandlerTest {
     }
 
     @Test
-    public void guestLoginExistingAccount() throws DataInaccessibleException, AccountNotFoundException {
+    public void guestLoginExistingAccount() throws DataInaccessibleException, AccountNotFoundException, InputValidationException {
         AccountDataMock accountData = new AccountDataMock(false, false, false);
         AccountHandler accountHandler = new AccountHandler(accountData, new SessionDataMock());
         AccountObj acc = accountHandler.guestLogin("test");
@@ -47,7 +48,7 @@ public class AccountHandlerTest {
     }
 
     @Test
-    public void guestLoginDefaultConstructor() throws DataInaccessibleException, AccountNotFoundException {
+    public void guestLoginDefaultConstructor() throws DataInaccessibleException, AccountNotFoundException, InputValidationException {
         AccountHandler accountHandler = new AccountHandler(Services.getAccountData(), Services.getSessionData());
         AccountObj acc = accountHandler.guestLogin("test");
         assertEquals(acc.getName(), "test");

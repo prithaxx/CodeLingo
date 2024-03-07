@@ -1,6 +1,7 @@
 package CodeLinguists.codelingo.persistence;
 
 import CodeLinguists.codelingo.dso.AccountObj;
+import CodeLinguists.codelingo.dso.LocalPreferences;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 
