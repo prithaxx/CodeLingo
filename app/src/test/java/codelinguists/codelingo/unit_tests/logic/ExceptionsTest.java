@@ -28,7 +28,7 @@ public class ExceptionsTest {
         assertTrue(caught);
     }
 
-    private void accountNotFoundException() {
+    private void accountNotFoundException() throws AccountNotFoundException {
         throw new AccountNotFoundException("Can't find account");
     }
 

@@ -12,7 +12,7 @@ public record QuizObj(int id,
                       List<String> wrongAnswers,
                       String wrongFeedback,
                       String correctFeedback) {
-    public static QuizObj asFeedback(QuizObj quiz, QuestionType type) {
+    public static QuizObj cloneAsFeedback(QuizObj quiz, QuestionType type) {
         return new QuizObj(
                 quiz.id(),
                 quiz.chapterId(),

@@ -20,4 +20,10 @@
     <string name="next">Next</string>
     <string name="wrong_answer_title">Wrong Answer</string>
     <string name="correct_answer_title">Correct!</string>
+    <string name="please_complete_the_previous_chapters">please complete the previous chapters</string>
+    <string name="select_a_course">Select a course</string>
+    <string name="welcome_name">Welcome, %s</string>
+    <string name="stay_signed_in">Stay Signed in?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="username">Username</string>
 </resources>

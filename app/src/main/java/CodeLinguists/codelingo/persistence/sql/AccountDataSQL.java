@@ -2,12 +2,14 @@ package CodeLinguists.codelingo.persistence.sql;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.AccountObj;
+import CodeLinguists.codelingo.dso.LocalPreferences;
+import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
+import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.persistence.IAccountData;
 import CodeLinguists.codelingo.persistence.utils.ISqlRunner;
 
@@ -20,68 +22,92 @@ public class AccountDataSQL implements IAccountData {
 
     @Override
     @NotNull
-    public AccountObj getGuestAccountByName(String name){
-        AccountObj account = null;
-        try (Connection connection = sqlRunner.connect()){
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM ACCOUNT WHERE name = ?");
-            ps.setString(1, name);
-            ResultSet rs = ps.executeQuery();
-            ps.close();
-
-            if (rs.next()) {
-                int id = rs.getInt("id");
-                boolean isGuest = rs.getBoolean("isGuest");
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-                int activeCourseId = rs.getInt("activeCourseId");
-
-                account = new AccountObj(id, name, isGuest, activeCourseId, username, password);
-            }
+    public AccountObj getGuestAccountByName(String name) throws AccountNotFoundException {
+        try {
+            return rsToAccountObj(sqlRunner.selectAccountByName(name));
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new AccountNotFoundException(Strings.AccountNotFoundWithName(name), e);
         }
-        return account;
     }
 
     @Override
-    public AccountObj createGuestAccount(String name) throws SQLException {
-        try (Connection connection = sqlRunner.connect()){
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO PUBLIC.ACCOUNT VALUES (DEFAULT, ?, TRUE, 1, ?, '')");
-            ps.setString(1, name);
-            ps.setString(2, name);
-            ps.executeUpdate();
-            ps.close();
-
-            ps = connection.prepareStatement("select * from ACCOUNT where USERNAME = ? and NAME = ?");
-            ps.setString(1, name);
-            ps.setString(2, name);
-            ResultSet rs = ps.executeQuery();
-
-            if(rs.next()) {
-                int id = rs.getInt("id");
-                String name2 = rs.getString("name");
-                boolean isGuest = rs.getBoolean("isGuest");
-                int activeCourse = rs.getInt("ActiveCourseId");
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-                return new AccountObj(id, name2, isGuest, activeCourse, username, password);
-            }
+    public AccountObj getGuestAccountById(int accountId) throws AccountNotFoundException {
+        try {
+            return rsToAccountObj(sqlRunner.selectAccountById(accountId));
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new AccountNotFoundException(Strings.AccountNotFound, e);
         }
-        throw new SQLException("Creating account failed, no ID obtained.");
+    }
+
+    @Override
+    public AccountObj createGuestAccount(String name) throws DataInaccessibleException {
+        try {
+            return rsToAccountObj(sqlRunner.insertGuestAccount(name));
+        } catch (SQLException | AccountNotFoundException e) {
+            throw new DataInaccessibleException(Strings.CannotCreateAccount, e);
+        }
     }
 
     @Override
     public void setActiveCourse(int accountId, int courseId) {
-        try (Connection connection = sqlRunner.connect()) {
-            PreparedStatement ps = connection.prepareStatement("UPDATE ACCOUNT set ActiveCourseId = ? where id = ?");
-            ps.setInt(1, courseId);
-            ps.setInt(2, accountId);
-            ps.executeUpdate();
-            ps.close();
+        try {
+            sqlRunner.updateAccountActiveCourse(accountId, courseId);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void setStayLoggedIn(int accountId, boolean stayLoggedIn) {
+        try {
+            sqlRunner.updateLocalPreferencesAutoLogin(stayLoggedIn, accountId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public LocalPreferences getLocalPreferences() throws DataInaccessibleException {
+        try (ResultSet rs = sqlRunner.selectLocalPreferences()){
+            if (rs.next()) {
+                boolean autoLogin = rs.getBoolean("autoLogin");
+                int activeAccountId = rs.getInt("activeAccountId");
+                return new LocalPreferences(autoLogin, activeAccountId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        throw new DataInaccessibleException(Strings.CannotFindPreferences);
+    }
+
+    @Override
+    public void initLocalPreferences() {
+        try (ResultSet rs = sqlRunner.selectLocalPreferences()) {
+            if (!rs.next()){
+                sqlRunner.insertLocalPreferences();
+            } else {
+                setStayLoggedIn(1, false);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private AccountObj rsToAccountObj(ResultSet rs) throws AccountNotFoundException {
+        try (rs) {
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                boolean isGuest = rs.getBoolean("isGuest");
+                String name = rs.getString("name");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                int activeCourseId = rs.getInt("activeCourseId");
+
+                return new AccountObj(id, name, isGuest, activeCourseId, username, password);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        throw new AccountNotFoundException(Strings.AccountNotFound);
     }
 }

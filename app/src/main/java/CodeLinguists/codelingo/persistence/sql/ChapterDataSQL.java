@@ -21,17 +21,7 @@ public class ChapterDataSQL implements IChapterData {
     @Override
     public List<ChapterObj> getChapterByCourseId(int courseId, int accountId) {
         List<ChapterObj> chapters = new ArrayList<>();
-
-        try (Connection connection = sqlRunner.connect()){
-            PreparedStatement ps = connection.prepareStatement("SELECT c.id, c.name, c.courseId, c.description, cc.isUnlocked, cc.isCompleted" +
-                                                                    "FROM CHAPTER c" +
-                                                                    "JOIN CHAPTER_COMPLETION cc ON c.id = cc.chapterId" +
-                                                                    "WHERE c.courseId = ? AND cc.accountId = ?");
-            ps.setInt(1, courseId);
-            ps.setInt(1, accountId);
-            ResultSet rs = ps.executeQuery();
-            ps.close();
-
+        try (ResultSet rs = sqlRunner.selectChaptersByCourseId(courseId, accountId)) {
             while (rs.next()) {
                 chapters.add(new ChapterObj(
                         rs.getInt("id"),
@@ -51,18 +41,7 @@ public class ChapterDataSQL implements IChapterData {
     @Override
     public ChapterObj getChapterById(int chapterId, int courseId, int accountId) {
         ChapterObj chapter = null;
-        try (Connection connection = sqlRunner.connect();
-             PreparedStatement ps = connection.prepareStatement("SELECT c.id, c.name, c.courseId, c.description, cc.isUnlocked, cc.isCompleted " +
-                                                                    "FROM CHAPTER c " +
-                                                                    "LEFT JOIN CHAPTER_COMPLETION cc ON c.id = cc.chapterId and cc.accountId = ? " +
-                                                                    "WHERE c.courseId = ? AND c.id = ?")) {
-            ps.setInt(1, accountId);
-            ps.setInt(2, courseId);
-            ps.setInt(3, chapterId);
-
-            ResultSet rs = ps.executeQuery();
-            ps.close();
-
+        try (ResultSet rs = sqlRunner.selectChapterById(chapterId, courseId, accountId)) {
             if (rs.next()) {
                 chapter = new ChapterObj(
                         rs.getInt("id"),

@@ -16,6 +16,7 @@ import java.util.Locale;
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.CourseObj;
+import CodeLinguists.codelingo.exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.logic.ISessionManager;
 import CodeLinguists.codelingo.logic.SessionManager;
@@ -49,23 +50,25 @@ public class cont_CourseOverview extends Fragment {
         CourseObj course = null;
         try {
             course = sessionManager.getActiveCourse();
-        } catch (CourseNotFoundException e) {
+        } catch (CourseNotFoundException | AccountPermissionException e) {
+            e.printStackTrace();
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
         View v = inflater.inflate(R.layout.fragment_course_overview, container, false);
 
         TextView tv = v.findViewById(R.id.placeholder_course);
-        tv.setText(course!=null ? course.name() : "Select a course");
+        tv.setText(course!=null ? course.name() : getString(R.string.select_a_course));
 
         TextView tvProgressPercentage = v.findViewById(R.id.progress_percentage);
         int progressPercentage = 0;
         try {
             progressPercentage = sessionManager.calculateProgressPercentage(course);
         } catch (CourseNotFoundException e) {
+            e.printStackTrace();
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
-        tvProgressPercentage.setText(String.format(Locale.getDefault(), "%d%%", progressPercentage));
+        tvProgressPercentage.setText(String.format(Locale.getDefault(), "%d%% complete", progressPercentage));
 
         View b = v.findViewById(R.id.rectangle_1);
         b.setOnClickListener(this::tileOnclick0);

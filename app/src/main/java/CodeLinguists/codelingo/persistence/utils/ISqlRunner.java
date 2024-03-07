@@ -1,9 +1,35 @@
 package CodeLinguists.codelingo.persistence.utils;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public interface ISqlRunner {
-    public Connection connect() throws SQLException;
-    //TODO access stored sql queries
+    Connection connect() throws SQLException;
+
+    //AccountData
+    ResultSet selectAccountByName(String name) throws SQLException;
+    ResultSet insertGuestAccount(String name) throws SQLException;
+    void updateAccountActiveCourse(int accountId, int courseId) throws SQLException;
+
+    //CourseData
+    ResultSet selectCourseById(int courseId, int accountId) throws SQLException;
+    ResultSet selectCourseList(int accountId) throws SQLException;
+
+    //ChapterData
+    ResultSet selectChaptersByCourseId(int courseId, int accountId) throws SQLException;
+    ResultSet selectChapterById(int chapterId, int courseId, int accountId) throws SQLException;
+
+    //QuizData
+    ResultSet selectQuizByChapterId(int chapterId) throws SQLException;
+    ResultSet selectQuizById(int quizId, int chapterId) throws SQLException;
+
+
+    //Preferences
+    void updateLocalPreferencesAutoLogin(boolean stayLoggedIn, int accountId) throws SQLException;
+    ResultSet selectLocalPreferences() throws SQLException;
+
+    void insertLocalPreferences() throws SQLException;
+
+    ResultSet selectAccountById(int accountId) throws SQLException;
 }
