@@ -14,7 +14,7 @@ public class QuizIteratorTest {
     @Before
     public void setUp() {
         QuizDataStub quizDataStub = new QuizDataStub();
-        this.quizIterator = new QuizIterator(quizDataStub.getQuizList());
+        quizIterator = new QuizIterator(quizDataStub.getQuizList());
     }
     @Test
     public void testStartQuiz() {

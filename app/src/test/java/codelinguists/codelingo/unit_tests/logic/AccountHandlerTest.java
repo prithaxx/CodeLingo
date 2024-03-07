@@ -19,14 +19,12 @@ import CodeLinguists.codelingo.persistence.stubs.AccountDataStub;
 public class AccountHandlerTest {
     private AccountDataStub accountDataStub;
     private AccountHandler accountHandler;
-    private SessionDataStub sessionDataStub;
 
 
     @Before
     public void setUp() {
         accountDataStub = new AccountDataStub();
-        sessionDataStub = new SessionDataStub();
-        accountHandler = new AccountHandler(accountDataStub, sessionDataStub);
+        accountHandler = new AccountHandler(accountDataStub);
     }
 
     @Test
@@ -49,8 +47,6 @@ public class AccountHandlerTest {
 
     @Test
     public void guestLoginNoAccount() throws DataInaccessibleException, AccountNotFoundException, InputValidationException {
-        AccountDataMock accountData = new AccountDataMock(false, false, true);
-        AccountHandler accountHandler = new AccountHandler(accountData);
         AccountObj acc = accountHandler.guestLogin("test");
         assertEquals(acc.getName(), "test");
     }
@@ -67,7 +63,7 @@ public class AccountHandlerTest {
     }
 
     @Test
-    public void setActiveCourseTest() throws AccountNotFoundException {
+    public void setActiveCourseTest() throws AccountNotFoundException, InputValidationException {
         AccountObj testAccount = accountDataStub.createGuestAccount("TestUser");
         assertNotNull("Account should not be null", testAccount);
 
