@@ -27,5 +27,5 @@ public interface IAccountData {
 
     void setStayLoggedIn(int accountId, boolean stayLoggedIn);
 
-    LocalPreferences getLocalPreferences() throws DataInaccessibleException;
+    preferencesObj getLocalPreferences() throws DataInaccessibleException;
 }
