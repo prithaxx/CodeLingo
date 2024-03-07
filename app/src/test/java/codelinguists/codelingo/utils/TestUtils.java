@@ -23,29 +23,4 @@ public class TestUtils {
         Main.setDBPathName(target.getAbsolutePath().replace(".script", ""));
         return target;
     }
-//
-//
-//    public static SessionManager getSessionManager() {
-//        return new SessionManager(getQuizHandler(), getAccountHandler(), getCourseHandler());
-//    }
-//
-//    private static ICourseHandler getCourseHandler() {
-//        return new CourseHandler(getCourseDataHSQLDB(), getChapterDataHSQLDB());
-//    }
-//
-//    private static IAccountHandler getAccountHandler() {
-//        return null;
-//    }
-//
-//    private static IQuizHandler getQuizHandler() {
-//        return null;
-//    }
-//
-//    private static IChapterData getChapterDataHSQLDB() {
-//        return null;
-//    }
-//
-//    private static ICourseData getCourseDataHSQLDB() {
-//        return null;
-//    }
 }
