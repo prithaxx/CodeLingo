@@ -11,8 +11,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 import CodeLinguists.codelingo.application.Services;
+import CodeLinguists.codelingo.application.Strings;
+import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.dso.CourseObjFactory;
+import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
@@ -76,6 +79,12 @@ public class SessionManagerIT extends SqlDbIT {
         String user = "SA";
         sessionManager.guestLogin(user);
         assertNotNull(sessionManager.getActiveAccount());
+    }
+
+    @Test(expected = AccountPermissionException.class)
+    public void testLogoutAccountWithoutSignin() throws CourseNotFoundException, AccountPermissionException, DataInaccessibleException {
+        sessionManager.logout();
+        sessionManager.getActiveAccount();
     }
 
     @Test(expected = AccountPermissionException.class)
@@ -148,13 +157,13 @@ public class SessionManagerIT extends SqlDbIT {
     }
 
     @Test
-    public void testGetNoneActiveCourse() throws CourseNotFoundException, AccountPermissionException, DataInaccessibleException {
+    public void testGetDefaultActiveCourse() throws CourseNotFoundException, AccountPermissionException, DataInaccessibleException {
         String user = "SA";
         sessionManager.guestLogin(user);
         try{
             sessionManager.getActiveCourse();
         } catch (CourseNotFoundException ignored) {}
-        assertEquals(CourseObjFactory.getNoneCourse(), sessionManager.getActiveCourse());
+        assertEquals(1, sessionManager.getActiveCourse().id());
     }
 
     @Test
@@ -226,5 +235,90 @@ public class SessionManagerIT extends SqlDbIT {
     }
 
     //State specific integration tests
-    
+    @Test
+    public void testAutoLoginDisabled() throws CourseNotFoundException, AccountPermissionException {
+        assertFalse(sessionManager.autoLogin());
+    }
+
+    @Test
+    public void testAutoLoginNoLocalPreference() throws CourseNotFoundException, AccountPermissionException, SQLException {
+        SqlTestRunner.executeUpdate("DELETE FROM LOCAL_PREFERENCES");
+        Exception e = assertThrows(DataInaccessibleException.class, ()-> {
+            sessionManager.autoLogin();
+        });
+
+        assertEquals(Strings.CannotFindPreferences, e.getMessage());
+    }
+
+    @Test
+    public void testAutoLoginAutoLoginFalse() throws CourseNotFoundException, AccountPermissionException, SQLException {
+        SqlTestRunner.executeUpdate("UPDATE LOCAL_PREFERENCES SET autologin=FALSE, activeAccountId=1");
+        assertFalse(sessionManager.autoLogin());
+    }
+
+    @Test
+    public void testAutoLoginAccountInvalid() throws CourseNotFoundException, AccountPermissionException, SQLException {
+        SqlTestRunner.executeUpdate("UPDATE LOCAL_PREFERENCES SET autologin=TRUE, activeAccountId=0");
+        assertFalse(sessionManager.autoLogin());
+    }
+
+    @Test (expected = AccountNotFoundException.class)
+    public void testAutoLoginAccountNotFound() throws CourseNotFoundException, AccountPermissionException, SQLException {
+        SqlTestRunner.executeUpdate("UPDATE LOCAL_PREFERENCES SET autologin=TRUE, activeAccountId=123456789");
+        sessionManager.autoLogin();
+    }
+
+    @Test
+    public void testAutoLoginSuccess() throws CourseNotFoundException, AccountPermissionException, SQLException {
+        SqlTestRunner.executeUpdate("UPDATE LOCAL_PREFERENCES SET autologin=TRUE, activeAccountId=2");
+        assertTrue(sessionManager.autoLogin());
+    }
+
+    //login existing account/not existing
+    @Test
+    public void testLoginExistingAccount() throws CourseNotFoundException, AccountPermissionException, SQLException, DataInaccessibleException {
+        SqlTestRunner.executeUpdate("INSERT INTO ACCOUNT VALUES (DEFAULT, 'EXAMPLE', TRUE, 1, 'john.doe', 'password')");
+        sessionManager.guestLogin("EXAMPLE");
+        AccountObj account = sessionManager.getActiveAccount();
+        assertEquals("john.doe", account.getUsername());
+    }
+
+    @Test
+    public void testLoginNotNonGuestAccount() throws CourseNotFoundException, AccountPermissionException, SQLException, DataInaccessibleException {
+        SqlTestRunner.executeUpdate("INSERT INTO ACCOUNT VALUES (DEFAULT, 'EXAMPLE', FALSE, 1, 'john.doe', 'password')");
+        sessionManager.guestLogin("EXAMPLE");
+        AccountObj account = sessionManager.getActiveAccount();
+        assertEquals("EXAMPLE", account.getUsername());
+    }
+
+    @Test
+    public void testLoginExistingAccountOverload() throws CourseNotFoundException, AccountPermissionException, SQLException, DataInaccessibleException {
+        SqlTestRunner.executeUpdate("INSERT INTO ACCOUNT VALUES (DEFAULT, 'EXAMPLE', TRUE, 1, 'john.doe', 'password')");
+        sessionManager.guestLogin("EXAMPLE", false);
+        AccountObj account = sessionManager.getActiveAccount();
+        assertEquals("john.doe", account.getUsername());
+    }
+
+    @Test
+    public void testLoginNotNonGuestAccountOverload() throws CourseNotFoundException, AccountPermissionException, SQLException, DataInaccessibleException {
+        SqlTestRunner.executeUpdate("INSERT INTO ACCOUNT VALUES (DEFAULT, 'EXAMPLE', FALSE, 1, 'john.doe', 'password')");
+        sessionManager.guestLogin("EXAMPLE", false);
+        AccountObj account = sessionManager.getActiveAccount();
+        assertEquals("EXAMPLE", account.getUsername());
+    }
+
+    @Test
+    public void testLogoutAutoLogin() throws SQLException {
+        SqlTestRunner.executeUpdate("UPDATE LOCAL_PREFERENCES SET autologin=TRUE, accountId=2");
+        sessionManager.logout();
+        assertFalse(sessionManager.autoLogin());
+    }
+
+    @Test
+    public void testLoginLogoutAutoLogin() throws SQLException {
+        SqlTestRunner.executeUpdate("UPDATE LOCAL_PREFERENCES SET autologin=TRUE, accountId=2");
+        assertTrue(sessionManager.autoLogin());
+        sessionManager.logout();
+        assertFalse(sessionManager.autoLogin());
+    }
 }
