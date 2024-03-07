@@ -11,6 +11,7 @@ import codelinguists.codelingo.dso.QuizObjTest;
 import codelinguists.codelingo.logic.AccountHandlerTest;
 import codelinguists.codelingo.logic.CourseHandlerTest;
 import codelinguists.codelingo.logic.QuizHandlerTest;
+import codelinguists.codelingo.logic.QuizIteratorTest;
 import codelinguists.codelingo.logic.SessionManagerTest;
 
 @RunWith(Suite.class)
@@ -21,6 +22,7 @@ import codelinguists.codelingo.logic.SessionManagerTest;
     AccountHandlerTest.class,
         CourseHandlerTest.class,
     QuizHandlerTest.class,
+        QuizIteratorTest.class,
     SessionManagerTest.class,
 
     //DSOs

@@ -28,13 +28,14 @@ public class AccountHandlerTest {
     @Before
     public void setUp() {
         accountDataStub = new AccountDataStub();
-        sessionDataStub = new SessionDataStub(); // Your session stub setup
+        sessionDataStub = new SessionDataStub();
         accountHandler = new AccountHandler(accountDataStub, sessionDataStub);
     }
 
     @Test
     public void testGuestLoginValidName() throws Exception {
         AccountObj account = accountDataStub.createGuestAccount("TestUser");
+        accountHandler.guestLogin("TestUser");
         assertNotNull("Account should not be null", account);
         assertEquals("TestUser", account.getName());
     }
@@ -57,19 +58,39 @@ public class AccountHandlerTest {
 
     @Test
     public void logoutTest() throws InputValidationException, DataInaccessibleException {
-        accountHandler.guestLogin("TestUser", true); // Ensure there's a logged-in session
+        AccountObj testAccount = accountDataStub.createGuestAccount("TestUser");
+
+        accountHandler.guestLogin("TestUser", true);
+        accountDataStub.setStayLoggedIn(testAccount.getId(), true);
         accountHandler.logout();
+        // not sure how to test this
+
     }
 
     @Test
     public void setActiveCourseTest() throws AccountNotFoundException {
         AccountObj testAccount = accountDataStub.createGuestAccount("TestUser");
         assertNotNull("Account should not be null", testAccount);
+
         int testCourseId = 4; // Example course ID
         accountHandler.setActiveCourse(testAccount, testCourseId);
 
         assertEquals("Active course ID should be updated", testCourseId, testAccount.getActiveCourseId());
     }
 
+    @Test
+    public void autoLoginTestSuccess() throws InputValidationException, DataInaccessibleException {
+        AccountObj account = accountDataStub.createGuestAccount("TestUser");
+        accountHandler.guestLogin("TestUser", true);
 
+        assertEquals(accountHandler.autoLogin(), account);
+    }
+
+    @Test
+    public void autoLoginTestFail() throws InputValidationException, DataInaccessibleException {
+        accountDataStub.createGuestAccount("TestUser");
+        accountHandler.guestLogin("TestUser");
+
+        assertNull(accountHandler.autoLogin());
+    }
 }
