@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import CodeLinguists.codelingo.dso.AccountObj;
-import CodeLinguists.codelingo.dso.LocalPreferences;
+import CodeLinguists.codelingo.dso.preferencesObj;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.persistence.IAccountData;
 
 public class AccountDataStub implements IAccountData {
     private final List<AccountObj> guestAccounts;
-    private LocalPreferences localPreferences;
+    private preferencesObj preferencesObj;
 
     public AccountDataStub() {
         guestAccounts = new ArrayList<>();
-        localPreferences = new LocalPreferences(false, 0);
+        preferencesObj = new preferencesObj(false, 0);
     }
 
     @Override
@@ -57,18 +57,18 @@ public class AccountDataStub implements IAccountData {
     //There is no persistence, so staying logged in does nothing
     @Override
     public void setStayLoggedIn(int accountId, boolean stayLoggedIn) {
-        localPreferences = new LocalPreferences(stayLoggedIn, accountId);
+        preferencesObj = new preferencesObj(stayLoggedIn, accountId);
     }
 
     @Override
-    public LocalPreferences getLocalPreferences() throws DataInaccessibleException {
-        return localPreferences;
+    public preferencesObj getLocalPreferences() throws DataInaccessibleException {
+        return preferencesObj;
     }
 
     //No persistence -> no localPreferences
     @Override
     public void initLocalPreferences() {
-        localPreferences = new LocalPreferences(false, 0);
+        preferencesObj = new preferencesObj(false, 0);
     }
 
     private AccountObj getAccountById(int accountId) {
