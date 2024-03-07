@@ -30,7 +30,7 @@ public class QuizIteratorTest {
 
     @Test
     public void testHasNextQuestion() {
-        QuizObj firstQuiz = quizIterator.startQuiz();
+        quizIterator.startQuiz();
         assertTrue(quizIterator.hasNextQuestion());
     }
     @Test
@@ -59,7 +59,7 @@ public class QuizIteratorTest {
 
     @Test
     public void testHasPrevQuestion() {
-        QuizObj firstQuiz = quizIterator.startQuiz();
+        quizIterator.startQuiz();
         quizIterator.nextQuestion();
         assertTrue(quizIterator.hasPrevQuestion());
     }
@@ -95,14 +95,14 @@ public class QuizIteratorTest {
         quizIterator.startQuiz();
         quizIterator.nextQuestion();
         quizIterator.nextQuestion();
-        QuizObj submitResponse = quizIterator.submit("");
+        quizIterator.submit("");
     }
     @Test (expected = InputValidationException.class)
     public void testSubmitNullInput() throws InputValidationException {
         quizIterator.startQuiz();
         quizIterator.nextQuestion();
         quizIterator.nextQuestion();
-        QuizObj submitResponse = quizIterator.submit(null);
+        quizIterator.submit(null);
     }
 
     @Test

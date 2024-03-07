@@ -14,7 +14,6 @@ import CodeLinguists.codelingo.logic.QuizHandler;
 import CodeLinguists.codelingo.logic.QuizIterator;
 import CodeLinguists.codelingo.logic.QuizIteratorFactory;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
-import CodeLinguists.codelingo.persistence.stubs.ChapterDataStub;
 import CodeLinguists.codelingo.persistence.stubs.QuizDataStub;
 
 public class QuizHandlerTest {
@@ -24,9 +23,8 @@ public class QuizHandlerTest {
     private QuizHandler quizHandler;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp(){
         quizDataStub = new QuizDataStub();
-        ChapterDataStub chapterDataStub = new ChapterDataStub();
         quizList = new ArrayList<>();
         quizHandler = new QuizHandler(quizDataStub, new QuizIteratorFactory());
     }
@@ -128,7 +126,6 @@ public class QuizHandlerTest {
 
     @Test (expected = InputValidationException.class)
     public void checkAnswerNullQuiz() throws InputValidationException {
-        QuizObj quizObj = new QuizObj(1, 1, QuestionType.SHORT_ANSWER, "prompt", true, "answer", null, null, "Wrong", "Right");
         quizHandler.checkQuizAnswer(null, "answer");
     }
 

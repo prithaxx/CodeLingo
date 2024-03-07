@@ -59,6 +59,5 @@ public class AccountHandlerTestDouble implements IAccountHandler {
 
     @Override
     public void logout() {
-        return;
     }
 }

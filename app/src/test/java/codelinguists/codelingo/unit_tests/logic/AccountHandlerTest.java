@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
-import CodeLinguists.codelingo.persistence.persistence_exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.AccountHandler;
@@ -43,7 +42,7 @@ public class AccountHandlerTest {
     }
 
     @Test
-    public void guestLoginNoAccount() throws DataInaccessibleException, AccountNotFoundException, InputValidationException {
+    public void guestLoginNoAccount() throws DataInaccessibleException, InputValidationException {
         AccountObj acc = accountHandler.guestLogin("test");
         assertEquals(acc.getName(), "test");
     }
@@ -60,7 +59,7 @@ public class AccountHandlerTest {
     }
 
     @Test
-    public void setActiveCourseTest() throws AccountNotFoundException, InputValidationException, AccountPermissionException {
+    public void setActiveCourseTest() throws InputValidationException, AccountPermissionException {
         AccountObj testAccount = accountDataStub.createGuestAccount("TestUser");
         assertNotNull("Account should not be null", testAccount);
 
@@ -71,7 +70,7 @@ public class AccountHandlerTest {
     }
 
     @Test (expected = InputValidationException.class)
-    public void setActiveCourseTestNoCourse() throws AccountNotFoundException, InputValidationException, AccountPermissionException {
+    public void setActiveCourseTestNoCourse() throws InputValidationException, AccountPermissionException {
         AccountObj testAccount = accountDataStub.createGuestAccount("TestUser");
         int testCourseId = -1; // Example course ID
         accountHandler.setActiveCourse(testAccount, testCourseId);

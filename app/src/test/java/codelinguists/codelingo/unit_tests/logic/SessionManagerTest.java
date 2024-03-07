@@ -42,7 +42,7 @@ public class SessionManagerTest {
     }
 
     @Test
-    public void testGuestLoginNoActiveCourse() throws DataInaccessibleException, CourseNotFoundException, AccountPermissionException, InputValidationException {
+    public void testGuestLoginNoActiveCourse() throws DataInaccessibleException, AccountPermissionException, InputValidationException {
         courseHandler.doException = true;
         sessionManager.guestLogin("tmp", false);
         assertEquals(accountHandler.guestLoginResponse, sessionManager.getActiveAccount());
@@ -100,7 +100,7 @@ public class SessionManagerTest {
     }
 
     @Test
-    public void testGetActiveCourseNotFound() throws CourseNotFoundException, AccountPermissionException {
+    public void testGetActiveCourseNotFound() throws AccountPermissionException {
         Exception except = null;
         sessionManager.autoLogin();
         courseHandler.doException = true;
