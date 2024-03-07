@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -158,6 +159,7 @@
             android:textSize="25sp" />
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="74.5dp"
             android:layout_height="31.5dp"
             android:layout_marginLeft="939dp"
@@ -324,6 +326,31 @@
             android:text="0%"
             android:textColor="#FFFF"
             android:textSize="40sp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="565dp"
+            android:layout_height="480dp"
+            android:layout_below="@+id/progress_percentage"
+            android:layout_alignBottom="@+id/textView"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="47dp"
+            android:layout_marginEnd="105dp"
+            android:layout_marginBottom="-6dp"
+            android:visibility="visible"
+            app:cardBackgroundColor="#4B3434"
+            tools:visibility="visible">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/chapterList"
+                android:name="CodeLinguists.codelingo.ui.ChapterFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:layoutManager="LinearLayoutManager"
+                tools:context=".ui.ChapterFragment"
+                tools:listitem="@layout/fragment_item" />
+        </androidx.cardview.widget.CardView>
 
 
     </RelativeLayout>

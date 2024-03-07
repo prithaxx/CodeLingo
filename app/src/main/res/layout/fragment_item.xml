@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="260dp"
+    android:onClick="startQuiz"
+    android:orientation="horizontal">
+
+    <View
+        android:id="@+id/rectangle_4"
+        android:layout_width="265dp"
+        android:layout_height="228dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="17dp"
+        android:alpha="0.5"
+        android:background="@drawable/rectangle_4_shape" />
+
+    <ImageView
+        android:layout_width="227dp"
+        android:layout_height="145dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="design4"
+        android:src="@drawable/course_tile_4" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="117dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="86dp"
+        android:layout_marginBottom="33dp"
+        android:gravity="center"
+        android:text="TextView" />
+
+</RelativeLayout>

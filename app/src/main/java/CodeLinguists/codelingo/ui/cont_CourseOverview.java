@@ -1,9 +1,13 @@
 package CodeLinguists.codelingo.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +15,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.application.Services;
+import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
@@ -81,7 +88,28 @@ public class cont_CourseOverview extends Fragment {
         b = v.findViewById(R.id.rectangle_4);
         b.setOnClickListener(this::tileOnclick3);
 
+        //better
+        View chapterListView = v.findViewById(R.id.chapterList);
+        List<ChapterObj> chapters = new ArrayList<>();
+        for (int i = 0; i < 60; i++) {
+            chapters.add(new ChapterObj(1, "test", 2, "Hello", true, true));
+            chapters.add(new ChapterObj(2, "test", 2, "Hello", true, true));
+            chapters.add(new ChapterObj(3, "test", 2, "Hello", true, true));
+        }
+
+        // Set the adapter
+        if (chapterListView instanceof RecyclerView recyclerView) {
+            Context context = chapterListView.getContext();
+            recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
+            recyclerView.setAdapter(new ChapterRecyclerViewAdapter(chapters));
+        }
+//        return view;
+
         return v;
+    }
+
+    public void test(int position) {
+
     }
 
     public void tileOnclick0(View v) {
