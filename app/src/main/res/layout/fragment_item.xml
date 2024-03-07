@@ -1,24 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="300dp"
-    android:layout_height="260dp"
-    android:onClick="startQuiz"
+    android:layout_height="255dp"
     android:orientation="horizontal">
 
     <View
-        android:id="@+id/rectangle_4"
+        android:id="@+id/chapterTile"
+        android:onClick="startQuiz"
         android:layout_width="265dp"
         android:layout_height="228dp"
         android:layout_marginStart="17dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="12dp"
         android:alpha="0.5"
         android:background="@drawable/rectangle_4_shape" />
 
+    <View
+        android:layout_width="240dp"
+        android:layout_height="152dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="29dp"
+        android:background="@drawable/innerrect1_shape" />
+
     <ImageView
+        android:id="@+id/chpt_image"
         android:layout_width="227dp"
         android:layout_height="145dp"
         android:layout_marginStart="31dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="35dp"
         android:contentDescription="design4"
         android:src="@drawable/course_tile_4" />
 

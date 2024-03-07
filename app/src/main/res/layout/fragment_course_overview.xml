@@ -28,100 +28,12 @@
             android:src="@drawable/course_overview_intro" />
 
         <ImageView
-            android:layout_width="1145dp"
-            android:layout_height="557dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="62dp"
             android:layout_marginTop="55dp"
             android:contentDescription="outer_box"
             android:src="@drawable/outer_box" />
-
-        <View
-            android:id="@+id/rectangle_1"
-            android:layout_width="265dp"
-            android:layout_height="228dp"
-            android:layout_marginStart="612dp"
-            android:layout_marginTop="100dp"
-            android:alpha="0.5"
-            android:background="@drawable/rectangle_1_shape" />
-
-        <View
-            android:layout_width="240dp"
-            android:layout_height="152dp"
-            android:layout_marginStart="625dp"
-            android:layout_marginTop="113dp"
-            android:background="@drawable/innerrect1_shape" />
-
-        <View
-            android:layout_width="240dp"
-            android:layout_height="152dp"
-            android:layout_marginStart="926dp"
-            android:layout_marginTop="367dp"
-            android:background="@drawable/innerrect1_ek1_shape" />
-
-        <View
-            android:layout_width="240dp"
-            android:layout_height="152dp"
-            android:layout_marginStart="625dp"
-            android:layout_marginTop="364dp"
-            android:background="@drawable/innerrect1_ek2_shape" />
-
-        <View
-            android:layout_width="240dp"
-            android:layout_height="152dp"
-            android:layout_marginStart="925dp"
-            android:layout_marginTop="113dp"
-            android:background="@drawable/innerrect1_ek3_shape" />
-
-        <View
-            android:id="@+id/rectangle_2"
-            android:layout_width="265dp"
-            android:layout_height="228dp"
-            android:layout_marginStart="912dp"
-            android:layout_marginTop="100dp"
-            android:alpha="0.5"
-            android:background="@drawable/rectangle_2_shape" />
-
-        <ImageView
-            android:layout_width="254dp"
-            android:layout_height="152dp"
-            android:layout_marginStart="911dp"
-            android:layout_marginTop="113dp"
-            android:contentDescription="design2"
-            android:src="@drawable/course_tile_2" />
-
-        <View
-            android:id="@+id/rectangle_3"
-            android:layout_width="265dp"
-            android:layout_height="228dp"
-            android:layout_marginStart="612dp"
-            android:layout_marginTop="352dp"
-            android:alpha="0.5"
-            android:background="@drawable/rectangle_3_shape" />
-
-        <ImageView
-            android:layout_width="226dp"
-            android:layout_height="146dp"
-            android:layout_marginStart="625dp"
-            android:layout_marginTop="370dp"
-            android:contentDescription="design3"
-            android:src="@drawable/course_tile_3" />
-
-        <View
-            android:id="@+id/rectangle_4"
-            android:layout_width="265dp"
-            android:layout_height="228dp"
-            android:layout_marginStart="912dp"
-            android:layout_marginTop="352dp"
-            android:alpha="0.5"
-            android:background="@drawable/rectangle_4_shape" />
-
-        <ImageView
-            android:layout_width="227dp"
-            android:layout_height="145dp"
-            android:layout_marginStart="925dp"
-            android:layout_marginTop="374dp"
-            android:contentDescription="design4"
-            android:src="@drawable/course_tile_4" />
 
         <TextView
             android:id="@+id/placeholder_course"
@@ -140,163 +52,6 @@
             android:layout_marginTop="112dp"
             android:contentDescription="line_1"
             android:src="@drawable/line" />
-
-        <ImageView
-            android:layout_width="211dp"
-            android:layout_height="152dp"
-            android:layout_marginStart="640dp"
-            android:layout_marginTop="113dp"
-            android:contentDescription="untitled_design__7__1"
-            android:src="@drawable/course_tile_1" />
-
-        <TextView
-            android:layout_width="68.5dp"
-            android:layout_height="31.5dp"
-            android:layout_marginLeft="640dp"
-            android:layout_marginTop="289dp"
-            android:text="@string/ex_1_string"
-            android:textColor="@color/_bg__surface_pro_8___1_ek2_color"
-            android:textSize="25sp" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="74.5dp"
-            android:layout_height="31.5dp"
-            android:layout_marginLeft="939dp"
-            android:layout_marginTop="543dp"
-            android:text="@string/ex_4_string"
-            android:textColor="@color/_bg__surface_pro_8___1_ek2_color"
-            android:textSize="25sp" />
-
-        <TextView
-            android:layout_width="75.5dp"
-            android:layout_height="31.5dp"
-            android:layout_marginLeft="640dp"
-            android:layout_marginTop="543dp"
-            android:text="@string/ex_3_string"
-            android:textColor="@color/_bg__surface_pro_8___1_ek2_color"
-            android:textSize="25sp" />
-
-        <TextView
-            android:layout_width="76.5dp"
-            android:layout_height="31.5dp"
-            android:layout_marginLeft="939dp"
-            android:layout_marginTop="289dp"
-            android:text="@string/ex_2_string"
-            android:textColor="@color/_bg__surface_pro_8___1_ek2_color"
-            android:textSize="25sp" />
-
-        <ImageView
-            android:layout_width="25.68dp"
-            android:layout_height="24.42dp"
-            android:layout_marginStart="702dp"
-            android:layout_marginTop="283dp"
-            android:contentDescription="star_1"
-            android:src="@drawable/star" />
-
-        <ImageView
-            android:layout_width="25.68dp"
-            android:layout_height="24.42dp"
-            android:layout_marginStart="729dp"
-            android:layout_marginTop="283dp"
-            android:contentDescription="star_2"
-            android:src="@drawable/star" />
-
-        <ImageView
-            android:layout_width="25.68dp"
-            android:layout_height="24.42dp"
-            android:layout_marginStart="810dp"
-            android:layout_marginTop="283dp"
-            android:contentDescription="star_5"
-            android:src="@drawable/star" />
-
-        <ImageView
-            android:layout_width="25.68dp"
-            android:layout_height="24.42dp"
-            android:layout_marginStart="783dp"
-            android:layout_marginTop="283dp"
-            android:contentDescription="star_4"
-            android:src="@drawable/star" />
-
-        <ImageView
-            android:layout_width="25.68dp"
-            android:layout_height="24.42dp"
-            android:layout_marginStart="756dp"
-            android:layout_marginTop="283dp"
-            android:contentDescription="star_3"
-            android:src="@drawable/star" />
-
-        <ImageView
-            android:layout_width="25.68dp"
-            android:layout_height="24.42dp"
-            android:layout_marginStart="1037dp"
-            android:layout_marginTop="537dp"
-            android:contentDescription="star_16"
-            android:src="@drawable/star" />
-
-        <ImageView
-            android:layout_width="25.68dp"
-            android:layout_height="24.42dp"
-            android:layout_marginStart="1064dp"
-            android:layout_marginTop="537dp"
-            android:contentDescription="star_17"
-            android:src="@drawable/star" />
-
-        <ImageView
-            android:layout_width="25.68dp"
-            android:layout_height="24.42dp"
-            android:layout_marginStart="716dp"
-            android:layout_marginTop="537dp"
-            android:contentDescription="star_11"
-            android:src="@drawable/star" />
-
-        <ImageView
-            android:layout_width="25.68dp"
-            android:layout_height="24.42dp"
-            android:layout_marginStart="743dp"
-            android:layout_marginTop="537dp"
-            android:contentDescription="star_12"
-            android:src="@drawable/star" />
-
-        <ImageView
-            android:layout_width="25.68dp"
-            android:layout_height="24.42dp"
-            android:layout_marginStart="797dp"
-            android:layout_marginTop="537dp"
-            android:contentDescription="star_14"
-            android:src="@drawable/star" />
-
-        <ImageView
-            android:layout_width="25.68dp"
-            android:layout_height="24.42dp"
-            android:layout_marginStart="770dp"
-            android:layout_marginTop="537dp"
-            android:contentDescription="star_15"
-            android:src="@drawable/star" />
-
-        <ImageView
-            android:layout_width="25.68dp"
-            android:layout_height="24.42dp"
-            android:layout_marginStart="1023dp"
-            android:layout_marginTop="286dp"
-            android:contentDescription="star_6"
-            android:src="@drawable/star" />
-
-        <ImageView
-            android:layout_width="25.68dp"
-            android:layout_height="24.42dp"
-            android:layout_marginStart="1050dp"
-            android:layout_marginTop="286dp"
-            android:contentDescription="star_7"
-            android:src="@drawable/star" />
-
-        <ImageView
-            android:layout_width="25.68dp"
-            android:layout_height="24.42dp"
-            android:layout_marginStart="1077dp"
-            android:layout_marginTop="286dp"
-            android:contentDescription="star_10"
-            android:src="@drawable/star" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -328,27 +83,25 @@
             android:textSize="40sp" />
 
         <androidx.cardview.widget.CardView
-            android:layout_width="565dp"
-            android:layout_height="480dp"
+            android:layout_width="622dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/progress_percentage"
-            android:layout_alignBottom="@+id/textView"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="47dp"
-            android:layout_marginEnd="105dp"
+            android:layout_marginTop="23dp"
+            android:layout_marginEnd="82dp"
             android:layout_marginBottom="-6dp"
             android:visibility="visible"
-            app:cardBackgroundColor="#4B3434"
+            app:cardBackgroundColor="#00000000"
             tools:visibility="visible">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/chapterList"
                 android:name="CodeLinguists.codelingo.ui.ChapterFragment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="515dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 app:layoutManager="LinearLayoutManager"
-                tools:context=".ui.ChapterFragment"
                 tools:listitem="@layout/fragment_item" />
         </androidx.cardview.widget.CardView>
 

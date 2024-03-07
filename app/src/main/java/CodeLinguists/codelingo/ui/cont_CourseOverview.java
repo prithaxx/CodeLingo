@@ -77,24 +77,14 @@ public class cont_CourseOverview extends Fragment {
         }
         tvProgressPercentage.setText(String.format(Locale.getDefault(), "%d%% complete", progressPercentage));
 
-
-        //We know this is hard-coded, will be resolve in iteration 3
-        View b = v.findViewById(R.id.rectangle_1);
-        b.setOnClickListener(this::tileOnclick0);
-        b = v.findViewById(R.id.rectangle_2);
-        b.setOnClickListener(this::tileOnclick1);
-        b = v.findViewById(R.id.rectangle_3);
-        b.setOnClickListener(this::tileOnclick2);
-        b = v.findViewById(R.id.rectangle_4);
-        b.setOnClickListener(this::tileOnclick3);
-
-        //better
         View chapterListView = v.findViewById(R.id.chapterList);
-        List<ChapterObj> chapters = new ArrayList<>();
-        for (int i = 0; i < 60; i++) {
-            chapters.add(new ChapterObj(1, "test", 2, "Hello", true, true));
-            chapters.add(new ChapterObj(2, "test", 2, "Hello", true, true));
-            chapters.add(new ChapterObj(3, "test", 2, "Hello", true, true));
+        List<ChapterObj> chapters = null;
+        try {
+            chapters = sessionManager.getActiveCourseChapters();
+        } catch (CourseNotFoundException | AccountPermissionException e) {
+            e.printStackTrace();
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            chapters = new ArrayList<>(); //Empty list to avoid null point errors
         }
 
         // Set the adapter
@@ -103,36 +93,6 @@ public class cont_CourseOverview extends Fragment {
             recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
             recyclerView.setAdapter(new ChapterRecyclerViewAdapter(chapters));
         }
-//        return view;
-
         return v;
-    }
-
-    public void test(int position) {
-
-    }
-
-    public void tileOnclick0(View v) {
-        startQuiz(1);
-    }
-    public void tileOnclick1(View v) {
-        startQuiz(1);
-    }
-    public void tileOnclick2(View v) {
-        startQuiz(1);
-    }
-    public void tileOnclick3(View v) {
-        startQuiz(1);
-    }
-
-    public void startQuiz(int index) {
-        try {
-            sessionManager.setActiveChapter(index);
-            Intent intent = new Intent(requireContext(), view_SlideShowWrapper.class);
-            startActivity(intent);
-        } catch (InputValidationException | AccountPermissionException e) {
-            e.printStackTrace();
-            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
     }
 }
