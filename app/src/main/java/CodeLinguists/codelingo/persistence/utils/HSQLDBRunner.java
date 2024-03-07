@@ -113,9 +113,9 @@ public class HSQLDBRunner implements ISqlRunner {
     public ResultSet selectChaptersByCourseId(int courseId, int accountId) throws SQLException {
         //Uses try-with to close connection & prepared statement on exception
         try (Connection connection = connect();
-             PreparedStatement ps = connection.prepareStatement("SELECT c.id, c.name, c.courseId, c.description, cc.isUnlocked, cc.isCompleted" +
-                     "FROM CHAPTER c" +
-                     "JOIN CHAPTER_COMPLETION cc ON c.id = cc.chapterId" +
+             PreparedStatement ps = connection.prepareStatement("SELECT c.id, c.name, c.courseId, c.description, cc.isUnlocked, cc.isCompleted " +
+                     "FROM CHAPTER c " +
+                     "JOIN CHAPTER_COMPLETION cc ON c.id = cc.chapterId " +
                      "WHERE c.courseId = ? AND cc.accountId = ?")) {
             ps.setInt(1, courseId);
             ps.setInt(2, accountId);
