@@ -1,19 +1,19 @@
 
-	 
+
 	/*
 	 *	This content is generated from the API File Info.
 	 *	(Alt+Shift+Ctrl+I).
 	 *
-	 *	@desc 		
+	 *	@desc
 	 *	@file 		activity_course_overview
 	 *	@date 		Wednesday 07th of February 2024 06:38:24 PM
 	 *	@title 		Page 1
-	 *	@author 	
-	 *	@keywords 	
+	 *	@author
+	 *	@keywords
 	 *	@generator 	Export Kit v1.3.figma
 	 *
 	 */
-	
+
 
 package CodeLinguists.codelingo.ui;
 
@@ -38,8 +38,8 @@ import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.logic.ISessionManager;
 import CodeLinguists.codelingo.logic.SessionManager;
 
-	public class view_CourseOverview extends AppCompatActivity {
-		ISessionManager sessionManager;
+public class view_CourseOverview extends AppCompatActivity {
+	ISessionManager sessionManager;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -93,13 +93,16 @@ import CodeLinguists.codelingo.logic.SessionManager;
 	public void changeView(MenuItem view){
 		if(R.id.course1 == view.getItemId()) {
 			changeCourse(1);
+			NavigationView navView = findViewById(R.id.nav_view);
+			navView.setVisibility(View.INVISIBLE);
 		}
 		else if(R.id.course2 == view.getItemId()) {
 			changeCourse(2);
+			NavigationView navView = findViewById(R.id.nav_view);
+			navView.setVisibility(View.INVISIBLE);
 		}
 		else
 			Toast.makeText(this, "Course not available", Toast.LENGTH_SHORT).show();
 	}
 }
-	
-	
+
