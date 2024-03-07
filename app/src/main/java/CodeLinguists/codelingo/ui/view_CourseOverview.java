@@ -37,6 +37,7 @@ import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.logic.ISessionManager;
 import CodeLinguists.codelingo.logic.SessionManager;
+import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
 
 	public class view_CourseOverview extends AppCompatActivity {
@@ -82,11 +83,16 @@ import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFound
 		startActivity(intent);
 	}
 
-	private void changeCourse(int newCourseId) throws CourseNotFoundException, AccountPermissionException {
-		sessionManager.setActiveCourse(newCourseId);
-		cont_CourseOverview newCont = new cont_CourseOverview();
-		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.replace(R.id.fragmentContainerView3, newCont).commit();
+	private void changeCourse(int newCourseId){
+		try {
+			sessionManager.setActiveCourse(newCourseId);
+			cont_CourseOverview newCont = new cont_CourseOverview();
+			FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+			ft.replace(R.id.fragmentContainerView3, newCont).commit();
+		} catch (CourseNotFoundException | AccountPermissionException | InputValidationException e) {
+			e.printStackTrace();
+			Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	public void changeView(MenuItem view) throws CourseNotFoundException, AccountPermissionException {

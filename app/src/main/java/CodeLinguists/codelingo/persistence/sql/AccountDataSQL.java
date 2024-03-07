@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.AccountObj;
-import CodeLinguists.codelingo.dso.LocalPreferences;
+import CodeLinguists.codelingo.dso.preferencesObj;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.persistence.IAccountData;
@@ -24,7 +24,7 @@ public class AccountDataSQL implements IAccountData {
     @NotNull
     public AccountObj getGuestAccountByName(String name) throws AccountNotFoundException {
         try {
-            return rsToAccountObj(sqlRunner.selectAccountByName(name));
+            return rsToAccountObj(sqlRunner.selectGuestAccountByUsername(name));
         } catch (SQLException e) {
             throw new AccountNotFoundException(Strings.AccountNotFoundWithName(name), e);
         }
@@ -33,7 +33,7 @@ public class AccountDataSQL implements IAccountData {
     @Override
     public AccountObj getGuestAccountById(int accountId) throws AccountNotFoundException {
         try {
-            return rsToAccountObj(sqlRunner.selectAccountById(accountId));
+            return rsToAccountObj(sqlRunner.selectGuestAccountById(accountId));
         } catch (SQLException e) {
             throw new AccountNotFoundException(Strings.AccountNotFound, e);
         }
@@ -67,30 +67,17 @@ public class AccountDataSQL implements IAccountData {
     }
 
     @Override
-    public LocalPreferences getLocalPreferences() throws DataInaccessibleException {
+    public preferencesObj getLocalPreferences() throws DataInaccessibleException {
         try (ResultSet rs = sqlRunner.selectLocalPreferences()){
             if (rs.next()) {
                 boolean autoLogin = rs.getBoolean("autoLogin");
                 int activeAccountId = rs.getInt("activeAccountId");
-                return new LocalPreferences(autoLogin, activeAccountId);
+                return new preferencesObj(autoLogin, activeAccountId);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         throw new DataInaccessibleException(Strings.CannotFindPreferences);
-    }
-
-    @Override
-    public void initLocalPreferences() {
-        try (ResultSet rs = sqlRunner.selectLocalPreferences()) {
-            if (!rs.next()){
-                sqlRunner.insertLocalPreferences();
-            } else {
-                setStayLoggedIn(1, false);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     private AccountObj rsToAccountObj(ResultSet rs) throws AccountNotFoundException {

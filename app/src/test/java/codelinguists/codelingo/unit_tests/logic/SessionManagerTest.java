@@ -1,4 +1,4 @@
-package codelinguists.codelingo.logic;
+package codelinguists.codelingo.unit_tests.logic;
 
 import static org.junit.Assert.*;
 
@@ -34,7 +34,7 @@ public class SessionManagerTest {
     }
 
     @Test
-    public void setActiveChapter() {
+    public void setActiveChapter() throws AccountPermissionException, InputValidationException {
         Services.getSessionManager().setActiveChapter(1);
     }
 

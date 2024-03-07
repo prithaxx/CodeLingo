@@ -9,8 +9,14 @@ public class Main {
     private static String dbName = null;
 
     public static void setDBPathName(final String name) {
-        new jdbcDriver();
+        //new jdbcDriver();
+        try {
+            Class.forName("org.hsqldb.jdbc.JDBCDriver").newInstance();
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         dbName = name;
+
     }
 
     public static String getDbUrl() {

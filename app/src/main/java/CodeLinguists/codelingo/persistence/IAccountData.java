@@ -1,7 +1,7 @@
 package CodeLinguists.codelingo.persistence;
 
 import CodeLinguists.codelingo.dso.AccountObj;
-import CodeLinguists.codelingo.dso.LocalPreferences;
+import CodeLinguists.codelingo.dso.preferencesObj;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 
@@ -27,7 +27,5 @@ public interface IAccountData {
 
     void setStayLoggedIn(int accountId, boolean stayLoggedIn);
 
-    LocalPreferences getLocalPreferences() throws DataInaccessibleException;
-
-    void initLocalPreferences();
+    preferencesObj getLocalPreferences() throws DataInaccessibleException;
 }

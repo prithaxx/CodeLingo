@@ -28,6 +28,8 @@ public class SessionManager implements ISessionManager {
         this.quizHandler = quizHandler;
         this.accountHandler = accountHandler;
         this.courseHandler = courseHandler;
+        course = CourseObjFactory.getNoneCourse();;
+        chapterId = -1;
     }
 
     @Override
@@ -68,21 +70,23 @@ public class SessionManager implements ISessionManager {
 
     @Override
     public IQuizIterator startQuiz() throws NoItemSelectedException {
-        if (course==null || chapterId<0) {
+        if (course==null) {
             throw new NoItemSelectedException(Strings.NoCourseSelected);
+        }
+        if (chapterId<0) {
+            throw new NoItemSelectedException(Strings.NoChapterSelected);
         }
         return quizHandler.getQuiz(course.id(), chapterId);
     }
 
     @Override
     public CourseObj getActiveCourse() throws CourseNotFoundException, AccountPermissionException {
-        //return course;
         if (this.account == null) {
             throw new AccountPermissionException(Strings.NotSignedIn);
         }
         try {
-            course = courseHandler.getActiveCourse(account);
-            return course;
+            this.course = courseHandler.getActiveCourse(account);
+            return this.course;
         } catch (CourseNotFoundException e) {
             course = CourseObjFactory.getNoneCourse();
             throw e;
@@ -90,19 +94,31 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public void setActiveCourse(int index) throws CourseNotFoundException, AccountPermissionException {
-        accountHandler.setActiveCourse(account, index);
-        getActiveCourse();
+    public void setActiveCourse(int courseId) throws CourseNotFoundException, AccountPermissionException, InputValidationException {
+        if (this.account == null) {
+            throw new AccountPermissionException(Strings.NotSignedIn);
+        }
+        accountHandler.setActiveCourse(account, courseId);
+        getActiveCourse(); //update course variable
     }
 
     @Override
-    public List<CourseObj> getCourseList(){
+    public List<CourseObj> getCourseList() throws AccountPermissionException {
+        if (account == null) {
+            throw new AccountPermissionException(Strings.NotSignedIn);
+        }
         return courseHandler.getCourseList(account);
     }
 
     @Override
-    public void setActiveChapter(int index) {
-        chapterId = index;
+    public void setActiveChapter(int chapterId) throws InputValidationException, AccountPermissionException {
+        if (account == null) {
+            throw new AccountPermissionException(Strings.NotSignedIn);
+        }
+        if (chapterId < 0) {
+            throw new InputValidationException(Strings.ChapterIdPositive);
+        }
+        this.chapterId = chapterId;
     }
 
     @Override
@@ -114,7 +130,10 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public int calculateProgressPercentage(CourseObj course) throws CourseNotFoundException {
+    public int calculateProgressPercentage() throws CourseNotFoundException, AccountPermissionException {
+        if (account == null) {
+            throw new AccountPermissionException(Strings.NotSignedIn);
+        }
         return courseHandler.calculateProgressPercentage(account);
     }
 

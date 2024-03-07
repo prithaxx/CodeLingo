@@ -25,12 +25,4 @@ public class ChapterDataStub implements IChapterData {
                 .filter(chapterObj -> chapterObj.courseId()==courseId)
                 .collect(Collectors.toList());
     }
-
-    @Override
-    public ChapterObj getChapterById(int chapterId, int courseId, int accountId) {
-        return chapterList.stream()
-                .filter(chapterObj -> chapterObj.courseId()==courseId && chapterObj.id()==chapterId)
-                .findFirst()
-                .orElse(null);
-    }
 }

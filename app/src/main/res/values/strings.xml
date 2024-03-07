@@ -13,6 +13,8 @@
     <string name="optionB">Option B</string>
     <string name="optionC">Option C</string>
     <string name="optionD">Option D</string>
+    <string name="True">True</string>
+    <string name="False">False</string>
     <string name="SlideTitlePlaceholder">Slide #%1$d</string>
     <string name="placeholder">placeholder</string>
     <string name="check_answer">Check Answer</string>

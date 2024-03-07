@@ -23,4 +23,6 @@ public interface IQuizIterator {
      * Else a QuizObj for feedback
      */
     QuizObj submit(String input) throws InputValidationException;
+
+    int cursorPos();
 }

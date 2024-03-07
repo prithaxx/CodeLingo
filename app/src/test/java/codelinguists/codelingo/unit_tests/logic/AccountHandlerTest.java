@@ -1,4 +1,4 @@
-package codelinguists.codelingo.logic;
+package codelinguists.codelingo.unit_tests.logic;
 
 import static org.junit.Assert.*;
 
@@ -8,16 +8,13 @@ import org.junit.Test;
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.CourseObj;
-import CodeLinguists.codelingo.dso.LocalPreferences;
-import CodeLinguists.codelingo.logic.SessionManager;
+import CodeLinguists.codelingo.dso.preferencesObj;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.AccountHandler;
 import CodeLinguists.codelingo.persistence.IAccountData;
-import CodeLinguists.codelingo.persistence.ISessionData;
 import CodeLinguists.codelingo.persistence.stubs.AccountDataStub;
-import CodeLinguists.codelingo.persistence.stubs.SessionDataStub;
 
 public class AccountHandlerTest {
     private AccountDataStub accountDataStub;
@@ -52,6 +49,8 @@ public class AccountHandlerTest {
 
     @Test
     public void guestLoginNoAccount() throws DataInaccessibleException, AccountNotFoundException, InputValidationException {
+        AccountDataMock accountData = new AccountDataMock(false, false, true);
+        AccountHandler accountHandler = new AccountHandler(accountData);
         AccountObj acc = accountHandler.guestLogin("test");
         assertEquals(acc.getName(), "test");
     }

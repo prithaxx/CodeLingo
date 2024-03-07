@@ -2,21 +2,18 @@ package CodeLinguists.codelingo.logic;
 
 import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.AccountObj;
-import CodeLinguists.codelingo.dso.LocalPreferences;
+import CodeLinguists.codelingo.dso.preferencesObj;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.persistence.IAccountData;
-import CodeLinguists.codelingo.persistence.ISessionData;
 
 public class AccountHandler implements IAccountHandler {
 
     private final IAccountData accountData;
-    private final ISessionData sessionData;
 
-    public AccountHandler(IAccountData accountData, ISessionData sessionData) {
+    public AccountHandler(IAccountData accountData) {
         this.accountData = accountData;
-        this.sessionData = sessionData;
     }
 
     @Override
@@ -38,7 +35,6 @@ public class AccountHandler implements IAccountHandler {
         }
 
         accountData.setStayLoggedIn(account.getId(), stayLoggedIn);
-        updateSessionData(account);
         return account;
     }
 
@@ -51,7 +47,7 @@ public class AccountHandler implements IAccountHandler {
      // Returns Null if autologin fails
     public AccountObj autoLogin() {
         try {
-            LocalPreferences lp = accountData.getLocalPreferences();
+            preferencesObj lp = accountData.getLocalPreferences();
             if (lp.autoLogin() && lp.accountId()>0) {
                 return accountData.getGuestAccountById(lp.accountId());
             }
@@ -62,14 +58,11 @@ public class AccountHandler implements IAccountHandler {
     }
 
     @Override
-    public void setActiveCourse(AccountObj account, int courseId) {
+    public void setActiveCourse(AccountObj account, int courseId) throws InputValidationException {
+        if (courseId<0) {
+            throw new InputValidationException(Strings.CourseNotFound(courseId));
+        }
         accountData.setActiveCourse(account.getId(), courseId);
         account.setActiveCourseId(courseId);
-    }
-
-    private void updateSessionData(AccountObj account) {
-        if (account != null) {
-            sessionData.setActiveAccount(account);
-        }
     }
 }
