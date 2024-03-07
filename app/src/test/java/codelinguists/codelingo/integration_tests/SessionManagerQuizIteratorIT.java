@@ -1,8 +1,10 @@
 package codelinguists.codelingo.integration_tests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -15,7 +17,6 @@ import CodeLinguists.codelingo.dso.QuestionType;
 import CodeLinguists.codelingo.dso.QuizObj;
 import CodeLinguists.codelingo.logic.IQuizIterator;
 import CodeLinguists.codelingo.logic.ISessionManager;
-import CodeLinguists.codelingo.logic.QuizIterator;
 import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.logic_exceptions.NoItemSelectedException;
@@ -23,7 +24,7 @@ import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFound
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 import codelinguists.codelingo.utils.SqlDbIT;
 
-public class SessionManagerQuizItorator extends SqlDbIT {
+public class SessionManagerQuizIteratorIT extends SqlDbIT {
     ISessionManager sessionManager;
 
     //General session manager tests
@@ -80,7 +81,9 @@ public class SessionManagerQuizItorator extends SqlDbIT {
         sessionManager.guestLogin(user);
         sessionManager.setActiveCourse(1);
         sessionManager.setActiveChapter(1);
-        assertNotNull(sessionManager.startQuiz().nextQuestion());
+        IQuizIterator qi = sessionManager.startQuiz();
+        assertNotNull(qi.nextQuestion());
+        assertEquals(1, qi.cursorPos());
     }
 
     @Test
@@ -162,7 +165,7 @@ public class SessionManagerQuizItorator extends SqlDbIT {
         IQuizIterator qi = sessionManager.startQuiz();
         QuizObj qo = qi.nextQuestion();
         QuizObj feedback = qi.submit(qo.answer()+"incorrect");
-        assertTrue(feedback.type() == QuestionType.FEEDBACK_FAILED);
+        assertSame(feedback.type(), QuestionType.FEEDBACK_FAILED);
     }
     @Test
     public void testQuizIteratorStartSubmitTrue() throws CourseNotFoundException, AccountPermissionException, InputValidationException, DataInaccessibleException, NoItemSelectedException {
@@ -173,7 +176,7 @@ public class SessionManagerQuizItorator extends SqlDbIT {
         IQuizIterator qi = sessionManager.startQuiz();
         QuizObj qo = qi.nextQuestion();
         QuizObj feedback = qi.submit(qo.answer());
-        assertTrue(feedback.type() == QuestionType.FEEDBACK_PASSED);
+        assertSame(feedback.type(), QuestionType.FEEDBACK_PASSED);
     }
 
     @Test(expected = InputValidationException.class)
@@ -204,7 +207,7 @@ public class SessionManagerQuizItorator extends SqlDbIT {
         String user = "SA";
         SqlTestRunner.executeUpdate("INSERT INTO COURSE VALUES(555, 'Example', 'example description');");
         SqlTestRunner.executeUpdate("INSERT INTO CHAPTER VALUES(555, 'Example', 555, 'example description');");
-        SqlTestRunner.executeUpdate("INSERT INTO QUIZ VALUES(1, 555, 'MULTI_CHOICE', 'prompt', TRUE, 'answer', '1, 2, 3', 'Oops! That's the wrong answer', 'Great job! That's the correct answer!');");
+        SqlTestRunner.executeUpdate("INSERT INTO QUIZ VALUES(555, 555, 'MULTI_CHOICE', 'prompt', TRUE, 'answer', '1, 2, 3', 'Oops! Thats the wrong answer', 'Great job! Thats the correct answer!')");
         sessionManager.guestLogin(user);
         sessionManager.setActiveCourse(555);
         sessionManager.setActiveChapter(555);
@@ -219,13 +222,14 @@ public class SessionManagerQuizItorator extends SqlDbIT {
         String user = "SA";
         SqlTestRunner.executeUpdate("INSERT INTO COURSE VALUES(555, 'Example', 'example description');");
         SqlTestRunner.executeUpdate("INSERT INTO CHAPTER VALUES(555, 'Example', 555, 'example description');");
-        SqlTestRunner.executeUpdate("INSERT INTO QUIZ VALUES(1, 555, 'MULTI_CHOICE', 'prompt', FALSE, 'answer', '1, 2, 3', 'Oops! That's the wrong answer', 'Great job! That's the correct answer!');");
+        SqlTestRunner.executeUpdate("INSERT INTO QUIZ VALUES(555, 555, 'MULTI_CHOICE', 'prompt', FALSE, 'answer', '1, 2, 3', 'Oops! Thats the wrong answer', 'Great job! Thats the correct answer!')");
+        SqlTestRunner.executeUpdate("INSERT INTO QUIZ VALUES(556, 555, 'MULTI_CHOICE', 'prompt', TRUE, 'answer', '1, 2, 3', 'Oops! Thats the wrong answer', 'Great job! Thats the correct answer!')");
         sessionManager.guestLogin(user);
         sessionManager.setActiveCourse(555);
         sessionManager.setActiveChapter(555);
         IQuizIterator qi = sessionManager.startQuiz();
         qi.nextQuestion();
-        assertFalse(qi.hasNextQuestion());
+        assertSame(qi.submit("").type(), QuestionType.MULTI_CHOICE);
     }
 
     @Test
@@ -233,12 +237,13 @@ public class SessionManagerQuizItorator extends SqlDbIT {
         String user = "SA";
         SqlTestRunner.executeUpdate("INSERT INTO COURSE VALUES(555, 'Example', 'example description');");
         SqlTestRunner.executeUpdate("INSERT INTO CHAPTER VALUES(555, 'Example', 555, 'example description');");
-        SqlTestRunner.executeUpdate("INSERT INTO QUIZ VALUES(1, 555, 'MULTI_CHOICE', 'prompt', FALSE, '', '1, 2, 3', 'Oops! That's the wrong answer', 'Great job! That's the correct answer!');");
+        SqlTestRunner.executeUpdate("INSERT INTO QUIZ VALUES(555, 555, 'MULTI_CHOICE', 'prompt', TRUE, '', '1, 2, 3', 'Oops! Thats the wrong answer', 'Great job! Thats the correct answer!')");
+        SqlTestRunner.executeUpdate("INSERT INTO QUIZ VALUES(556, 555, 'MULTI_CHOICE', 'prompt', TRUE, 'answer', '1, 2, 3', 'Oops! Thats the wrong answer', 'Great job! Thats the correct answer!')");
         sessionManager.guestLogin(user);
         sessionManager.setActiveCourse(555);
         sessionManager.setActiveChapter(555);
         IQuizIterator qi = sessionManager.startQuiz();
         qi.nextQuestion();
-        assertFalse(qi.hasNextQuestion());
+        assertSame(qi.submit("").type(), QuestionType.MULTI_CHOICE);
     }
 }

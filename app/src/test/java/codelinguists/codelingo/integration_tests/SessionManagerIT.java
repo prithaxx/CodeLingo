@@ -207,10 +207,8 @@ public class SessionManagerIT extends SqlDbIT {
         String user = "SA";
         sessionManager.guestLogin(user);
         List<CourseObj> courses = sessionManager.getCourseList();
-        if (!courses.isEmpty()) {
-            sessionManager.setActiveCourse(0);
-            assertNotNull(sessionManager.getActiveCourse());
-        }
+        sessionManager.setActiveCourse(1);
+        assertNotNull(sessionManager.getActiveCourse());
     }
 
     @Test(expected = AccountPermissionException.class)

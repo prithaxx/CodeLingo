@@ -68,7 +68,7 @@ public class QuizIterator implements IQuizIterator {
     @Override
     public QuizObj submit(String input) throws InputValidationException {
         QuizObj current = activeQuiz.get(currentQuizCursor-1);
-        if ( current.answer() == null || !current.hasAnswer() || inFeedback) {
+        if ( current.answer() == null || current.answer().isBlank() || !current.hasAnswer() || inFeedback) {
             return nextQuestion();
         }
 
@@ -77,6 +77,7 @@ public class QuizIterator implements IQuizIterator {
         return QuizObj.cloneAsFeedback(current, feedbackType);
     }
 
+    @Override
     public int cursorPos() {
         return currentQuizCursor;
     }
