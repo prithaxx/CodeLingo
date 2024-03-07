@@ -95,14 +95,13 @@ public class view_CourseOverview extends AppCompatActivity {
 			changeCourse(1);
 			NavigationView navView = findViewById(R.id.nav_view);
 			navView.setVisibility(View.INVISIBLE);
-		}
-		else if(R.id.course2 == view.getItemId()) {
+		} else if(R.id.course2 == view.getItemId()) {
 			changeCourse(2);
 			NavigationView navView = findViewById(R.id.nav_view);
 			navView.setVisibility(View.INVISIBLE);
-		}
-		else
+		} else {
 			Toast.makeText(this, "Course not available", Toast.LENGTH_SHORT).show();
+		}
 	}
 }
 
