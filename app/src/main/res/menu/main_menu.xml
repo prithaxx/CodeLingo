@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/logout"
+            android:title="Logout"
+            android:onClick="navigateToLogin"/>
+    </group>
+
+    <item android:title="Courses">
+        <menu>
+            <item
+                android:id="@+id/course1"
+                android:onClick="changeView"
+                android:title="     Java Basics" />
+
+            <item
+                android:id="@+id/course2"
+                android:onClick="changeView"
+                android:title="     Java Advanced" />
+
+        </menu>
+    </item>
+</menu>

@@ -1,10 +1,9 @@
 package CodeLinguists.codelingo.logic;
 
-import java.util.List;
-
 import CodeLinguists.codelingo.dso.AccountObj;
-import CodeLinguists.codelingo.dso.ChapterObj;
-import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
+import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
+import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 
 public interface IAccountHandler {
 
@@ -14,7 +13,12 @@ public interface IAccountHandler {
      *
      * @param name - name of account to log into
      */
-    AccountObj guestLogin(String name);
+    AccountObj guestLogin(String name) throws DataInaccessibleException, InputValidationException;
+    AccountObj guestLogin(String name, boolean stayLoggedIn) throws DataInaccessibleException, InputValidationException;
 
-    List<ChapterObj> getActiveCourseChapters();
+    void setActiveCourse(AccountObj account, int courseId) throws InputValidationException, AccountPermissionException;
+
+    AccountObj autoLogin();
+
+    void logout();
 }

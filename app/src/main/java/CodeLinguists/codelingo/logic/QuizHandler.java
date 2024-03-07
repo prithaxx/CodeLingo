@@ -1,49 +1,37 @@
 package CodeLinguists.codelingo.logic;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.QuizObj;
+import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
+import CodeLinguists.codelingo.persistence.IQuizData;
 
 public class QuizHandler implements IQuizHandler{
-
-    List<QuizObj> activeQuiz;
-    int currentQuizCursor;
-
-    public QuizHandler(List<QuizObj> activeQuiz) {
-        this.activeQuiz = activeQuiz==null ? new ArrayList<>() : activeQuiz;
-        currentQuizCursor=0;
+    private final IQuizData quizData;
+    private final QuizIteratorFactory quizFactory;
+    public QuizHandler(IQuizData quizData, QuizIteratorFactory quizFactory) {
+        this.quizData = quizData;
+        this.quizFactory = quizFactory;
     }
 
     @Override
-    public QuizObj nextQuestion() {
-        if (currentQuizCursor >= activeQuiz.size()) {
-            return null;
+    public IQuizIterator getQuiz(int courseId, int chapterId) {
+        return quizFactory.getQuiz(this, quizData.getQuizByChapterId(chapterId));
+    }
+
+    @Override
+    public boolean checkQuizAnswer(QuizObj quiz, String answer) throws InputValidationException {
+        if (quiz == null) {
+            throw new InputValidationException(Strings.QuizNotFound);
         }
-        return activeQuiz.get(currentQuizCursor++);
-    }
 
-    @Override
-    public boolean hasNextQuestion() {
-        return currentQuizCursor < activeQuiz.size();
-    }
-
-    @Override
-    public QuizObj prevQuestion() {
-        //cursor always points to the next quiz
-        //so going backwards requires on offset of 1
-        if (currentQuizCursor <= 1) {
-            return null;
+        if (!quiz.hasAnswer() || quiz.answer()==null || quiz.answer().isBlank()) {
+            return true;
         }
-        return activeQuiz.get(--currentQuizCursor-1);
-    }
 
-    @Override
-    public boolean hasPrevQuestion() {
-        return currentQuizCursor > 1;
-    }
+        if (answer==null || answer.isBlank()) {
+            throw new InputValidationException(Strings.QuestionNotAnswered);
+        }
 
-    public int cursorPos() {
-        return currentQuizCursor;
+        return answer.equals(quiz.answer());
     }
 }

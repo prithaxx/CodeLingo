@@ -7,12 +7,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import CodeLinguists.codelingo.R;
+import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.QuizObj;
-import CodeLinguists.codelingo.logic.IQuizHandler;
+import CodeLinguists.codelingo.logic.IQuizIterator;
 import CodeLinguists.codelingo.logic.ISessionManager;
-import CodeLinguists.codelingo.logic.SessionManager;
+import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
+import CodeLinguists.codelingo.logic.logic_exceptions.NoItemSelectedException;
+import CodeLinguists.codelingo.ui.slides.QuestionFragmentFactory;
+import CodeLinguists.codelingo.ui.slides.QuizSlide;
+import CodeLinguists.codelingo.ui.ui_exceptions.SlideTypeNotHandledException;
 
 /**
  * Provides common behaviours for slides like:
@@ -21,52 +27,80 @@ import CodeLinguists.codelingo.logic.SessionManager;
 
 public class view_SlideShowWrapper extends AppCompatActivity {
 
-    ISessionManager sessionManager;
-    int lives = 3; //needs to be global
-    private IQuizHandler quizHandler;
+    private ISessionManager sessionManager;
+    private IQuizIterator quizIterator;
+    private QuestionFragmentFactory slideFactory;
+    private QuizSlide currentSlide;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slide_show_wrapper);
 
-        sessionManager = SessionManager.newInstance();
-        this.quizHandler = sessionManager.startQuiz();
-        changeSlide(true);
+        this.sessionManager = Services.getSessionManager();
+        try {
+            this.quizIterator = sessionManager.startQuiz();
+        } catch (NoItemSelectedException e) {
+            throw new RuntimeException(e);
+        }
+        this.slideFactory = new QuestionFragmentFactory();
+        try {
+            changeSlide(quizIterator.startQuiz()); //Load first slide
+        } catch (SlideTypeNotHandledException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public void btnSlideShowNextOnClick(View v){
-        changeSlide(true);
+    public void btnSlideShowNextOnClick(View v) throws SlideTypeNotHandledException, InputValidationException {
+        changeSlide(quizIterator.submit(currentSlide.getInput()));
     }
 
-    public void btnSlideShowPrevOnClick(View v){
-        changeSlide(false);
+    public void btnSlideShowPrevOnClick(View v) throws SlideTypeNotHandledException {
+        changeSlide(quizIterator.prevQuestion());
+    }
+    public void btnSlideShowSkipOnClick(View v) throws SlideTypeNotHandledException {
+        changeSlide(quizIterator.nextQuestion());
     }
 
-    /**
-     * @param to_next - go to next slide on true, go to previous slide on false.
-     */
-    private void changeSlide(boolean to_next) {
-        QuizObj quiz = to_next ? quizHandler.nextQuestion() : quizHandler.prevQuestion();
+    private void changeSlide(QuizObj quiz) throws SlideTypeNotHandledException {
+        this.currentSlide = slideFactory.getInstance(quiz);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragmentContainerView, cont_SlideText.newInstance("Quiz #"+quiz.id(), quiz.prompt())).commit();
+        ft.replace(R.id.fragmentContainerView, this.currentSlide).commit();
         toggleNavButtons();
     }
 
     private void toggleNavButtons() {
         Button next = findViewById(R.id.btnSlideShowNext);
         Button prev = findViewById(R.id.btnSlideShowPrev);
+        QuizObj quizData = currentSlide.getQuiz();
 
-        if (!quizHandler.hasNextQuestion()) {
-            next.setText("Done!");
-            next.setOnClickListener(this::finishQuiz);
+        if (quizData.hasAnswer()) {
+            next.setText(R.string.check_answer);
+            next.setOnClickListener(v -> {
+                try {
+                    btnSlideShowNextOnClick(v);
+                } catch (SlideTypeNotHandledException | InputValidationException e) {
+                    Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
         } else {
-            next.setText("Next");
-            next.setOnClickListener(this::btnSlideShowNextOnClick);
+            if (!quizIterator.hasNextQuestion()) {
+                next.setText(R.string.done);
+                next.setOnClickListener(this::finishQuiz);
+            } else {
+                next.setText(R.string.next);
+                next.setOnClickListener(v -> {
+                    try {
+                        btnSlideShowNextOnClick(v);
+                    } catch (SlideTypeNotHandledException | InputValidationException e) {
+                        Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
         }
 
-        if (!quizHandler.hasPrevQuestion()) {
+        if (!quizIterator.hasPrevQuestion()) {
             prev.setVisibility(View.INVISIBLE);
         } else {
             prev.setVisibility(View.VISIBLE);
