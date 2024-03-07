@@ -4,15 +4,12 @@ import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
-import CodeLinguists.codelingo.exceptions.AccountNotFoundException;
-import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
-import CodeLinguists.codelingo.exceptions.InputValidationException;
+import CodeLinguists.codelingo.dso.LocalPreferences;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.AccountNotFoundException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
+import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.persistence.IAccountData;
 import CodeLinguists.codelingo.persistence.ISessionData;
-import CodeLinguists.codelingo.application.Services;
-
-import java.sql.SQLException;
-import java.util.List;
 
 public class AccountHandler implements IAccountHandler {
 
@@ -26,6 +23,11 @@ public class AccountHandler implements IAccountHandler {
 
     @Override
     public AccountObj guestLogin(String name) throws DataInaccessibleException {
+        return guestLogin(name, false);
+    }
+
+    @Override
+    public AccountObj guestLogin(String name, boolean stayLoggedIn) throws DataInaccessibleException {
         if(name == null || name.isEmpty()){
             throw new InputValidationException(Strings.NoName);
         }
@@ -37,8 +39,28 @@ public class AccountHandler implements IAccountHandler {
             account = accountData.createGuestAccount(name);
         }
 
+        accountData.setStayLoggedIn(account.getId(), stayLoggedIn);
         updateSessionData(account);
         return account;
+    }
+
+    @Override
+    public void logout() {
+        accountData.setStayLoggedIn(-1, false);
+    }
+
+    @Override
+     // Returns Null if autologin fails
+    public AccountObj autoLogin() {
+        try {
+            LocalPreferences lp = accountData.getLocalPreferences();
+            if (lp.autoLogin() && lp.accountId()>0) {
+                return accountData.getGuestAccountById(lp.accountId());
+            }
+        } catch (DataInaccessibleException | AccountNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

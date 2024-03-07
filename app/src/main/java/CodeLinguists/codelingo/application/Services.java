@@ -1,6 +1,6 @@
 package CodeLinguists.codelingo.application;
 
-import CodeLinguists.codelingo.exceptions.RuntimeExceptions.ConstantDependencyException;
+import CodeLinguists.codelingo.application.runtime_exceptions.ConstantDependencyException;
 import CodeLinguists.codelingo.logic.AccountHandler;
 import CodeLinguists.codelingo.logic.CourseHandler;
 import CodeLinguists.codelingo.logic.IAccountHandler;
@@ -52,6 +52,10 @@ public class Services {
     private static IQuizData quizData;
     private static IChapterData chapterData;
 
+    @Deprecated
+    /**
+     * Used exclusively for testing
+     */
     public static synchronized void resetObjects() {
         sessionManager = null;
         accountHandler = null;
