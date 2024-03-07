@@ -6,6 +6,7 @@ import java.util.List;
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.QuestionType;
 import CodeLinguists.codelingo.dso.QuizObj;
+import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 
 public class QuizIterator implements IQuizIterator {
 
@@ -35,10 +36,11 @@ public class QuizIterator implements IQuizIterator {
     public QuizObj nextQuestion() {
         inFeedback = false;
 
-        if (currentQuizCursor >= activeQuiz.size()) {
+        if (hasNextQuestion()) {
+            return activeQuiz.get(currentQuizCursor++);
+        }else{
             return null;
         }
-        return activeQuiz.get(currentQuizCursor++);
     }
 
     @Override
@@ -63,7 +65,7 @@ public class QuizIterator implements IQuizIterator {
     }
 
     @Override
-    public QuizObj submit(String input) {
+    public QuizObj submit(String input) throws InputValidationException {
         QuizObj current = activeQuiz.get(currentQuizCursor-1);
         if ( current.answer() == null || !current.hasAnswer() || inFeedback) {
             return nextQuestion();

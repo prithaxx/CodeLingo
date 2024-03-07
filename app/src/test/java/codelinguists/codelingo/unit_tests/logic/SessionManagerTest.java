@@ -5,13 +5,12 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.SQLException;
-
 import CodeLinguists.codelingo.application.Services;
-import CodeLinguists.codelingo.exceptions.AccountPermissionException;
-import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
-import CodeLinguists.codelingo.exceptions.DataInaccessibleException;
-import CodeLinguists.codelingo.logic.SessionManager;
+import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
+import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
+import CodeLinguists.codelingo.logic.logic_exceptions.NoItemSelectedException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 
 public class SessionManagerTest {
     @Before
@@ -20,12 +19,12 @@ public class SessionManagerTest {
     }
 
     @Test
-    public void guestLoginTest() throws DataInaccessibleException, CourseNotFoundException, AccountPermissionException {
+    public void guestLoginTest() throws DataInaccessibleException, CourseNotFoundException, AccountPermissionException, InputValidationException {
         Services.getSessionManager().guestLogin("test");
     }
 
     @Test
-    public void startQuiz() {
+    public void startQuiz() throws NoItemSelectedException {
         assertNotNull(Services.getSessionManager().startQuiz());
     }
 
