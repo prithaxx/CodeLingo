@@ -3,6 +3,7 @@ package CodeLinguists.codelingo.persistence.stubs;
 import java.util.ArrayList;
 import java.util.List;
 
+import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.preferencesObj;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.AccountNotFoundException;
@@ -19,13 +20,13 @@ public class AccountDataStub implements IAccountData {
     }
 
     @Override
-    public AccountObj getGuestAccountByName(String name) {
+    public AccountObj getGuestAccountByName(String name) throws AccountNotFoundException {
         for (AccountObj account:this.guestAccounts) {
             if (name.equals(account.getName())){
                 return account;
             }
         }
-        return null;
+        throw new AccountNotFoundException(Strings.AccountNotFoundWithName(name));
     }
 
     @Override

@@ -3,6 +3,7 @@ package CodeLinguists.codelingo.logic;
 import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.preferencesObj;
+import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
@@ -58,9 +59,12 @@ public class AccountHandler implements IAccountHandler {
     }
 
     @Override
-    public void setActiveCourse(AccountObj account, int courseId) throws InputValidationException {
+    public void setActiveCourse(AccountObj account, int courseId) throws InputValidationException, AccountPermissionException {
         if (courseId<0) {
             throw new InputValidationException(Strings.CourseNotFound(courseId));
+        }
+        if (account==null) {
+            throw new AccountPermissionException(Strings.NotSignedIn);
         }
         accountData.setActiveCourse(account.getId(), courseId);
         account.setActiveCourseId(courseId);

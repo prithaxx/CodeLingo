@@ -8,14 +8,11 @@ import codelinguists.codelingo.integration_tests.SessionManagerIT;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+        DBAccessTest.class,
         SessionManagerIT.class,
         SessionManagerLogoutIT.class,
         SessionManagerQuizIteratorIT.class
 })
 
 public class AllIntegrationTests {
-    @BeforeSuite
-    public void setupDb() {
-
-    }
 }

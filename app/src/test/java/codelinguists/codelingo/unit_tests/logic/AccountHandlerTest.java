@@ -5,15 +5,12 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.AccountObj;
-import CodeLinguists.codelingo.dso.CourseObj;
-import CodeLinguists.codelingo.dso.preferencesObj;
+import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.AccountHandler;
-import CodeLinguists.codelingo.persistence.IAccountData;
 import CodeLinguists.codelingo.persistence.stubs.AccountDataStub;
 
 public class AccountHandlerTest {
@@ -63,7 +60,7 @@ public class AccountHandlerTest {
     }
 
     @Test
-    public void setActiveCourseTest() throws AccountNotFoundException, InputValidationException {
+    public void setActiveCourseTest() throws AccountNotFoundException, InputValidationException, AccountPermissionException {
         AccountObj testAccount = accountDataStub.createGuestAccount("TestUser");
         assertNotNull("Account should not be null", testAccount);
 
@@ -71,6 +68,19 @@ public class AccountHandlerTest {
         accountHandler.setActiveCourse(testAccount, testCourseId);
 
         assertEquals("Active course ID should be updated", testCourseId, testAccount.getActiveCourseId());
+    }
+
+    @Test (expected = InputValidationException.class)
+    public void setActiveCourseTestNoCourse() throws AccountNotFoundException, InputValidationException, AccountPermissionException {
+        AccountObj testAccount = accountDataStub.createGuestAccount("TestUser");
+        int testCourseId = -1; // Example course ID
+        accountHandler.setActiveCourse(testAccount, testCourseId);
+    }
+
+    @Test (expected = AccountPermissionException.class)
+    public void setActiveCourseTestNoAccount() throws InputValidationException, AccountPermissionException {
+        int testCourseId = 1; // Example course ID
+        accountHandler.setActiveCourse(null, testCourseId);
     }
 
     @Test

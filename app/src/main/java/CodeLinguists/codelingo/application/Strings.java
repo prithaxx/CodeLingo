@@ -12,6 +12,7 @@ public class Strings {
     public static String AccountNotFound = "No account found";
     public static String ChapterIdPositive = "Chapter Ids must be positive";
     public static String NoChapterSelected = "Could not start quiz, please select a chapter";
+    public static String QuizNotFound = "Could not find the answer to quiz. Please try again";
 
     public static String AccountNotFoundWithName(String name) { return "No account found for the name " + name; }
     public static String CourseNotFound(int courseId) { return "Course "+courseId+" is not available. Selecte a different course"; }
