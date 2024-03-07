@@ -2,7 +2,7 @@ package CodeLinguists.codelingo.ui.slides;
 
 import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.QuizObj;
-import CodeLinguists.codelingo.ui.uiExceptions.SlideTypeNotHandledException;
+import CodeLinguists.codelingo.ui.ui_exceptions.SlideTypeNotHandledException;
 
 public class QuestionFragmentFactory {
     public QuizSlide getInstance(QuizObj quiz) {

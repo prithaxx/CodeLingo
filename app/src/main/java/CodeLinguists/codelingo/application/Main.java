@@ -2,7 +2,7 @@ package CodeLinguists.codelingo.application;
 
 import org.hsqldb.jdbcDriver;
 
-import CodeLinguists.codelingo.application.applicationExceptions.DBStateException;
+import CodeLinguists.codelingo.application.runtime_exceptions.DBStateException;
 
 public class Main {
     public static final String DB_FILE_NAME = "CodeLingoDB";

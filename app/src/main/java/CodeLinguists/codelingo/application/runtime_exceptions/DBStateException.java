@@ -1,4 +1,4 @@
-package CodeLinguists.codelingo.application.applicationExceptions;
+package CodeLinguists.codelingo.application.runtime_exceptions;
 
 public class DBStateException extends RuntimeException{
     public DBStateException(String message) {

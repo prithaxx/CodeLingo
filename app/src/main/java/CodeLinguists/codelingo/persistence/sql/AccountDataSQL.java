@@ -7,8 +7,8 @@ import java.sql.SQLException;
 
 import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.AccountObj;
-import CodeLinguists.codelingo.persistence.persistenceExceptions.AccountNotFoundException;
-import CodeLinguists.codelingo.persistence.persistenceExceptions.DataInaccessibleException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.AccountNotFoundException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.persistence.IAccountData;
 import CodeLinguists.codelingo.persistence.utils.ISqlRunner;
 

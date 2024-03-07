@@ -5,7 +5,7 @@ import java.util.List;
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
-import CodeLinguists.codelingo.persistence.persistenceExceptions.CourseNotFoundException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
 
 public interface ICourseHandler {
     //Either return the active course, the placeholder course, or throw courseNotFound

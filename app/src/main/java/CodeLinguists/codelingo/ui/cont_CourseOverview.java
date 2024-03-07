@@ -16,8 +16,8 @@ import java.util.Locale;
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.CourseObj;
-import CodeLinguists.codelingo.logic.logicExceptions.AccountPermissionException;
-import CodeLinguists.codelingo.persistence.persistenceExceptions.CourseNotFoundException;
+import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.logic.ISessionManager;
 
 /**

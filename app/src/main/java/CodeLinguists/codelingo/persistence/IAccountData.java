@@ -1,8 +1,8 @@
 package CodeLinguists.codelingo.persistence;
 
 import CodeLinguists.codelingo.dso.AccountObj;
-import CodeLinguists.codelingo.persistence.persistenceExceptions.AccountNotFoundException;
-import CodeLinguists.codelingo.persistence.persistenceExceptions.DataInaccessibleException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.AccountNotFoundException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 
 public interface IAccountData {
 

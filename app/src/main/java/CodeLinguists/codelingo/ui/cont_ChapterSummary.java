@@ -14,9 +14,9 @@ import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.ChapterObj;
-import CodeLinguists.codelingo.logic.logicExceptions.AccountPermissionException;
-import CodeLinguists.codelingo.persistence.persistenceExceptions.CourseNotFoundException;
-import CodeLinguists.codelingo.ui.uiExceptions.EmptyListException;
+import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
+import CodeLinguists.codelingo.ui.ui_exceptions.EmptyListException;
 import CodeLinguists.codelingo.logic.ISessionManager;
 
 import android.widget.ImageView;

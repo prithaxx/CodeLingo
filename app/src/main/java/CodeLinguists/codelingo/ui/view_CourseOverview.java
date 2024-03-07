@@ -33,7 +33,7 @@ import com.google.android.material.navigation.NavigationView;
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.AccountObj;
-import CodeLinguists.codelingo.logic.logicExceptions.AccountPermissionException;
+import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.logic.ISessionManager;
 
 	public class view_CourseOverview extends AppCompatActivity {

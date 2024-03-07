@@ -1,4 +1,4 @@
-package CodeLinguists.codelingo.application.applicationExceptions;
+package CodeLinguists.codelingo.application.runtime_exceptions;
 
 /**
  * Thrown when trying to change dependencies after initialization

@@ -3,7 +3,7 @@ package CodeLinguists.codelingo.persistence;
 import java.util.List;
 
 import CodeLinguists.codelingo.dso.CourseObj;
-import CodeLinguists.codelingo.persistence.persistenceExceptions.CourseNotFoundException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
 
 public interface ICourseData {
     CourseObj getCourseById(int id, int accountId) throws CourseNotFoundException;

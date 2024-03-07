@@ -1,7 +1,7 @@
 package CodeLinguists.codelingo.logic;
 
 import CodeLinguists.codelingo.dso.AccountObj;
-import CodeLinguists.codelingo.persistence.persistenceExceptions.DataInaccessibleException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 
 public interface IAccountHandler {
 
