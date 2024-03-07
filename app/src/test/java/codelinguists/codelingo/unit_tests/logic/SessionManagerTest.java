@@ -1,4 +1,4 @@
-package codelinguists.codelingo.logic;
+package codelinguists.codelingo.unit_tests.logic;
 
 import static org.junit.Assert.*;
 
@@ -9,7 +9,6 @@ import java.sql.SQLException;
 
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
-import CodeLinguists.codelingo.logic.SessionManager;
 
 public class SessionManagerTest {
     @Before

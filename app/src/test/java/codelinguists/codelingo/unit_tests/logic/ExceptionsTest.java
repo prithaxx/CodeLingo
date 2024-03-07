@@ -1,4 +1,4 @@
-package codelinguists.codelingo.logic;
+package codelinguists.codelingo.unit_tests.logic;
 
 import static org.junit.Assert.*;
 import org.junit.Test;

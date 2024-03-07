@@ -1,4 +1,4 @@
-package codelinguists.codelingo.logic;
+package codelinguists.codelingo.integration_tests;
 
 import org.junit.After;
 import org.junit.Before;
@@ -11,24 +11,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 import CodeLinguists.codelingo.application.Services;
-import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.CourseObj;
-import CodeLinguists.codelingo.dso.QuizObj;
 import CodeLinguists.codelingo.exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.exceptions.NoItemSelectedException;
-import CodeLinguists.codelingo.logic.AccountHandler;
-import CodeLinguists.codelingo.logic.CourseHandler;
 import CodeLinguists.codelingo.logic.IAccountHandler;
 import CodeLinguists.codelingo.logic.ICourseHandler;
 import CodeLinguists.codelingo.logic.IQuizHandler;
-import CodeLinguists.codelingo.logic.IQuizIterator;
-import CodeLinguists.codelingo.logic.ISessionManager;
-import CodeLinguists.codelingo.logic.QuizHandler;
 import CodeLinguists.codelingo.logic.SessionManager;
-import CodeLinguists.codelingo.persistence.IAccountData;
-import CodeLinguists.codelingo.persistence.ISessionData;
-import CodeLinguists.codelingo.persistence.IQuizData;
-import codelinguists.codelingo.utils.TestUtils;
+import codelinguists.codelingo.unit_tests.utils.TestUtils;
 
 public class SessionManagerIT {
     private File tempDB;
@@ -39,10 +29,10 @@ public class SessionManagerIT {
     @Before
     public void setup() throws IOException {
         this.tempDB = TestUtils.copyDB();
-//        quizHandler = Services.getQuizHandler();
-//        accountHandler = Services.getAccountHandler();
-//        courseHandler = Services.getCourseHandler();
-//        sessionManager = new SessionManager(quizHandler, accountHandler, courseHandler);
+        quizHandler = Services.getQuizHandler();
+        accountHandler = Services.getAccountHandler();
+        courseHandler = Services.getCourseHandler();
+        sessionManager = new SessionManager(quizHandler, accountHandler, courseHandler);
 
     }
 

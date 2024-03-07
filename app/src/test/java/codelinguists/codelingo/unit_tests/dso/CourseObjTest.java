@@ -1,4 +1,4 @@
-package codelinguists.codelingo.dso;
+package codelinguists.codelingo.unit_tests.dso;
 
 import static org.junit.Assert.*;
 

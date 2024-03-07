@@ -2,8 +2,9 @@ package codelinguists.codelingo;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+import org.testng.annotations.BeforeSuite;
 
-import codelinguists.codelingo.logic.SessionManagerIT;
+import codelinguists.codelingo.integration_tests.SessionManagerIT;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
@@ -11,5 +12,8 @@ import codelinguists.codelingo.logic.SessionManagerIT;
 })
 
 public class AllIntegrationTests {
-
+    @BeforeSuite
+    public void setupDb() {
+        System.out.println("SADKJHASKDJGASJFKHGASFJHASGFJHASGDFJKHAG");
+    }
 }

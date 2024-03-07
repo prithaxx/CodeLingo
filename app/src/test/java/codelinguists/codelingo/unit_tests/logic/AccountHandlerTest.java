@@ -1,8 +1,7 @@
-package codelinguists.codelingo.logic;
+package codelinguists.codelingo.unit_tests.logic;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
