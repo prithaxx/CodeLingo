@@ -1,6 +1,7 @@
 package CodeLinguists.codelingo.logic;
 
 import CodeLinguists.codelingo.dso.AccountObj;
+import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 
@@ -15,7 +16,7 @@ public interface IAccountHandler {
     AccountObj guestLogin(String name) throws DataInaccessibleException, InputValidationException;
     AccountObj guestLogin(String name, boolean stayLoggedIn) throws DataInaccessibleException, InputValidationException;
 
-    void setActiveCourse(AccountObj account, int courseId) throws InputValidationException;
+    void setActiveCourse(AccountObj account, int courseId) throws InputValidationException, AccountPermissionException;
 
     AccountObj autoLogin();
 

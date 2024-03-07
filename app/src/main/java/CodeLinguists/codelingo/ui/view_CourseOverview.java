@@ -95,7 +95,7 @@ import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFound
 		}
 	}
 
-	public void changeView(MenuItem view){
+	public void changeView(MenuItem view) throws CourseNotFoundException, AccountPermissionException {
 		if(R.id.course1 == view.getItemId()) {
 			changeCourse(1);
 			NavigationView navView = findViewById(R.id.nav_view);

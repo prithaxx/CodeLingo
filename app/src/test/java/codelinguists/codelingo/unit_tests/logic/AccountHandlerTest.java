@@ -2,110 +2,99 @@ package codelinguists.codelingo.unit_tests.logic;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.AccountObj;
-import CodeLinguists.codelingo.dso.CourseObj;
-import CodeLinguists.codelingo.dso.preferencesObj;
-import CodeLinguists.codelingo.persistence.persistence_exceptions.AccountNotFoundException;
+import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.AccountHandler;
-import CodeLinguists.codelingo.persistence.IAccountData;
+import CodeLinguists.codelingo.persistence.stubs.AccountDataStub;
 
 public class AccountHandlerTest {
+    private AccountDataStub accountDataStub;
+    private AccountHandler accountHandler;
+
+
+    @Before
+    public void setUp() {
+        accountDataStub = new AccountDataStub();
+        accountHandler = new AccountHandler(accountDataStub);
+    }
+
+    @Test
+    public void testGuestLoginValidName() throws Exception {
+        AccountObj account = accountDataStub.createGuestAccount("TestUser");
+        accountHandler.guestLogin("TestUser");
+        assertNotNull("Account should not be null", account);
+        assertEquals("TestUser", account.getName());
+    }
 
     @Test(expected = InputValidationException.class)
-    public void guestLoginNullInput() throws DataInaccessibleException, AccountNotFoundException, InputValidationException {
-        AccountDataMock accountData = new AccountDataMock(false, false, false);
-        AccountHandler accountHandler = new AccountHandler(accountData);
+    public void guestLoginNullInput() throws DataInaccessibleException, InputValidationException {
         accountHandler.guestLogin(null);
     }
 
     @Test(expected = InputValidationException.class)
-    public void guestLoginEmptyInput() throws DataInaccessibleException, AccountNotFoundException, InputValidationException {
-        AccountDataMock accountData = new AccountDataMock(false, false, false);
-        AccountHandler accountHandler = new AccountHandler(accountData);
+    public void guestLoginEmptyInput() throws DataInaccessibleException,  InputValidationException {
         accountHandler.guestLogin("");
     }
 
     @Test
-    public void guestLoginNoAccount() throws DataInaccessibleException, AccountNotFoundException, InputValidationException {
-        AccountDataMock accountData = new AccountDataMock(false, false, true);
-        AccountHandler accountHandler = new AccountHandler(accountData);
+    public void guestLoginNoAccount() throws DataInaccessibleException, InputValidationException {
         AccountObj acc = accountHandler.guestLogin("test");
         assertEquals(acc.getName(), "test");
     }
 
     @Test
-    public void guestLoginExistingAccount() throws DataInaccessibleException, AccountNotFoundException, InputValidationException {
-        AccountDataMock accountData = new AccountDataMock(false, false, false);
-        AccountHandler accountHandler = new AccountHandler(accountData);
-        AccountObj acc = accountHandler.guestLogin("test");
-        assertEquals(acc.getName(), "test");
+    public void logoutTest() throws InputValidationException, DataInaccessibleException {
+        AccountObj testAccount = accountDataStub.createGuestAccount("TestUser");
+
+        accountHandler.guestLogin("TestUser", true);
+        accountDataStub.setStayLoggedIn(testAccount.getId(), true);
+        accountHandler.logout();
+        // not sure how to test this
+
     }
 
     @Test
-    public void guestLoginDefaultConstructor() throws DataInaccessibleException, AccountNotFoundException, InputValidationException {
-        AccountHandler accountHandler = new AccountHandler(Services.getAccountData());
-        AccountObj acc = accountHandler.guestLogin("test");
-        assertEquals(acc.getName(), "test");
+    public void setActiveCourseTest() throws InputValidationException, AccountPermissionException {
+        AccountObj testAccount = accountDataStub.createGuestAccount("TestUser");
+        assertNotNull("Account should not be null", testAccount);
+
+        int testCourseId = 4; // Example course ID
+        accountHandler.setActiveCourse(testAccount, testCourseId);
+
+        assertEquals("Active course ID should be updated", testCourseId, testAccount.getActiveCourseId());
     }
 
-    class AccountDataMock implements IAccountData{
-        boolean isGetGuestNull;
-        boolean isCreateGuestNull;
-        boolean enableCreation;
+    @Test (expected = InputValidationException.class)
+    public void setActiveCourseTestNoCourse() throws InputValidationException, AccountPermissionException {
+        AccountObj testAccount = accountDataStub.createGuestAccount("TestUser");
+        int testCourseId = -1; // Example course ID
+        accountHandler.setActiveCourse(testAccount, testCourseId);
+    }
 
-        private AccountObj account;
+    @Test (expected = AccountPermissionException.class)
+    public void setActiveCourseTestNoAccount() throws InputValidationException, AccountPermissionException {
+        int testCourseId = 1; // Example course ID
+        accountHandler.setActiveCourse(null, testCourseId);
+    }
 
-        public AccountDataMock(boolean isGetGuestNull, boolean isCreateGuestNull, boolean enableCreation) {
-            this.isGetGuestNull = isGetGuestNull;
-            this.isCreateGuestNull = isCreateGuestNull;
-            this.enableCreation = enableCreation;
-        }
-        @Override
-        public AccountObj getGuestAccountByName(String name) {
-            if (enableCreation) {
-                return account;
-            }
-            if (isGetGuestNull){
-                return null;
-            }
-            return new AccountObj(0,name,true,-1,null,null);
-        }
+    @Test
+    public void autoLoginTestSuccess() throws InputValidationException, DataInaccessibleException {
+        AccountObj account = accountDataStub.createGuestAccount("TestUser");
+        accountHandler.guestLogin("TestUser", true);
 
-        @Override
-        public AccountObj getGuestAccountById(int accountId) throws AccountNotFoundException {
-            return null;
-        }
+        assertEquals(accountHandler.autoLogin(), account);
+    }
 
-        @Override
-        public AccountObj createGuestAccount(String name) {
-            if (isCreateGuestNull){
-                return null;
-            }
-            AccountObj localAccount = new AccountObj(0,name,true,-1,null,null);
-            if (enableCreation) {
-                account=localAccount;
-            }
-            return localAccount;
-        }
+    @Test
+    public void autoLoginTestFail() throws InputValidationException, DataInaccessibleException {
+        accountDataStub.createGuestAccount("TestUser");
+        accountHandler.guestLogin("TestUser");
 
-        @Override
-        public void setActiveCourse(int accountId, int courseId) {
-
-        }
-
-        @Override
-        public void setStayLoggedIn(int accountId, boolean stayLoggedIn) {
-            return;
-        }
-
-        @Override
-        public preferencesObj getLocalPreferences() throws DataInaccessibleException {
-            return null;
-        }
+        assertNull(accountHandler.autoLogin());
     }
 }

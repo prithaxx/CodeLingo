@@ -15,10 +15,6 @@ public class QuizIterator implements IQuizIterator {
     int currentQuizCursor;
     private boolean inFeedback; //if showing quiz slide or feedback slide
 
-    public QuizIterator(List<QuizObj> activeQuiz) {
-        this(Services.getQuizHandler(), activeQuiz);
-    }
-
     public QuizIterator(IQuizHandler quizHandler, List<QuizObj> activeQuiz) {
         this.quizHandler = quizHandler;
         this.activeQuiz = activeQuiz==null ? new ArrayList<>() : activeQuiz;

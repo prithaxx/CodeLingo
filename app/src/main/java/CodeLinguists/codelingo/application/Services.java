@@ -8,6 +8,7 @@ import CodeLinguists.codelingo.logic.ICourseHandler;
 import CodeLinguists.codelingo.logic.IQuizHandler;
 import CodeLinguists.codelingo.logic.ISessionManager;
 import CodeLinguists.codelingo.logic.QuizHandler;
+import CodeLinguists.codelingo.logic.QuizIteratorFactory;
 import CodeLinguists.codelingo.logic.SessionManager;
 import CodeLinguists.codelingo.persistence.IAccountData;
 import CodeLinguists.codelingo.persistence.IChapterData;
@@ -97,7 +98,7 @@ public class Services {
 
     public static synchronized IQuizHandler getQuizHandler() {
         if (quizHandler == null){
-            quizHandler = new QuizHandler(getQuizData());
+            quizHandler = new QuizHandler(getQuizData(), new QuizIteratorFactory());
         }
         return quizHandler;
     }

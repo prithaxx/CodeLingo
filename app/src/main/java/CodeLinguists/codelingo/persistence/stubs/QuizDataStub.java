@@ -40,4 +40,8 @@ public class QuizDataStub implements IQuizData {
                 .findFirst()
                 .orElse(null);
     }
+
+    public List<QuizObj> getQuizList(){
+        return quizList;
+    }
 }

@@ -3,6 +3,7 @@ package codelinguists.codelingo.integration_tests;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import CodeLinguists.codelingo.application.Main;
@@ -20,6 +21,13 @@ class SqlTestRunner {
         try (Connection connection = connect();
         PreparedStatement ps = connection.prepareStatement(query)) {
             ps.executeUpdate();
+        }
+    }
+
+    static ResultSet executeQuery(String query) throws SQLException {
+        try (Connection connection = connect();
+             PreparedStatement ps = connection.prepareStatement(query)) {
+             return ps.executeQuery();
         }
     }
 }
