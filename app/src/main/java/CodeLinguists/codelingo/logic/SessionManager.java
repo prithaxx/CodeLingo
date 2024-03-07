@@ -115,7 +115,7 @@ public class SessionManager implements ISessionManager {
 
     @Override
     public int calculateProgressPercentage(CourseObj course) throws CourseNotFoundException {
-        return courseHandler.calculateProgressPercentage(account, course);
+        return courseHandler.calculateProgressPercentage(account);
     }
 
     private void storeAccount(AccountObj acc) {
