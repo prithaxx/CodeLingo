@@ -28,7 +28,7 @@ public class SessionManager implements ISessionManager {
         this.quizHandler = quizHandler;
         this.accountHandler = accountHandler;
         this.courseHandler = courseHandler;
-        course = CourseObjFactory.getNoneCourse();;
+        course = CourseObjFactory.getNoneCourse();
         chapterId = -1;
     }
 

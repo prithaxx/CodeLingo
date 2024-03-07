@@ -32,6 +32,12 @@
     + Course navigation: Still need to work on the design of the Chapter Summary popup modal (medium priority).
     + [These issues](https://code.cs.umanitoba.ca/comp3350-winter2024/codelinguists-ao1-15/-/issues/?sort=created_date&state=opened&milestone_title=Iteration%203%20-%20CodeLingo&or%5Blabel_name%5D%5B%5D=Sprint%201%20-%20Iteration%202&or%5Blabel_name%5D%5B%5D=Sprint%202%20-%20Iteration2&first_page_size=100) have been moved into the next iteration.
 
+# Config
+- To reset the DB, disable persistence by setting 
+  - [DbHelper.java](app%2Fsrc%2Fmain%2Fjava%2FCodeLinguists%2Fcodelingo%2Fpersistence%2Futils%2FDbHelper.java).doReset to true
+- To switch DB implementations, set 
+  - [Services.java](app%2Fsrc%2Fmain%2Fjava%2FCodeLinguists%2Fcodelingo%2Fapplication%2FServices.java).DbType to DbType.STUB or DbType.HSQLDB
+
 # Other Docs
  - [ARCHITECTURE.md](Docs/ARCHITECTURE.md)
  - [VisionStatement.md](Docs/VisionStatement.md)
