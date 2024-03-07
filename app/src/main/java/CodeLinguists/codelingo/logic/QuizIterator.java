@@ -35,10 +35,11 @@ public class QuizIterator implements IQuizIterator {
     public QuizObj nextQuestion() {
         inFeedback = false;
 
-        if (currentQuizCursor >= activeQuiz.size()) {
+        if (hasNextQuestion()) {
+            return activeQuiz.get(currentQuizCursor++);
+        }else{
             return null;
         }
-        return activeQuiz.get(currentQuizCursor++);
     }
 
     @Override

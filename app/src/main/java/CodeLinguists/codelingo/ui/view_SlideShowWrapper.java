@@ -29,7 +29,7 @@ public class view_SlideShowWrapper extends AppCompatActivity {
     private ISessionManager sessionManager;
     private IQuizIterator quizIterator;
     private QuestionFragmentFactory slideFactory;
-    int lives = 3; //needs to be global
+    static int globalLives = 3; //needs to be global
     private QuizSlide currentSlide;
 
     @Override
