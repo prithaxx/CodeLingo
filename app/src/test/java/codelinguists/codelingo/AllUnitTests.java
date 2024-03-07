@@ -9,6 +9,7 @@ import codelinguists.codelingo.dso.ChapterObjTest;
 import codelinguists.codelingo.dso.CourseObjTest;
 import codelinguists.codelingo.dso.QuizObjTest;
 import codelinguists.codelingo.logic.AccountHandlerTest;
+import codelinguists.codelingo.logic.CourseHandlerTest;
 import codelinguists.codelingo.logic.QuizHandlerTest;
 import codelinguists.codelingo.logic.SessionManagerTest;
 
@@ -18,6 +19,7 @@ import codelinguists.codelingo.logic.SessionManagerTest;
 
     //logic
     AccountHandlerTest.class,
+        CourseHandlerTest.class,
     QuizHandlerTest.class,
     SessionManagerTest.class,
 
