@@ -80,19 +80,6 @@ public class AccountDataSQL implements IAccountData {
         throw new DataInaccessibleException(Strings.CannotFindPreferences);
     }
 
-    @Override
-    public void initLocalPreferences() {
-        try (ResultSet rs = sqlRunner.selectLocalPreferences()) {
-            if (!rs.next()){
-                sqlRunner.insertLocalPreferences();
-            } else {
-                setStayLoggedIn(1, false);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     private AccountObj rsToAccountObj(ResultSet rs) throws AccountNotFoundException {
         try (rs) {
             if (rs.next()) {

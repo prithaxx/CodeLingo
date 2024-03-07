@@ -37,6 +37,7 @@ import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.logic.ISessionManager;
 import CodeLinguists.codelingo.logic.SessionManager;
+import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
 
 	public class view_CourseOverview extends AppCompatActivity {

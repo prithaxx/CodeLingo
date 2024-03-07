@@ -65,12 +65,6 @@ public class AccountDataStub implements IAccountData {
         return localPreferences;
     }
 
-    //No persistence -> no localPreferences
-    @Override
-    public void initLocalPreferences() {
-        localPreferences = new LocalPreferences(false, 0);
-    }
-
     private AccountObj getAccountById(int accountId) {
         for (AccountObj account:this.guestAccounts) {
             if (accountId == account.getId()){

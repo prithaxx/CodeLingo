@@ -13,17 +13,14 @@ import CodeLinguists.codelingo.persistence.IAccountData;
 import CodeLinguists.codelingo.persistence.IChapterData;
 import CodeLinguists.codelingo.persistence.ICourseData;
 import CodeLinguists.codelingo.persistence.IQuizData;
-import CodeLinguists.codelingo.persistence.ISessionData;
 import CodeLinguists.codelingo.persistence.sql.AccountDataSQL;
 import CodeLinguists.codelingo.persistence.sql.ChapterDataSQL;
 import CodeLinguists.codelingo.persistence.sql.CourseDataSQL;
 import CodeLinguists.codelingo.persistence.sql.QuizDataSQL;
-import CodeLinguists.codelingo.persistence.sql.SessionDataSQL;
 import CodeLinguists.codelingo.persistence.stubs.AccountDataStub;
 import CodeLinguists.codelingo.persistence.stubs.ChapterDataStub;
 import CodeLinguists.codelingo.persistence.stubs.CourseDataStub;
 import CodeLinguists.codelingo.persistence.stubs.QuizDataStub;
-import CodeLinguists.codelingo.persistence.stubs.SessionDataStub;
 import CodeLinguists.codelingo.persistence.utils.HSQLDBRunner;
 import CodeLinguists.codelingo.persistence.utils.ISqlRunner;
 
@@ -48,7 +45,6 @@ public class Services {
     //Persistence
     private static IAccountData accountData;
     private static ICourseData courseData;
-    private static ISessionData sessionData;
     private static IQuizData quizData;
     private static IChapterData chapterData;
 
@@ -64,7 +60,6 @@ public class Services {
 
         accountData = null;
         courseData = null;
-        sessionData = null;
         quizData = null;
         chapterData = null;
     }
@@ -78,7 +73,6 @@ public class Services {
 
             accountData != null ||
             courseData != null ||
-            sessionData != null ||
             quizData != null ||
             chapterData != null
         ) {
@@ -96,7 +90,7 @@ public class Services {
 
     public static synchronized IAccountHandler getAccountHandler() {
         if (accountHandler == null) {
-            accountHandler = new AccountHandler(getAccountData(), getSessionData());
+            accountHandler = new AccountHandler(getAccountData());
         }
         return accountHandler;
     }
@@ -133,17 +127,6 @@ public class Services {
             }
         }
         return courseData;
-    }
-
-    public static synchronized ISessionData getSessionData() {
-        if (sessionData == null) {
-            switch (DB_IMPLEMENTATION){
-                case STUB -> sessionData = new SessionDataStub();
-                case HSQLDB -> sessionData = new SessionDataSQL(getSqlRunner());
-            }
-        }
-
-        return sessionData;
     }
 
     public static synchronized IQuizData getQuizData() {
