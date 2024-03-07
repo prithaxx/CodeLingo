@@ -17,7 +17,7 @@
 [CourseOverview](../app/src/main/java/CodeLinguists/codelingo/ui/cont_CourseOverview.java)
 - Show the overview of the selected course
 
-[Chapter_Summary](../app/src/main/java/CodeLinguists/codelingo/ui/cont_ChapterSummary.java)
+[ChapterSummary](../app/src/main/java/CodeLinguists/codelingo/ui/cont_ChapterSummary.java)
 - Show the summary of the selected chapter
 
 [SlideShowWrapper](../app/src/main/java/CodeLinguists/codelingo/ui/view_SlideShowWrapper.java)
@@ -69,35 +69,35 @@
 - Provides an iterator for navigating a quiz list
 
 ## Exceptions
-[AccountNotFoundException](../app/src/main/java/CodeLinguists/codelingo/exceptions/AccountNotFoundException.java)
+[AccountNotFoundException](../app/src/main/java/CodeLinguists/codelingo/persistence/persistence_exceptions/AccountNotFoundException.java)
 - Exception used on failed login
 
-[AccountPermissionException](../app/src/main/java/CodeLinguists/codelingo/exceptions/AccountPermissionException.java)
+[AccountPermissionException](../app/src/main/java/CodeLinguists/codelingo/logic/logic_exceptions/AccountPermissionException.java)
 - Exception used when trying to access features without being logged in
 
-[CourseNotFoundException](../app/src/main/java/CodeLinguists/codelingo/exceptions/CourseNotFoundException.java)
+[CourseNotFoundException](../app/src/main/java/CodeLinguists/codelingo/persistence/persistence_exceptions/CourseNotFoundException.java)
 - Exception used when request course was not found
 
-[DataInaccessibleException](../app/src/main/java/CodeLinguists/codelingo/exceptions/DataInaccessibleException.java)
+[DataInaccessibleException](../app/src/main/java/CodeLinguists/codelingo/persistence/persistence_exceptions/DataInaccessibleException.java)
 - Exception used when system fails to access data. Eg, when account creation fails
 
-[EmptyListException](../app/src/main/java/CodeLinguists/codelingo/exceptions/EmptyListException.java)
+[EmptyListException](../app/src/main/java/CodeLinguists/codelingo/ui/ui_exceptions/EmptyListException.java)
 - Exception used when trying to render a list without elements
 
-[InputValidationException](../app/src/main/java/CodeLinguists/codelingo/exceptions/InputValidationException.java)
+[InputValidationException](../app/src/main/java/CodeLinguists/codelingo/logic/logic_exceptions/InputValidationException.java)
 - The exception class for invalid inputs for constrained fields
 
-[NoItemSelectedException](../app/src/main/java/CodeLinguists/codelingo/exceptions/NoItemSelectedException.java)
+[NoItemSelectedException](../app/src/main/java/CodeLinguists/codelingo/logic/logic_exceptions/NoItemSelectedException.java)
 - Exception used when trying to submit empty data
 
-[SlideTypeNotHandledException](../app/src/main/java/CodeLinguists/codelingo/exceptions/SlideTypeNotHandledException.java)
+[SlideTypeNotHandledException](../app/src/main/java/CodeLinguists/codelingo/ui/ui_exceptions/SlideTypeNotHandledException.java)
 - Exception used when trying render an unsupported slide type
 
 ### RuntimeExceptions
-[ConstantDependencyException](../app/src/main/java/CodeLinguists/codelingo/exceptions/RuntimeExceptions/ConstantDependencyException.java)
+[ConstantDependencyException](../app/src/main/java/CodeLinguists/codelingo/application/runtime_exceptions/ConstantDependencyException.java)
 - Exception used when trying to change the persistence layer implementation while the app is running
 
-[DBStateException](../app/src/main/java/CodeLinguists/codelingo/exceptions/RuntimeExceptions/DBStateException.java)
+[DBStateException](../app/src/main/java/CodeLinguists/codelingo/application/runtime_exceptions/DBStateException.java)
 - Exception used when the DB cannot be accessed
 
 ## Persistence Layer
@@ -179,4 +179,4 @@
 
 ## Docs
 
-[View other docs](.)
+[View other docs](../Docs)
