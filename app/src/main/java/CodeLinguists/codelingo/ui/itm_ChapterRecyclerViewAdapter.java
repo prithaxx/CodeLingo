@@ -16,7 +16,6 @@ import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.databinding.FragmentItemBinding;
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.logic.ISessionManager;
-import CodeLinguists.codelingo.logic.SessionManager;
 import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 
@@ -25,11 +24,11 @@ import java.util.List;
 /**
  * {@link RecyclerView.Adapter} that can display a {@link ChapterObj}.
  */
-public class ChapterRecyclerViewAdapter extends RecyclerView.Adapter<ChapterRecyclerViewAdapter.ViewHolder> {
+public class itm_ChapterRecyclerViewAdapter extends RecyclerView.Adapter<itm_ChapterRecyclerViewAdapter.ViewHolder> {
 
     private final List<ChapterObj> mValues;
 
-    public ChapterRecyclerViewAdapter(List<ChapterObj> items) {
+    public itm_ChapterRecyclerViewAdapter(List<ChapterObj> items) {
         mValues = items;
     }
 
@@ -47,19 +46,20 @@ public class ChapterRecyclerViewAdapter extends RecyclerView.Adapter<ChapterRecy
         holder.mTitle.setText(chapter.name());
         holder.mIView.setImageResource(chAssets[chapter.id()%chAssets.length]);
         holder.mTile.setOnClickListener(
-                (View view)->{
-                    try {
-                        ISessionManager sessionManager = Services.getSessionManager();
-                        sessionManager.setActiveChapter(chapter.id());
-                        Intent intent = new Intent(view.getContext(), view_SlideShowWrapper.class);
-                        view.getContext().startActivity(intent);
-                    } catch (InputValidationException | AccountPermissionException e) {
-                        e.printStackTrace();
-                        Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+            (View view)->{
+                try {
+                    ISessionManager sessionManager = Services.getSessionManager();
+                    sessionManager.setActiveChapter(chapter.id());
+                    Intent intent = new Intent(view.getContext(), view_SlideShowWrapper.class);
+                    view.getContext().startActivity(intent);
+                } catch (InputValidationException | AccountPermissionException e) {
+                    e.printStackTrace();
+                    Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
+            }
         );
     }
+
     @Override
     public int getItemCount() {
         return mValues.size();

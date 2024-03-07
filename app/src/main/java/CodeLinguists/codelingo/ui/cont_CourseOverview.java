@@ -1,11 +1,9 @@
 package CodeLinguists.codelingo.ui;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainerView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,7 +22,6 @@ import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
-import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.logic.ISessionManager;
 
@@ -91,7 +88,7 @@ public class cont_CourseOverview extends Fragment {
         if (chapterListView instanceof RecyclerView recyclerView) {
             Context context = chapterListView.getContext();
             recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
-            recyclerView.setAdapter(new ChapterRecyclerViewAdapter(chapters));
+            recyclerView.setAdapter(new itm_ChapterRecyclerViewAdapter(chapters));
         }
         return v;
     }

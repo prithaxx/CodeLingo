@@ -108,16 +108,5 @@ import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFound
 			Toast.makeText(this, "Course not available", Toast.LENGTH_SHORT).show();
 		}
 	}
-
-	public void startQuiz(View index) {
-		try {
-			sessionManager.setActiveChapter(1);
-			Intent intent = new Intent(this, view_SlideShowWrapper.class);
-			startActivity(intent);
-		} catch (InputValidationException | AccountPermissionException e) {
-			e.printStackTrace();
-			Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-		}
-	}
 }
 
