@@ -1,0 +1,48 @@
+body{
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* NAVBAR */
+nav {
+    display: flex;
+    width: 100%;
+    background-color: rgb(4, 6, 56);
+    position: fixed;
+    text-align: center;
+}
+ul{
+    display: flex;
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+}
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+li a:hover {
+    background-color: #310d78;
+}
+
+.website-icon{
+    padding-left: 15px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.logobtn{
+    color: white;
+    background-color: transparent;
+    border: none;
+    font-size: 17px;
+}
+.logo{
+    height: 100%;
+    width: 7%;
+}
