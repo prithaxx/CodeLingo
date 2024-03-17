@@ -6,10 +6,9 @@ body{
 }
 
 /* NAVBAR */
-nav {
+.navbar {
     display: flex;
     width: 100%;
-    background-color: rgb(4, 6, 56);
     position: fixed;
     text-align: center;
 }
@@ -44,7 +43,29 @@ a:hover {
 }
 .logo{
     height: 100%;
-    width: 7%;
+    max-width: 8%;
+}
+
+/* HEADER */
+.header{
+    padding-top: 50px;
+    height: 350px;
+    /* background-color: #1F014A; 
+    background-image: linear-gradient(#1F014A, #010728); */
+    background-image: url(https://coolbackgrounds.io/images/backgrounds/index/compute-ea4c57a4.png);
+    text-align: center;
+    justify-content: space-around;
+}
+.header img{
+    height: 70%;
+    width:min-content;
+    position: relative;
+}
+.appname{
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    position: relative;
 }
 
 /* MAINPAGE */
@@ -53,4 +74,4 @@ a:hover {
     margin-left: 15%;
     margin-right: 15%;
     padding-top: 70px;
-  }
+}
