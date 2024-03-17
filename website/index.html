@@ -41,20 +41,23 @@
 
         <div class="feature-box">
             <div class="video-box">
-                <video class="video" width="100%" height="90%" autoplay muted>
-                    <source src="assets/Placeholder video1.mp4" type="video/mp4">
+                <video class="video" autoplay muted>
+                    <source id="video-source" src="" type="video/mp4">
                 </video>
             </div>
             <div class="feature-button-box">
-                <button>Hi</button>
-                <button>Hi</button>
-                <button>Hi</button>
-                <button>Hi</button>
-                <button>Hi</button>
+                <button class="toggle-button active" data-video="assets/Placeholder video1.mp4">Detailed Chapters</button>
+                <button class="toggle-button" data-video="assets/Placeholder video2.mp4">Quizzes</button>
+                <button class="toggle-button" data-video="assets/Placeholder video1.mp4">Progress Tracking</button>
+                <button class="toggle-button" data-video="assets/Placeholder video2.mp4">Review Quizzes</button>
+                <button class="toggle-button" data-video="assets/Placeholder video1.mp4">Unlocking New Chapters</button>
             </div>
         </div>
 
     </div>
 
+    <script src="script.js"></script>
 </body>
+
+
 </html>
