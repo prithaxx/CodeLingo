@@ -11,6 +11,7 @@ body{
     width: 100%;
     position: fixed;
     text-align: center;
+    background-color: #151019;
 }
 .nav-contents{
     display: flex;
@@ -59,19 +60,52 @@ a:hover {
 .header img{
     height: 70%;
     width:min-content;
-    position: relative;
 }
 .appname{
     color: white;
-    font-size: 30px;
+    font-size: 35px;
     font-weight: bold;
-    position: relative;
 }
 
 /* MAINPAGE */
 .mainpage{
-    font-size: 13px;
+    font-size: 14px;
     margin-left: 15%;
     margin-right: 15%;
     padding-top: 70px;
+    padding-bottom: 100px;
+}
+p{
+    line-height: 25px;
+}
+ul{
+    line-height: 25px;
+}
+
+.heading{
+    color: #1f0455;
+    font-weight: bold;
+}
+.feature-header{
+    margin-top: 55px;
+}
+
+/* FEATURE-VIDEO BOX */
+.feature-box{
+    margin-top: 50px;
+    background-color:gainsboro;
+    color: white;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    border-radius: 10px;
+}
+.video{
+    padding: 20px;
+}
+.feature-button-box button{
+    display: block;
+}
+.feature-button-box{
+    padding: 20px;
+    padding-left: 40px;
 }
