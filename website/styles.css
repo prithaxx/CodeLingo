@@ -13,26 +13,26 @@ nav {
     position: fixed;
     text-align: center;
 }
-ul{
+.nav-contents{
     display: flex;
-    margin: 0;
-    padding: 0;
-    font-size: 15px;
+    align-items: right;
+    padding-left: 30%;
 }
-li a {
+
+a{
     display: block;
     color: white;
     text-align: center;
     padding: 16px;
     text-decoration: none;
 }
-li a:hover {
+a:hover {
     background-color: #310d78;
 }
 
 .website-icon{
     padding-left: 15px;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     cursor: pointer;
 }
@@ -46,3 +46,11 @@ li a:hover {
     height: 100%;
     width: 7%;
 }
+
+/* MAINPAGE */
+.mainpage{
+    font-size: 13px;
+    margin-left: 15%;
+    margin-right: 15%;
+    padding-top: 70px;
+  }
