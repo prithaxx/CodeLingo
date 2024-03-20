@@ -91,6 +91,7 @@ ul{
 
 /* FEATURE-VIDEO BOX */
 .feature-box{
+    width: 1000px;
     margin-top: 50px;
     background-color:gainsboro;
     color: white;
@@ -98,6 +99,12 @@ ul{
     grid-template-columns: 3fr 1fr;
     border-radius: 10px;
     overflow: hidden;
+}
+.video-box{
+    position: relative;
+    width: 800px; /* Set a fixed width */
+    height: 550px; /* Set a fixed height */
+    overflow: hidden; /* Hide overflowing content */
 }
 .video{
     width: 100%;
@@ -127,7 +134,15 @@ ul{
     font-size: 18px;
 }
 .description-box{
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    padding: 20px;
+    width: 800px;
     padding-left: 20px;
     padding-right: 20px;
     color: #151019;
+}
+.description-box p{
+    margin:0;
 }
