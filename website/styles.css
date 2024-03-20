@@ -1,0 +1,148 @@
+body{
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    width: 100%;
+    position: fixed;
+    text-align: center;
+    background-color: #151019;
+}
+.nav-contents{
+    display: flex;
+    align-items: right;
+    padding-left: 30%;
+}
+
+a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+a:hover {
+    background-color: #310d78;
+}
+
+.website-icon{
+    padding-left: 15px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+.logobtn{
+    color: white;
+    background-color: transparent;
+    border: none;
+    font-size: 17px;
+}
+.logo{
+    height: 100%;
+    max-width: 8%;
+}
+
+/* HEADER */
+.header{
+    padding-top: 50px;
+    height: 350px;
+    /* background-color: #1F014A; 
+    background-image: linear-gradient(#1F014A, #010728); */
+    background-image: url(https://coolbackgrounds.io/images/backgrounds/index/compute-ea4c57a4.png);
+    text-align: center;
+    justify-content: space-around;
+}
+.header img{
+    height: 70%;
+    width:min-content;
+}
+.appname{
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+/* MAINPAGE */
+.mainpage{
+    font-size: 18px;
+    margin-left: 15%;
+    margin-right: 15%;
+    padding-top: 70px;
+    padding-bottom: 100px;
+}
+p{
+    line-height: 25px;
+}
+ul{
+    line-height: 25px;
+}
+
+.heading{
+    color: #1f0455;
+}
+.feature-header{
+    margin-top: 55px;
+}
+
+/* FEATURE-VIDEO BOX */
+.feature-box{
+    width: 1000px;
+    margin-top: 50px;
+    background-color:gainsboro;
+    color: white;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.video-box{
+    position: relative;
+    width: 800px; /* Set a fixed width */
+    height: 550px; /* Set a fixed height */
+    overflow: hidden; /* Hide overflowing content */
+}
+.video{
+    width: 100%;
+    height: fit-content;
+    padding: 20px;
+}
+.feature-button-box button{
+    width: 100%;
+    height: 19%;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+.feature-button-box{
+    display: block;
+    padding: 20px;
+    padding-left: 40px;
+}
+.feature-button-box button:hover{
+    background-color: darkgray;
+    font-size: 20px;
+}
+.feature-button-box button.active {
+    background-color:#310d78;
+    color: white;
+    font-size: 18px;
+}
+.description-box{
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    padding: 20px;
+    width: 800px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #151019;
+}
+.description-box p{
+    margin:0;
+}
