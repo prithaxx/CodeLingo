@@ -126,3 +126,8 @@ ul{
     color: white;
     font-size: 18px;
 }
+.description-box{
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #151019;
+}
