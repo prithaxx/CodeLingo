@@ -27,3 +27,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+function scrollToFunction(id, link){
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+function goToLandingPage(){
+    var targetPage = 'index.html';
+    window.location.href = targetPage;
+}

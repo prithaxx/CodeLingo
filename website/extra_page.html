@@ -10,16 +10,16 @@
     
     <div class="navbar">
         <div class="website-icon">
-            <img class="logo" src="assets/codelingo_logo.png">
-            <button class="logobtn" href="#">CodeLingo</button>
+            <img class="logo" src="assets/codelingo_logo.png" onclick="goToLandingPage()">
+            <button class="logobtn" onclick="goToLandingPage()">CodeLingo</button>
         </div>
         
         <div class="nav-contents">
-            <a href="#">Vision</a>
-            <a href="#">Audience</a>
-            <a href="#">Features</a>
-            <a href="#">Achievement</a>
-            <a href="#">FAQ</a>
+            <a href="index.html#vision">Vision</a>
+            <a href="index.html#audience">Audience</a>
+            <a href="index.html#feature">Features</a>
+            <a id = 'achievement-link' onclick="scrollToFunction('achievement', 'achievement-link')">Achievement</a>
+            <a id = 'faq-link' onclick="scrollToFunction('faq', 'faq-link')">FAQ</a>
         </div>
     </div>
 
@@ -31,13 +31,53 @@
     <div class="mainpage">
         <section id="achievement">
             <h1 class="heading feature-header">Achievement</h1>
-            <p>
-                <h3>Ahmed, Sa'ad</h3>
-                <h3>Bian, Fengfan</h3>
-                <h3>Chartrand, Josh</h3>
-                <h3>Das, Pritha</h3>
-                <h3>Do, Duc Nghia</h3>
-            </p>
+
+            <div class="card-deck">
+                <div class="card">
+                  <img class="card-img-top" src="assets/face.webp" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Josh Chartrand</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                  </div>
+                </div>
+                <div class="card">
+                  <img class="card-img-top" src="assets/face.webp" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Duc Nghia Do</h5>
+                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                  </div>
+                </div>
+                <div class="card">
+                  <img class="card-img-top" src="assets/face.webp" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Fengfan Bian</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                  </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="assets/face.webp" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">Pritha Das</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="assets/face.webp" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">Sa'ad Ahmed</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+
+            
+              
+
         </section>
 
         <section id="faq">

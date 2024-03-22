@@ -11,15 +11,15 @@
     <div class="navbar">
         <div class="website-icon">
             <img class="logo" src="assets/codelingo_logo.png">
-            <button class="logobtn" href="#">CodeLingo</button>
+            <button class="logobtn" href="index.html">CodeLingo</button>
         </div>
         
         <div class="nav-contents">
-            <a href="#">Vision</a>
-            <a href="#">Audience</a>
-            <a href="#">Features</a>
-            <a href="#">Achievement</a>
-            <a href="#">FAQ</a>
+            <a id = 'vision-link' onclick="scrollToFunction('vision', 'vision-link')">Vision</a>
+            <a id = 'audience-link' onclick="scrollToFunction('audience', 'audience-link')">Audience</a>
+            <a id = 'feature-link' onclick="scrollToFunction('feature', 'feature-link')">Features</a>
+            <a href="extra_page.html#achievement">Achievement</a>
+            <a href="extra_page.html#faq">FAQ</a>
         </div>
     </div>
 
@@ -39,7 +39,7 @@
             <li>Review Quizzes</li>
         </ul>
 
-        <div class="feature-box">
+        <div id="feature" class="feature-box">
             <div class="video-box">
                 <video class="video" autoplay muted width="400" height="300">
                     <source id="video-source" src="assets/Placeholder video1.mp4" type="video/mp4">
