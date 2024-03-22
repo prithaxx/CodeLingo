@@ -12,6 +12,7 @@ body{
     position: fixed;
     text-align: center;
     background-color: #151019;
+    z-index: 1000;
 }
 .nav-contents{
     display: flex;
@@ -53,8 +54,6 @@ a:hover {
 .header{
     padding-top: 50px;
     height: 350px;
-    /* background-color: #1F014A; 
-    background-image: linear-gradient(#1F014A, #010728); */
     background-image: url(https://coolbackgrounds.io/images/backgrounds/index/compute-ea4c57a4.png);
     text-align: center;
     justify-content: space-around;
@@ -104,9 +103,9 @@ ul{
 }
 .video-box{
     position: relative;
-    width: 800px; /* Set a fixed width */
-    height: 550px; /* Set a fixed height */
-    overflow: hidden; /* Hide overflowing content */
+    width: 800px; 
+    height: 550px; 
+    overflow: hidden; 
 }
 .video{
     width: 100%;
