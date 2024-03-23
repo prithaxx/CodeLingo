@@ -29,15 +29,6 @@ import CodeLinguists.codelingo.ui.view_GuestLogin;
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class LoginATest {
-    @Before
-    public void setup() {
-        androidx.test.espresso.intent.Intents.init();
-    }
-    @After
-    public void teardown() {
-        androidx.test.espresso.intent.Intents.release();
-    }
-
     @Rule
     public ActivityScenarioRule<view_GuestLogin> activityRule =
             new ActivityScenarioRule<>(view_GuestLogin.class);
