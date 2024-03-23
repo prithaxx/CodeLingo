@@ -49,7 +49,7 @@ public class LessonATest {
 
     @Test
     public void wrongAnswerMultiChoice() {
-        onView(withText("float")).perform(click());
+        onView(withText("int")).perform(click());
         onView(withId(R.id.btnSlideShowNext)).perform(click());
         onView(withText("Wrong Answer")).check(matches(isDisplayed()));
     }

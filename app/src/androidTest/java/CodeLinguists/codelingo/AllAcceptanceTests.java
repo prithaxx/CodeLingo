@@ -14,7 +14,9 @@ import CodeLinguists.codelingo.persistence.utils.DbHelper;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        LoginATest.class
+        LoginATest.class,
+        NavigationATest.class,
+        LessonATest.class
 })
 public class AllAcceptanceTests {
     @BeforeClass
