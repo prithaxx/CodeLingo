@@ -152,25 +152,40 @@ ul{
     margin:0;
 }
 
+/* PARAGRAPHS */
 
+.paragraphs {
+    background-color: #310d7816;
+    padding: 10px;
+}
+
+/* CARDS */
 .card-deck{
     display: flex;
 }
 .card{
-    height: 20%;
-    min-height: 460px;
     width: 20%;
     margin: 10px;
     padding: 1%;
     background-color: white;
     border-radius: 10px;
     box-shadow: 5px 5px 15px grey;
+    cursor: pointer;
+}
+.card:hover{
+    background-color: rgba(33, 2, 59, 0.2);
 }
 .card img{
-    height: 50%;
+    height: 200px;
     width: 100%;
-    object-fit: cover;
+    object-fit:contain;
 } 
 .card-body p{
     font-size: 70%;
+}
+.card-text {
+    overflow-y: auto;
+}
+.card-title{
+    margin: 0;
 }
