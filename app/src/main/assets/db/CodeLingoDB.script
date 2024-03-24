@@ -33,13 +33,7 @@ INSERT INTO QUIZ VALUES(7, 3, 'SHORT_ANSWER', 'What does polymorphism allow in J
 INSERT INTO QUIZ VALUES(8, 4, 'MULTI_CHOICE', 'Which feature allows a class in Java to inherit attributes and behaviours from another class?', TRUE, 'Inheritance', 'Abstraction, Polymorphism, Encapsulation', 'Oops! That's the wrong answer', 'Great job! That's the correct answer!');
 INSERT INTO QUIZ VALUES(9, 4, 'SHORT_ANSWER', 'What keyword do we use in Java to inherit properties of Parent class in Child class?', TRUE, 'extends', 'null, null, null', 'Oops! That's the wrong answer', 'Great job! That's the correct answer!');
 INSERT INTO LOCAL_PREFERENCES(1, FALSE);
-INSERT INTO PUBLIC.CHAPTER_COMPLETION (accountId, chapterId, isUnlocked, isCompleted) VALUES
-(1, 1, TRUE, FALSE),
-(1, 2, FALSE, FALSE),
-(1, 3, FALSE, FALSE),
-(1, 4, FALSE, FALSE);
-INSERT INTO PUBLIC.CHAPTER_COMPLETION (accountId, chapterId, isUnlocked, isCompleted) VALUES
-(2, 1, TRUE, FALSE),
-(2, 2, FALSE, FALSE),
-(2, 3, FALSE, FALSE),
-(2, 4, FALSE, FALSE);
+INSERT INTO CHAPTER_COMPLETION VALUES (1, 1, 'TRUE', 'FALSE');
+INSERT INTO CHAPTER_COMPLETION VALUES (1,3,'TRUE','FALSE');
+INSERT INTO CHAPTER_COMPLETION VALUES (2, 1, 'TRUE', 'FALSE');
+INSERT INTO CHAPTER_COMPLETION VALUES (2,3,'TRUE','FALSE');
