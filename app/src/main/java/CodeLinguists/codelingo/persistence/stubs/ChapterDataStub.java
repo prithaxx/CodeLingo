@@ -1,7 +1,9 @@
 package CodeLinguists.codelingo.persistence.stubs;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import CodeLinguists.codelingo.dso.ChapterObj;
@@ -45,4 +47,37 @@ public class ChapterDataStub implements IChapterData {
             System.out.println("Chapter not found for ID: " + chapterId);
         }
     }
+
+    @Override
+    public boolean isRemainChaptersInCourse(int courseId, int chapterId) {
+        boolean result = false;
+        for (int i = 0; i < chapterList.size(); i++) {
+            if (courseId == chapterList.get(i).getCourseId() && chapterId < chapterList.get(i).getId()) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public List<ChapterObj> getFirstChaptersForAllCourse() {
+        Map<Integer, List<ChapterObj>> chaptersByCourse = chapterList.stream()
+                .collect(Collectors.groupingBy(ChapterObj::getCourseId));
+
+        List<ChapterObj> firstChapters = new ArrayList<>();
+
+        chaptersByCourse.forEach((courseId, chapters) -> {
+            ChapterObj firstChapter = chapters.stream()
+                    .sorted(Comparator.comparingInt(ChapterObj::getId))
+                    .findFirst()
+                    .orElse(null);
+
+            if (firstChapter != null) {
+                firstChapters.add(firstChapter);
+            }
+        });
+
+        return firstChapters;
+    }
+
 }

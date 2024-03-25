@@ -26,5 +26,5 @@ public interface ISessionManager {
     boolean autoLogin();
     void logout();
 
-    void setChapterComplete();
+    void setChapterComplete() throws CourseNotFoundException;
 }

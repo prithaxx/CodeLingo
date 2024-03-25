@@ -61,7 +61,7 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public void setChapterComplete() {
+    public void setChapterComplete() throws CourseNotFoundException {
         courseHandler.setChapterComplete(this.chapterId, this.account);
     }
 
