@@ -233,7 +233,7 @@ public class HSQLDBRunner implements ISqlRunner {
                     ps.executeUpdate();
                 }
             } else {
-                String insertSQL = "INSERT INTO CHAPTER_COMPLETION (accountId, chapterId, isUnlocked, isCompleted) VALUES (?, ?, ?, TRUE)";
+                String insertSQL = "INSERT INTO CHAPTER_COMPLETION (accountId, chapterId, isUnlocked, isCompleted) VALUES (?, ?, ?, FALSE)";
                 try (PreparedStatement ps = connection.prepareStatement(insertSQL)) {
                     ps.setInt(1, accountId);
                     ps.setInt(2, chapterId);

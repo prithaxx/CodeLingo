@@ -78,6 +78,9 @@ public class AccountHandler implements IAccountHandler {
         return acc;
     }
     private void unlockDefaultChapters(AccountObj acc) {
+        if (courseHandler == null) {
+            throw new IllegalStateException("CourseHandler is not initialized.");
+        }
         courseHandler.unlockDefaultChapters(acc);
     }
 }

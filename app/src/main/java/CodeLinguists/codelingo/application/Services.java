@@ -82,18 +82,18 @@ public class Services {
         DB_IMPLEMENTATION = newType;
     }
 
+    public static synchronized IAccountHandler getAccountHandler() {
+        if (accountHandler == null) {
+            accountHandler = new AccountHandler(getAccountData(), getCourseHandler());
+        }
+        return accountHandler;
+    }
+
     public static synchronized ISessionManager getSessionManager() {
         if (sessionManager == null) {
             sessionManager = new SessionManager(getQuizHandler(), getAccountHandler(), getCourseHandler());
         }
         return sessionManager;
-    }
-
-    public static synchronized IAccountHandler getAccountHandler() {
-        if (accountHandler == null) {
-            accountHandler = new AccountHandler(getAccountData(), courseHandler);
-        }
-        return accountHandler;
     }
 
     public static synchronized IQuizHandler getQuizHandler() {

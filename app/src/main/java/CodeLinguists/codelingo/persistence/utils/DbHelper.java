@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class DbHelper {
-    private static boolean doReset = true;
+    private static boolean doReset = false;
     public static void resetDB(Context context){
         doReset = true;
         copyDatabaseToDevice(context);
