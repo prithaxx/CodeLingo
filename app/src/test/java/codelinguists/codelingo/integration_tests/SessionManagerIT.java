@@ -9,6 +9,7 @@ import java.util.List;
 
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.AccountObj;
+import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.dso.CourseObj;
 import CodeLinguists.codelingo.dso.QuestionType;
 import CodeLinguists.codelingo.dso.QuizObj;
@@ -20,11 +21,13 @@ import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.logic_exceptions.NoItemSelectedException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
+import CodeLinguists.codelingo.persistence.stubs.ChapterDataStub;
 import codelinguists.codelingo.utils.SqlDbIT;
 
 public class SessionManagerIT extends SqlDbIT {
 
     ISessionManager sessionManager;
+    private ChapterDataStub chapterDataStub;
 
     //General session manager tests
     @Override
@@ -160,7 +163,7 @@ public class SessionManagerIT extends SqlDbIT {
         try{
             sessionManager.getActiveCourse();
         } catch (CourseNotFoundException ignored) {}
-        assertEquals(1, sessionManager.getActiveCourse().id());
+        assertEquals(1, sessionManager.getActiveCourse().getId());
     }
 
     @Test
@@ -309,4 +312,30 @@ public class SessionManagerIT extends SqlDbIT {
         int completePercent = sessionManager.calculateProgressPercentage();
         assertTrue(completePercent>0); //mostly checking for error
     }
+
+    @Test
+    public void testSetChapterComplete() throws DataInaccessibleException, CourseNotFoundException, AccountPermissionException, InputValidationException, NoItemSelectedException {
+        String user = "TestUser";
+        sessionManager.guestLogin(user);
+
+        // 假定选择了一个课程和章节
+        List<CourseObj> courses = sessionManager.getCourseList();
+        assertFalse("course list should not be null", courses.isEmpty());
+        CourseObj selectedCourse = courses.get(0);
+        sessionManager.setActiveCourse(selectedCourse.getId());
+
+        List<ChapterObj> chapters = sessionManager.getActiveCourseChapters();
+        assertFalse("chapter list should not be null", chapters.isEmpty());
+        ChapterObj selectedChapter = chapters.get(0);
+        sessionManager.setActiveChapter(selectedChapter.getId());
+
+        sessionManager.setChapterComplete();
+
+        assertTrue("chapter should be marked as complete", checkChapterCompleted(selectedChapter.getId()));
+    }
+
+    private boolean checkChapterCompleted(int chapterId) throws AccountPermissionException {
+        return chapterDataStub.isChapterComplete(chapterId, sessionManager.getActiveAccount().getId());
+    }
+
 }
