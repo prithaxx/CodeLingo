@@ -36,6 +36,10 @@ public class CourseHandler implements ICourseHandler {
     @Override
     public void setChapterComplete(int chapterId, AccountObj account) {
         chapterData.setChapterCompletionById(account.getId(), chapterId);
+        // And if(there exists a next chapter) update nextChapter to isUnlocked=true
+        if (chapterId < chapterData.getChapterByCourseId(account.getActiveCourseId(),account.getId()).size()) {
+            chapterData.setChapterUnlockedById(account.getId(),chapterId,true);
+        }
     }
 
     @Override

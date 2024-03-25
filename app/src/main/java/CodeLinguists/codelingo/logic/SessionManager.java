@@ -62,8 +62,6 @@ public class SessionManager implements ISessionManager {
 
     @Override
     public void setChapterComplete() {
-//        this.chapterId; // <-the current active chapter
-//        this.course; // <- the current active course
         courseHandler.setChapterComplete(this.chapterId, this.account);
     }
 
