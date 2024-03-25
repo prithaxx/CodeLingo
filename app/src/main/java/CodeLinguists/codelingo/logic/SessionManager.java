@@ -61,6 +61,13 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
+    public void setChapterComplete() {
+//        this.chapterId; // <-the current active chapter
+//        this.course; // <- the current active course
+        courseHandler.setChapterComplete(this.chapterId, this.course, this.account);
+    }
+
+    @Override
     public AccountObj getActiveAccount() throws AccountPermissionException {
         if (account == null) {
             throw new AccountPermissionException(Strings.NotSignedIn);
@@ -76,7 +83,7 @@ public class SessionManager implements ISessionManager {
         if (chapterId<0) {
             throw new NoItemSelectedException(Strings.NoChapterSelected);
         }
-        return quizHandler.getQuiz(course.id(), chapterId);
+        return quizHandler.getQuiz(course.getId(), chapterId);
     }
 
     @Override

@@ -12,5 +12,12 @@ public interface ICourseHandler {
     CourseObj getActiveCourse(AccountObj account) throws CourseNotFoundException;
     List<CourseObj> getCourseList(AccountObj account);
     List<ChapterObj> getActiveCourseChapters(AccountObj account) throws CourseNotFoundException;
+
+
+    void setChapterComplete(int chapterId, CourseObj course, AccountObj account);
+
+    void unlockDefaultChapters(AccountObj account);
+
     int calculateProgressPercentage(AccountObj account) throws CourseNotFoundException;
+
 }

@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import CodeLinguists.codelingo.dso.AccountObj;
+import CodeLinguists.codelingo.logic.CourseHandler;
+import CodeLinguists.codelingo.logic.ICourseHandler;
 import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
@@ -15,12 +17,17 @@ import CodeLinguists.codelingo.persistence.stubs.AccountDataStub;
 public class AccountHandlerTest {
     private AccountDataStub accountDataStub;
     private AccountHandler accountHandler;
-
+    private ICourseHandler courseHandler;
+//    private final ICourseHandler courseHandler;
+//
+//    public AccountHandlerTest(ICourseHandler courseHandler) {
+//        this.courseHandler = courseHandler;
+//    }
 
     @Before
     public void setUp() {
         accountDataStub = new AccountDataStub();
-        accountHandler = new AccountHandler(accountDataStub);
+        accountHandler = new AccountHandler(accountDataStub, courseHandler);
     }
 
     @Test

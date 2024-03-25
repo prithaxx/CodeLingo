@@ -22,7 +22,27 @@ public class ChapterDataStub implements IChapterData {
     @Override
     public List<ChapterObj> getChapterByCourseId(int courseId, int accountId) {
         return chapterList.stream()
-                .filter(chapterObj -> chapterObj.courseId()==courseId)
+                .filter(chapterObj -> chapterObj.getCourseId()==courseId)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void setChapterCompletionById(int accountId, int courseId, int chapterId) {
+        ChapterObj chapter = chapterList.get(chapterId);
+        if (chapter != null) {
+            chapter.setCompleted(true);
+        } else {
+            System.out.println("Chapter not found for ID: " + chapterId);
+        }
+    }
+
+    @Override
+    public void setChapterUnlockedById(int accountId, int courseId, int chapterId, boolean unlocked) {
+        ChapterObj chapter = chapterList.get(chapterId);
+        if (chapter != null) {
+            chapter.setUnlocked(unlocked);
+        } else {
+            System.out.println("Chapter not found for ID: " + chapterId);
+        }
     }
 }

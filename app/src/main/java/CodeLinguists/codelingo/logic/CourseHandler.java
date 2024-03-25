@@ -34,6 +34,20 @@ public class CourseHandler implements ICourseHandler {
     }
 
     @Override
+    public void setChapterComplete(int chapterId, CourseObj course, AccountObj account) {
+        chapterData.setChapterCompletionById(account.getId(), course.getId(), chapterId);
+    }
+
+    @Override
+    public void unlockDefaultChapters(AccountObj account) {
+        // not sure this is correct
+        // it is unlocked the first chapter of each course
+        for (int i = 0; i < courseData.getCourseList(account.getId()).size(); i++) {
+            chapterData.setChapterUnlockedById(account.getId(),i,1,true);
+        }
+    }
+
+    @Override
     public int calculateProgressPercentage(AccountObj account) throws CourseNotFoundException {
         List<ChapterObj> listOfChapter = getActiveCourseChapters(account);
 
@@ -52,4 +66,6 @@ public class CourseHandler implements ICourseHandler {
 
         return (int) (doublePercent * 100);
     }
+
+
 }

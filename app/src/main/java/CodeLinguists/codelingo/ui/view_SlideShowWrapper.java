@@ -108,6 +108,7 @@ public class view_SlideShowWrapper extends AppCompatActivity {
     }
 
     private void finishQuiz(View v) {
+        sessionManager.setChapterComplete();
         Intent intent = new Intent(this, view_CourseOverview.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);

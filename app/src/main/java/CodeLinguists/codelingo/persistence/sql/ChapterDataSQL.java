@@ -1,7 +1,5 @@
 package CodeLinguists.codelingo.persistence.sql;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -36,5 +34,23 @@ public class ChapterDataSQL implements IChapterData {
             e.printStackTrace();
         }
         return chapters;
+    }
+
+    @Override
+    public void setChapterCompletionById(int accountId, int courseId, int chapterId) {
+        try {
+            sqlRunner.setChapterComplete(accountId, courseId, chapterId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setChapterUnlockedById(int accountId, int courseId, int chapterId, boolean unlocked) {
+        try {
+            sqlRunner.setChapterUnlocked(accountId, courseId, chapterId, unlocked);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

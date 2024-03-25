@@ -37,7 +37,7 @@ public class CourseHandlerTest {
         CourseObj course = courseHandler.getActiveCourse(account);
 
         assertNotNull(course);
-        assertEquals(1, course.id());
+        assertEquals(1, course.getId());
     }
 
     @Test

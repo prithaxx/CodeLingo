@@ -32,4 +32,12 @@ public interface ISqlRunner {
     void insertLocalPreferences() throws SQLException;
 
     ResultSet selectGuestAccountById(int accountId) throws SQLException;
+
+    ResultSet selectChapterCompletionById(int accountId, int courseId, int chapterId) throws SQLException;
+
+    void setChapterComplete(int accountId, int courseId, int chapterId) throws SQLException;
+
+    //TODO
+    //set unlocked
+    void setChapterUnlocked(int accountId, int courseId, int chapterId, boolean setUnlocked) throws SQLException;
 }

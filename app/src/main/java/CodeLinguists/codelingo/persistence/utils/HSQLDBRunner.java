@@ -173,7 +173,7 @@ public class HSQLDBRunner implements ISqlRunner {
     public ResultSet selectLocalPreferences() throws SQLException {
         try (Connection connection = connect();
              PreparedStatement ps = connection.prepareStatement("SELECT * FROM LOCAL_PREFERENCES")) {
-            return ps.executeQuery();
+             return ps.executeQuery();
         }
     }
 
@@ -184,4 +184,70 @@ public class HSQLDBRunner implements ISqlRunner {
             ps.executeUpdate();
         }
     }
+
+    @Override
+    public ResultSet selectChapterCompletionById(int accountId, int courseId, int chapterId) throws SQLException {
+        //Uses try-with to close connection & prepared statement on exception
+        try (Connection connection = connect();
+             PreparedStatement ps = connection.prepareStatement("SELECT * FROM CHAPTER_COMPLETION WHERE accountId = ? AND courseId = ? AND chapterId = ?")) {
+             ps.setInt(1, accountId);
+             ps.setInt(2, courseId);
+             ps.setInt(3, chapterId);
+             return ps.executeQuery();
+        }
+    }
+    @Override
+    public void setChapterComplete(int accountId, int courseId, int chapterId) throws SQLException {
+        try (Connection connection = connect()) {
+            boolean exists = selectChapterCompletionById(accountId,courseId, chapterId).next();
+
+            if (exists) {
+                String updateSQL = "UPDATE CHAPTER_COMPLETION SET isCompleted = TRUE WHERE accountId = ? AND courseId = ? AND chapterId = ?";
+                try (PreparedStatement ps = connection.prepareStatement(updateSQL)) {
+                    ps.setInt(1, accountId);
+                    ps.setInt(2, courseId);
+                    ps.setInt(3, chapterId);
+                    ps.executeUpdate();
+                }
+            } else {
+                String insertSQL = "INSERT INTO CHAPTER_COMPLETION (accountId, courseId, chapterId, isUnlocked, isCompleted) VALUES (?, ?, ?,  TRUE, TRUE)";
+                try (PreparedStatement ps = connection.prepareStatement(insertSQL)) {
+                    ps.setInt(1, accountId);
+                    ps.setInt(2, courseId);
+                    ps.setInt(3, chapterId);
+                    ps.executeUpdate();
+                }
+            }
+        }
+    }
+    //TODO
+    //set unlocked
+    @Override
+    public void setChapterUnlocked(int accountId, int courseId, int chapterId, boolean setUnlocked) throws SQLException {
+        try (Connection connection = connect()) {
+            boolean exists = selectChapterCompletionById(accountId, courseId, chapterId).next();
+
+            if (exists) {
+                String updateSQL = "UPDATE CHAPTER_COMPLETION SET isUnlocked = ? WHERE accountId = ? AND courseId = ? AND chapterId = ?";
+                try (PreparedStatement ps = connection.prepareStatement(updateSQL)) {
+                    ps.setBoolean(1, setUnlocked);
+                    ps.setInt(2, accountId);
+                    ps.setInt(3, courseId);
+                    ps.setInt(4, chapterId);
+                    ps.executeUpdate();
+                }
+            } else {
+                String insertSQL = "INSERT INTO CHAPTER_COMPLETION (accountId, courseId, chapterId, isUnlocked, isCompleted) VALUES (?, ?, ?, ?, TRUE)";
+                try (PreparedStatement ps = connection.prepareStatement(insertSQL)) {
+                    ps.setInt(1, accountId);
+                    ps.setInt(2, courseId);
+                    ps.setInt(3, chapterId);
+                    ps.setBoolean(4, setUnlocked);
+                    ps.executeUpdate();
+                }
+            }
+        }
+    }
+
+
 }
