@@ -34,24 +34,18 @@ public class CourseHandler implements ICourseHandler {
     }
 
     @Override
-    public void setChapterComplete(int chapterId, AccountObj account) {
+    public void setChapterComplete(int chapterId, AccountObj account) throws CourseNotFoundException {
         chapterData.setChapterCompletionById(account.getId(), chapterId);
-        // And if(there exists a next chapter) update nextChapter to isUnlocked=true
-        if (chapterId < chapterData.getChapterByCourseId(account.getActiveCourseId(),account.getId()).size()) {
-            chapterData.setChapterUnlockedById(account.getId(),chapterId,true);
+        if (chapterData.isRemainChaptersInCourse(getActiveCourse(account).getId(),chapterId)) {
+            chapterData.setChapterUnlockedById(account.getId(),chapterId + 1,true);
         }
     }
 
     @Override
     public void unlockDefaultChapters(AccountObj account) {
-        // not sure this is correct
-        // it is unlocked the first chapter of each course
-//        for (int i = 0; i < courseData.getCourseList(account.getId()).size(); i++) {
-//            chapterData.setChapterUnlockedById(account.getId(),getCourseList(account).get(i).,true);
-//        }
-        // rightnow, it is just hardcoded cause I don't know how to indicate the first chapter of each course
-        chapterData.setChapterUnlockedById(account.getId(),1,true);
-        chapterData.setChapterUnlockedById(account.getId(),3,true);
+        for (ChapterObj chapter : chapterData.getFirstChaptersForAllCourse()) {
+            chapterData.setChapterUnlockedById(account.getId(),chapter.getId(),true);
+        }
     }
 
     @Override

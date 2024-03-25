@@ -13,20 +13,17 @@ import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessib
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.AccountHandler;
 import CodeLinguists.codelingo.persistence.stubs.AccountDataStub;
+import codelinguists.codelingo.unit_tests.logic.test_doubles.CourseHandlerTestDouble;
 
 public class AccountHandlerTest {
     private AccountDataStub accountDataStub;
     private AccountHandler accountHandler;
     private ICourseHandler courseHandler;
-//    private final ICourseHandler courseHandler;
-//
-//    public AccountHandlerTest(ICourseHandler courseHandler) {
-//        this.courseHandler = courseHandler;
-//    }
 
     @Before
     public void setUp() {
         accountDataStub = new AccountDataStub();
+        courseHandler = new CourseHandlerTestDouble();
         accountHandler = new AccountHandler(accountDataStub, courseHandler);
     }
 

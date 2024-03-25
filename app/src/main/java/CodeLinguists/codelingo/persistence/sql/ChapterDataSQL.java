@@ -39,7 +39,12 @@ public class ChapterDataSQL implements IChapterData {
     @Override
     public void setChapterCompletionById(int accountId, int chapterId) {
         try {
-            sqlRunner.setChapterComplete(accountId, chapterId);
+            boolean exists = sqlRunner.selectChapterCompletionById(accountId, chapterId).next();
+            if (exists) {
+                sqlRunner.setChapterCompleteIfExist(accountId, chapterId);
+            } else {
+                sqlRunner.setChapterCompleteIfNotExist(accountId,chapterId);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -48,9 +53,44 @@ public class ChapterDataSQL implements IChapterData {
     @Override
     public void setChapterUnlockedById(int accountId, int chapterId, boolean unlocked) {
         try {
-            sqlRunner.setChapterUnlocked(accountId, chapterId, unlocked);
+            boolean exists = sqlRunner.selectChapterCompletionById(accountId, chapterId).next();
+            if (exists) {
+                sqlRunner.setChapterUnlockIfExist(accountId, chapterId, unlocked);
+            } else {
+                sqlRunner.setChapterUnlockIfNotExist(accountId,chapterId, unlocked);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    @Override
+    public boolean isRemainChaptersInCourse(int courseId, int chapterId) {
+        boolean exists = false;
+        try {
+            exists = sqlRunner.selectChaptersInCourseAfterId(courseId,chapterId).next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return exists;
+    }
+
+    @Override
+    public List<ChapterObj> getFirstChaptersForAllCourse() {
+        List<ChapterObj> chapters = new ArrayList<>();
+        try (ResultSet rs = sqlRunner.selectFirstChaptersOfAllCourses()) {
+            while (rs.next()) {
+                chapters.add(new ChapterObj(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getInt("courseId"),
+                        rs.getString("description"),
+                        rs.getBoolean("isUnlocked"),
+                        rs.getBoolean("isCompleted")));
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return chapters;
     }
 }
