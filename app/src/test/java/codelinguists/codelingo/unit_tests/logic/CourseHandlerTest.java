@@ -20,12 +20,14 @@ import CodeLinguists.codelingo.persistence.stubs.CourseDataStub;
 public class CourseHandlerTest {
     private IAccountData accountDataStub;
     private CourseHandler courseHandler;
+    private ChapterDataStub chapterDataStub;
+
 
     @Before
     public void setUp() {
         CourseDataStub courseDataStub = new CourseDataStub();
         accountDataStub = new AccountDataStub();
-        ChapterDataStub chapterDataStub = new ChapterDataStub();
+        chapterDataStub = new ChapterDataStub();
         courseHandler = new CourseHandler(courseDataStub, chapterDataStub);
     }
 
@@ -75,6 +77,19 @@ public class CourseHandlerTest {
         int expectedPercentage = 50;
         assertEquals(expectedPercentage, progressPercentage);
     }
+
+    @Test
+    public void testSetChapterComplete() throws CourseNotFoundException, DataInaccessibleException {
+        AccountObj account = accountDataStub.createGuestAccount("testUser");
+        int chapterId = 1;
+
+        courseHandler.setChapterComplete(chapterId, account);
+
+        assertTrue("Chapter should be marked as complete", chapterDataStub.isChapterComplete(chapterId, account.getId()));
+
+        assertTrue("Next chapter should be unlocked", chapterDataStub.isChapterUnlocked(chapterId + 1, account.getId()));
+    }
+
 }
 
 

@@ -1,7 +1,9 @@
 package codelinguists.codelingo.unit_tests.logic.test_doubles;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.ChapterObj;
@@ -14,7 +16,9 @@ public class CourseHandlerTestDouble implements ICourseHandler {
     public List<CourseObj> getCourseListResponse;
     public List<ChapterObj> getActiveCourseChaptersResponse;
     public int calculateProgressPercentageResponse;
-
+    public Set<Integer> completedChapters = new HashSet<>();
+    public Set<Integer> unlockedChapters = new HashSet<>();
+    public boolean unlockDefaultChaptersCalled = false;
     public boolean doException;
 
     public CourseHandlerTestDouble() {
@@ -46,6 +50,17 @@ public class CourseHandlerTestDouble implements ICourseHandler {
             throw new CourseNotFoundException("Empty");
         }
         return getActiveCourseChaptersResponse;
+    }
+
+    @Override
+    public void setChapterComplete(int chapterId, AccountObj account) {
+        completedChapters.add(chapterId);
+        unlockedChapters.add(chapterId + 1);
+    }
+
+    @Override
+    public void unlockDefaultChapters(AccountObj account) {
+        unlockDefaultChaptersCalled = true;
     }
 
     @Override
