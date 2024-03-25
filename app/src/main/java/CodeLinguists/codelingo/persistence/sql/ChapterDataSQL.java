@@ -37,18 +37,18 @@ public class ChapterDataSQL implements IChapterData {
     }
 
     @Override
-    public void setChapterCompletionById(int accountId, int courseId, int chapterId) {
+    public void setChapterCompletionById(int accountId, int chapterId) {
         try {
-            sqlRunner.setChapterComplete(accountId, courseId, chapterId);
+            sqlRunner.setChapterComplete(accountId, chapterId);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void setChapterUnlockedById(int accountId, int courseId, int chapterId, boolean unlocked) {
+    public void setChapterUnlockedById(int accountId, int chapterId, boolean unlocked) {
         try {
-            sqlRunner.setChapterUnlocked(accountId, courseId, chapterId, unlocked);
+            sqlRunner.setChapterUnlocked(accountId, chapterId, unlocked);
         } catch (SQLException e) {
             e.printStackTrace();
         }

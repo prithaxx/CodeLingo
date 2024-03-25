@@ -34,17 +34,20 @@ public class CourseHandler implements ICourseHandler {
     }
 
     @Override
-    public void setChapterComplete(int chapterId, CourseObj course, AccountObj account) {
-        chapterData.setChapterCompletionById(account.getId(), course.getId(), chapterId);
+    public void setChapterComplete(int chapterId, AccountObj account) {
+        chapterData.setChapterCompletionById(account.getId(), chapterId);
     }
 
     @Override
     public void unlockDefaultChapters(AccountObj account) {
         // not sure this is correct
         // it is unlocked the first chapter of each course
-        for (int i = 0; i < courseData.getCourseList(account.getId()).size(); i++) {
-            chapterData.setChapterUnlockedById(account.getId(),i,1,true);
-        }
+//        for (int i = 0; i < courseData.getCourseList(account.getId()).size(); i++) {
+//            chapterData.setChapterUnlockedById(account.getId(),getCourseList(account).get(i).,true);
+//        }
+        // rightnow, it is just hardcoded cause I don't know how to indicate the first chapter of each course
+        chapterData.setChapterUnlockedById(account.getId(),1,true);
+        chapterData.setChapterUnlockedById(account.getId(),3,true);
     }
 
     @Override

@@ -27,7 +27,7 @@ public class ChapterDataStub implements IChapterData {
     }
 
     @Override
-    public void setChapterCompletionById(int accountId, int courseId, int chapterId) {
+    public void setChapterCompletionById(int accountId, int chapterId) {
         ChapterObj chapter = chapterList.get(chapterId);
         if (chapter != null) {
             chapter.setCompleted(true);
@@ -37,7 +37,7 @@ public class ChapterDataStub implements IChapterData {
     }
 
     @Override
-    public void setChapterUnlockedById(int accountId, int courseId, int chapterId, boolean unlocked) {
+    public void setChapterUnlockedById(int accountId, int chapterId, boolean unlocked) {
         ChapterObj chapter = chapterList.get(chapterId);
         if (chapter != null) {
             chapter.setUnlocked(unlocked);

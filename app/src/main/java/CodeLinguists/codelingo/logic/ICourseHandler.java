@@ -14,7 +14,7 @@ public interface ICourseHandler {
     List<ChapterObj> getActiveCourseChapters(AccountObj account) throws CourseNotFoundException;
 
 
-    void setChapterComplete(int chapterId, CourseObj course, AccountObj account);
+    void setChapterComplete(int chapterId, AccountObj account);
 
     void unlockDefaultChapters(AccountObj account);
 
