@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background">
 
     <Button
         android:id="@+id/optionA_button"
@@ -14,6 +15,7 @@
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="100dp"
         android:text="@string/optionA"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -30,6 +32,7 @@
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="100dp"
         android:text="@string/optionB"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -46,6 +49,7 @@
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="100dp"
         android:text="@string/optionC"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -62,6 +66,7 @@
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="100dp"
         android:text="@string/optionD"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -71,29 +76,27 @@
 
     <TextView
         android:id="@+id/title_text"
-        android:layout_width="1062dp"
-        android:layout_height="68dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="500dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/hello_blank_fragment"
+        android:textColor="@color/_bg__surface_pro_8___1_ek2_color"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.26" />
 
     <TextView
         android:id="@+id/prompt_text"
-        android:layout_width="288dp"
+        android:layout_width="wrap_content"
         android:layout_height="78dp"
-        android:layout_marginStart="300dp"
         android:layout_marginTop="100dp"
-        android:layout_marginEnd="300dp"
         android:layout_marginBottom="600dp"
         android:text="@string/hello_blank_fragment"
+        android:textColor="@color/_bg__surface_pro_8___1_ek2_color"
+        android:textSize="48sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
