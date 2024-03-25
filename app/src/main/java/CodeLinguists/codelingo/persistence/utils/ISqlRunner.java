@@ -67,4 +67,6 @@ public interface ISqlRunner {
     void setChapterUnlockIfExist(int accountId, int chapterId, boolean setUnlocked) throws SQLException;
 
     void setChapterUnlockIfNotExist(int accountId, int chapterId, boolean setUnlocked) throws SQLException;
+
+    ResultSet selectChaptersInCourseAfterId(int courseId, int chapterId) throws SQLException;
 }

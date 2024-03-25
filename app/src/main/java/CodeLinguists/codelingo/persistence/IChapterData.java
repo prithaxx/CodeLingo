@@ -11,4 +11,6 @@ public interface IChapterData {
     void setChapterCompletionById(int accountId, int chapterId);
 
     void setChapterUnlockedById(int accountId, int chapterId, boolean unlocked);
+
+    boolean isRemainChaptersInCourse(int courseId, int chapterId);
 }

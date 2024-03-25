@@ -219,7 +219,7 @@ public class HSQLDBRunner implements ISqlRunner {
             }
         }
     }
-    
+
     @Override
     public void setChapterUnlockIfExist(int accountId, int chapterId, boolean setUnlocked) throws SQLException {
         try (Connection connection = connect()) {
@@ -246,4 +246,14 @@ public class HSQLDBRunner implements ISqlRunner {
         }
     }
 
+    @Override
+    public ResultSet selectChaptersInCourseAfterId(int courseId, int chapterId) throws SQLException {
+        //Uses try-with to close connection & prepared statement on exception
+        try (Connection connection = connect();
+             PreparedStatement ps = connection.prepareStatement("SELECT * FROM CHAPTER WHERE courseId = ? AND chapterId > ?")) {
+            ps.setInt(1, courseId);
+            ps.setInt(2, chapterId);
+            return ps.executeQuery();
+        }
+    }
 }
