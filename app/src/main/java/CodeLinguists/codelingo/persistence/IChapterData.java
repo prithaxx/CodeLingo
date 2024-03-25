@@ -13,4 +13,6 @@ public interface IChapterData {
     void setChapterUnlockedById(int accountId, int chapterId, boolean unlocked);
 
     boolean isRemainChaptersInCourse(int courseId, int chapterId);
+
+    List<ChapterObj> getFirstChaptersForAllCourse();
 }

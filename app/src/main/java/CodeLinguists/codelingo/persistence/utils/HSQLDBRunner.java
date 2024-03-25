@@ -256,4 +256,13 @@ public class HSQLDBRunner implements ISqlRunner {
             return ps.executeQuery();
         }
     }
+
+    @Override
+    public ResultSet selectFirstChaptersOfAllCourses() throws SQLException {
+        //Uses try-with to close connection & prepared statement on exception
+        try (Connection connection = connect();
+             PreparedStatement ps = connection.prepareStatement("SELECT courseId, MIN(id) FROM CHAPTER GROUP BY courseId")) {
+            return ps.executeQuery();
+        }
+    }
 }
