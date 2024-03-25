@@ -50,7 +50,7 @@
         android:paddingEnd="20dp"
         android:paddingBottom="20dp"
         android:singleLine="true"
-        android:textColor="@color/lavender"
+        android:textColor="@color/_bg__surface_pro_8___1_ek2_color"
         android:textColorHint="@color/darkPurple"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
