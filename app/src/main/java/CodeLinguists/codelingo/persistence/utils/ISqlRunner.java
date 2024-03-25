@@ -39,7 +39,32 @@ public interface ISqlRunner {
 
     void setChapterCompleteIfNotExist(int accountId, int chapterId) throws SQLException;
 
-    //TODO
-    //set unlocked
-    void setChapterUnlocked(int accountId, int chapterId, boolean setUnlocked) throws SQLException;
+
+    //          @Override
+    //    public void setChapterUnlocked(int accountId, int chapterId, boolean setUnlocked) throws SQLException {
+    //        try (Connection connection = connect()) {
+    //            boolean exists = selectChapterCompletionById(accountId, chapterId).next();
+    //
+    //            if (exists) {
+    //                String updateSQL = "UPDATE CHAPTER_COMPLETION SET isUnlocked = ? WHERE accountId = ? AND chapterId = ?";
+    //                try (PreparedStatement ps = connection.prepareStatement(updateSQL)) {
+    //                    ps.setBoolean(1, setUnlocked);
+    //                    ps.setInt(2, accountId);
+    //                    ps.setInt(3, chapterId);
+    //                    ps.executeUpdate();
+    //                }
+    //            } else {
+    //                String insertSQL = "INSERT INTO CHAPTER_COMPLETION (accountId, chapterId, isUnlocked, isCompleted) VALUES (?, ?, ?, FALSE)";
+    //                try (PreparedStatement ps = connection.prepareStatement(insertSQL)) {
+    //                    ps.setInt(1, accountId);
+    //                    ps.setInt(2, chapterId);
+    //                    ps.setBoolean(3, setUnlocked);
+    //                    ps.executeUpdate();
+    //                }
+    //            }
+    //        }
+    //    }
+    void setChapterUnlockIfExist(int accountId, int chapterId, boolean setUnlocked) throws SQLException;
+
+    void setChapterUnlockIfNotExist(int accountId, int chapterId, boolean setUnlocked) throws SQLException;
 }
