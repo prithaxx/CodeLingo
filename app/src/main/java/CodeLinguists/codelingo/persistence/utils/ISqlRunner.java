@@ -35,7 +35,9 @@ public interface ISqlRunner {
 
     ResultSet selectChapterCompletionById(int accountId, int chapterId) throws SQLException;
 
-    void setChapterComplete(int accountId, int chapterId) throws SQLException;
+    void setChapterCompleteIfExist(int accountId, int chapterId) throws SQLException;
+
+    void setChapterCompleteIfNotExist(int accountId, int chapterId) throws SQLException;
 
     //TODO
     //set unlocked
