@@ -99,6 +99,7 @@ ul{
     color: white;
     display: grid;
     grid-template-columns: 3fr 1fr;
+    grid-template-rows: 3fr 0.7fr;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 5px 5px 20px grey ;
@@ -107,7 +108,6 @@ ul{
     position: relative;
     width: 800px; 
     height: 550px; 
-    overflow: hidden; 
 }
 .video{
     width: 100%;
@@ -139,13 +139,14 @@ ul{
     font-size: 18px;
 }
 .description-box{
-    position: absolute; 
-    bottom: 0; 
+    overflow: auto;
+    position:absolute; 
     left: 0; 
     padding: 20px;
-    width: 800px;
+    width: 100%;
     padding-left: 20px;
     padding-right: 20px;
+    
     color: #151019;
 }
 .description-box p{
