@@ -22,12 +22,13 @@
 
     <TextView
         android:id="@+id/body_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="484dp"
+        android:layout_height="151dp"
         android:gravity="center"
         android:text="@string/hello_blank_fragment"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/_bg__surface_pro_8___1_ek2_color"
+        android:translationZ="-1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

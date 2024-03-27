@@ -5,7 +5,8 @@
     android:id="@+id/relativeLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_background">
+    android:background="@drawable/login_background"
+    android:translationZ="-1dp">
 
     <TextView
         android:id="@+id/title_text"
