@@ -185,6 +185,7 @@ ul{
     font-size: 70%;
 }
 .card-text {
+    max-height: 250px;
     overflow-y: auto;
 }
 .card-title{
