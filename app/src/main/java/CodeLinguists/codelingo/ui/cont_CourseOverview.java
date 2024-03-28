@@ -33,7 +33,8 @@ import CodeLinguists.codelingo.logic.ISessionManager;
 public class cont_CourseOverview extends Fragment {
 
     private ISessionManager sessionManager;
-    RecyclerView lessons;
+    private RecyclerView lessons;
+    private TextView tvProgressPercentage;
 
     public cont_CourseOverview() {
         // Required empty public constructor
@@ -65,15 +66,8 @@ public class cont_CourseOverview extends Fragment {
         TextView tv = v.findViewById(R.id.placeholder_course);
         tv.setText(course!=null ? course.getName() : getString(R.string.select_a_course));
 
-        TextView tvProgressPercentage = v.findViewById(R.id.progress_percentage);
-        int progressPercentage = 0;
-        try {
-            progressPercentage = sessionManager.calculateProgressPercentage();
-        } catch (CourseNotFoundException | AccountPermissionException e) {
-            e.printStackTrace();
-            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-        tvProgressPercentage.setText(String.format(Locale.getDefault(), "%d%% complete", progressPercentage));
+        this.tvProgressPercentage = v.findViewById(R.id.progress_percentage);
+        setCompletionPercent();
 
         View chapterListView = v.findViewById(R.id.chapterList);
         List<ChapterObj> chapters = null;
@@ -101,6 +95,20 @@ public class cont_CourseOverview extends Fragment {
         if (lessons != null) {
             resetChapterAdapter();
         }
+        if (tvProgressPercentage!=null) {
+            setCompletionPercent();
+        }
+    }
+
+    private void setCompletionPercent() {
+        int progressPercentage = 0;
+        try {
+            progressPercentage = sessionManager.calculateProgressPercentage();
+        } catch (CourseNotFoundException | AccountPermissionException e) {
+            e.printStackTrace();
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+        tvProgressPercentage.setText(String.format(Locale.getDefault(), "%d%% complete", progressPercentage));
     }
 
     private void resetChapterAdapter() {
