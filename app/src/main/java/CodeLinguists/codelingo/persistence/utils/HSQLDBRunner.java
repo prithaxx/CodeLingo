@@ -197,7 +197,7 @@ public class HSQLDBRunner implements ISqlRunner {
     }
 
     @Override
-    public void setChapterCompleteIfExist(int accountId, int chapterId) throws SQLException {
+    public void updateChapterCompletionSetComplete(int accountId, int chapterId) throws SQLException {
         try (Connection connection = connect()) {
             String updateSQL = "UPDATE CHAPTER_COMPLETION SET isCompleted = TRUE WHERE accountId = ? AND chapterId = ?";
             try (PreparedStatement ps = connection.prepareStatement(updateSQL)) {
@@ -209,9 +209,9 @@ public class HSQLDBRunner implements ISqlRunner {
     }
 
     @Override
-    public void setChapterCompleteIfNotExist(int accountId, int chapterId) throws SQLException {
+    public void insertUnlockedIntoChapterCompletion(int accountId, int chapterId) throws SQLException {
         try (Connection connection = connect()) {
-            String insertSQL = "INSERT INTO CHAPTER_COMPLETION (accountId, chapterId, isUnlocked, isCompleted) VALUES (?, ?,  TRUE, TRUE)";
+            String insertSQL = "INSERT INTO CHAPTER_COMPLETION (accountId, chapterId, isUnlocked, isCompleted) VALUES (?, ?,  TRUE, FALSE)";
             try (PreparedStatement ps = connection.prepareStatement(insertSQL)) {
                 ps.setInt(1, accountId);
                 ps.setInt(2, chapterId);
@@ -221,7 +221,7 @@ public class HSQLDBRunner implements ISqlRunner {
     }
 
     @Override
-    public void setChapterUnlockIfExist(int accountId, int chapterId, boolean setUnlocked) throws SQLException {
+    public void updateChapterCompletion(int accountId, int chapterId, boolean setUnlocked) throws SQLException {
         try (Connection connection = connect()) {
             String updateSQL = "UPDATE CHAPTER_COMPLETION SET isUnlocked = ? WHERE accountId = ? AND chapterId = ?";
             try (PreparedStatement ps = connection.prepareStatement(updateSQL)) {
@@ -234,7 +234,7 @@ public class HSQLDBRunner implements ISqlRunner {
     }
 
     @Override
-    public void setChapterUnlockIfNotExist(int accountId, int chapterId, boolean setUnlocked) throws SQLException {
+    public void insertChapterCompletion(int accountId, int chapterId, boolean setUnlocked) throws SQLException {
         try (Connection connection = connect()) {
             String insertSQL = "INSERT INTO CHAPTER_COMPLETION (accountId, chapterId, isUnlocked, isCompleted) VALUES (?, ?, ?, FALSE)";
             try (PreparedStatement ps = connection.prepareStatement(insertSQL)) {
@@ -261,7 +261,7 @@ public class HSQLDBRunner implements ISqlRunner {
     public ResultSet selectFirstChaptersOfAllCourses() throws SQLException {
         //Uses try-with to close connection & prepared statement on exception
         try (Connection connection = connect();
-             PreparedStatement ps = connection.prepareStatement("SELECT courseId, MIN(id) FROM CHAPTER GROUP BY courseId")) {
+             PreparedStatement ps = connection.prepareStatement("SELECT * FROM CHAPTER as c WHERE id in (SELECT MIN(id) FROM CHAPTER GROUP BY courseId)")) {
             return ps.executeQuery();
         }
     }

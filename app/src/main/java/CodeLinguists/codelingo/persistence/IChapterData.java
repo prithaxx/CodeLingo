@@ -3,7 +3,7 @@ package CodeLinguists.codelingo.persistence;
 import java.util.List;
 
 import CodeLinguists.codelingo.dso.ChapterObj;
-import CodeLinguists.codelingo.dso.QuizObj;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
 
 public interface IChapterData {
     List<ChapterObj> getChapterByCourseId(int courseId, int accountId);
@@ -14,9 +14,9 @@ public interface IChapterData {
 
     void setChapterUnlockedById(int accountId, int chapterId, boolean unlocked);
 
-    boolean isChapterUnlocked(int accountId, int chapterId);
+    boolean isChapterUnlocked(int accountId, int chapterId) throws CourseNotFoundException;
 
-    boolean isRemainChaptersInCourse(int courseId, int chapterId);
+    boolean hasNextChapter(int courseId, int chapterId);
 
     List<ChapterObj> getFirstChaptersForAllCourse();
 }

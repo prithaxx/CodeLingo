@@ -59,7 +59,7 @@ public class ChapterDataStub implements IChapterData {
     }
 
     @Override
-    public boolean isRemainChaptersInCourse(int courseId, int chapterId) {
+    public boolean hasNextChapter(int courseId, int chapterId) {
         boolean result = false;
         for (int i = 0; i < chapterList.size(); i++) {
             if (courseId == chapterList.get(i).getCourseId() && chapterId < chapterList.get(i).getId()) {

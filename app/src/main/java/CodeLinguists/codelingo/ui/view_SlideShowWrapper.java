@@ -114,8 +114,6 @@ public class view_SlideShowWrapper extends AppCompatActivity {
         } catch (CourseNotFoundException e) {
             throw new RuntimeException(e);
         }
-        Intent intent = new Intent(this, view_CourseOverview.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
+        finish();
     }
 }

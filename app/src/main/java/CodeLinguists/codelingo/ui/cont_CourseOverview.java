@@ -33,6 +33,7 @@ import CodeLinguists.codelingo.logic.ISessionManager;
 public class cont_CourseOverview extends Fragment {
 
     private ISessionManager sessionManager;
+    RecyclerView lessons;
 
     public cont_CourseOverview() {
         // Required empty public constructor
@@ -86,10 +87,34 @@ public class cont_CourseOverview extends Fragment {
 
         // Set the adapter
         if (chapterListView instanceof RecyclerView recyclerView) {
+            lessons = (RecyclerView)chapterListView;
             Context context = chapterListView.getContext();
             recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
             recyclerView.setAdapter(new itm_ChapterRecyclerViewAdapter(chapters));
         }
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (lessons != null) {
+            resetChapterAdapter();
+        }
+    }
+
+    private void resetChapterAdapter() {
+        List<ChapterObj> chapters = null;
+        try {
+            chapters = sessionManager.getActiveCourseChapters();
+        } catch (CourseNotFoundException | AccountPermissionException e) {
+            e.printStackTrace();
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            chapters = new ArrayList<>(); //Empty list to avoid null point errors
+        }
+        itm_ChapterRecyclerViewAdapter adapter = (itm_ChapterRecyclerViewAdapter)lessons.getAdapter();
+        if (adapter!=null) {
+            adapter.updateChapterList(chapters);
+        }
     }
 }
