@@ -5,10 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import CodeLinguists.codelingo.application.Strings;
 import CodeLinguists.codelingo.dso.ChapterObj;
 import CodeLinguists.codelingo.persistence.IChapterData;
-import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.persistence.utils.ISqlRunner;
 
 public class ChapterDataSQL implements IChapterData {
@@ -52,17 +50,6 @@ public class ChapterDataSQL implements IChapterData {
         }
     }
 
-    @Override
-    public boolean isChapterComplete(int accountId, int chapterId) {
-        boolean isComplete;
-        try {
-            isComplete = sqlRunner.selectChapterCompletionById(accountId, chapterId).getBoolean("isCompleted");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return isComplete;
-    }
-
         @Override
     public void setChapterUnlockedById(int accountId, int chapterId, boolean unlocked) {
         try {
@@ -75,19 +62,6 @@ public class ChapterDataSQL implements IChapterData {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public boolean isChapterUnlocked(int accountId, int chapterId) throws CourseNotFoundException {
-        try (ResultSet rs = sqlRunner.selectChapterCompletionById(accountId, chapterId)) {
-            if (!rs.next()) {
-                throw new CourseNotFoundException(Strings.CourseNotFound(chapterId));
-            }
-            return rs.getBoolean("isLocked");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 
     @Override

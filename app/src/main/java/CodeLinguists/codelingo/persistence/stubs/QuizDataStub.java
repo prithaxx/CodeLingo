@@ -33,7 +33,6 @@ public class QuizDataStub implements IQuizData {
                 .collect(Collectors.toList());
     }
 
-    @Override
     public QuizObj getQuizById(int quizId, int chapterId) {
         return quizList.stream()
                 .filter(quizObj -> quizObj.chapterId()==chapterId && quizObj.id()==quizId)
