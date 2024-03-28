@@ -318,7 +318,6 @@ public class SessionManagerIT extends SqlDbIT {
         String user = "TestUser";
         sessionManager.guestLogin(user);
 
-        // 假定选择了一个课程和章节
         List<CourseObj> courses = sessionManager.getCourseList();
         assertFalse("course list should not be null", courses.isEmpty());
         CourseObj selectedCourse = courses.get(0);
