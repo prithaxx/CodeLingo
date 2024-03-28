@@ -32,6 +32,11 @@
     + Course navigation: Still need to work on the design of the Chapter Summary popup modal (medium priority).
     + [These issues](https://code.cs.umanitoba.ca/comp3350-winter2024/codelinguists-ao1-15/-/issues/?sort=created_date&state=opened&milestone_title=Iteration%203%20-%20CodeLingo&or%5Blabel_name%5D%5B%5D=Sprint%201%20-%20Iteration%202&or%5Blabel_name%5D%5B%5D=Sprint%202%20-%20Iteration2&first_page_size=100) have been moved into the next iteration.
 
+# Iteration 3 Notes
+- Time reporting is done on Issues labeled "DevTask".
+- In this iteration, we divided into 3 teams to work on the website for presentation, acceptance tests and 2 new features.
+- We finished up 2 features: Updating the design of the quizzes to be in line with the rest of the app and adding lock for quizzes.
+
 # Other Docs
  - [ARCHITECTURE.md](Docs/ARCHITECTURE.md)
  - [VisionStatement.md](Docs/VisionStatement.md)
