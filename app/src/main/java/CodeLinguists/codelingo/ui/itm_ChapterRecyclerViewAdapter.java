@@ -43,15 +43,15 @@ public class itm_ChapterRecyclerViewAdapter extends RecyclerView.Adapter<itm_Cha
         int[] chAssets = new int[]{R.drawable.course_tile_1, R.drawable.course_tile_2, R.drawable.course_tile_3, R.drawable.course_tile_4};
         ChapterObj chapter = mValues.get(position);
         holder.mItem = chapter;
-        holder.mTitle.setText(chapter.name());
-        holder.mIView.setImageResource(chAssets[chapter.id()%chAssets.length]);
+        holder.mTitle.setText(chapter.getName());
+        holder.mIView.setImageResource(chAssets[chapter.getId()%chAssets.length]);
         if(chapter.isUnlocked() || position == 0) {
             holder.mLock.setVisibility(View.INVISIBLE);
             holder.mTile.setOnClickListener(
                     (View view) -> {
                         try {
                             ISessionManager sessionManager = Services.getSessionManager();
-                            sessionManager.setActiveChapter(chapter.id());
+                            sessionManager.setActiveChapter(chapter.getId());
                             Intent intent = new Intent(view.getContext(), view_SlideShowWrapper.class);
                             view.getContext().startActivity(intent);
                         } catch (InputValidationException | AccountPermissionException e) {
