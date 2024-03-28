@@ -22,16 +22,16 @@ To find the most recent release of a stable version please go to the release pag
 
 
 
-# Iteration 0 Notes
+## Iteration 0 Notes
 - All features are issues with the label "Feature", all user stories are issues with the label "UserStory"
 - The 5 User stories for iteration 1 are all marked as "high" with a label. We included future user stories to ensure the time estimates were consistent for grading.
 - Developer tasks omitted from this iteration
 
-# Iteration 1 Notes
+## Iteration 1 Notes
 - Time reporting is done on Issues labeled "DevTask"
 - The focus of this iteration was to create a horizontal prototype, so we implemented a few features to a demonstrable state.
 
-# Iteration 2 Notes
+## Iteration 2 Notes
 - Time reporting is done on Issues labeled "DevTask".
 - This iteration had 2 sprints:
     + Sprint 1 focused on implementing the Demo Quiz and Course Navigation features.
@@ -40,6 +40,11 @@ To find the most recent release of a stable version please go to the release pag
     + Demo Quiz : Still need to implement code block type quiz slide (low priority).
     + Course navigation: Still need to work on the design of the Chapter Summary popup modal (medium priority).
     + [These issues](https://code.cs.umanitoba.ca/comp3350-winter2024/codelinguists-ao1-15/-/issues/?sort=created_date&state=opened&milestone_title=Iteration%203%20-%20CodeLingo&or%5Blabel_name%5D%5B%5D=Sprint%201%20-%20Iteration%202&or%5Blabel_name%5D%5B%5D=Sprint%202%20-%20Iteration2&first_page_size=100) have been moved into the next iteration.
+
+## Iteration 3 Notes
+- Time reporting is done on Issues labeled "DevTask".
+- In this iteration, we divided into 3 teams to work on the website for presentation, acceptance tests and 2 new features.
+- We finished up 2 features: Updating the design of the quizzes to be in line with the rest of the app and adding lock for quizzes.
 
 ## Iteration Milestones
 - [Iteration 1](https://code.cs.umanitoba.ca/comp3350-winter2024/codelinguists-ao1-15/-/milestones/1#tab-issues)
@@ -50,7 +55,6 @@ To find the most recent release of a stable version please go to the release pag
 ## Features
 - [Feature List](https://code.cs.umanitoba.ca/comp3350-winter2024/codelinguists-ao1-15/-/issues/?label_name%5B%5D=Feature)
 
-
 ## User Stories
 - [User Story List](https://code.cs.umanitoba.ca/comp3350-winter2024/codelinguists-ao1-15/-/issues/?label_name%5B%5D=UserStory)
 
@@ -59,8 +63,10 @@ To find the most recent release of a stable version please go to the release pag
 - [IntegrationTests](https://code.cs.umanitoba.ca/comp3350-winter2024/codelinguists-ao1-15/-/blob/main/app/src/test/java/codelinguists/codelingo/integration_tests/AllIntegrationTests.java?ref_type=heads)
 - [AcceptanceTests](https://code.cs.umanitoba.ca/comp3350-winter2024/codelinguists-ao1-15/-/blob/main/app/src/test/java/codelinguists/codelingo/AllTests.java?ref_type=heads)
 
+=======
 
-# Other Docs
+
+## Other Docs
  - [ARCHITECTURE.md](Docs/ARCHITECTURE.md)
  - [VisionStatement.md](Docs/VisionStatement.md)
  - [CodingStyle.md](Docs/CodingStyle.md)
