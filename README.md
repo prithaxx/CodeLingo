@@ -63,7 +63,6 @@ To find the most recent release of a stable version please go to the release pag
 - [IntegrationTests](https://code.cs.umanitoba.ca/comp3350-winter2024/codelinguists-ao1-15/-/blob/main/app/src/test/java/codelinguists/codelingo/integration_tests/AllIntegrationTests.java?ref_type=heads)
 - [AcceptanceTests](https://code.cs.umanitoba.ca/comp3350-winter2024/codelinguists-ao1-15/-/blob/main/app/src/test/java/codelinguists/codelingo/AllTests.java?ref_type=heads)
 
-=======
 
 
 ## Other Docs
