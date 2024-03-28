@@ -86,7 +86,7 @@ public class LessonATest {
     @Test
     public void correctAnswerTrueFalse() {
         goToQuestion(2);
-        onView(withId(R.id.true_button)).perform(click());
+        onView(withText("True")).perform(click());
         onView(withId(R.id.btnSlideShowNext)).perform(click());
         onView(withText("Correct!")).check(matches(isDisplayed()));
     }
@@ -94,7 +94,7 @@ public class LessonATest {
     @Test
     public void wrongAnswerTrueFalse() {
         goToQuestion(2);
-        onView(withId(R.id.false_button)).perform(click());
+        onView(withText("False")).perform(click());
         onView(withId(R.id.btnSlideShowNext)).perform(click());
         onView(withText("Wrong Answer")).check(matches(isDisplayed()));
     }
@@ -103,7 +103,7 @@ public class LessonATest {
     public void nullAnswerTrueFalse() {
         goToQuestion(2);
         onView(withId(R.id.btnSlideShowNext)).perform(click());
-        onView(withId(R.id.true_button)).check(matches(isDisplayed()));
+        onView(withText("True")).check(matches(isDisplayed()));
     }
 
     @Test
@@ -116,7 +116,7 @@ public class LessonATest {
     @Test
     public void completeQuiz() {
         goToQuestion(2);
-        onView(withId(R.id.false_button)).perform(click());
+        onView(withText("False")).perform(click());
         onView(withId(R.id.btnSlideShowNext)).perform(click());
         onView(withId(R.id.btnSlideShowNext)).check(matches(withText("Done!")));
         onView(withId(R.id.btnSlideShowNext)).perform(click());

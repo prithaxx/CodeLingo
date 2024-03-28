@@ -5,6 +5,8 @@ import org.junit.runners.Suite;
 
 import codelinguists.codelingo.unit_tests.logic.AccountHandlerTest;
 import codelinguists.codelingo.unit_tests.logic.CourseHandlerTest;
+import codelinguists.codelingo.unit_tests.logic.MockitoCourseHandlerTest;
+import codelinguists.codelingo.unit_tests.logic.MokitoSessionManagerTest;
 import codelinguists.codelingo.unit_tests.logic.QuizHandlerTest;
 import codelinguists.codelingo.unit_tests.logic.QuizIteratorTest;
 import codelinguists.codelingo.unit_tests.logic.SessionManagerTest;
@@ -14,6 +16,8 @@ import codelinguists.codelingo.unit_tests.logic.SessionManagerTest;
     //logic
     AccountHandlerTest.class,
     CourseHandlerTest.class,
+    MockitoCourseHandlerTest.class,
+    MokitoSessionManagerTest.class,
     QuizHandlerTest.class,
     QuizIteratorTest.class,    
     SessionManagerTest.class,

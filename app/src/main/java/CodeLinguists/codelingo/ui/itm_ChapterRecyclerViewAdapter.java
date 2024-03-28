@@ -43,15 +43,18 @@ public class itm_ChapterRecyclerViewAdapter extends RecyclerView.Adapter<itm_Cha
         int[] chAssets = new int[]{R.drawable.course_tile_1, R.drawable.course_tile_2, R.drawable.course_tile_3, R.drawable.course_tile_4};
         ChapterObj chapter = mValues.get(position);
         holder.mItem = chapter;
-        holder.mTitle.setText(chapter.name());
-        holder.mIView.setImageResource(chAssets[chapter.id()%chAssets.length]);
+        holder.mTitle.setText(chapter.getName());
+        holder.mIView.setImageResource(chAssets[chapter.getId()%chAssets.length]);
         if(chapter.isUnlocked() || position == 0) {
             holder.mLock.setVisibility(View.INVISIBLE);
+            holder.mTile.setAlpha(0.5f);
+            holder.mTitle.setAlpha(1f);
+            holder.mIView.setAlpha(1f);
             holder.mTile.setOnClickListener(
                     (View view) -> {
                         try {
                             ISessionManager sessionManager = Services.getSessionManager();
-                            sessionManager.setActiveChapter(chapter.id());
+                            sessionManager.setActiveChapter(chapter.getId());
                             Intent intent = new Intent(view.getContext(), view_SlideShowWrapper.class);
                             view.getContext().startActivity(intent);
                         } catch (InputValidationException | AccountPermissionException e) {
@@ -72,6 +75,12 @@ public class itm_ChapterRecyclerViewAdapter extends RecyclerView.Adapter<itm_Cha
     @Override
     public int getItemCount() {
         return mValues.size();
+    }
+
+    public void updateChapterList(List<ChapterObj> items) {
+        mValues.clear();
+        mValues.addAll(items);
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

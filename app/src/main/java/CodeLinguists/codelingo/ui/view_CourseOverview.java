@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -81,14 +82,19 @@ import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFound
 		Intent intent = new Intent(view_CourseOverview.this, view_GuestLogin.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		startActivity(intent);
+
+	}
+
+	private void reloadContent() {
+		cont_CourseOverview newCont = new cont_CourseOverview();
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		ft.replace(R.id.fragmentContainerView3, newCont).commit();
 	}
 
 	private void changeCourse(int newCourseId){
 		try {
 			sessionManager.setActiveCourse(newCourseId);
-			cont_CourseOverview newCont = new cont_CourseOverview();
-			FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-			ft.replace(R.id.fragmentContainerView3, newCont).commit();
+			reloadContent();
 		} catch (CourseNotFoundException | AccountPermissionException | InputValidationException e) {
 			e.printStackTrace();
 			Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();

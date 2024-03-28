@@ -16,3 +16,5 @@ local.properties
 .DS_Store
 .idea/deploymentTargetDropDown.xml
 .idea/misc.xml
+.idea/deploymentTargetDropDown.xml
+.idea/androidTestResultsUserPreferences.xml
