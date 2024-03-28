@@ -57,6 +57,7 @@ public class DbHelper {
             }
 
             if (!outFile.exists()) {
+                System.out.println("~DB Reset!~");
                 InputStreamReader in = new InputStreamReader(assetManager.open(asset));
                 FileWriter out = new FileWriter(outFile);
 
