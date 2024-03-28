@@ -11,8 +11,8 @@ public abstract class InformationSlide extends QuizSlide{
     @Override
     public String getInput(){
         // Since these slide types don't have an input field to collect user input,
-        // And since the SlideShowWrapper needs to getInput from all slides to handle validation,
-        // We return null to indicate that there was no answer provided
+        // And since the SlideShowWrapper needs to getInput from all slide types to handle validation,
+        // We return null to explicitly indicate that there is no provided answer
         return null;
     }
 }
