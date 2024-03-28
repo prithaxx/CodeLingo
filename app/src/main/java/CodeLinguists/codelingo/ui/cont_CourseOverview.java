@@ -62,7 +62,7 @@ public class cont_CourseOverview extends Fragment {
         View v = inflater.inflate(R.layout.fragment_course_overview, container, false);
 
         TextView tv = v.findViewById(R.id.placeholder_course);
-        tv.setText(course!=null ? course.name() : getString(R.string.select_a_course));
+        tv.setText(course!=null ? course.getName() : getString(R.string.select_a_course));
 
         TextView tvProgressPercentage = v.findViewById(R.id.progress_percentage);
         int progressPercentage = 0;

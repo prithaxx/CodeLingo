@@ -7,4 +7,16 @@ import CodeLinguists.codelingo.dso.QuizObj;
 
 public interface IChapterData {
     List<ChapterObj> getChapterByCourseId(int courseId, int accountId);
+
+    void setChapterCompletionById(int accountId, int chapterId);
+
+    boolean isChapterComplete(int accountId, int chapterId);
+
+    void setChapterUnlockedById(int accountId, int chapterId, boolean unlocked);
+
+    boolean isChapterUnlocked(int accountId, int chapterId);
+
+    boolean isRemainChaptersInCourse(int courseId, int chapterId);
+
+    List<ChapterObj> getFirstChaptersForAllCourse();
 }

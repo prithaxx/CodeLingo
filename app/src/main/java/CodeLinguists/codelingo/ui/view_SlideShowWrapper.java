@@ -16,6 +16,7 @@ import CodeLinguists.codelingo.logic.IQuizNavigation;
 import CodeLinguists.codelingo.logic.ISessionManager;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.logic_exceptions.NoItemSelectedException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.ui.slides.QuestionFragmentFactory;
 import CodeLinguists.codelingo.ui.slides.QuizSlide;
 import CodeLinguists.codelingo.ui.ui_exceptions.SlideTypeNotHandledException;
@@ -108,6 +109,11 @@ public class view_SlideShowWrapper extends AppCompatActivity {
     }
 
     private void finishQuiz(View v) {
+        try {
+            sessionManager.setChapterComplete();
+        } catch (CourseNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         Intent intent = new Intent(this, view_CourseOverview.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);

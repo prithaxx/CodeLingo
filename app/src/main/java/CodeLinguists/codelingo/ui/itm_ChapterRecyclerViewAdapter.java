@@ -45,19 +45,28 @@ public class itm_ChapterRecyclerViewAdapter extends RecyclerView.Adapter<itm_Cha
         holder.mItem = chapter;
         holder.mTitle.setText(chapter.name());
         holder.mIView.setImageResource(chAssets[chapter.id()%chAssets.length]);
-        holder.mTile.setOnClickListener(
-            (View view)->{
-                try {
-                    ISessionManager sessionManager = Services.getSessionManager();
-                    sessionManager.setActiveChapter(chapter.id());
-                    Intent intent = new Intent(view.getContext(), view_SlideShowWrapper.class);
-                    view.getContext().startActivity(intent);
-                } catch (InputValidationException | AccountPermissionException e) {
-                    e.printStackTrace();
-                    Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        );
+        if(chapter.isUnlocked() || position == 0) {
+            holder.mLock.setVisibility(View.INVISIBLE);
+            holder.mTile.setOnClickListener(
+                    (View view) -> {
+                        try {
+                            ISessionManager sessionManager = Services.getSessionManager();
+                            sessionManager.setActiveChapter(chapter.id());
+                            Intent intent = new Intent(view.getContext(), view_SlideShowWrapper.class);
+                            view.getContext().startActivity(intent);
+                        } catch (InputValidationException | AccountPermissionException e) {
+                            e.printStackTrace();
+                            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+            );
+        } else {
+            holder.mTile.setOnClickListener(null);
+            holder.mTile.setAlpha(0.3f);
+            holder.mTitle.setAlpha(0.3f);
+            holder.mIView.setAlpha(0.3f);
+            holder.mLock.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -70,12 +79,14 @@ public class itm_ChapterRecyclerViewAdapter extends RecyclerView.Adapter<itm_Cha
         public ChapterObj mItem;
         public ImageView mIView;
         public View mTile;
+        public ImageView mLock;
 
         public ViewHolder(FragmentItemBinding binding) {
             super(binding.getRoot());
             mTitle = binding.title;
             mIView = binding.chptImage;
             mTile = binding.chapterTile;
+            mLock = binding.chapterLock;
         }
 
         @Override

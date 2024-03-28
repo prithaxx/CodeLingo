@@ -1,7 +1,9 @@
 package CodeLinguists.codelingo.persistence.stubs;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import CodeLinguists.codelingo.dso.ChapterObj;
@@ -22,7 +24,70 @@ public class ChapterDataStub implements IChapterData {
     @Override
     public List<ChapterObj> getChapterByCourseId(int courseId, int accountId) {
         return chapterList.stream()
-                .filter(chapterObj -> chapterObj.courseId()==courseId)
+                .filter(chapterObj -> chapterObj.getCourseId()==courseId)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void setChapterCompletionById(int accountId, int chapterId) {
+        ChapterObj chapter = chapterList.get(chapterId - 1);
+        if (chapter != null) {
+            chapter.setCompleted(true);
+        } else {
+            System.out.println("Chapter not found for ID: " + chapterId);
+        }
+    }
+
+    @Override
+    public boolean isChapterComplete(int accountId, int chapterId) {
+        return chapterList.get(chapterId - 1).isCompleted();
+    }
+
+    @Override
+    public void setChapterUnlockedById(int accountId, int chapterId, boolean unlocked) {
+        ChapterObj chapter = chapterList.get(chapterId - 1);
+        if (chapter != null) {
+            chapter.setUnlocked(unlocked);
+        } else {
+            System.out.println("Chapter not found for ID: " + chapterId);
+        }
+    }
+
+    @Override
+    public boolean isChapterUnlocked(int accountId, int chapterId) {
+        return chapterList.get(chapterId - 1).isUnlocked();
+    }
+
+    @Override
+    public boolean isRemainChaptersInCourse(int courseId, int chapterId) {
+        boolean result = false;
+        for (int i = 0; i < chapterList.size(); i++) {
+            if (courseId == chapterList.get(i).getCourseId() && chapterId < chapterList.get(i).getId()) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public List<ChapterObj> getFirstChaptersForAllCourse() {
+        Map<Integer, List<ChapterObj>> chaptersByCourse = chapterList.stream()
+                .collect(Collectors.groupingBy(ChapterObj::getCourseId));
+
+        List<ChapterObj> firstChapters = new ArrayList<>();
+
+        chaptersByCourse.forEach((courseId, chapters) -> {
+            ChapterObj firstChapter = chapters.stream()
+                    .sorted(Comparator.comparingInt(ChapterObj::getId))
+                    .findFirst()
+                    .orElse(null);
+
+            if (firstChapter != null) {
+                firstChapters.add(firstChapter);
+            }
+        });
+
+        return firstChapters;
+    }
+
 }
