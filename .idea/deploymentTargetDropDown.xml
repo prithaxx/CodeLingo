@@ -2,7 +2,10 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="All Tests">
+      <entry key="AllAcceptanceTests">
+        <State />
+      </entry>
+      <entry key="LessonATest">
         <State />
       </entry>
       <entry key="app">
@@ -18,8 +21,17 @@
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-03-03T10:33:57.958507700Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-03-07T21:56:23.862293200Z" />
         </State>
+      </entry>
+      <entry key="completeQuiz()">
+        <State />
+      </entry>
+      <entry key="nullAnswerMultiChoice()">
+        <State />
+      </entry>
+      <entry key="wrongAnswerMultiChoice()">
+        <State />
       </entry>
     </value>
   </component>
