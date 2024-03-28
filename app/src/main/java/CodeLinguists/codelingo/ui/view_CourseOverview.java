@@ -67,13 +67,6 @@ import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFound
 		}
 	}
 
-//		@Override
-//		protected void onRestart() {
-//			super.onRestart();
-//			FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//			ft.replace(R.id.fragmentContainerView3, cont_CourseOverview.newInstance()).commit();
-//		}
-
 	public void btnHamburgerMenuOnClick(View v){
 		NavigationView navView = findViewById(R.id.nav_view);
 		navView.setVisibility(View.VISIBLE);
