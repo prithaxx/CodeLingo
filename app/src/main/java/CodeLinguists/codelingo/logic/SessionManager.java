@@ -61,7 +61,10 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public void setChapterComplete() throws CourseNotFoundException {
+    public void setChapterComplete() throws CourseNotFoundException, AccountPermissionException {
+        if (account == null) {
+            throw new AccountPermissionException(Strings.NotSignedIn);
+        }
         courseHandler.setChapterComplete(this.chapterId, this.account);
     }
 

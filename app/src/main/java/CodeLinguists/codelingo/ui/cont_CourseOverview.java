@@ -33,6 +33,8 @@ import CodeLinguists.codelingo.logic.ISessionManager;
 public class cont_CourseOverview extends Fragment {
 
     private ISessionManager sessionManager;
+    private RecyclerView lessons;
+    private TextView tvProgressPercentage;
 
     public cont_CourseOverview() {
         // Required empty public constructor
@@ -64,15 +66,8 @@ public class cont_CourseOverview extends Fragment {
         TextView tv = v.findViewById(R.id.placeholder_course);
         tv.setText(course!=null ? course.getName() : getString(R.string.select_a_course));
 
-        TextView tvProgressPercentage = v.findViewById(R.id.progress_percentage);
-        int progressPercentage = 0;
-        try {
-            progressPercentage = sessionManager.calculateProgressPercentage();
-        } catch (CourseNotFoundException | AccountPermissionException e) {
-            e.printStackTrace();
-            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-        tvProgressPercentage.setText(String.format(Locale.getDefault(), "%d%% complete", progressPercentage));
+        this.tvProgressPercentage = v.findViewById(R.id.progress_percentage);
+        setCompletionPercent();
 
         View chapterListView = v.findViewById(R.id.chapterList);
         List<ChapterObj> chapters = null;
@@ -86,10 +81,48 @@ public class cont_CourseOverview extends Fragment {
 
         // Set the adapter
         if (chapterListView instanceof RecyclerView recyclerView) {
+            lessons = (RecyclerView)chapterListView;
             Context context = chapterListView.getContext();
             recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
             recyclerView.setAdapter(new itm_ChapterRecyclerViewAdapter(chapters));
         }
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (lessons != null) {
+            resetChapterAdapter();
+        }
+        if (tvProgressPercentage!=null) {
+            setCompletionPercent();
+        }
+    }
+
+    private void setCompletionPercent() {
+        int progressPercentage = 0;
+        try {
+            progressPercentage = sessionManager.calculateProgressPercentage();
+        } catch (CourseNotFoundException | AccountPermissionException e) {
+            e.printStackTrace();
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+        tvProgressPercentage.setText(String.format(Locale.getDefault(), "%d%% complete", progressPercentage));
+    }
+
+    private void resetChapterAdapter() {
+        List<ChapterObj> chapters = null;
+        try {
+            chapters = sessionManager.getActiveCourseChapters();
+        } catch (CourseNotFoundException | AccountPermissionException e) {
+            e.printStackTrace();
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            chapters = new ArrayList<>(); //Empty list to avoid null point errors
+        }
+        itm_ChapterRecyclerViewAdapter adapter = (itm_ChapterRecyclerViewAdapter)lessons.getAdapter();
+        if (adapter!=null) {
+            adapter.updateChapterList(chapters);
+        }
     }
 }

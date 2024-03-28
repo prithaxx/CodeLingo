@@ -35,13 +35,13 @@ public interface ISqlRunner {
 
     ResultSet selectChapterCompletionById(int accountId, int chapterId) throws SQLException;
 
-    void setChapterCompleteIfExist(int accountId, int chapterId) throws SQLException;
+    void updateChapterCompletionSetComplete(int accountId, int chapterId) throws SQLException;
 
-    void setChapterCompleteIfNotExist(int accountId, int chapterId) throws SQLException;
+    void insertUnlockedIntoChapterCompletion(int accountId, int chapterId) throws SQLException;
 
-    void setChapterUnlockIfExist(int accountId, int chapterId, boolean setUnlocked) throws SQLException;
+    void updateChapterCompletion(int accountId, int chapterId, boolean setUnlocked) throws SQLException;
 
-    void setChapterUnlockIfNotExist(int accountId, int chapterId, boolean setUnlocked) throws SQLException;
+    void insertChapterCompletion(int accountId, int chapterId, boolean setUnlocked) throws SQLException;
 
     ResultSet selectChaptersInCourseAfterId(int courseId, int chapterId) throws SQLException;
 

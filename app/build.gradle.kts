@@ -54,6 +54,7 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("androidx.mediarouter:mediarouter:1.6.0")
     implementation("org.hsqldb:hsqldb:2.4.1") //newer version are not compatible with android
+    implementation("org.mockito:mockito-core:2+")
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.testng:testng:6.9.6")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

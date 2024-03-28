@@ -1,10 +1,6 @@
 package CodeLinguists.codelingo;
 
-import static androidx.test.InstrumentationRegistry.getContext;
 import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
-
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.filters.LargeTest;
 
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -16,7 +12,8 @@ import CodeLinguists.codelingo.persistence.utils.DbHelper;
 @Suite.SuiteClasses({
         LoginATest.class,
         NavigationATest.class,
-        LessonATest.class
+        LessonATest.class,
+        CourseProgressATest.class
 })
 public class AllAcceptanceTests {
     @BeforeClass

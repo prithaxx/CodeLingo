@@ -36,7 +36,7 @@ public class CourseHandler implements ICourseHandler {
     @Override
     public void setChapterComplete(int chapterId, AccountObj account) throws CourseNotFoundException {
         chapterData.setChapterCompletionById(account.getId(), chapterId);
-        if (chapterData.isRemainChaptersInCourse(getActiveCourse(account).getId(),chapterId)) {
+        if (chapterData.hasNextChapter(getActiveCourse(account).getId(),chapterId)) {
             chapterData.setChapterUnlockedById(account.getId(),chapterId + 1,true);
         }
     }

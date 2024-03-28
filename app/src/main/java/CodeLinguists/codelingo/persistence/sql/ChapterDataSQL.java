@@ -41,24 +41,13 @@ public class ChapterDataSQL implements IChapterData {
         try {
             boolean exists = sqlRunner.selectChapterCompletionById(accountId, chapterId).next();
             if (exists) {
-                sqlRunner.setChapterCompleteIfExist(accountId, chapterId);
+                sqlRunner.updateChapterCompletionSetComplete(accountId, chapterId);
             } else {
-                sqlRunner.setChapterCompleteIfNotExist(accountId,chapterId);
+                sqlRunner.insertUnlockedIntoChapterCompletion(accountId,chapterId);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public boolean isChapterComplete(int accountId, int chapterId) {
-        boolean isComplete;
-        try {
-            isComplete = sqlRunner.selectChapterCompletionById(accountId, chapterId).getBoolean("isCompleted");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return isComplete;
     }
 
         @Override
@@ -66,9 +55,9 @@ public class ChapterDataSQL implements IChapterData {
         try {
             boolean exists = sqlRunner.selectChapterCompletionById(accountId, chapterId).next();
             if (exists) {
-                sqlRunner.setChapterUnlockIfExist(accountId, chapterId, unlocked);
+                sqlRunner.updateChapterCompletion(accountId, chapterId, unlocked);
             } else {
-                sqlRunner.setChapterUnlockIfNotExist(accountId,chapterId, unlocked);
+                sqlRunner.insertChapterCompletion(accountId,chapterId, unlocked);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -76,25 +65,13 @@ public class ChapterDataSQL implements IChapterData {
     }
 
     @Override
-    public boolean isChapterUnlocked(int accountId, int chapterId) {
-        boolean isLocked;
-        try {
-            isLocked = sqlRunner.selectChapterCompletionById(accountId, chapterId).getBoolean("isLocked");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return isLocked;
-    }
-
-    @Override
-    public boolean isRemainChaptersInCourse(int courseId, int chapterId) {
-        boolean exists = false;
-        try {
-            exists = sqlRunner.selectChaptersInCourseAfterId(courseId,chapterId).next();
+    public boolean hasNextChapter(int courseId, int chapterId) {
+        try (ResultSet rs = sqlRunner.selectChaptersInCourseAfterId(courseId,chapterId)) {
+            return rs.next();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return exists;
+        return false;
     }
 
     @Override
@@ -107,8 +84,8 @@ public class ChapterDataSQL implements IChapterData {
                         rs.getString("name"),
                         rs.getInt("courseId"),
                         rs.getString("description"),
-                        rs.getBoolean("isUnlocked"),
-                        rs.getBoolean("isCompleted")));
+                        false,
+                        false));
 
             }
         } catch (SQLException e) {
