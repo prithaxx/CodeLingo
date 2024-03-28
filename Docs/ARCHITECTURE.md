@@ -2,6 +2,10 @@
 
 **Directory of Classes and their locations**
 
+## Iteration 3 Diagram
+
+![alt text](Architecture3.svg)
+
 ## Iteration 2 Diagram
 
 ![alt text](Architecture2.svg)
