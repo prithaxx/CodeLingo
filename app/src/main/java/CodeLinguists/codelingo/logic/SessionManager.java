@@ -69,7 +69,7 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public IQuizIterator startQuiz() throws NoItemSelectedException {
+    public IQuizNavigation startQuiz() throws NoItemSelectedException {
         if (course==null) {
             throw new NoItemSelectedException(Strings.NoCourseSelected);
         }

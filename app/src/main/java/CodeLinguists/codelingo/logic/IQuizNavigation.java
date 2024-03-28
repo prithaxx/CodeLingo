@@ -3,7 +3,7 @@ package CodeLinguists.codelingo.logic;
 import CodeLinguists.codelingo.dso.QuizObj;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 
-public interface IQuizIterator {
+public interface IQuizNavigation {
     QuizObj startQuiz();
 
     /**

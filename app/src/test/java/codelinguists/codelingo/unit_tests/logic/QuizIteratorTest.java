@@ -7,19 +7,19 @@ import static org.junit.Assert.*;
 import CodeLinguists.codelingo.dso.QuestionType;
 import CodeLinguists.codelingo.dso.QuizObj;
 import CodeLinguists.codelingo.logic.QuizHandler;
-import CodeLinguists.codelingo.logic.QuizIterator;
+import CodeLinguists.codelingo.logic.QuizNavigation;
 import CodeLinguists.codelingo.logic.QuizIteratorFactory;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.persistence.stubs.QuizDataStub;
 
 public class QuizIteratorTest {
-    private QuizIterator quizIterator;
+    private QuizNavigation quizIterator;
 
     @Before
     public void setUp() {
         QuizDataStub quizDataStub = new QuizDataStub();
         QuizHandler quizHandler = new QuizHandler(quizDataStub, new QuizIteratorFactory());
-        quizIterator = new QuizIterator(quizHandler, quizDataStub.getQuizList());
+        quizIterator = new QuizNavigation(quizHandler, quizDataStub.getQuizList());
     }
 
     @Test

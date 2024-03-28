@@ -14,7 +14,7 @@ public class QuizHandler implements IQuizHandler{
     }
 
     @Override
-    public IQuizIterator getQuiz(int courseId, int chapterId) {
+    public IQuizNavigation getQuiz(int courseId, int chapterId) {
         return quizFactory.getQuiz(this, quizData.getQuizByChapterId(chapterId));
     }
 
