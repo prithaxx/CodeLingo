@@ -36,7 +36,7 @@ public class view_GuestLogin extends AppCompatActivity {
         }
     }
 
-    public void btnLoginOnClick(View v) throws InputValidationException {
+    public void btnLoginOnClick(View v) {
         String name = String.valueOf(usernameField.getText());
         boolean stayIn = ((CheckBox)findViewById(R.id.stay_logged_in)).isChecked();
         login(name, stayIn);

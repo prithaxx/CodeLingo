@@ -3,19 +3,18 @@ package CodeLinguists.codelingo.logic;
 import java.util.ArrayList;
 import java.util.List;
 
-import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.QuestionType;
 import CodeLinguists.codelingo.dso.QuizObj;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 
-public class QuizIterator implements IQuizIterator {
+public class QuizNavigation implements IQuizNavigation {
 
     private final IQuizHandler quizHandler;
     List<QuizObj> activeQuiz;
     int currentQuizCursor;
     private boolean inFeedback; //if showing quiz slide or feedback slide
 
-    public QuizIterator(IQuizHandler quizHandler, List<QuizObj> activeQuiz) {
+    public QuizNavigation(IQuizHandler quizHandler, List<QuizObj> activeQuiz) {
         this.quizHandler = quizHandler;
         this.activeQuiz = activeQuiz==null ? new ArrayList<>() : activeQuiz;
         this.currentQuizCursor = 0;

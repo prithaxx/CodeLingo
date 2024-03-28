@@ -9,9 +9,9 @@ import java.util.List;
 
 import CodeLinguists.codelingo.dso.QuestionType;
 import CodeLinguists.codelingo.dso.QuizObj;
-import CodeLinguists.codelingo.logic.IQuizIterator;
+import CodeLinguists.codelingo.logic.IQuizNavigation;
 import CodeLinguists.codelingo.logic.QuizHandler;
-import CodeLinguists.codelingo.logic.QuizIterator;
+import CodeLinguists.codelingo.logic.QuizNavigation;
 import CodeLinguists.codelingo.logic.QuizIteratorFactory;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.persistence.stubs.QuizDataStub;
@@ -19,7 +19,7 @@ import CodeLinguists.codelingo.persistence.stubs.QuizDataStub;
 public class QuizHandlerTest {
     List<QuizObj> quizList;
     QuizDataStub quizDataStub;
-    IQuizIterator quizIterator;
+    IQuizNavigation quizIterator;
     private QuizHandler quizHandler;
 
     @Before
@@ -62,7 +62,7 @@ public class QuizHandlerTest {
 
     @Test
     public void emptyList() {
-        QuizIterator quizIter = new QuizIterator(quizHandler, quizList);
+        QuizNavigation quizIter = new QuizNavigation(quizHandler, quizList);
 
         assertFalse(quizIter.hasPrevQuestion());
         assertFalse(quizIter.hasNextQuestion());
@@ -75,7 +75,7 @@ public class QuizHandlerTest {
 
     @Test
     public void nullList() {
-        QuizIterator quizIter = new QuizIterator(quizHandler, null);
+        QuizNavigation quizIter = new QuizNavigation(quizHandler, null);
 
         assertFalse(quizIter.hasPrevQuestion());
         assertFalse(quizIter.hasNextQuestion());
@@ -89,7 +89,7 @@ public class QuizHandlerTest {
     @Test
     public void oneElement() {
         addQuizObj(1);
-        QuizIterator quizIter = new QuizIterator(quizHandler, quizList);
+        QuizNavigation quizIter = new QuizNavigation(quizHandler, quizList);
 
         assertFalse(quizIter.hasPrevQuestion());
         assertTrue(quizIter.hasNextQuestion());
@@ -106,7 +106,7 @@ public class QuizHandlerTest {
     @Test
     public void twoElement() {
         addQuizObj(2);
-        QuizIterator quizIter = new QuizIterator(quizHandler, quizList);
+        QuizNavigation quizIter = new QuizNavigation(quizHandler, quizList);
 
         assertFalse(quizIter.hasPrevQuestion());
         assertTrue(quizIter.hasNextQuestion());

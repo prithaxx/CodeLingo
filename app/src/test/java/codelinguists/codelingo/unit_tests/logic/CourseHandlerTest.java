@@ -20,12 +20,14 @@ import CodeLinguists.codelingo.persistence.stubs.CourseDataStub;
 public class CourseHandlerTest {
     private IAccountData accountDataStub;
     private CourseHandler courseHandler;
+    private ChapterDataStub chapterDataStub;
+
 
     @Before
     public void setUp() {
         CourseDataStub courseDataStub = new CourseDataStub();
         accountDataStub = new AccountDataStub();
-        ChapterDataStub chapterDataStub = new ChapterDataStub();
+        chapterDataStub = new ChapterDataStub();
         courseHandler = new CourseHandler(courseDataStub, chapterDataStub);
     }
 
@@ -37,7 +39,7 @@ public class CourseHandlerTest {
         CourseObj course = courseHandler.getActiveCourse(account);
 
         assertNotNull(course);
-        assertEquals(1, course.id());
+        assertEquals(1, course.getId());
     }
 
     @Test

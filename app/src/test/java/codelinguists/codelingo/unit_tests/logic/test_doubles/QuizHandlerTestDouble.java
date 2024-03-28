@@ -2,24 +2,24 @@ package codelinguists.codelingo.unit_tests.logic.test_doubles;
 
 import CodeLinguists.codelingo.dso.QuizObj;
 import CodeLinguists.codelingo.logic.IQuizHandler;
-import CodeLinguists.codelingo.logic.IQuizIterator;
-import CodeLinguists.codelingo.logic.QuizIterator;
+import CodeLinguists.codelingo.logic.IQuizNavigation;
+import CodeLinguists.codelingo.logic.QuizNavigation;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 
 public class QuizHandlerTestDouble implements IQuizHandler {
-    public IQuizIterator getQuizResponse;
+    public IQuizNavigation getQuizResponse;
     public boolean checkQuizAnswerResponse;
     public boolean throwException;
     public int startQuizChapterOutput;
 
     public QuizHandlerTestDouble() {
-        getQuizResponse = new QuizIterator(null, null);
+        getQuizResponse = new QuizNavigation(null, null);
         checkQuizAnswerResponse = false;
         startQuizChapterOutput=-1;
     }
 
     @Override
-    public IQuizIterator getQuiz(int courseId, int chapterId) {
+    public IQuizNavigation getQuiz(int courseId, int chapterId) {
         startQuizChapterOutput = chapterId;
         return getQuizResponse;
     }

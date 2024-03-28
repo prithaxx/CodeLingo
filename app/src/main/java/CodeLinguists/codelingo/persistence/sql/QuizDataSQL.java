@@ -1,7 +1,5 @@
 package CodeLinguists.codelingo.persistence.sql;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -45,29 +43,5 @@ public class QuizDataSQL implements IQuizData {
             e.printStackTrace();
         }
         return quizzes;
-    }
-
-    @Override
-    public QuizObj getQuizById(int quizId, int chapterId){
-        QuizObj quiz = null;
-        try (ResultSet rs = sqlRunner.selectQuizById(quizId, chapterId)){
-            if (rs.next()) {
-                int id = rs.getInt("id");
-                QuestionType type = QuestionType.valueOf(rs.getString("type"));
-                String prompt = rs.getString("prompt");
-                boolean hasAnswer = rs.getBoolean("hasAnswer");
-                String answer = rs.getString("answer");
-                List<String> hints = rs.getString("hints") != null ? Arrays.stream(rs.getString("hints").split(",")).collect(Collectors.toList()) : new ArrayList<>();
-                List<String> wrongAnswers = rs.getString("wrongAnswers") != null ? Arrays.stream(rs.getString("wrongAnswers").split(",")).collect(Collectors.toList()) : new ArrayList<>();
-                String wrongFeedback = rs.getString("wrongFeedback");
-                String correctFeedback = rs.getString("correctFeedback");
-
-                quiz = new QuizObj(id,chapterId, type, prompt, hasAnswer, answer, hints, wrongAnswers, wrongFeedback, correctFeedback);
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return quiz;
     }
 }

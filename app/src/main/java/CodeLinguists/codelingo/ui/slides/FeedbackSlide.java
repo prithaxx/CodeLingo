@@ -7,7 +7,7 @@ import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.dso.QuestionType;
 import CodeLinguists.codelingo.dso.QuizObj;
 
-public class FeedbackSlide extends QuizSlide{
+public class FeedbackSlide extends InformationSlide{
     private final boolean isCorrect;
     public FeedbackSlide(QuizObj quiz) {
         super(
@@ -16,13 +16,6 @@ public class FeedbackSlide extends QuizSlide{
                         : R.layout.fragment_slide_wrong_answer,
                 quiz);
         this.isCorrect = quiz.type().equals(QuestionType.FEEDBACK_PASSED);
-    }
-    @Override
-    public String getInput() {
-        //user will always return empty response
-        //This is not a Liskov substitution violation.
-        //The user is literally returning ""
-        return "";
     }
 
     @Override

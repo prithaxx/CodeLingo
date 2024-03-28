@@ -1,21 +1,22 @@
 package CodeLinguists.codelingo.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.QuizObj;
-import CodeLinguists.codelingo.logic.IQuizIterator;
+import CodeLinguists.codelingo.logic.IQuizNavigation;
 import CodeLinguists.codelingo.logic.ISessionManager;
+import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.logic_exceptions.NoItemSelectedException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.ui.slides.QuestionFragmentFactory;
 import CodeLinguists.codelingo.ui.slides.QuizSlide;
 import CodeLinguists.codelingo.ui.ui_exceptions.SlideTypeNotHandledException;
@@ -28,7 +29,7 @@ import CodeLinguists.codelingo.ui.ui_exceptions.SlideTypeNotHandledException;
 public class view_SlideShowWrapper extends AppCompatActivity {
 
     private ISessionManager sessionManager;
-    private IQuizIterator quizIterator;
+    private IQuizNavigation quizIterator;
     private QuestionFragmentFactory slideFactory;
     private QuizSlide currentSlide;
 
@@ -108,9 +109,11 @@ public class view_SlideShowWrapper extends AppCompatActivity {
     }
 
     private void finishQuiz(View v) {
-        Intent intent = new Intent(this, view_CourseOverview.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
+        try {
+            sessionManager.setChapterComplete();
+        } catch (CourseNotFoundException | AccountPermissionException e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();;
+        }
+        finish();
     }
-
 }

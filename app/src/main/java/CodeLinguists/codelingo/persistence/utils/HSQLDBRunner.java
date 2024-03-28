@@ -173,7 +173,7 @@ public class HSQLDBRunner implements ISqlRunner {
     public ResultSet selectLocalPreferences() throws SQLException {
         try (Connection connection = connect();
              PreparedStatement ps = connection.prepareStatement("SELECT * FROM LOCAL_PREFERENCES")) {
-            return ps.executeQuery();
+             return ps.executeQuery();
         }
     }
 
@@ -182,6 +182,87 @@ public class HSQLDBRunner implements ISqlRunner {
         try (Connection connection = connect();
             PreparedStatement ps = connection.prepareStatement("INSERT INTO LOCAL_PREFERENCES FALSE, 1")) {
             ps.executeUpdate();
+        }
+    }
+
+    @Override
+    public ResultSet selectChapterCompletionById(int accountId, int chapterId) throws SQLException {
+        //Uses try-with to close connection & prepared statement on exception
+        try (Connection connection = connect();
+             PreparedStatement ps = connection.prepareStatement("SELECT * FROM CHAPTER_COMPLETION WHERE accountId = ? AND chapterId = ?")) {
+             ps.setInt(1, accountId);
+             ps.setInt(2, chapterId);
+             return ps.executeQuery();
+        }
+    }
+
+    @Override
+    public void updateChapterCompletionSetComplete(int accountId, int chapterId) throws SQLException {
+        try (Connection connection = connect()) {
+            String updateSQL = "UPDATE CHAPTER_COMPLETION SET isCompleted = TRUE WHERE accountId = ? AND chapterId = ?";
+            try (PreparedStatement ps = connection.prepareStatement(updateSQL)) {
+                ps.setInt(1, accountId);
+                ps.setInt(2, chapterId);
+                ps.executeUpdate();
+            }
+        }
+    }
+
+    @Override
+    public void insertUnlockedIntoChapterCompletion(int accountId, int chapterId) throws SQLException {
+        try (Connection connection = connect()) {
+            String insertSQL = "INSERT INTO CHAPTER_COMPLETION (accountId, chapterId, isUnlocked, isCompleted) VALUES (?, ?,  TRUE, FALSE)";
+            try (PreparedStatement ps = connection.prepareStatement(insertSQL)) {
+                ps.setInt(1, accountId);
+                ps.setInt(2, chapterId);
+                ps.executeUpdate();
+            }
+        }
+    }
+
+    @Override
+    public void updateChapterCompletion(int accountId, int chapterId, boolean setUnlocked) throws SQLException {
+        try (Connection connection = connect()) {
+            String updateSQL = "UPDATE CHAPTER_COMPLETION SET isUnlocked = ? WHERE accountId = ? AND chapterId = ?";
+            try (PreparedStatement ps = connection.prepareStatement(updateSQL)) {
+                ps.setBoolean(1, setUnlocked);
+                ps.setInt(2, accountId);
+                ps.setInt(3, chapterId);
+                ps.executeUpdate();
+            }
+        }
+    }
+
+    @Override
+    public void insertChapterCompletion(int accountId, int chapterId, boolean setUnlocked) throws SQLException {
+        try (Connection connection = connect()) {
+            String insertSQL = "INSERT INTO CHAPTER_COMPLETION (accountId, chapterId, isUnlocked, isCompleted) VALUES (?, ?, ?, FALSE)";
+            try (PreparedStatement ps = connection.prepareStatement(insertSQL)) {
+                ps.setInt(1, accountId);
+                ps.setInt(2, chapterId);
+                ps.setBoolean(3, setUnlocked);
+                ps.executeUpdate();
+            }
+        }
+    }
+
+    @Override
+    public ResultSet selectChaptersInCourseAfterId(int courseId, int chapterId) throws SQLException {
+        //Uses try-with to close connection & prepared statement on exception
+        try (Connection connection = connect();
+             PreparedStatement ps = connection.prepareStatement("SELECT * FROM CHAPTER WHERE courseId = ? AND id > ?")) {
+            ps.setInt(1, courseId);
+            ps.setInt(2, chapterId);
+            return ps.executeQuery();
+        }
+    }
+
+    @Override
+    public ResultSet selectFirstChaptersOfAllCourses() throws SQLException {
+        //Uses try-with to close connection & prepared statement on exception
+        try (Connection connection = connect();
+             PreparedStatement ps = connection.prepareStatement("SELECT * FROM CHAPTER as c WHERE id in (SELECT MIN(id) FROM CHAPTER GROUP BY courseId)")) {
+            return ps.executeQuery();
         }
     }
 }

@@ -1,7 +1,11 @@
 package codelinguists.codelingo.integration_tests;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -10,21 +14,19 @@ import java.util.List;
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.AccountObj;
 import CodeLinguists.codelingo.dso.CourseObj;
-import CodeLinguists.codelingo.dso.QuestionType;
-import CodeLinguists.codelingo.dso.QuizObj;
-import CodeLinguists.codelingo.logic.IQuizIterator;
 import CodeLinguists.codelingo.logic.ISessionManager;
-import CodeLinguists.codelingo.logic.QuizIterator;
 import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.logic_exceptions.NoItemSelectedException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.CourseNotFoundException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
+import CodeLinguists.codelingo.persistence.stubs.ChapterDataStub;
 import codelinguists.codelingo.utils.SqlDbIT;
 
 public class SessionManagerIT extends SqlDbIT {
 
     ISessionManager sessionManager;
+    private ChapterDataStub chapterDataStub;
 
     //General session manager tests
     @Override
@@ -160,7 +162,7 @@ public class SessionManagerIT extends SqlDbIT {
         try{
             sessionManager.getActiveCourse();
         } catch (CourseNotFoundException ignored) {}
-        assertEquals(1, sessionManager.getActiveCourse().id());
+        assertEquals(1, sessionManager.getActiveCourse().getId());
     }
 
     @Test
@@ -308,5 +310,127 @@ public class SessionManagerIT extends SqlDbIT {
         SqlTestRunner.executeUpdate(String.format("INSERT INTO CHAPTER_COMPLETION VALUES (%d, 1, TRUE, TRUE)", accountId));
         int completePercent = sessionManager.calculateProgressPercentage();
         assertTrue(completePercent>0); //mostly checking for error
+    }
+
+    @Test
+    public void testSetChapterCompleteNoNext() throws CourseNotFoundException, AccountPermissionException, InputValidationException, DataInaccessibleException, SQLException {
+        String user = "SA";
+        SqlTestRunner.executeUpdate("INSERT INTO COURSE VALUES (555, 'test', 'test desc');");
+        SqlTestRunner.executeUpdate("INSERT INTO CHAPTER VALUES (555, 'testChap', 555, 'test desc');");
+        SqlTestRunner.executeUpdate("INSERT INTO QUIZ VALUES (555, 555,  'MULTI_CHOICE', 'prompt', TRUE, '4', '1,2,3', 'wrong', 'yes');");
+        sessionManager.guestLogin(user);
+        sessionManager.setActiveCourse(555);
+        sessionManager.setActiveChapter(555);
+        sessionManager.setChapterComplete();
+        AccountObj acc = sessionManager.getActiveAccount();
+        assertTrue(SqlTestRunner.checkValue("CHAPTER_COMPLETION", String.format("accountId=%d AND chapterId=555 AND isCompleted=TRUE", acc.getId())));
+    }
+
+    @Test
+    public void testSetChapterCompleteWithNext() throws CourseNotFoundException, AccountPermissionException, InputValidationException, DataInaccessibleException, SQLException {
+        String user = "SA";
+        SqlTestRunner.executeUpdate("INSERT INTO COURSE VALUES (555, 'test', 'test desc');");
+        SqlTestRunner.executeUpdate("INSERT INTO CHAPTER VALUES (555, 'testChap', 555, 'test desc');");
+        SqlTestRunner.executeUpdate("INSERT INTO CHAPTER VALUES (556, 'testChap', 555, 'test desc');");
+        SqlTestRunner.executeUpdate("INSERT INTO QUIZ VALUES (555, 555,  'MULTI_CHOICE', 'prompt', TRUE, '4', '1,2,3', 'wrong', 'yes');");
+        sessionManager.guestLogin(user);
+        sessionManager.setActiveCourse(555);
+        sessionManager.setActiveChapter(555);
+        sessionManager.setChapterComplete();
+        AccountObj acc = sessionManager.getActiveAccount();
+        assertTrue(SqlTestRunner.checkValue("CHAPTER_COMPLETION", String.format("accountId=%d AND chapterId=555 AND isUnlocked=TRUE AND isCompleted=TRUE", acc.getId())));
+        assertTrue(SqlTestRunner.checkValue("CHAPTER_COMPLETION", String.format("accountId=%d AND chapterId=556 AND isUnlocked=TRUE AND isCompleted=FALSE", acc.getId())));
+    }
+    @Test
+    public void testSetChapterCompleteWithNextDifferentCourse() throws CourseNotFoundException, AccountPermissionException, InputValidationException, DataInaccessibleException, SQLException {
+        String user = "SA";
+        SqlTestRunner.executeUpdate("INSERT INTO COURSE VALUES (555, 'test', 'test desc');");
+        SqlTestRunner.executeUpdate("INSERT INTO CHAPTER VALUES (554, 'testChap', 554, 'test desc');");
+        SqlTestRunner.executeUpdate("INSERT INTO CHAPTER VALUES (555, 'testChap', 555, 'test desc');");
+        SqlTestRunner.executeUpdate("INSERT INTO CHAPTER VALUES (556, 'testChap', 554, 'test desc');");
+        SqlTestRunner.executeUpdate("INSERT INTO QUIZ VALUES (555, 555,  'MULTI_CHOICE', 'prompt', TRUE, '4', '1,2,3', 'wrong', 'yes');");
+        sessionManager.guestLogin(user);
+        sessionManager.setActiveCourse(555);
+        sessionManager.setActiveChapter(555);
+        sessionManager.setChapterComplete();
+        AccountObj acc = sessionManager.getActiveAccount();
+        assertTrue(SqlTestRunner.checkValue("CHAPTER_COMPLETION", String.format("accountId=%d AND chapterId=555 AND isUnlocked=TRUE AND isCompleted=TRUE", acc.getId())));
+        assertFalse(SqlTestRunner.checkValue("CHAPTER_COMPLETION", String.format("accountId=%d AND chapterId=556", acc.getId())));
+    }
+
+    @Test
+    public void testSetChapterCompleteWithExistingChapterCompletionEntryUnlocked() throws CourseNotFoundException, AccountPermissionException, InputValidationException, DataInaccessibleException, SQLException {
+        String user = "SA";
+        SqlTestRunner.executeUpdate("INSERT INTO COURSE VALUES (555, 'test', 'test desc');");
+        SqlTestRunner.executeUpdate("INSERT INTO CHAPTER VALUES (555, 'testChap', 555, 'test desc');");
+        SqlTestRunner.executeUpdate("INSERT INTO QUIZ VALUES (555, 555,  'MULTI_CHOICE', 'prompt', TRUE, '4', '1,2,3', 'wrong', 'yes');");
+        sessionManager.guestLogin(user);
+        AccountObj acc = sessionManager.getActiveAccount();
+        SqlTestRunner.executeUpdate(String.format("INSERT INTO CHAPTER_COMPLETION VALUES (%d, 555, TRUE, FALSE);", acc.getId()));
+        sessionManager.setActiveCourse(555);
+        sessionManager.setActiveChapter(555);
+        sessionManager.setChapterComplete();
+        assertTrue(SqlTestRunner.checkValue("CHAPTER_COMPLETION", String.format("accountId=%d AND chapterId=555 AND isUnlocked=TRUE AND isCompleted=TRUE", acc.getId())));
+    }
+
+    @Test
+    public void testSetChapterCompleteWithExistingChapterCompletionEntryCompleted() throws CourseNotFoundException, AccountPermissionException, InputValidationException, DataInaccessibleException, SQLException {
+        String user = "SA";
+        SqlTestRunner.executeUpdate("INSERT INTO COURSE VALUES (555, 'test', 'test desc');");
+        SqlTestRunner.executeUpdate("INSERT INTO CHAPTER VALUES (555, 'testChap', 555, 'test desc');");
+        SqlTestRunner.executeUpdate("INSERT INTO QUIZ VALUES (555, 555,  'MULTI_CHOICE', 'prompt', TRUE, '4', '1,2,3', 'wrong', 'yes');");
+        sessionManager.guestLogin(user);
+        AccountObj acc = sessionManager.getActiveAccount();
+        SqlTestRunner.executeUpdate(String.format("INSERT INTO CHAPTER_COMPLETION VALUES (%d, 555, TRUE, TRUE);", acc.getId()));
+        sessionManager.setActiveCourse(555);
+        sessionManager.setActiveChapter(555);
+        sessionManager.setChapterComplete();
+        assertTrue(SqlTestRunner.checkValue("CHAPTER_COMPLETION", String.format("accountId=%d AND chapterId=555 AND isUnlocked=TRUE AND isCompleted=TRUE", acc.getId())));
+    }
+
+    @Test
+    public void testSetChapterCompleteWithExistingChapterCompletionEntryUnlockedForNextChapter() throws CourseNotFoundException, AccountPermissionException, InputValidationException, DataInaccessibleException, SQLException {
+        String user = "SA";
+        SqlTestRunner.executeUpdate("INSERT INTO COURSE VALUES (555, 'test', 'test desc');");
+        SqlTestRunner.executeUpdate("INSERT INTO CHAPTER VALUES (555, 'testChap', 555, 'test desc');");
+        SqlTestRunner.executeUpdate("INSERT INTO CHAPTER VALUES (556, 'testChap', 555, 'test desc');");
+        SqlTestRunner.executeUpdate("INSERT INTO QUIZ VALUES (555, 555,  'MULTI_CHOICE', 'prompt', TRUE, '4', '1,2,3', 'wrong', 'yes');");
+        sessionManager.guestLogin(user);
+        AccountObj acc = sessionManager.getActiveAccount();
+        SqlTestRunner.executeUpdate(String.format("INSERT INTO CHAPTER_COMPLETION VALUES (%d, 556, TRUE, FALSE);", acc.getId()));
+        sessionManager.setActiveCourse(555);
+        sessionManager.setActiveChapter(555);
+        sessionManager.setChapterComplete();
+        assertTrue(SqlTestRunner.checkValue("CHAPTER_COMPLETION", String.format("accountId=%d AND chapterId=556 AND isUnlocked=TRUE AND isCompleted=FALSE", acc.getId())));
+    }
+
+    @Test
+    public void testSetChapterCompleteWithExistingChapterCompletionEntryCompletedForNextChapter() throws CourseNotFoundException, AccountPermissionException, InputValidationException, DataInaccessibleException, SQLException {
+        String user = "SA";
+        SqlTestRunner.executeUpdate("INSERT INTO COURSE VALUES (555, 'test', 'test desc');");
+        SqlTestRunner.executeUpdate("INSERT INTO CHAPTER VALUES (555, 'testChap', 555, 'test desc');");
+        SqlTestRunner.executeUpdate("INSERT INTO CHAPTER VALUES (556, 'testChap', 555, 'test desc');");
+        SqlTestRunner.executeUpdate("INSERT INTO QUIZ VALUES (555, 555,  'MULTI_CHOICE', 'prompt', TRUE, '4', '1,2,3', 'wrong', 'yes');");
+        sessionManager.guestLogin(user);
+        AccountObj acc = sessionManager.getActiveAccount();
+        SqlTestRunner.executeUpdate(String.format("INSERT INTO CHAPTER_COMPLETION VALUES (%d, 556, TRUE, TRUE);", acc.getId()));
+        sessionManager.setActiveCourse(555);
+        sessionManager.setActiveChapter(555);
+        sessionManager.setChapterComplete();
+        assertTrue(SqlTestRunner.checkValue("CHAPTER_COMPLETION", String.format("accountId=%d AND chapterId=556 AND isUnlocked=TRUE AND isCompleted=TRUE", acc.getId())));
+    }
+
+    @Test
+    public void testUnlockDefaultChapters () throws SQLException, CourseNotFoundException, AccountPermissionException, InputValidationException, DataInaccessibleException {
+        String user = "SA";
+        SqlTestRunner.executeUpdate("INSERT INTO COURSE VALUES (555, 'test', 'test desc');");
+        SqlTestRunner.executeUpdate("INSERT INTO CHAPTER VALUES (555, 'testChap', 555, 'test desc');");
+        sessionManager.guestLogin(user);
+        AccountObj acc = sessionManager.getActiveAccount();
+        assertTrue(SqlTestRunner.checkValue("CHAPTER_COMPLETION", String.format("accountId=%d AND chapterId=1 AND isUnlocked=TRUE", acc.getId())));
+        assertFalse(SqlTestRunner.checkValue("CHAPTER_COMPLETION", String.format("accountId=%d AND chapterId=2", acc.getId())));
+        assertTrue(SqlTestRunner.checkValue("CHAPTER_COMPLETION", String.format("accountId=%d AND chapterId=3 AND isUnlocked=TRUE", acc.getId())));
+        assertFalse(SqlTestRunner.checkValue("CHAPTER_COMPLETION", String.format("accountId=%d AND chapterId=4", acc.getId())));
+        assertTrue(SqlTestRunner.checkValue("CHAPTER_COMPLETION", String.format("accountId=%d AND chapterId=555 AND isUnlocked=TRUE", acc.getId())));
     }
 }

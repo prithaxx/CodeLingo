@@ -61,6 +61,14 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
+    public void setChapterComplete() throws CourseNotFoundException, AccountPermissionException {
+        if (account == null) {
+            throw new AccountPermissionException(Strings.NotSignedIn);
+        }
+        courseHandler.setChapterComplete(this.chapterId, this.account);
+    }
+
+    @Override
     public AccountObj getActiveAccount() throws AccountPermissionException {
         if (account == null) {
             throw new AccountPermissionException(Strings.NotSignedIn);
@@ -69,14 +77,14 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public IQuizIterator startQuiz() throws NoItemSelectedException {
+    public IQuizNavigation startQuiz() throws NoItemSelectedException {
         if (course==null) {
             throw new NoItemSelectedException(Strings.NoCourseSelected);
         }
         if (chapterId<0) {
             throw new NoItemSelectedException(Strings.NoChapterSelected);
         }
-        return quizHandler.getQuiz(course.id(), chapterId);
+        return quizHandler.getQuiz(course.getId(), chapterId);
     }
 
     @Override
@@ -142,7 +150,7 @@ public class SessionManager implements ISessionManager {
         try {
             getActiveCourse();
         } catch (CourseNotFoundException | AccountPermissionException e) {
-            e.printStackTrace(); //Suppress these error, it's irrelevant on login
+            e.printStackTrace(); //Suppress these errors, getActiveCourse is optional, and permitted to fail
         }
     }
 }
