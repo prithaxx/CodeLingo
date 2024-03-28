@@ -64,8 +64,13 @@ To find the most recent release of a stable version please go to the release pag
 - [AcceptanceTests](https://code.cs.umanitoba.ca/comp3350-winter2024/codelinguists-ao1-15/-/blob/main/app/src/test/java/codelinguists/codelingo/AllTests.java?ref_type=heads)
 
 
+# Config
+- To reset the DB, disable persistence by setting 
+  - [DbHelper.java](app%2Fsrc%2Fmain%2Fjava%2FCodeLinguists%2Fcodelingo%2Fpersistence%2Futils%2FDbHelper.java).doReset to true
+- To switch DB implementations, set 
+  - [Services.java](app%2Fsrc%2Fmain%2Fjava%2FCodeLinguists%2Fcodelingo%2Fapplication%2FServices.java).DbType to DbType.STUB or DbType.HSQLDB
 
-## Other Docs
+# Other Docs
  - [ARCHITECTURE.md](Docs/ARCHITECTURE.md)
  - [VisionStatement.md](Docs/VisionStatement.md)
  - [CodingStyle.md](Docs/CodingStyle.md)
