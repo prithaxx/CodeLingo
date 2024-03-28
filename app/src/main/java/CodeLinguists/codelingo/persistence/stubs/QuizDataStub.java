@@ -20,6 +20,10 @@ public class QuizDataStub implements IQuizData {
         quizList.add(new QuizObj(4,1, QuestionType.MULTI_CHOICE,"MULTI_CHOICE Placeholder 2", true, "Correct answer", null, Arrays.asList("Incorrect Answer 1", "Incorrect Answer 2", "Incorrect Answer 3"), "id 4: Incorrect answer feedback placeholder" , "id 4: Correct answer feedback placeholder"));
         quizList.add(new QuizObj(5,1, QuestionType.SHORT_ANSWER,"SHORT_ANSWER Placeholder 1",true,"a",null,null,"id 5: Incorrect answer feedback placeholder" , "id 5: Correct answer feedback placeholder"));
         quizList.add(new QuizObj(6,1, QuestionType.SHORT_ANSWER,"SHORT_ANSWER Placeholder 2",true,"a",null,null,"id 6: Incorrect answer feedback placeholder" , "id 6: Correct answer feedback placeholder"));
+        quizList.add(new QuizObj(7,2, QuestionType.TEXT,"TEXT Placeholder 1", false,null, null, null, null, null));
+        quizList.add(new QuizObj(8,4, QuestionType.TEXT,"TEXT Placeholder 1", false,null, null, null, null, null));
+        quizList.add(new QuizObj(9,5, QuestionType.TEXT,"TEXT Placeholder 1", false,null, null, null, null, null));
+        quizList.add(new QuizObj(10,6, QuestionType.TEXT,"TEXT Placeholder 1", false,null, null, null, null, null));
     }
 
     public QuizDataStub(List<QuizObj> quizList) {
