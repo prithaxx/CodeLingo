@@ -25,4 +25,6 @@ public interface ISessionManager {
     int calculateProgressPercentage() throws CourseNotFoundException, AccountPermissionException;
     boolean autoLogin();
     void logout();
+
+    void setChapterComplete() throws CourseNotFoundException;
 }
