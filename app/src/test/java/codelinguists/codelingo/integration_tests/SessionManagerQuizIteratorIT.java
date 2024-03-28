@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.QuestionType;
 import CodeLinguists.codelingo.dso.QuizObj;
-import CodeLinguists.codelingo.logic.IQuizIterator;
+import CodeLinguists.codelingo.logic.IQuizNavigation;
 import CodeLinguists.codelingo.logic.ISessionManager;
 import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
@@ -81,7 +81,7 @@ public class SessionManagerQuizIteratorIT extends SqlDbIT {
         sessionManager.guestLogin(user);
         sessionManager.setActiveCourse(1);
         sessionManager.setActiveChapter(1);
-        IQuizIterator qi = sessionManager.startQuiz();
+        IQuizNavigation qi = sessionManager.startQuiz();
         assertNotNull(qi.nextQuestion());
         assertEquals(1, qi.cursorPos());
     }
@@ -92,7 +92,7 @@ public class SessionManagerQuizIteratorIT extends SqlDbIT {
         sessionManager.guestLogin(user);
         sessionManager.setActiveCourse(1);
         sessionManager.setActiveChapter(1);
-        IQuizIterator qi = sessionManager.startQuiz();
+        IQuizNavigation qi = sessionManager.startQuiz();
         while (qi.hasNextQuestion()) {
             qi.nextQuestion();
         }
@@ -105,7 +105,7 @@ public class SessionManagerQuizIteratorIT extends SqlDbIT {
         sessionManager.guestLogin(user);
         sessionManager.setActiveCourse(1);
         sessionManager.setActiveChapter(1);
-        IQuizIterator qi = sessionManager.startQuiz();
+        IQuizNavigation qi = sessionManager.startQuiz();
         while (qi.hasNextQuestion()) {
             qi.nextQuestion();
         }
@@ -118,7 +118,7 @@ public class SessionManagerQuizIteratorIT extends SqlDbIT {
         sessionManager.guestLogin(user);
         sessionManager.setActiveCourse(1);
         sessionManager.setActiveChapter(1);
-        IQuizIterator qi = sessionManager.startQuiz();
+        IQuizNavigation qi = sessionManager.startQuiz();
         assertFalse(qi.hasPrevQuestion());
     }
 
@@ -128,7 +128,7 @@ public class SessionManagerQuizIteratorIT extends SqlDbIT {
         sessionManager.guestLogin(user);
         sessionManager.setActiveCourse(1);
         sessionManager.setActiveChapter(1);
-        IQuizIterator qi = sessionManager.startQuiz();
+        IQuizNavigation qi = sessionManager.startQuiz();
         assertNull(qi.prevQuestion());
     }
 
@@ -138,7 +138,7 @@ public class SessionManagerQuizIteratorIT extends SqlDbIT {
         sessionManager.guestLogin(user);
         sessionManager.setActiveCourse(1);
         sessionManager.setActiveChapter(1);
-        IQuizIterator qi = sessionManager.startQuiz();
+        IQuizNavigation qi = sessionManager.startQuiz();
         qi.nextQuestion();
         qi.nextQuestion();
         assertTrue(qi.hasPrevQuestion());
@@ -150,7 +150,7 @@ public class SessionManagerQuizIteratorIT extends SqlDbIT {
         sessionManager.guestLogin(user);
         sessionManager.setActiveCourse(1);
         sessionManager.setActiveChapter(1);
-        IQuizIterator qi = sessionManager.startQuiz();
+        IQuizNavigation qi = sessionManager.startQuiz();
         qi.nextQuestion();
         qi.nextQuestion();
         assertNotNull(qi.prevQuestion());
@@ -162,7 +162,7 @@ public class SessionManagerQuizIteratorIT extends SqlDbIT {
         sessionManager.guestLogin(user);
         sessionManager.setActiveCourse(1);
         sessionManager.setActiveChapter(1);
-        IQuizIterator qi = sessionManager.startQuiz();
+        IQuizNavigation qi = sessionManager.startQuiz();
         QuizObj qo = qi.nextQuestion();
         QuizObj feedback = qi.submit(qo.answer()+"incorrect");
         assertSame(feedback.type(), QuestionType.FEEDBACK_FAILED);
@@ -173,7 +173,7 @@ public class SessionManagerQuizIteratorIT extends SqlDbIT {
         sessionManager.guestLogin(user);
         sessionManager.setActiveCourse(1);
         sessionManager.setActiveChapter(1);
-        IQuizIterator qi = sessionManager.startQuiz();
+        IQuizNavigation qi = sessionManager.startQuiz();
         QuizObj qo = qi.nextQuestion();
         QuizObj feedback = qi.submit(qo.answer());
         assertSame(feedback.type(), QuestionType.FEEDBACK_PASSED);
@@ -185,7 +185,7 @@ public class SessionManagerQuizIteratorIT extends SqlDbIT {
         sessionManager.guestLogin(user);
         sessionManager.setActiveCourse(1);
         sessionManager.setActiveChapter(1);
-        IQuizIterator qi = sessionManager.startQuiz();
+        IQuizNavigation qi = sessionManager.startQuiz();
         QuizObj qo = qi.nextQuestion();
         QuizObj feedback = qi.submit(null);
     }
@@ -198,7 +198,7 @@ public class SessionManagerQuizIteratorIT extends SqlDbIT {
         sessionManager.guestLogin(user);
         sessionManager.setActiveCourse(555);
         sessionManager.setActiveChapter(555);
-        IQuizIterator qi = sessionManager.startQuiz();
+        IQuizNavigation qi = sessionManager.startQuiz();
         assertFalse(qi.hasNextQuestion());
     }
 
@@ -211,7 +211,7 @@ public class SessionManagerQuizIteratorIT extends SqlDbIT {
         sessionManager.guestLogin(user);
         sessionManager.setActiveCourse(555);
         sessionManager.setActiveChapter(555);
-        IQuizIterator qi = sessionManager.startQuiz();
+        IQuizNavigation qi = sessionManager.startQuiz();
         assertTrue(qi.hasNextQuestion());
         assertNotNull(qi.nextQuestion());
         assertFalse(qi.hasNextQuestion());
@@ -227,7 +227,7 @@ public class SessionManagerQuizIteratorIT extends SqlDbIT {
         sessionManager.guestLogin(user);
         sessionManager.setActiveCourse(555);
         sessionManager.setActiveChapter(555);
-        IQuizIterator qi = sessionManager.startQuiz();
+        IQuizNavigation qi = sessionManager.startQuiz();
         qi.nextQuestion();
         assertSame(qi.submit("").type(), QuestionType.MULTI_CHOICE);
     }
@@ -242,7 +242,7 @@ public class SessionManagerQuizIteratorIT extends SqlDbIT {
         sessionManager.guestLogin(user);
         sessionManager.setActiveCourse(555);
         sessionManager.setActiveChapter(555);
-        IQuizIterator qi = sessionManager.startQuiz();
+        IQuizNavigation qi = sessionManager.startQuiz();
         qi.nextQuestion();
         assertSame(qi.submit("").type(), QuestionType.MULTI_CHOICE);
     }

@@ -6,14 +6,9 @@ import android.widget.TextView;
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.dso.QuizObj;
 
-public class TextSlide extends QuizSlide{
+public class TextSlide extends InformationSlide {
     public TextSlide(QuizObj quiz) {
         super(R.layout.fragment_slide_text, quiz);
-    }
-
-    @Override
-    public String getInput() {
-        return null;
     }
 
     @Override

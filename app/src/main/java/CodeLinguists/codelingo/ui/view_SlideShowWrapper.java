@@ -12,7 +12,7 @@ import android.widget.Toast;
 import CodeLinguists.codelingo.R;
 import CodeLinguists.codelingo.application.Services;
 import CodeLinguists.codelingo.dso.QuizObj;
-import CodeLinguists.codelingo.logic.IQuizIterator;
+import CodeLinguists.codelingo.logic.IQuizNavigation;
 import CodeLinguists.codelingo.logic.ISessionManager;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.logic_exceptions.NoItemSelectedException;
@@ -28,7 +28,7 @@ import CodeLinguists.codelingo.ui.ui_exceptions.SlideTypeNotHandledException;
 public class view_SlideShowWrapper extends AppCompatActivity {
 
     private ISessionManager sessionManager;
-    private IQuizIterator quizIterator;
+    private IQuizNavigation quizIterator;
     private QuestionFragmentFactory slideFactory;
     private QuizSlide currentSlide;
 

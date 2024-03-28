@@ -16,7 +16,7 @@ public interface ISessionManager {
     void guestLogin(String user) throws CourseNotFoundException, AccountPermissionException, DataInaccessibleException, InputValidationException;
     void guestLogin(String user, boolean stayLoggedIn) throws CourseNotFoundException, AccountPermissionException, DataInaccessibleException, InputValidationException;
     AccountObj getActiveAccount() throws AccountPermissionException;
-    IQuizIterator startQuiz() throws NoItemSelectedException;
+    IQuizNavigation startQuiz() throws NoItemSelectedException;
     CourseObj getActiveCourse() throws CourseNotFoundException, AccountPermissionException;
     void setActiveCourse(int index) throws CourseNotFoundException, AccountPermissionException, InputValidationException;
     List<CourseObj> getCourseList() throws AccountPermissionException;
