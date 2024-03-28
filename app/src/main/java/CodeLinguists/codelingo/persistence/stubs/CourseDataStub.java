@@ -24,7 +24,7 @@ public class CourseDataStub implements ICourseData {
     @Override
     public CourseObj getCourseById(int id, int accountId){
         return courseList.stream()
-                .filter(courseObj -> id == courseObj.id())
+                .filter(courseObj -> id == courseObj.getId())
                 .findFirst()
                 .orElse(null);
     }

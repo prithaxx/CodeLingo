@@ -74,21 +74,21 @@ public class cont_ChapterSummary extends AppCompatActivity {
         @Override
         public void onBindViewHolder(ChapterViewHolder holder, int position) {
             final ChapterObj chapter = chapterList.get(position);
-            holder.buttonChapter.setText(chapter.name());
+            holder.buttonChapter.setText(chapter.getName());
 
             if (chapter.isCompleted()) {
                 holder.imageChapterStatus.setImageResource(R.drawable.ic_completed);
                 holder.imageChapterStatus.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        chapterSummaryTextView.setText(chapter.description());
+                        chapterSummaryTextView.setText(chapter.getDescription());
                     }
                 });
 
                 holder.buttonChapter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        chapterSummaryTextView.setText(chapter.description());
+                        chapterSummaryTextView.setText(chapter.getDescription());
                     }
                 });
 

@@ -6,21 +6,26 @@ import org.junit.Before;
 import org.junit.Test;
 
 import CodeLinguists.codelingo.dso.AccountObj;
+import CodeLinguists.codelingo.logic.CourseHandler;
+import CodeLinguists.codelingo.logic.ICourseHandler;
 import CodeLinguists.codelingo.logic.logic_exceptions.AccountPermissionException;
+import CodeLinguists.codelingo.persistence.persistence_exceptions.AccountNotFoundException;
 import CodeLinguists.codelingo.persistence.persistence_exceptions.DataInaccessibleException;
 import CodeLinguists.codelingo.logic.logic_exceptions.InputValidationException;
 import CodeLinguists.codelingo.logic.AccountHandler;
 import CodeLinguists.codelingo.persistence.stubs.AccountDataStub;
+import codelinguists.codelingo.unit_tests.logic.test_doubles.CourseHandlerTestDouble;
 
 public class AccountHandlerTest {
     private AccountDataStub accountDataStub;
     private AccountHandler accountHandler;
-
+    private ICourseHandler courseHandler;
 
     @Before
     public void setUp() {
         accountDataStub = new AccountDataStub();
-        accountHandler = new AccountHandler(accountDataStub);
+        courseHandler = new CourseHandlerTestDouble();
+        accountHandler = new AccountHandler(accountDataStub, courseHandler);
     }
 
     @Test

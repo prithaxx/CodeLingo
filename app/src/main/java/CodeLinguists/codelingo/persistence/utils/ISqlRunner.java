@@ -32,4 +32,18 @@ public interface ISqlRunner {
     void insertLocalPreferences() throws SQLException;
 
     ResultSet selectGuestAccountById(int accountId) throws SQLException;
+
+    ResultSet selectChapterCompletionById(int accountId, int chapterId) throws SQLException;
+
+    void setChapterCompleteIfExist(int accountId, int chapterId) throws SQLException;
+
+    void setChapterCompleteIfNotExist(int accountId, int chapterId) throws SQLException;
+
+    void setChapterUnlockIfExist(int accountId, int chapterId, boolean setUnlocked) throws SQLException;
+
+    void setChapterUnlockIfNotExist(int accountId, int chapterId, boolean setUnlocked) throws SQLException;
+
+    ResultSet selectChaptersInCourseAfterId(int courseId, int chapterId) throws SQLException;
+
+    ResultSet selectFirstChaptersOfAllCourses() throws SQLException;
 }

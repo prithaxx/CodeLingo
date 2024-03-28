@@ -91,7 +91,7 @@ public class Services {
 
     public static synchronized IAccountHandler getAccountHandler() {
         if (accountHandler == null) {
-            accountHandler = new AccountHandler(getAccountData());
+            accountHandler = new AccountHandler(getAccountData(), getCourseHandler());
         }
         return accountHandler;
     }
