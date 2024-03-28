@@ -47,6 +47,9 @@ public class itm_ChapterRecyclerViewAdapter extends RecyclerView.Adapter<itm_Cha
         holder.mIView.setImageResource(chAssets[chapter.getId()%chAssets.length]);
         if(chapter.isUnlocked() || position == 0) {
             holder.mLock.setVisibility(View.INVISIBLE);
+            holder.mTile.setAlpha(0.5f);
+            holder.mTitle.setAlpha(1f);
+            holder.mIView.setAlpha(1f);
             holder.mTile.setOnClickListener(
                     (View view) -> {
                         try {
@@ -72,6 +75,12 @@ public class itm_ChapterRecyclerViewAdapter extends RecyclerView.Adapter<itm_Cha
     @Override
     public int getItemCount() {
         return mValues.size();
+    }
+
+    public void updateChapterList(List<ChapterObj> items) {
+        mValues.clear();
+        mValues.addAll(items);
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
