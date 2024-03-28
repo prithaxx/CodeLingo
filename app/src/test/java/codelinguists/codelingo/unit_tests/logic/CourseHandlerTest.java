@@ -77,7 +77,6 @@ public class CourseHandlerTest {
         int expectedPercentage = 50;
         assertEquals(expectedPercentage, progressPercentage);
     }
-
 }
 
 
