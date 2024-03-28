@@ -142,7 +142,7 @@ public class SessionManager implements ISessionManager {
         try {
             getActiveCourse();
         } catch (CourseNotFoundException | AccountPermissionException e) {
-            e.printStackTrace(); //Suppress these error, it's irrelevant on login
+            e.printStackTrace(); //Suppress these errors, getActiveCourse is optional, and permitted to fail
         }
     }
 }
