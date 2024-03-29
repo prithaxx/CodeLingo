@@ -36,3 +36,8 @@ function goToLandingPage(){
     var targetPage = 'index.html';
     window.location.href = targetPage;
 }
+
+function goToGitLab(){
+    var targetPage = "https://code.cs.umanitoba.ca/comp3350-winter2024/codelinguists-ao1-15";
+    location.href = targetPage
+}
